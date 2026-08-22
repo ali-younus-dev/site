@@ -284,11 +284,15 @@
       if(document.readyState!=='loading') boot();
       else document.addEventListener('DOMContentLoaded',boot);
 
-      /* backstop for any link created and clicked before a sweep runs */
+      /* Backstop for a link created and clicked before a sweep could run.
+         MUST ignore links the sweep already rewrote, otherwise the prefix
+         would be applied twice (/site/ -> /site/site/). */
       document.addEventListener('click',function(e){
         var a=e.target.closest&&e.target.closest('a'); if(!a) return;
+        if(a.getAttribute('data-lnav')) return;      /* already handled */
         var href=a.getAttribute('href');
         if(!href||href.charAt(0)!=='/'||href.charAt(1)==='/') return;
+        a.setAttribute('data-lnav','1');
         e.preventDefault();
         location.href=fix(href);
       },true);
