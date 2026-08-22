@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Fotile Pakistan | The Leading Kitchen Brand</title>
+<meta name="description" content="Learn about Fotile — a global, award-winning kitchen appliance brand on a mission to make Pakistani kitchens cleaner, healthier and more enjoyable.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fotile Pakistan">
+<meta property="og:title" content="About Fotile Pakistan | The Leading Kitchen Brand">
+<meta property="og:description" content="Learn about Fotile — a global, award-winning kitchen appliance brand on a mission to make Pakistani kitchens cleaner, healthier and more enjoyable.">
+<meta property="og:image" content="https://fotilepk.com/assets/hero-banner.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About Fotile Pakistan | The Leading Kitchen Brand">
+<meta name="twitter:description" content="Learn about Fotile — a global, award-winning kitchen appliance brand on a mission to make Pakistani kitchens cleaner, healthier and more enjoyable.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0d;--bg2:#101013;--panel:#141417;--steel:#3a3d42;--steel-lt:#9ea2a8;
+    --line:rgba(255,255,255,.08);--txt:#f2f2f3;--txt-dim:#8b8d92;--red:#e01e37;
+    --font:"Manrope",system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+  ::selection{background:var(--red);color:#fff}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 44px}
+
+  /* NAV (shared) */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:22px 44px;transition:.5s cubic-bezier(.16,1,.3,1);border-bottom:1px solid transparent;margin-top:26px}
+  .nav.solid{background:rgba(11,11,13,.72);backdrop-filter:blur(20px) saturate(140%);border-bottom-color:var(--line);padding:16px 44px;margin-top:0}
+  .nav .brand img{height:20px;filter:brightness(0) invert(1)}
+  .nlinks{display:flex;gap:40px;font-size:13.5px;font-weight:500;letter-spacing:.2px}
+  .nlinks a{position:relative;opacity:.72;transition:.3s;padding:3px 0}.nlinks a:hover{opacity:1}
+  .nlinks a.active{opacity:1}
+  .nlinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--red);transition:.35s}
+  .nlinks a:hover::after,.nlinks a.active::after{width:100%}
+  .nr{display:flex;align-items:center;gap:24px;font-size:14px}
+  .nr .ic{opacity:.75;cursor:pointer;transition:.3s;font-size:15px}.nr .ic:hover{opacity:1}
+  .npill{font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,.22);padding:10px 22px;border-radius:4px;transition:.35s}
+  .npill:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+  /* HERO */
+  .ahero{min-height:82vh;position:relative;overflow:hidden;display:flex;align-items:center}
+  .ahero .bg{position:absolute;inset:-4%;background-size:cover;background-position:center;filter:grayscale(.15) contrast(1.05) brightness(.55);animation:kb 24s ease-in-out infinite alternate}
+  @keyframes kb{0%{transform:scale(1)}100%{transform:scale(1.12)}}
+  .ahero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.9),rgba(11,11,13,.5) 55%,rgba(11,11,13,.2))}
+  .ahero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,var(--bg),transparent 34%)}
+  .ahero .in{position:relative;z-index:2;width:100%}
+  .ey{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--steel-lt);font-weight:600;margin-bottom:26px;opacity:0;animation:fu 1s .2s forwards}
+  .ey .dot{width:6px;height:6px;background:var(--red);border-radius:50%}
+  .ahero h1{font-size:clamp(44px,7vw,96px);font-weight:200;line-height:1;letter-spacing:-3px;margin-bottom:24px;opacity:0;animation:fu 1.1s .4s forwards}
+  .ahero h1 b{font-weight:600}
+  .ahero p{max-width:520px;font-size:18px;font-weight:300;color:#cbcdd1;opacity:0;animation:fu 1.1s .7s forwards}
+  @keyframes fu{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+
+  section{position:relative}
+  .pad{padding:clamp(80px,13vh,150px) 0}
+  .kick{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--steel-lt);font-weight:600}
+  .kick .dot{width:5px;height:5px;background:var(--red);border-radius:50%}
+  .h2{font-size:clamp(32px,4.6vw,60px);font-weight:200;line-height:1.05;letter-spacing:-2px}
+  .h2 b{font-weight:600}
+  .dim{color:var(--txt-dim);font-weight:300}
+  .reveal{opacity:0;transform:translateY(46px);transition:1s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .r2{transition-delay:.1s}.r3{transition-delay:.2s}
+
+  /* INTRO SPLIT */
+  .split{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+  .split .lead{font-size:clamp(24px,2.9vw,40px);font-weight:200;line-height:1.32;letter-spacing:-1px}
+  .split .lead b{font-weight:500}.split .lead .rd{color:var(--red)}
+  .split .body{color:var(--txt-dim);font-size:16px;font-weight:300;margin-top:0}
+  .split .body p{margin-bottom:18px}
+  .imgframe{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .imgframe .im{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(.1) brightness(.9);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+  .imgframe:hover .im{transform:scale(1.05)}
+
+  /* MISSION / VISION cards */
+  .mv{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .mvcard{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:48px;transition:.4s;position:relative;overflow:hidden}
+  .mvcard::before{content:"";position:absolute;top:0;left:0;width:3px;height:0;background:var(--red);transition:.5s}
+  .mvcard:hover{background:#17171b}.mvcard:hover::before{height:100%}
+  .mvcard .no{font-size:13px;letter-spacing:2px;color:var(--red);font-weight:600;margin-bottom:20px}
+  .mvcard h3{font-size:26px;font-weight:300;margin-bottom:16px;letter-spacing:-.5px}
+  .mvcard p{color:var(--txt-dim);font-size:15.5px;font-weight:300}
+
+  /* FULL-WIDTH KITCHEN BAND */
+  .kband{position:relative;min-height:70vh;display:flex;align-items:center;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .kband-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06);filter:brightness(.55);animation:kb 26s ease-in-out infinite alternate}
+  .kband::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.82),rgba(11,11,13,.35) 60%,rgba(11,11,13,.15))}
+  .kband-in{position:relative;z-index:2;max-width:720px}
+  .kquote{font-size:clamp(24px,3vw,42px);font-weight:200;line-height:1.32;letter-spacing:-1px}
+  .kquote b{font-weight:500;color:#fff}
+
+  /* PRESS / FORBES */
+  .press{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:center;margin-top:70px}
+  .press .pimg{border-radius:10px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background-size:cover;background-position:center}
+  .press h3{font-size:clamp(24px,2.6vw,36px);font-weight:200;letter-spacing:-1px;margin-bottom:16px;line-height:1.1}
+  .press h3 b{font-weight:600}
+  .press p{color:var(--txt-dim);font-size:16px;font-weight:300}
+
+  /* AWARDS band */
+  .awards{background:
+     radial-gradient(120% 100% at 80% 30%, #17171b 0%, var(--bg) 60%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .agrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:60px}
+  .astat{background:var(--bg);padding:52px 30px;text-align:center;transition:.4s}
+  .astat:hover{background:var(--panel)}
+  .astat b{font-size:clamp(40px,5vw,68px);font-weight:200;line-height:1;letter-spacing:-2px;display:block}
+  .astat i{color:var(--red);font-style:normal}
+  .astat span{display:block;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--txt-dim);margin-top:14px}
+
+  /* TIMELINE */
+  .tl{max-width:820px;margin:60px auto 0;position:relative;padding-left:40px}
+  .tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--red),transparent)}
+  .tlrow{position:relative;padding-bottom:44px}
+  .tlrow::before{content:"";position:absolute;left:-40px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--bg);border:2px solid var(--red)}
+  .tlrow .yr{font-size:14px;font-weight:700;color:var(--red);letter-spacing:1px;margin-bottom:6px}
+  .tlrow h4{font-size:20px;font-weight:400;margin-bottom:6px}
+  .tlrow p{color:var(--txt-dim);font-size:15px;font-weight:300}
+
+  /* VALUES */
+  .vals{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
+  .val{border:1px solid var(--line);border-radius:10px;padding:38px;transition:.4s}
+  .val:hover{border-color:rgba(224,30,55,.35);background:var(--panel)}
+  .val .ic{font-size:30px;margin-bottom:18px}
+  .val h4{font-size:19px;font-weight:400;margin-bottom:10px}
+  .val p{color:var(--txt-dim);font-size:14.5px;font-weight:300}
+
+  /* CTA */
+  .cta{position:relative;overflow:hidden;text-align:center;border-top:1px solid var(--line)}
+  .cta .bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.35) grayscale(.3)}
+  .cta::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(11,11,13,.6),rgba(11,11,13,.88))}
+  .cta .in{position:relative;z-index:2;max-width:680px;margin:0 auto}
+  .btn-r{background:var(--red);color:#fff;padding:15px 34px;border-radius:4px;font-weight:600;font-size:14px;transition:.35s;display:inline-flex;align-items:center;gap:9px}
+  .btn-r:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(224,30,55,.32);background:#c81a30}
+  .btn-l{border:1px solid rgba(255,255,255,.25);color:#fff;padding:15px 34px;border-radius:4px;font-weight:500;font-size:14px;transition:.35s}
+  .btn-l:hover{background:#fff;color:#000;border-color:#fff}
+
+  /* FOOTER (shared) */
+  footer{background:#08080a;padding:84px 0 36px;border-top:1px solid var(--line)}
+  .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:56px}
+  footer img.fl{height:22px;filter:brightness(0) invert(1);margin-bottom:22px}
+  .fdesc{color:var(--txt-dim);font-size:14px;font-weight:300;max-width:300px}
+  footer h5{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:20px;font-weight:700}
+  footer a.fli{display:block;color:var(--txt-dim);font-size:14px;padding:7px 0;font-weight:300;transition:.3s}
+  footer a.fli:hover{color:#fff}
+  .fbot{display:flex;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid var(--line);color:#57595e;font-size:13px;flex-wrap:wrap;gap:14px}
+  .fsoc{display:flex;gap:12px}
+  .fsoc a{width:36px;height:36px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:.3s;font-size:13px}
+  .fsoc a:hover{background:var(--red);border-color:var(--red);color:#fff}
+  .wa{position:fixed;right:26px;bottom:26px;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:900;box-shadow:0 12px 28px rgba(37,211,102,.4)}
+  .flag{position:fixed;top:0;left:0;right:0;z-index:2000;background:#000;color:#9ea2a8;text-align:center;padding:6px;font-size:11.5px;font-weight:500;letter-spacing:.5px;border-bottom:1px solid var(--line)}
+  .flag b{color:var(--red)}
+
+  @media(max-width:1000px){
+    .wrap{padding:0 28px}.nav{padding:18px 28px}.nav.solid{padding:14px 28px}
+    .nlinks{display:none}
+    .split{grid-template-columns:1fr;gap:44px}
+    .press{grid-template-columns:1fr;gap:34px}
+    .mv,.vals,.agrid{grid-template-columns:1fr 1fr}
+    .fgrid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .mv,.vals,.fgrid{grid-template-columns:1fr}.agrid{grid-template-columns:1fr 1fr}
+  }
+</style>
+  <link rel="canonical" href="https://fotilepk.com/about-us/">
+<script>window.__PBASE="../";</script>
+</head>
+<body>
+
+<div class="flag">CONCEPT <b>·</b> About Us page · dark tech-luxury · real Fotile content · placeholder imagery (swap later)</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="/home-regular/" class="brand"><img src="../assets/logo.png" alt="FOTILE"></a>
+  <div class="nlinks">
+    <a href="/home-regular/#collection">Collection</a>
+    <a href="/shop/">Products</a>
+    <a href="/moon-series/">Moon Series</a>
+    <a href="/home-regular/#engineering">Engineering</a>
+    <a href="/about-us/" class="active">About</a>
+    <a href="/home-regular/#legacy">Legacy</a>
+    <a href="/our-dealers/">Dealers</a>
+    <a href="/contact-us/">Contact</a>
+    <a href="/home-regular/#experience">Showrooms</a>
+  </div>
+  <div class="nr">
+    <span class="ic">⌕</span><a href="/cart/" class="ic" style="position:relative;text-decoration:none">🛒<b data-cart-count style="position:absolute;top:-8px;right:-9px;background:var(--red,#e01e37);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a>
+    <a href="#" class="npill">Request a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="ahero">
+  <div class="bg" style="background-image:url('../assets/aboutus/about-banner-img-new-scaled.jpg')"></div>
+  <div class="in"><div class="wrap">
+    <div class="ey"><span class="dot"></span>About Fotile Pakistan</div>
+    <h1>Redefining life<br>at <b>home.</b></h1>
+    <p>We offer a premium selection of kitchen and home appliances that expertly combine innovation, utility and aesthetics.</p>
+  </div></div>
+</header>
+
+<!-- INTRO SPLIT (text + real kitchen image) -->
+<section class="pad"><div class="wrap split">
+  <div class="reveal">
+    <div class="kick" style="margin-bottom:26px"><span class="dot"></span>Who We Are</div>
+    <p class="lead" style="margin-bottom:26px">For more than <b>20 years</b>, Fotile has served the Pakistani customer — building a reputation for kitchen appliances that are <span class="rd">functional and stylish.</span></p>
+    <div class="body">
+      <p>Fotile is the leading kitchen appliances brand in Pakistan. From kitchenware to small appliances, we offer a wide range of products to meet the needs of every kitchen.</p>
+      <p>As Asia's leading kitchen appliances brand, our products are designed to make your life in the kitchen easier and more enjoyable — guaranteeing a fresh, smoke-free and healthier home.</p>
+    </div>
+  </div>
+  <div class="imgframe reveal r2"><div class="im" style="background-image:url('../assets/aboutus/about-new-img-1536x1152.jpg')"></div></div>
+</div></section>
+
+<!-- FULL-WIDTH KITCHEN BAND -->
+<section class="kband">
+  <div class="kband-bg" style="background-image:url('../assets/aboutus/about-sec-img-new-1536x864.jpg')"></div>
+  <div class="wrap"><div class="kband-in reveal">
+    <p class="kquote">"We have quickly risen to prominence as a leader in both <b>culinary innovation</b> and improving lifestyles — growing from small beginnings to a global presence."</p>
+  </div></div>
+</section>
+
+<!-- MISSION / VISION -->
+<section class="pad" style="border-top:1px solid var(--line)"><div class="wrap">
+  <div class="reveal" style="max-width:640px;margin-bottom:52px">
+    <div class="kick"><span class="dot"></span>Purpose</div>
+    <h2 class="h2" style="margin-top:20px">Our mission &amp; <b>vision.</b></h2>
+  </div>
+  <div class="mv">
+    <div class="mvcard reveal">
+      <div class="no">01 — Mission</div>
+      <h3>Making kitchens more enjoyable.</h3>
+      <p>As a leading kitchen appliance brand, Fotile is on a mission to make kitchens more efficient and enjoyable spaces for families everywhere.</p>
+    </div>
+    <div class="mvcard reveal r2">
+      <div class="no">02 — Vision</div>
+      <h3>Top quality, for the world.</h3>
+      <p>As the world's leading kitchen appliances brand, Fotile is committed to providing top-quality products and solutions that make life easier and more enjoyable for families all over the world.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- AWARDS -->
+<section class="pad awards"><div class="wrap reveal" style="text-align:center">
+  <div class="kick" style="justify-content:center"><span class="dot"></span>Recognised Worldwide</div>
+  <h2 class="h2" style="margin-top:20px">Award-winning by <b>design.</b></h2>
+  <p class="dim" style="max-width:560px;margin:22px auto 0;font-size:16px">Between 2005 and 2018, Fotile received 18 international awards for excellence in design — including 9 iF Design Awards and 9 Red Dot Awards.</p>
+  <div class="agrid">
+    <div class="astat"><b data-c="18">0</b><span>Design Awards</span></div>
+    <div class="astat"><b data-c="9">0</b><span>iF Design Awards</span></div>
+    <div class="astat"><b data-c="9">0</b><span>Red Dot Awards</span></div>
+    <div class="astat"><b data-c="20" data-suf="+">0</b><span>Years in Pakistan</span></div>
+  </div>
+
+  <div class="press" style="text-align:left">
+    <div class="pimg reveal" style="background-image:url('../assets/aboutus/418952092_349463977838464_6567547486613977522_n-e1721019995266.webp')"></div>
+    <div class="reveal r2">
+      <div class="kick" style="margin-bottom:16px"><span class="dot"></span>In The Press</div>
+      <h3>Named a <b>Best Range Hood Brand</b> by Forbes.</h3>
+      <p>Fotile was featured by Forbes among the best range hood brands — recognition of the engineering, reliability and design that define every appliance we build.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- TIMELINE -->
+<section class="pad"><div class="wrap">
+  <div class="reveal center" style="text-align:center;max-width:640px;margin:0 auto 10px">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>Our Journey</div>
+    <h2 class="h2" style="margin-top:20px">A legacy of <b>craft.</b></h2>
+  </div>
+  <div class="tl">
+    <div class="tlrow reveal"><div class="yr">THE BEGINNING</div><h4>From small beginnings</h4><p>Fotile is founded on a simple belief — that the kitchen is the heart of the home, and deserves to be healthier, quieter and more beautiful.</p></div>
+    <div class="tlrow reveal r2"><div class="yr">2005 – 2018</div><h4>18 international design awards</h4><p>Recognised with 9 iF Design Awards and 9 Red Dot Awards for excellence in design — a rare achievement in the appliance world.</p></div>
+    <div class="tlrow reveal r3"><div class="yr">20+ YEARS</div><h4>Serving Pakistan</h4><p>Over two decades building a trusted reputation with Pakistani families for functional, stylish, smoke-free kitchens.</p></div>
+    <div class="tlrow reveal"><div class="yr">TODAY</div><h4>A global presence</h4><p>Now an essential component of kitchens everywhere — with 200 million customers across more than 50 countries worldwide.</p></div>
+  </div>
+</div></section>
+
+<!-- VALUES -->
+<section class="pad" style="border-top:1px solid var(--line)"><div class="wrap">
+  <div class="reveal" style="max-width:640px;margin-bottom:10px">
+    <div class="kick"><span class="dot"></span>What We Stand For</div>
+    <h2 class="h2" style="margin-top:20px">Built on <b>principle.</b></h2>
+  </div>
+  <div class="vals">
+    <div class="val reveal"><div class="ic">◇</div><h4>Innovation</h4><p>Cutting-edge, patented technology that leads the industry — from suction power to 4-in-1 cooking.</p></div>
+    <div class="val reveal r2"><div class="ic">◈</div><h4>Health</h4><p>Every appliance is engineered to make your kitchen cleaner, your air fresher and your home healthier.</p></div>
+    <div class="val reveal r3"><div class="ic">◆</div><h4>Aesthetics</h4><p>Award-winning design that combines innovation, utility and beauty in every considered detail.</p></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<!--CMP-MODULE-->
+<section class="pad ab"><div class="wrap">
+  <div class="ab-head reveal center" style="text-align:center;max-width:640px;margin:0 auto 52px">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>Why Fotile</div>
+    <h2 class="h2" style="margin-top:16px">Trusted in millions of<br><b>kitchens worldwide.</b></h2>
+  </div>
+  <div class="ab-pillars reveal">
+    <div class="ab-p"><b>1996</b><span>Founded — decades devoted<br>entirely to the kitchen</span></div>
+    <div class="ab-p"><b>#1</b><span>Built-in kitchen appliance<br>brand across Asia</span></div>
+    <div class="ab-p"><b>20+</b><span>Countries where Fotile<br>kitchens are sold</span></div>
+    <div class="ab-p"><b>PK</b><span>Nationwide warranty<br>&amp; service in Pakistan</span></div>
+  </div>
+</div>
+<style>
+  .ab-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .ab-p{padding:40px 24px;text-align:center;border-right:1px solid var(--line);opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .ab-p:nth-child(2){transition-delay:.1s}.ab-p:nth-child(3){transition-delay:.2s}.ab-p:nth-child(4){transition-delay:.3s}
+  .reveal.in .ab-p{opacity:1;transform:none}
+  .ab-p:last-child{border-right:none}
+  .ab-p b{display:block;font-size:clamp(40px,4.6vw,60px);font-weight:200;letter-spacing:-2px;line-height:1;color:#fff}
+  .ab-p:nth-child(2) b,.ab-p:last-child b{color:var(--red)}
+  .ab-p span{display:block;margin-top:14px;font-size:13.5px;color:var(--txt-dim);font-weight:300;line-height:1.55}
+  @media(max-width:820px){.ab-pillars{grid-template-columns:1fr 1fr}.ab-p:nth-child(2){border-right:none}.ab-p:nth-child(1),.ab-p:nth-child(2){border-bottom:1px solid var(--line)}}
+</style>
+
+<script>(function(){var sc=document.currentScript;var root=sc.parentNode;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});var els=root.querySelectorAll('.reveal');els.forEach(function(el){io.observe(el);});})();</script><!--/CMP-MODULE-->
+</section>
+
+<section class="pad cta">
+  <div class="bg" style="background-image:url('../assets/aboutus/436233144_425428316908696_6999406848099700077_n-e1721030296306.webp')"></div>
+  <div class="wrap"><div class="in reveal">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>Experience Fotile</div>
+    <h2 class="h2" style="margin:20px 0 22px">Bring Fotile <b>home.</b></h2>
+    <p class="dim" style="font-size:17px;margin-bottom:34px;color:#c4c6ca">Explore the collection or visit an authorized showroom across Pakistan to experience the craft in person.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="/home-regular/#collection" class="btn-r">Explore the Collection →</a>
+      <a href="#" class="btn-l">Find a Showroom</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div>
+      <img class="fl" src="../assets/logo.png" alt="FOTILE">
+      <p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
+      <div class="fsoc" style="margin-top:24px"><a href="#">f</a><a href="#">◎</a><a href="#">in</a><a href="#">▶</a></div>
+    </div>
+    <div><h5>Collection</h5><a class="fli" href="#">Range Hoods</a><a class="fli" href="#">Ovens</a><a class="fli" href="#">Hobs</a><a class="fli" href="#">Dishwashers</a><a class="fli" href="#">Purifiers</a></div>
+    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="#">Blog</a><a class="fli" href="#">FAQ</a><a class="fli" href="/contact-us/">Contact</a></div>
+    <div><h5>Support</h5><a class="fli" href="#">Track Order</a><a class="fli" href="#">Schedule Service</a><a class="fli" href="#">Warranty</a><a class="fli" href="#">042-111-131-517</a></div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 Fotile Pakistan — All Rights Reserved.</span>
+    <span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/refund_returns/" style="transition:.3s">Refunds</a><a href="/shipping-policy/" style="transition:.3s">Shipping</a><a href="/privacy-policy/" style="transition:.3s">Privacy Policy</a><a href="/terms-and-conditions/" style="transition:.3s">Terms &amp; Conditions</a></span>
+  </div>
+</div></footer>
+
+<a class="wa" href="#">💬</a>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50));
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.2});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const cio=new IntersectionObserver((es)=>es.forEach(e=>{
+    if(e.isIntersecting){const el=e.target,t=+el.dataset.c,s=el.dataset.suf||'';let n=0,st=Math.max(1,t/50);
+      const iv=setInterval(()=>{n+=st;if(n>=t){n=t;clearInterval(iv)}el.innerHTML=Math.floor(n)+'<i>'+s+'</i>';},22);cio.unobserve(el);}
+  }),{threshold:.6});
+  document.querySelectorAll('.astat b').forEach(el=>cio.observe(el));
+</script>
+<script src="../cart.js"></script>
+<script src="../editor.js"></script>
+<script src="../mobile-nav.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "Fotile Pakistan", "url": "https://fotilepk.com/", "logo": "https://fotilepk.com/assets/logo.png", "telephone": "+92-42-111-131-517", "areaServed": "PK", "sameAs": ["https://www.facebook.com/fotile.pk"]}</script>
+</body>
+</html>

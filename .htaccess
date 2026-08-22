@@ -1,0 +1,81 @@
+# Fotile Pakistan — clean URLs + legacy 301 redirects
+Options +FollowSymLinks
+RewriteEngine On
+
+# Serve /path/ -> /path/index.html (most hosts do this automatically)
+DirectoryIndex index.html
+
+# Force https + non-www (adjust to your canonical host at launch)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# --- legacy WordPress duplicates -> canonical (safe SEO cleanup) ---
+Redirect 301 /home-regular/ /
+Redirect 301 /fotile-shop/ /shop/
+Redirect 301 /my-account-2/ /my-account/
+Redirect 301 /yith-compare/ /compare/
+
+# --- category sub-paths we consolidated -> parent category ---
+Redirect 301 /product-category/hobs/gas-hobs/ /product-category/hobs/
+Redirect 301 /product-category/hobs/electric-hobs/ /product-category/hobs/
+Redirect 301 /product-category/oven/electric-oven/ /product-category/oven/
+Redirect 301 /product-category/oven/steam-oven/ /product-category/oven/
+Redirect 301 /product-category/oven/combi-oven/ /product-category/oven/
+Redirect 301 /product-category/oven/magic-oven/ /product-category/oven/
+Redirect 301 /product-category/sink-dish-washer/ /product-category/dish-washer/
+Redirect 301 /product-category/moonseries/ /moon-series/
+Redirect 301 /product-category/offers-and-discounts/ /shop/
+
+
+# --- legacy flat preview files -> clean URLs (added) ---
+Redirect 301 /about.html /about-us/
+Redirect 301 /contact.html /contact-us/
+Redirect 301 /dealers.html /our-dealers/
+Redirect 301 /moon-series.html /moon-series/
+Redirect 301 /shop.html /shop/
+Redirect 301 /cart.html /cart/
+Redirect 301 /payment.html /checkout/
+Redirect 301 /blog.html /blog/
+Redirect 301 /blog2.html /blog/page/2/
+Redirect 301 /blog3.html /blog/page/3/
+Redirect 301 /blog-post.html /blog/
+Redirect 301 /explore.html /shop/
+Redirect 301 /masterpiece.html /home-regular/
+Redirect 301 /masterpiece-cinematic.html /
+Redirect 301 /privacy-policy.html /privacy-policy/
+Redirect 301 /refund-policy.html /refund_returns/
+Redirect 301 /shipping-policy.html /shipping-policy/
+Redirect 301 /terms.html /terms-and-conditions/
+Redirect 301 /category-hoods.html /product-category/kitchen-hood/
+Redirect 301 /category-hobs.html /product-category/hobs/
+Redirect 301 /category-ovens.html /product-category/oven/
+Redirect 301 /category-microwaves.html /product-category/oven/microwave-oven-prices-in-pakistan/
+Redirect 301 /category-dishwashers.html /product-category/dish-washer/
+Redirect 301 /category-water.html /product-category/water-purifier/
+
+# custom 404
+ErrorDocument 404 /404.html
+
+# legacy flat .html files -> clean URLs
+Redirect 301 /masterpiece-cinematic.html /
+Redirect 301 /masterpiece.html /
+Redirect 301 /shop.html /shop/
+Redirect 301 /about.html /about-us/
+Redirect 301 /contact.html /contact-us/
+Redirect 301 /dealers.html /our-dealers/
+Redirect 301 /moon-series.html /moon-series/
+Redirect 301 /cart.html /cart/
+Redirect 301 /payment.html /checkout/
+Redirect 301 /blog.html /blog/
+Redirect 301 /blog2.html /blog/page/2/
+Redirect 301 /blog3.html /blog/page/3/
+Redirect 301 /terms.html /terms-and-conditions/
+Redirect 301 /privacy-policy.html /privacy-policy/
+Redirect 301 /refund-policy.html /refund_returns/
+Redirect 301 /shipping-policy.html /shipping-policy/
+Redirect 301 /category-hoods.html /product-category/kitchen-hood/
+Redirect 301 /category-hobs.html /product-category/hobs/
+Redirect 301 /category-ovens.html /product-category/oven/
+Redirect 301 /category-microwaves.html /product-category/oven/microwave-oven-prices-in-pakistan/
+Redirect 301 /category-dishwashers.html /product-category/dish-washer/
+Redirect 301 /category-water.html /product-category/water-purifier/

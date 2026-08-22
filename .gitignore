@@ -1,0 +1,33 @@
+# ============================================================
+#  Fotile Pakistan — website repository
+# ============================================================
+
+# --- ADMIN / SECRETS -----------------------------------------------
+# These run the live dashboard and contain the admin password hash.
+# They are deliberately NOT published. They are uploaded straight to
+# the web host via DirectAdmin, never through this repo.
+# (They would not work on GitHub Pages anyway — it cannot run PHP.)
+admin-api.php
+dashboard.php
+dashboard.html
+.admin-backups/
+
+# --- Local build / working files -----------------------------------
+*.tmp
+*.bak
+*.log
+_scratch/
+test.html
+
+# --- OS junk --------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+._*
+
+# --- Editors --------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*~

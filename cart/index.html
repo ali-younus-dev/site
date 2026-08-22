@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart | Fotile Pakistan</title>
+<meta name="description" content="Review your Fotile kitchen appliances and check out securely. Premium range hoods, ovens, hobs and more with nationwide delivery across Pakistan.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fotile Pakistan">
+<meta property="og:title" content="Your Cart | Fotile Pakistan">
+<meta property="og:description" content="Review your Fotile kitchen appliances and check out securely. Premium range hoods, ovens, hobs and more with nationwide delivery across Pakistan.">
+<meta property="og:image" content="https://fotilepk.com/assets/hero-banner.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your Cart | Fotile Pakistan">
+<meta name="twitter:description" content="Review your Fotile kitchen appliances and check out securely. Premium range hoods, ovens, hobs and more with nationwide delivery across Pakistan.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0c;--panel:#101216;--panel2:#161a1f;--line:rgba(255,255,255,.08);
+    --txt:#eef0f2;--txt-dim:#949aa2;--faint:#565c64;
+    --sil:#c8ccd2;--sil-lt:#eef1f4;--sil-deep:#6a6f77;
+    --red:#e01e37;--good:#3ec98a;
+    --font:"Manrope",system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;position:relative}
+  img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+  ::selection{background:var(--sil);color:#14171b}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 44px}
+
+  .aura{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .aura::before{content:"";position:absolute;top:-18%;left:-8%;width:60vw;height:60vw;border-radius:50%;background:radial-gradient(circle,rgba(120,128,140,.16),transparent 62%);filter:blur(34px)}
+  .aura::after{content:"";position:absolute;bottom:-24%;right:-10%;width:66vw;height:66vw;border-radius:50%;background:radial-gradient(circle,rgba(91,143,249,.06),transparent 60%);filter:blur(34px)}
+  header,section,footer,.nav{position:relative;z-index:3}.nav{z-index:1000}
+
+  /* NAV */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:22px 44px;transition:.5s cubic-bezier(.16,1,.3,1);border-bottom:1px solid transparent;margin-top:26px}
+  .nav.solid{background:rgba(10,11,12,.82);backdrop-filter:blur(20px) saturate(140%);border-bottom-color:var(--line);padding:16px 44px;margin-top:0}
+  .nav .brand img{height:20px;filter:brightness(0) invert(1)}
+  .nlinks{display:flex;gap:34px;font-size:13.5px;font-weight:500;letter-spacing:.2px}
+  .nlinks a{position:relative;opacity:.72;transition:.3s;padding:3px 0}.nlinks a:hover{opacity:1}
+  .nlinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--sil);transition:.35s}
+  .nlinks a:hover::after{width:100%}
+  .nr{display:flex;align-items:center;gap:22px;font-size:14px}
+  .cartic{position:relative;font-size:18px;cursor:pointer}
+  .cartic b{position:absolute;top:-8px;right:-9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:17px;height:17px;border-radius:20px;display:flex;align-items:center;justify-content:center;padding:0 3px}
+  .npill{font-size:13px;font-weight:600;border:1px solid rgba(200,204,210,.42);color:var(--sil-lt);padding:10px 22px;border-radius:4px;transition:.35s}
+  .npill:hover{background:var(--sil);border-color:var(--sil);color:#14171b}
+
+  .top{padding:150px 0 30px}
+  .top .ey{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--sil-lt);font-weight:500;margin-bottom:16px}
+  .top .ey .ln{width:34px;height:1px;background:linear-gradient(90deg,var(--sil),transparent)}
+  .top h1{font-size:clamp(38px,5vw,68px);font-weight:200;letter-spacing:-2px}
+  .top h1 b{font-weight:500;background:linear-gradient(120deg,#fff,var(--sil-lt));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* STEPPER */
+  .stepper{display:flex;align-items:center;gap:0;margin:26px 0 44px;max-width:640px}
+  .step{display:flex;align-items:center;gap:12px;flex:1}
+  .step .num{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--txt-dim);transition:.3s;flex-shrink:0}
+  .step .nm{font-size:13px;font-weight:600;color:var(--txt-dim);transition:.3s}
+  .step .line{flex:1;height:1.5px;background:var(--line);margin:0 12px;transition:.4s}
+  .step.on .num{background:var(--sil);border-color:var(--sil);color:#14171b}
+  .step.on .nm{color:#fff}
+  .step.done .num{background:var(--good);border-color:var(--good);color:#06110c}
+  .step.done .line,.step.on .line{background:linear-gradient(90deg,var(--good),var(--sil))}
+
+  /* LAYOUT */
+  .shell{display:grid;grid-template-columns:1fr 380px;gap:30px;align-items:start;padding-bottom:100px}
+  .view{display:none}.view.on{display:block;animation:vf .4s}
+  @keyframes vf{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* CART ITEMS */
+  .items{display:flex;flex-direction:column;gap:14px}
+  .item{display:grid;grid-template-columns:96px 1fr auto;gap:20px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;transition:.3s}
+  .item:hover{border-color:rgba(200,204,210,.25)}
+  .item .im{width:96px;height:96px;border-radius:10px;background:radial-gradient(120% 90% at 50% 25%,#1a1c20,#0b0c0e);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .item .im img{width:80%;height:80%;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.5))}
+  .item .meta .cat{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .item .meta h3{font-size:16px;font-weight:500;margin:5px 0 8px}
+  .item .meta .rm{font-size:12.5px;color:var(--faint);cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:5px}
+  .item .meta .rm:hover{color:var(--red)}
+  .item .right{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+  .qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .qty button{width:32px;height:32px;background:var(--panel2);border:none;color:#fff;font-size:16px;cursor:pointer;transition:.2s}
+  .qty button:hover{background:#20242b}
+  .qty span{width:38px;text-align:center;font-size:14px;font-weight:600}
+  .item .price{font-size:17px;font-weight:600}
+  .item .price small{display:block;font-size:11px;color:var(--faint);font-weight:500}
+
+  /* EMPTY */
+  .empty{text-align:center;padding:80px 20px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+  .empty .ic{font-size:48px;opacity:.4;margin-bottom:18px}
+  .empty h3{font-size:22px;font-weight:400;margin-bottom:10px}
+  .empty p{color:var(--txt-dim);margin-bottom:26px}
+
+  /* SUMMARY */
+  .summary{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;position:sticky;top:100px}
+  .summary h3{font-size:16px;font-weight:600;margin-bottom:22px}
+  .srow{display:flex;justify-content:space-between;font-size:14px;padding:10px 0;color:var(--txt-dim)}
+  .srow b{color:#fff;font-weight:600}
+  .srow.total{border-top:1px solid var(--line);margin-top:8px;padding-top:18px;font-size:19px}
+  .srow.total b{font-size:22px;font-weight:700}
+  .promo{display:flex;gap:8px;margin:18px 0}
+  .promo input{flex:1;background:var(--panel2);border:1px solid var(--line);color:#fff;padding:12px;border-radius:8px;font-family:inherit;font-size:13px}
+  .promo input:focus{outline:none;border-color:rgba(200,204,210,.4)}
+  .promo button{background:var(--panel2);border:1px solid var(--line);color:#fff;padding:0 16px;border-radius:8px;font-family:inherit;font-weight:600;font-size:12.5px;cursor:pointer}
+  .btn-p{width:100%;background:linear-gradient(135deg,var(--sil),var(--sil-lt));color:#14171b;border:none;padding:16px;border-radius:10px;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;transition:.35s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:9px}
+  .btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(200,204,210,.25)}
+  .btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+  .trust{display:flex;flex-direction:column;gap:9px;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+  .trust div{font-size:12.5px;color:var(--txt-dim);display:flex;align-items:center;gap:10px}
+  .trust .ti{color:var(--good)}
+
+  /* FORMS (shipping/payment) */
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;margin-bottom:20px}
+  .fcard h3{font-size:17px;font-weight:600;margin-bottom:6px}
+  .fcard .fsub{font-size:13px;color:var(--txt-dim);margin-bottom:24px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{margin-bottom:15px}
+  .field label{display:block;font-size:12px;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:8px}
+  .field input,.field select,.field textarea{width:100%;background:var(--panel2);border:1px solid var(--line);color:#fff;padding:13px 14px;border-radius:9px;font-family:inherit;font-size:14.5px;transition:.3s}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:rgba(200,204,210,.5);background:#191d23}
+  .field textarea{resize:vertical;min-height:80px}
+  .pay-opts{display:flex;flex-direction:column;gap:12px}
+  .pay{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:12px;padding:18px;cursor:pointer;transition:.25s}
+  .pay:hover{border-color:rgba(200,204,210,.4)}
+  .pay.on{border-color:var(--sil);background:rgba(200,204,210,.05)}
+  .pay .radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;transition:.25s;position:relative}
+  .pay.on .radio{border-color:var(--sil)}.pay.on .radio::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--sil)}
+  .pay .pi{font-size:22px}.pay b{font-size:15px;font-weight:600}.pay span{font-size:12.5px;color:var(--txt-dim);display:block}
+  .backbtn{background:none;border:none;color:var(--txt-dim);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;margin-top:16px;display:inline-flex;align-items:center;gap:8px}
+  .backbtn:hover{color:#fff}
+
+  /* CONFIRMATION */
+  .confirm{text-align:center;padding:70px 20px;max-width:640px;margin:0 auto}
+  .confirm .ck{width:88px;height:88px;border-radius:50%;background:radial-gradient(circle,rgba(62,201,138,.15),transparent);border:2px solid var(--good);color:var(--good);display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 26px;animation:pop .5s cubic-bezier(.16,1,.3,1)}
+  @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+  .confirm h2{font-size:clamp(28px,4vw,44px);font-weight:200;letter-spacing:-1px;margin-bottom:14px}
+  .confirm h2 b{font-weight:600}
+  .confirm p{color:var(--txt-dim);font-size:16px;margin-bottom:8px}
+  .confirm .oid{display:inline-block;margin:18px 0 30px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 24px;font-size:14px}
+  .confirm .oid b{color:var(--sil-lt)}
+
+  footer{background:#070809;padding:60px 0 34px;border-top:1px solid var(--line);margin-top:40px}
+  .fbot{text-align:center;color:#57544c;font-size:13px}
+  .wa{position:fixed;right:26px;bottom:26px;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:900;box-shadow:0 12px 28px rgba(37,211,102,.4)}
+  .flag{position:fixed;top:0;left:0;right:0;z-index:2000;background:#000;color:#949aa2;text-align:center;padding:6px;font-size:11.5px;font-weight:500;letter-spacing:.5px;border-bottom:1px solid var(--line)}
+  .flag b{color:var(--sil-lt)}
+
+  @media(max-width:960px){.wrap{padding:0 24px}.nav{padding:18px 24px}.nav.solid{padding:14px 24px}.nlinks{display:none}.shell{grid-template-columns:1fr}.summary{position:static}.frow{grid-template-columns:1fr}}
+  @media(max-width:560px){.item{grid-template-columns:72px 1fr;gap:14px}.item .right{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}.item .im{width:72px;height:72px}}
+</style>
+  <link rel="canonical" href="https://fotilepk.com/cart/">
+<script>window.__PBASE="../";</script>
+</head>
+<body>
+
+<div class="aura"></div>
+
+<div class="flag">CONCEPT <b>·</b> Shopping Cart &amp; Checkout · items added from anywhere on the site land here · demo checkout flow</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="/home-regular/" class="brand"><img src="../assets/logo.png" alt="FOTILE"></a>
+  <div class="nlinks">
+    <a href="/shop/">Products</a>
+    <a href="/moon-series/">Moon Series</a>
+    <a href="/about-us/">About</a>
+    <a href="/our-dealers/">Dealers</a>
+    <a href="/contact-us/">Contact</a>
+  </div>
+  <div class="nr">
+    <span class="ic">⌕</span>
+    <a href="/cart/" class="cartic">🛒<b data-cart-count>0</b></a>
+    <a href="#" class="npill">Request a Quote</a>
+  </div>
+</nav>
+
+<!-- TOP -->
+<header class="top"><div class="wrap">
+  <div class="ey"><span class="ln"></span>Checkout</div>
+  <h1>Your <b>Cart.</b></h1>
+  <div class="stepper" id="stepper">
+    <div class="step on" data-s="cart"><div class="num">1</div><div class="nm">Cart</div><div class="line"></div></div>
+    <div class="step" data-s="ship"><div class="num">2</div><div class="nm">Shipping</div><div class="line"></div></div>
+    <div class="step" data-s="pay"><div class="num">3</div><div class="nm">Payment</div></div>
+  </div>
+</div></header>
+
+<div class="wrap">
+
+  <!-- ===== VIEW 1: CART ===== -->
+  <div class="view on" id="v-cart">
+    <div class="shell">
+      <div>
+        <div class="items" id="itemsBox"></div>
+        <div class="empty" id="emptyBox" style="display:none">
+          <div class="ic">🛒</div>
+          <h3>Your cart is empty</h3>
+          <p>Looks like you haven't added anything yet.</p>
+          <a href="/shop/" class="npill" style="display:inline-block">Browse Products →</a>
+        </div>
+      </div>
+      <aside class="summary" id="sum1"></aside>
+    </div>
+  </div>
+
+  <!-- ===== VIEW 2: SHIPPING ===== -->
+  <div class="view" id="v-ship">
+    <div class="shell">
+      <div>
+        <div class="fcard">
+          <h3>Contact details</h3><div class="fsub">We'll use this to confirm your order.</div>
+          <div class="frow">
+            <div class="field"><label>Full Name</label><input id="s_name" placeholder="Your name"></div>
+            <div class="field"><label>Phone</label><input id="s_phone" placeholder="03xx-xxxxxxx"></div>
+          </div>
+          <div class="field"><label>Email</label><input id="s_email" type="email" placeholder="you@email.com"></div>
+        </div>
+        <div class="fcard">
+          <h3>Delivery address</h3><div class="fsub">Where should we deliver &amp; install?</div>
+          <div class="field"><label>Street Address</label><input id="s_addr" placeholder="House #, street, area"></div>
+          <div class="frow">
+            <div class="field"><label>City</label>
+              <select id="s_city"><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option><option>Other</option></select>
+            </div>
+            <div class="field"><label>Postal Code</label><input id="s_zip" placeholder="e.g. 75500"></div>
+          </div>
+          <div class="field"><label>Notes (optional)</label><textarea id="s_note" placeholder="Any delivery or installation notes"></textarea></div>
+        </div>
+        <button class="backbtn" onclick="goStep('cart')">← Back to cart</button>
+      </div>
+      <aside class="summary" id="sum2"></aside>
+    </div>
+  </div>
+
+  <!-- ===== VIEW 3: PAYMENT ===== -->
+  <div class="view" id="v-pay">
+    <div class="shell">
+      <div>
+        <div class="fcard">
+          <h3>Payment method</h3><div class="fsub">Choose how you'd like to pay.</div>
+          <div class="pay-opts" id="payOpts">
+            <label class="pay on" data-pay="cod"><span class="radio"></span><span class="pi">💵</span><div><b>Cash on Delivery</b><span>Pay when your order arrives</span></div></label>
+            <label class="pay" data-pay="card"><span class="radio"></span><span class="pi">💳</span><div><b>Credit / Debit Card</b><span>Visa, Mastercard — secure checkout</span></div></label>
+            <label class="pay" data-pay="bank"><span class="radio"></span><span class="pi">🏦</span><div><b>Bank Transfer</b><span>Direct transfer to Fotile Pakistan</span></div></label>
+            <label class="pay" data-pay="install"><span class="radio"></span><span class="pi">📅</span><div><b>Installments</b><span>Ask about easy monthly plans</span></div></label>
+          </div>
+        </div>
+        <div class="fcard" id="cardFields" style="display:none">
+          <h3>Card details</h3><div class="fsub">Encrypted &amp; secure. (Demo — no real charge.)</div>
+          <div class="field"><label>Card Number</label><input placeholder="0000 0000 0000 0000"></div>
+          <div class="frow">
+            <div class="field"><label>Expiry</label><input placeholder="MM / YY"></div>
+            <div class="field"><label>CVC</label><input placeholder="123"></div>
+          </div>
+        </div>
+        <button class="backbtn" onclick="goStep('ship')">← Back to shipping</button>
+      </div>
+      <aside class="summary" id="sum3"></aside>
+    </div>
+  </div>
+
+  <!-- ===== VIEW 4: CONFIRMATION ===== -->
+  <div class="view" id="v-done">
+    <div class="confirm">
+      <div class="ck">✓</div>
+      <h2>Order <b>confirmed!</b></h2>
+      <p>Thank you for choosing Fotile. Our team will contact you shortly to confirm delivery &amp; installation.</p>
+      <div class="oid">Order ID: <b id="orderId">#FT-000000</b></div>
+      <div><a href="/shop/" class="npill" style="display:inline-block">Continue Shopping →</a></div>
+    </div>
+  </div>
+
+</div>
+
+<footer><div class="wrap"><div class="fbot">© 2026 Fotile Pakistan — All Rights Reserved.</div></div></footer>
+<a class="wa" href="#">💬</a>
+
+<script src="../cart.js"></script>
+<script>
+  const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50));
+
+  /* ---- DEMO: seed a couple of items so the page isn't empty on first view ---- */
+  if(FotileCart.count()===0){
+    FotileCart.add({id:'ea06',name:'Range Island Hood EA06',price:858000,img:'assets/products/range-island-hood-ea06.png',cat:'Range Hood'});
+    FotileCart.add({id:'magic',name:'Magic Oven 4-in-1',price:249000,img:'assets/Magic-Oven.jpg-1.webp',cat:'Oven'});
+  }
+
+  const money=n=>'Rs '+n.toLocaleString();
+
+  /* ---- render cart items ---- */
+  function renderItems(){
+    const box=document.getElementById('itemsBox'),empty=document.getElementById('emptyBox');
+    const items=FotileCart.all();
+    empty.style.display=items.length?'none':'block';
+    box.style.display=items.length?'flex':'none';
+    box.innerHTML=items.map(i=>`
+      <div class="item">
+        <div class="im"><img src="${i.img}" alt="${i.name}"></div>
+        <div class="meta"><div class="cat">${i.cat||''}</div><h3>${i.name}</h3>
+          <span class="rm" data-rm="${i.id}">✕ Remove</span></div>
+        <div class="right">
+          <div class="qty"><button data-dec="${i.id}">−</button><span>${i.qty}</span><button data-inc="${i.id}">+</button></div>
+          <div class="price">${i.price?money(i.price*i.qty):'On Request'}${i.price?`<small>${money(i.price)} each</small>`:''}</div>
+        </div>
+      </div>`).join('');
+    box.querySelectorAll('[data-inc]').forEach(b=>b.onclick=()=>{const it=FotileCart.all().find(x=>x.id===b.dataset.inc);FotileCart.setQty(b.dataset.inc,it.qty+1);});
+    box.querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>{const it=FotileCart.all().find(x=>x.id===b.dataset.dec);FotileCart.setQty(b.dataset.dec,it.qty-1);});
+    box.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>FotileCart.remove(b.dataset.rm));
+  }
+
+  /* ---- render summary (shared across steps) ---- */
+  let discount=0;
+  function renderSummary(el,cta){
+    const sub=FotileCart.subtotal();
+    const delivery=sub>0?0:0;
+    const total=sub-discount;
+    el.innerHTML=`
+      <h3>Order Summary</h3>
+      <div class="srow"><span>Subtotal (${FotileCart.count()} items)</span><b>${money(sub)}</b></div>
+      <div class="srow"><span>Delivery &amp; Installation</span><b style="color:var(--good)">Free</b></div>
+      ${discount?`<div class="srow"><span>Discount</span><b style="color:var(--good)">−${money(discount)}</b></div>`:''}
+      <div class="srow total"><span>Total</span><b>${money(total)}</b></div>
+      ${cta==='cart'?`<div class="promo"><input id="promoIn" placeholder="Promo code"><button onclick="applyPromo()">Apply</button></div>`:''}
+      <button class="btn-p" ${FotileCart.count()?'':'disabled'} onclick="${cta==='cart'?"goStep('ship')":cta==='ship'?"validShip()":"placeOrder()"}">
+        ${cta==='cart'?'Proceed to Checkout →':cta==='ship'?'Continue to Payment →':'Place Order →'}
+      </button>
+      <div class="trust">
+        <div><span class="ti">✓</span> Free delivery &amp; installation nationwide</div>
+        <div><span class="ti">✓</span> Local warranty on every product</div>
+        <div><span class="ti">✓</span> Secure checkout · your data is safe</div>
+      </div>`;
+  }
+  function refresh(){renderItems();renderSummary(document.getElementById('sum1'),'cart');renderSummary(document.getElementById('sum2'),'ship');renderSummary(document.getElementById('sum3'),'pay');}
+  FotileCart.onChange(refresh);
+  refresh();
+
+  window.applyPromo=function(){const v=(document.getElementById('promoIn').value||'').trim().toUpperCase();if(v==='FOTILE10'){discount=Math.round(FotileCart.subtotal()*.1);refresh();}else{discount=0;refresh();alert('Try code FOTILE10 for 10% off (demo).');}};
+
+  /* ---- steps ---- */
+  const order=['cart','ship','pay'];
+  window.goStep=function(s){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    document.getElementById('v-'+s).classList.add('on');
+    const idx=order.indexOf(s);
+    document.querySelectorAll('.step').forEach((st,i)=>{st.classList.toggle('on',i===idx);st.classList.toggle('done',i<idx);});
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  window.validShip=function(){
+    const req=['s_name','s_phone','s_addr'];let ok=true;
+    req.forEach(id=>{const el=document.getElementById(id);if(!el.value.trim()){el.style.borderColor='var(--red)';ok=false;}else el.style.borderColor='';});
+    // go to the dedicated secure payment page (card / wallet / bank / COD)
+    if(ok)window.location.href='payment.html';else alert('Please fill in your name, phone and address.');
+  };
+
+  /* payment option select */
+  document.querySelectorAll('.pay').forEach(p=>p.onclick=()=>{
+    document.querySelectorAll('.pay').forEach(x=>x.classList.remove('on'));p.classList.add('on');
+    document.getElementById('cardFields').style.display=p.dataset.pay==='card'?'block':'none';
+  });
+
+  window.placeOrder=function(){
+    const id='#FT-'+Math.floor(100000+((FotileCart.subtotal()%899999))).toString();
+    document.getElementById('orderId').textContent=id;
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+    document.getElementById('v-done').classList.add('on');
+    document.querySelectorAll('.step').forEach(st=>st.classList.add('done'));
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+</script>
+<script src="../mobile-nav.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "Fotile Pakistan", "url": "https://fotilepk.com/", "logo": "https://fotilepk.com/assets/logo.png", "telephone": "+92-42-111-131-517", "areaServed": "PK", "sameAs": ["https://www.facebook.com/fotile.pk"]}</script>
+</body>
+</html>
