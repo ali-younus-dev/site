@@ -1,12 +1,16 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
-<title>Redirecting… | Fotile Pakistan</title>
+<title>Redirecting&#8230; | Fotile Pakistan</title>
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://fotilepk.com/refund_returns/">
 <script>
+/* Legacy URL redirect. Uses RELATIVE paths so it works at a domain root,
+   inside a subfolder (preview hosting), and straight from disk. */
 (function(){var t="refund_returns/";
- if(location.protocol==="file:")location.replace((t||"")+"index.html");
- else location.replace("/"+t);})();
+ var p=location.pathname, f=(location.protocol==="file:");
+ /* Some hosts serve foo.html for the URL /foo/ - if we are already inside the
+    destination folder, load its real page instead of redirecting again. */
+ if(t && p.slice(-t.length)===t){ location.replace("index.html"); return; }
+ location.replace(f ? (t+"index.html") : (t||"./"));})();
 </script>
-<meta http-equiv="refresh" content="0;url=/refund_returns/">
 <style>body{font-family:system-ui,Arial,sans-serif;background:#0b0b0e;color:#cfd2d6;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}a{color:#e01e37}</style>
-</head><body><p>Taking you to the updated page… <a href="/refund_returns/">continue</a></p></body></html>
+</head><body><p>Taking you to the updated page&#8230; <a href="refund_returns/">continue</a></p></body></html>
