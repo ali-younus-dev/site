@@ -255,7 +255,8 @@
 
   /* ===== BEFORE/AFTER AIR (cinematic full-bleed) ===== */
   .baband{position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .ba{position:relative;width:100%;aspect-ratio:16/8;overflow:hidden;user-select:none;cursor:ew-resize;min-height:420px}
+  .ba{position:relative;width:100%;aspect-ratio:16/8;overflow:hidden;user-select:none;cursor:ew-resize;min-height:420px;
+    touch-action:pan-y;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
   .ba .layer{position:absolute;inset:0;background-size:cover;background-position:center}
   .ba .before{filter:brightness(.8) saturate(.72) contrast(1.02)}
   .ba .after{clip-path:inset(0 0 0 50%);filter:brightness(1.02) saturate(1.06)}
@@ -393,6 +394,24 @@
   }
   @media(max-width:600px){
     .badges,.tgrid,.jgrid{grid-template-columns:1fr}
+  }
+  /* ---- BEFORE/AFTER slider: phone layout (was cramped + captions collided) ---- */
+  @media(max-width:768px){
+    .ba{aspect-ratio:4/5;min-height:0;max-height:76vh;cursor:grab}
+    .ba.dragging{cursor:grabbing}
+    /* headlines are decorative - the section heading above already explains it.
+       Keep just the Before / After labels as readable pills in the top corners. */
+    .ba .capt h3{display:none}
+    .ba .capt{top:16px;transform:none;max-width:none;width:auto}
+    .ba .capt.l{left:12px;right:auto}
+    .ba .capt.r{right:12px;left:auto;text-align:right}
+    .ba .capt .k{margin:0;font-size:9.5px;letter-spacing:1.4px;padding:7px 13px;border-radius:50px;
+      background:rgba(8,8,10,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.14);white-space:nowrap;display:inline-block}
+    .ba .grip{width:54px;height:54px}
+    .ba .grip i{font-size:17px}
+    .ba .bahint{bottom:18px;font-size:10.5px;padding:7px 14px}
+    .ba .handle::after{height:38px}
   }
   @media(max-width:600px){
     .t-sm,.t-md,.t-lg{grid-column:span 12}.lgrid{grid-template-columns:1fr 1fr}.fgrid{grid-template-columns:1fr}
@@ -666,7 +685,7 @@
   </div>
   <div class="nr">
     <span class="ic">⌕</span><a href="/cart/" class="ic" style="position:relative;text-decoration:none">🛒<b data-cart-count style="position:absolute;top:-8px;right:-9px;background:var(--red,#e01e37);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a>
-    <a href="#" class="npill">Request a Quote</a>
+    <a href="/contact-us/" class="npill">Request a Quote</a>
   </div>
 </nav>
 
@@ -850,11 +869,11 @@
     <h2 class="h2" style="margin-top:20px">Every appliance,<br>a <b>considered object.</b></h2>
   </div>
   <div class="coll">
-    <div class="tile t-lg reveal"><div class="ti" style="background-image:url('assets/hero-banner.jpg')"></div><div class="cap"><small>Signature</small><h4>Premium living, perfected</h4><div class="go">Explore the flagship →</div></div></div>
-    <div class="tile t-sm contain reveal r2"><div class="ti" style="background-image:url('assets/products/gas-hob-4-lohas-burners-glass-top-glg60409.png')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></div>
-    <div class="tile t-sm contain reveal r3"><div class="ti" style="background-image:url('assets/moon-new-home-img.jpg')"></div><div class="cap"><small>Premium</small><h4>Moon Series</h4><div class="go">Explore premium →</div></div></div>
-    <div class="tile t-md contain reveal"><div class="ti" style="background-image:url('assets/products/built-in-oven-kms7008.png')"></div><div class="cap"><small>Ovens</small><h4>Built-in Ovens</h4><div class="go">Shop ovens →</div></div></div>
-    <div class="tile t-md reveal r2"><div class="ti" style="background-image:url('assets/products/water-purifier.png')"></div><div class="cap"><small>Purity</small><h4>Water &amp; Air</h4><div class="go">Shop purifiers →</div></div></div>
+    <a href="/shop/" class="tile t-lg reveal"><div class="ti" style="background-image:url('assets/hero-banner.jpg')"></div><div class="cap"><small>Signature</small><h4>Premium living, perfected</h4><div class="go">Explore the flagship →</div></div></a>
+    <a href="/product-category/hobs/" class="tile t-sm contain reveal r2"><div class="ti" style="background-image:url('assets/products/gas-hob-gal90506.png')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></a>
+    <a href="/moon-series/" class="tile t-sm contain reveal r3"><div class="ti" style="background-image:url('assets/moon-new-home-img.jpg')"></div><div class="cap"><small>Premium</small><h4>Moon Series</h4><div class="go">Explore premium →</div></div></a>
+    <a href="/product-category/oven/" class="tile t-md contain reveal"><div class="ti" style="background-image:url('assets/products/built-in-oven-kms7008.png')"></div><div class="cap"><small>Ovens</small><h4>Built-in Ovens</h4><div class="go">Shop ovens →</div></div></a>
+    <a href="/product-category/water-purifier/" class="tile t-md reveal r2"><div class="ti" style="background-image:url('assets/products/water-purifier.png')"></div><div class="cap"><small>Purity</small><h4>Water &amp; Air</h4><div class="go">Shop purifiers →</div></div></a>
   </div>
 </div></section>
 
@@ -969,12 +988,12 @@
       <div class="kick"><span class="dot"></span>The Fotile Journal</div>
       <h2 class="h2" style="margin-top:18px">Guides &amp; <b>inspiration.</b></h2>
     </div>
-    <a href="#" class="btn-l">View All Articles →</a>
+    <a href="/blog/" class="btn-l">View All Articles →</a>
   </div>
   <div class="jgrid">
-    <a class="jcard reveal" href="#"><div class="jimg" style="background-image:url('assets/products/range-island-hood-ea06.png')"></div><div class="jb"><span class="jtag">Buying Guide</span><h4>The ultimate guide to choosing the right range hood for your kitchen</h4><div class="jmeta">6 min read</div></div></a>
-    <a class="jcard reveal r2" href="#"><div class="jimg" style="background-image:url('assets/products/gas-hob-4-lohas-burners-glass-top-glg60409.png')"></div><div class="jb"><span class="jtag">Comparison</span><h4>Gas vs electric hobs: which one is better for Pakistani kitchens?</h4><div class="jmeta">5 min read</div></div></a>
-    <a class="jcard reveal r3" href="#"><div class="jimg" style="background-image:url('assets/products/sd2f-p6l-sink-dishwasher.png')"></div><div class="jb"><span class="jtag">Innovation</span><h4>Sink dishwashers: a time-saving solution for busy Pakistani homes</h4><div class="jmeta">4 min read</div></div></a>
+    <a class="jcard reveal" href="/ultimate-guide-right-range-hood/"><div class="jimg" style="background-image:url('assets/products/range-island-hood-ea06.png')"></div><div class="jb"><span class="jtag">Buying Guide</span><h4>The ultimate guide to choosing the right range hood for your kitchen</h4><div class="jmeta">6 min read</div></div></a>
+    <a class="jcard reveal r2" href="/gas-vs-electric-hobs-pakistani-kitchens/"><div class="jimg" style="background-image:url('assets/products/gas-hob-gal90506.png')"></div><div class="jb"><span class="jtag">Comparison</span><h4>Gas vs electric hobs: which one is better for Pakistani kitchens?</h4><div class="jmeta">5 min read</div></div></a>
+    <a class="jcard reveal r3" href="/sink-dishwashers-busy-homes/"><div class="jimg" style="background-image:url('assets/products/sd2f-p6l-sink-dishwasher.png')"></div><div class="jb"><span class="jtag">Innovation</span><h4>Sink dishwashers: a time-saving solution for busy Pakistani homes</h4><div class="jmeta">4 min read</div></div></a>
   </div>
 </div></section>
 
@@ -1059,8 +1078,8 @@
     <h2 class="h2" style="margin:20px 0 22px">Feel it <b>for yourself.</b></h2>
     <p class="dim" style="font-size:17px;margin-bottom:36px;color:#c4c6ca">Visit an authorized Fotile showroom across Pakistan and experience the engineering in person — or let our team bring the demo to you.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <a href="#" class="btn-r">Find a Showroom →</a>
-      <a href="#" class="btn-l">Book a Private Demo</a>
+      <a href="/our-dealers/" class="btn-r">Find a Showroom →</a>
+      <a href="/contact-us/?enquire=private-demo" class="btn-l">Book a Private Demo</a>
     </div>
   </div></div>
 </section>
@@ -1135,9 +1154,9 @@
       <p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
       <div class="fsoc" style="margin-top:24px"><a href="https://www.facebook.com/fotile.pk" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/fotilepak/" target="_blank" rel="noopener">◎</a><a href="https://www.linkedin.com/company/fotilepk/" target="_blank" rel="noopener">in</a><a href="https://www.youtube.com/results?search_query=fotile+pakistan" target="_blank" rel="noopener">▶</a></div>
     </div>
-    <div><h5>Collection</h5><a class="fli" href="#">Range Hoods</a><a class="fli" href="/product-category/oven/">Ovens</a><a class="fli" href="/product-category/hobs/">Hobs</a><a class="fli" href="#">Dishwashers</a><a class="fli" href="#">Purifiers</a></div>
-    <div><h5>Company</h5><a class="fli" href="#">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="#">Blog</a><a class="fli" href="#">FAQ</a><a class="fli" href="/contact-us/">Contact</a></div>
-    <div><h5>Support</h5><a class="fli" href="#">Track Order</a><a class="fli" href="#">Schedule Service</a><a class="fli" href="#">Warranty</a><a class="fli" href="#">042-111-131-517</a></div>
+    <div><h5>Collection</h5><a class="fli" href="/product-category/kitchen-hood/">Range Hoods</a><a class="fli" href="/product-category/oven/">Ovens</a><a class="fli" href="/product-category/hobs/">Hobs</a><a class="fli" href="/product-category/dish-washer/">Dishwashers</a><a class="fli" href="/product-category/water-purifier/">Purifiers</a></div>
+    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="/blog/">Blog</a><a class="fli" href="/faq/">FAQ</a><a class="fli" href="/contact-us/">Contact</a></div>
+    <div><h5>Support</h5><a class="fli" href="/contact-us/">Track Order</a><a class="fli" href="/service-center/">Schedule Service</a><a class="fli" href="/service-center/">Warranty</a><a class="fli" href="tel:+924211131517">042-111-131-517</a></div>
   </div>
   <div class="fbot">
     <span>© 2026 Fotile Pakistan — All Rights Reserved.</span>
@@ -1145,7 +1164,7 @@
   </div>
 </div></footer>
 
-<a class="wa" href="#">💬</a>
+<a class="wa" href="https://wa.me/924211131517" target="_blank" rel="noopener">💬</a>
 
 <script>
   const nav=document.getElementById('nav');

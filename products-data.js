@@ -30,7 +30,6 @@ window.FOTILE_PRODUCTS = [
   {slug:'gas-hobs-90306-y',name:'Gas Hob',model:'90306-Y-II',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/products/gas-hobs-90306-y.png',price:'',featured:false,sale:''},
   {slug:'hob-glg86520',name:'Gas Hob',model:'GLG86520',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/products/hob-glg86520.png',price:'',featured:false,sale:''},
   {slug:'gas-hob-3-eps-burners-ss-top-gas-90302',name:'Gas Hob 3-Burner (SS Top)',model:'90302',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/products/gas-hob-3-eps-burners-ss-top-gas-90302.png',price:'',featured:false,sale:''},
-  {slug:'gas-hob-4-lohas-burners-glass-top-glg60409',name:'Gas Hob 4-Burner (Glass Top)',model:'GLG60409',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/products/gas-hob-4-lohas-burners-glass-top-glg60409.png',price:'',featured:false,sale:''},
   {slug:'induction-hob-eig76203',name:'Induction Hob',model:'EIG76203',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/products/induction-hob-eig76203.png',price:'',featured:false,sale:'10'},
   {slug:'induction-plate-eig30102',name:'Induction Plate',model:'EIG30102',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/products/induction-plate-eig30102.png',price:'',featured:false,sale:''},
   {slug:'glass-o-series-scd-42-ct2',name:'O-Series Glass Cooktop',model:'SCD42-CT2',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/products/glass-o-series-scd-42-ct2.png',price:'',featured:false,sale:''},
@@ -115,6 +114,53 @@ window.FOTILE_PRODUCTS = [
   function boot(){ apply();
     mo=new MutationObserver(function(){ if(mo)mo.disconnect(); apply(); if(mo)mo.observe(document.body,{childList:true,subtree:true}); });
     mo.observe(document.body,{childList:true,subtree:true});
+  }
+  if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded',boot);
+})();
+
+/* ===================== DISCONTINUED PRODUCTS =====================
+   Slugs listed here are hidden EVERYWHERE automatically: the shop grid,
+   category pages, search results, and the "related products" cards on
+   other product pages - so no page has to be edited by hand.
+   Their old URLs 301-redirect to the category page (see .htaccess), so no
+   SEO value or inbound link is lost.
+   To bring a product back: delete its slug from this list and restore its
+   row in the catalogue above.
+   ================================================================= */
+window.FOTILE_REMOVED = ['gas-hob-4-lohas-burners-glass-top-glg60409'];
+(function(){
+  var GONE = window.FOTILE_REMOVED || [];
+  if(!GONE.length) return;
+  function isGone(href){
+    if(!href) return false;
+    for(var i=0;i<GONE.length;i++){ if(href.indexOf('/shop/'+GONE[i]+'/')>-1) return true; }
+    return false;
+  }
+  var mo=null;
+  function sweep(){
+    if(mo) mo.disconnect();
+    try{
+      var as=document.getElementsByTagName('a');
+      for(var i=as.length-1;i>=0;i--){
+        var a=as[i];
+        if(a.getAttribute('data-gone')) continue;
+        if(!isGone(a.getAttribute('href'))) continue;
+        a.setAttribute('data-gone','1');
+        var card=null;
+        if(a.closest) card = a.closest('.pcard') || a.closest('.relcard') || a.closest('.rel .card');
+        var kill = card || a;
+        if(kill && kill.parentNode) kill.parentNode.removeChild(kill);
+      }
+    }catch(e){}
+    if(mo) mo.observe(document.documentElement,{childList:true,subtree:true});
+  }
+  function boot(){
+    sweep();
+    if(window.MutationObserver){
+      var t=null;
+      mo=new MutationObserver(function(){ clearTimeout(t); t=setTimeout(sweep,60); });
+      mo.observe(document.documentElement,{childList:true,subtree:true});
+    }
   }
   if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded',boot);
 })();

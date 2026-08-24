@@ -79,3 +79,6 @@ Redirect 301 /category-ovens.html /product-category/oven/
 Redirect 301 /category-microwaves.html /product-category/oven/microwave-oven-prices-in-pakistan/
 Redirect 301 /category-dishwashers.html /product-category/dish-washer/
 Redirect 301 /category-water.html /product-category/water-purifier/
+
+# --- discontinued products -> category page (keeps SEO value, no 404s) ---
+Redirect 301 /shop/gas-hob-4-lohas-burners-glass-top-glg60409/ /product-category/hobs/
