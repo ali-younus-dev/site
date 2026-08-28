@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotile Admin — Control Panel (Preview Demo)</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0f;--panel:#13131a;--panel2:#181820;--line:rgba(255,255,255,.08);
+    --txt:#f3f3f5;--dim:#8a8c96;--faint:#5a5c66;
+    --red:#e01e37;--c1:#5b8ff9;--c2:#61d4a5;--c3:#f6c445;--c4:#c98bdb;--c5:#ef7d63;
+    --good:#3ec98a;--warn:#f6c445;--crit:#e0485f;
+    --font:"Manrope",system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--font);background:var(--bg);color:var(--txt);-webkit-font-smoothing:antialiased;letter-spacing:-.01em;display:flex;min-height:100vh}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--red);color:#fff}
+
+  /* SIDEBAR */
+  .side{width:250px;background:var(--panel);border-right:1px solid var(--line);position:fixed;top:0;bottom:0;left:0;display:flex;flex-direction:column;padding:24px 16px;z-index:100}
+  .side .logo{display:flex;align-items:center;gap:10px;padding:6px 10px 24px}
+  .side .logo img{height:22px;filter:brightness(0) invert(1)}
+  .side .logo span{font-size:11px;color:var(--dim);border:1px solid var(--line);padding:2px 8px;border-radius:20px;letter-spacing:1px}
+  .navlbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);font-weight:700;padding:16px 12px 8px}
+  .navitem{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px;color:var(--dim);font-size:14px;font-weight:500;cursor:pointer;transition:.2s;margin-bottom:2px}
+  .navitem:hover{background:var(--panel2);color:var(--txt)}
+  .navitem.on{background:linear-gradient(90deg,rgba(224,30,55,.16),rgba(224,30,55,.03));color:#fff}
+  .navitem.on .ic{color:var(--red)}
+  .navitem .ic{width:18px;text-align:center;font-size:15px}
+  .navitem .badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px}
+  .side .foot{margin-top:auto;padding:14px 12px;border-top:1px solid var(--line);display:flex;align-items:center;gap:11px}
+  .side .foot .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--red),#8f0b1f);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+  .side .foot b{font-size:13.5px;display:block}.side .foot small{font-size:11.5px;color:var(--dim)}
+
+  /* MAIN */
+  .main{margin-left:250px;flex:1;min-width:0}
+  .top{position:sticky;top:0;z-index:60;background:rgba(11,11,15,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:18px 34px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .top h1{font-size:20px;font-weight:600;letter-spacing:-.5px}
+  .top .sub{font-size:13px;color:var(--dim);margin-top:2px}
+  .top .actions{display:flex;gap:12px;align-items:center}
+  .rangebtns{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .rangebtns button{background:none;border:none;color:var(--dim);font-family:inherit;font-size:12.5px;font-weight:600;padding:9px 14px;cursor:pointer;transition:.2s}
+  .rangebtns button.on{background:var(--red);color:#fff}
+  .livepill{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--good);font-weight:600;border:1px solid rgba(62,201,138,.25);padding:8px 13px;border-radius:20px}
+  .livepill .d{width:7px;height:7px;border-radius:50%;background:var(--good);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,201,138,.5)}70%{box-shadow:0 0 0 7px rgba(62,201,138,0)}100%{box-shadow:0 0 0 0 rgba(62,201,138,0)}}
+
+  .content{padding:30px 34px 60px}
+  .view{display:none}.view.on{display:block;animation:fade .4s}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* KPI CARDS */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+  .kpi .lbl{font-size:12.5px;color:var(--dim);font-weight:600;display:flex;align-items:center;gap:8px}
+  .kpi .lbl .i{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .kpi .val{font-size:34px;font-weight:700;letter-spacing:-1.5px;margin:14px 0 8px}
+  .kpi .chg{font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+  .kpi .chg.up{color:var(--good)}.kpi .chg.down{color:var(--crit)}
+  .kpi .spark{position:absolute;right:0;bottom:0;width:100%;height:42px;opacity:.5}
+
+  /* GRID */
+  .row{display:grid;gap:16px;margin-bottom:16px}
+  .r-2{grid-template-columns:2fr 1fr}
+  .r-2e{grid-template-columns:1fr 1fr}
+  .r-3{grid-template-columns:1fr 1fr 1fr}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .card-h h3{font-size:15px;font-weight:600}
+  .card-h .hint{font-size:12px;color:var(--faint)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px}
+  .legend span{font-size:12px;color:var(--dim);display:inline-flex;align-items:center;gap:7px}
+  .legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+
+  /* bars list (top pages) */
+  .barlist .bl{margin-bottom:15px}
+  .barlist .bl-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}
+  .barlist .bl-top b{font-weight:500}.barlist .bl-top span{color:var(--dim)}
+  .barlist .track{height:8px;background:var(--panel2);border-radius:6px;overflow:hidden}
+  .barlist .fill{height:100%;border-radius:6px;transition:width 1s cubic-bezier(.16,1,.3,1)}
+
+  /* funnel */
+  .funnel{display:flex;flex-direction:column;gap:10px}
+  .fstep{position:relative}
+  .fstep .ft{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+  .fstep .ft b{font-weight:500}.fstep .ft .v{color:var(--dim)}
+  .fstep .fbar{height:38px;border-radius:8px;display:flex;align-items:center;padding-left:14px;font-size:13px;font-weight:600;color:#06110c;transition:width 1s cubic-bezier(.16,1,.3,1)}
+  .fstep .drop{font-size:11px;color:var(--crit);margin-top:4px}
+
+  /* donut */
+  .donut-wrap{display:flex;align-items:center;gap:24px}
+  .donut{width:150px;height:150px;flex-shrink:0}
+  .dlegend{flex:1}
+  .dlegend .dl{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .dlegend .dl:last-child{border:none}
+  .dlegend .dl .nm{display:flex;align-items:center;gap:9px}
+  .dlegend .dl i{width:9px;height:9px;border-radius:3px}
+  .dlegend .dl b{color:var(--dim);font-weight:600}
+
+  /* live feed */
+  .feed{max-height:340px;overflow-y:auto}
+  .fitem{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .fitem .fdot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex-shrink:0}
+  .fitem .ftx{flex:1}.fitem .ftx b{font-weight:600}
+  .fitem .fmeta{color:var(--faint);font-size:11.5px;margin-top:2px}
+  .fitem .ftime{color:var(--faint);font-size:11.5px;white-space:nowrap}
+
+  /* table */
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--faint);font-weight:700;padding:10px 12px;border-bottom:1px solid var(--line)}
+  td{padding:13px 12px;font-size:13.5px;border-bottom:1px solid var(--line)}
+  tr:last-child td{border:none}
+  tr:hover td{background:var(--panel2)}
+  .tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+  .tag.g{background:rgba(62,201,138,.14);color:var(--good)}
+  .tag.w{background:rgba(246,196,69,.14);color:var(--warn)}
+  .tag.r{background:rgba(224,72,95,.14);color:var(--crit)}
+  .flag{font-size:15px}
+
+  /* placeholder views */
+  .ph{text-align:center;padding:90px 20px;color:var(--dim)}
+  .ph .pic{font-size:44px;margin-bottom:18px;opacity:.5}
+  .ph h2{font-size:22px;font-weight:600;color:var(--txt);margin-bottom:10px}
+  .ph p{font-size:14.5px;max-width:440px;margin:0 auto 8px}
+  .ph .soon{display:inline-block;margin-top:16px;font-size:12px;font-weight:600;color:var(--warn);border:1px solid rgba(246,196,69,.3);padding:6px 14px;border-radius:20px}
+
+  /* ===== INSIGHTS & ACTIONS (data fusion) ===== */
+  .insgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .ins{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;position:relative;overflow:hidden;transition:.25s}
+  .ins:hover{border-color:rgba(255,255,255,.16);transform:translateY(-2px)}
+  .ins::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+  .ins.sell::before{background:var(--good)}.ins.warn::before{background:var(--warn)}.ins.aud::before{background:var(--c1)}.ins.seo::before{background:var(--c4)}
+  .ins .ihead{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .ins .ibadge{font-size:10px;letter-spacing:.8px;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:20px}
+  .ins.sell .ibadge{background:rgba(62,201,138,.15);color:var(--good)}
+  .ins.warn .ibadge{background:rgba(246,196,69,.15);color:var(--warn)}
+  .ins.aud .ibadge{background:rgba(91,143,249,.15);color:var(--c1)}
+  .ins.seo .ibadge{background:rgba(201,139,219,.15);color:var(--c4)}
+  .ins .iimpact{margin-left:auto;font-size:11px;font-weight:700;color:var(--dim);display:flex;align-items:center;gap:5px}
+  .ins .iimpact .dot{width:7px;height:7px;border-radius:50%;background:var(--good)}
+  .ins .iimpact.med .dot{background:var(--warn)}.ins .iimpact.hi .dot{background:var(--good)}
+  .ins h3{font-size:16.5px;font-weight:600;line-height:1.3;margin-bottom:10px;letter-spacing:-.3px}
+  .ins .iwhy{font-size:13px;color:var(--dim);line-height:1.6;margin-bottom:14px}
+  .ins .iwhy b{color:var(--txt);font-weight:600}
+  .ins .ichips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .ins .ichip{font-size:11px;color:var(--dim);background:var(--panel2);border:1px solid var(--line);padding:4px 10px;border-radius:20px}
+  .ins .ichip b{color:#fff;font-weight:600}
+  .ins .iact{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:#fff;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .ins .iact .ar{color:var(--red);margin-left:auto}
+  .ins.sell .iact .ar{color:var(--good)}
+  /* weekly headline banner */
+  .insbanner{background:linear-gradient(120deg,rgba(224,30,55,.12),rgba(224,30,55,.02));border:1px solid rgba(224,30,55,.25);border-radius:16px;padding:24px 26px;margin-bottom:22px;display:flex;gap:18px;align-items:flex-start}
+  .insbanner .ib-ic{font-size:26px;flex-shrink:0}
+  .insbanner h2{font-size:18px;font-weight:700;margin-bottom:8px;letter-spacing:-.4px}
+  .insbanner p{font-size:14px;color:var(--dim);line-height:1.65;max-width:900px}
+  .insbanner p b{color:#fff;font-weight:600}
+  @media(max-width:1100px){.insgrid{grid-template-columns:1fr}}
+
+  /* age & gender split bars (male left / female right of a centre line) */
+  .agebars .ab{display:grid;grid-template-columns:56px 1fr;align-items:center;gap:12px;margin-bottom:13px}
+  .agebars .ab .agl{font-size:12.5px;color:var(--dim);font-weight:600;text-align:right}
+  .agebars .ab .abars{display:flex;align-items:center;height:20px;gap:2px}
+  .agebars .ab .m{background:var(--c1);height:100%;border-radius:4px 0 0 4px;transition:width 1s cubic-bezier(.16,1,.3,1)}
+  .agebars .ab .f{background:var(--red);height:100%;border-radius:0 4px 4px 0;transition:width 1s cubic-bezier(.16,1,.3,1)}
+  .agebars .ab .apct{font-size:11.5px;color:var(--faint);white-space:nowrap;margin-left:6px}
+  .abkey{display:flex;gap:18px;margin-top:6px;font-size:12px;color:var(--dim)}
+  .abkey span{display:inline-flex;align-items:center;gap:7px}.abkey i{width:9px;height:9px;border-radius:2px;display:inline-block}
+
+  /* editor cards (content control) */
+  .editgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .editcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.25s;cursor:pointer}
+  .editcard:hover{border-color:rgba(224,30,55,.4);transform:translateY(-3px)}
+  .editcard .eh{height:120px;background:var(--panel2);display:flex;align-items:center;justify-content:center;font-size:34px;border-bottom:1px solid var(--line)}
+  .editcard .eb{padding:18px}
+  .editcard .eb h4{font-size:15px;font-weight:600;margin-bottom:6px}
+  .editcard .eb p{font-size:12.5px;color:var(--dim)}
+  .editcard .eb .ed{margin-top:14px;font-size:12.5px;color:var(--red);font-weight:600}
+
+  .btnr{background:var(--red);color:#fff;border:none;padding:11px 20px;border-radius:8px;font-family:inherit;font-weight:600;font-size:13.5px;cursor:pointer;transition:.25s}
+  .btnr:hover{background:#c81a30}
+  .btng{background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:11px 18px;border-radius:8px;font-family:inherit;font-weight:600;font-size:13.5px;cursor:pointer;transition:.25s}
+  .btng:hover{border-color:rgba(255,255,255,.3)}
+
+  @media(max-width:1100px){.kpis{grid-template-columns:1fr 1fr}.r-2,.r-2e,.r-3{grid-template-columns:1fr}.editgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:720px){.side{transform:translateX(-100%)}.main{margin-left:0}}
+  /* ===== PRODUCT EDITOR ===== */
+  .pe-tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+  .pe-search{position:relative;flex:1;min-width:220px;max-width:360px}
+  .pe-search input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:11px 14px 11px 38px;color:var(--txt);font-family:inherit;font-size:13.5px;outline:none;transition:.2s}
+  .pe-search input:focus{border-color:rgba(224,30,55,.5)}
+  .pe-search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--faint)}
+  .pe-filters{display:flex;gap:7px;flex-wrap:wrap}
+  .pe-f{background:var(--panel);border:1px solid var(--line);color:var(--dim);font-family:inherit;font-size:12px;font-weight:500;padding:8px 13px;border-radius:50px;cursor:pointer;transition:.2s}
+  .pe-f:hover{color:var(--txt);border-color:rgba(255,255,255,.2)}
+  .pe-f.on{background:var(--red);border-color:var(--red);color:#fff}
+  .pe-sp{flex:1}
+  .pe-status{font-size:12.5px;color:var(--dim);font-weight:500;white-space:nowrap}
+  .pe-status.dirty{color:var(--c3)}
+  .pe-thumb{position:relative}.pe-salebadge{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#e01e37,#ff4d63);color:#fff;font-weight:800;font-size:10.5px;letter-spacing:.4px;padding:5px 10px;border-radius:40px;box-shadow:0 6px 16px rgba(224,30,55,.5);text-transform:uppercase;z-index:3}
+  .pe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pe-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.2s}
+  .pe-card:hover{border-color:rgba(255,255,255,.16)}
+  .pe-thumb{position:relative;height:150px;background:radial-gradient(70% 62% at 50% 42%,#26262e,#141419 70%,#0e0e12);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;border-bottom:1px solid var(--line)}
+  .pe-thumb img{max-width:78%;max-height:80%;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(0,0,0,.5));transition:.3s}
+  .pe-thumb:hover img{transform:scale(1.05)}
+  .pe-thumb .pe-rep{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(11,11,15,.55);color:#fff;font-size:12px;font-weight:600;opacity:0;transition:.2s;border:2px dashed rgba(224,30,55,.6)}
+  .pe-thumb:hover .pe-rep{opacity:1}
+  .pe-body{padding:14px}
+  .pe-row{display:flex;gap:8px;margin-bottom:8px}
+  .pe-field{flex:1;min-width:0}
+  .pe-field label{display:block;font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:4px}
+  .pe-field input,.pe-field select{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:8px 10px;color:var(--txt);font-family:inherit;font-size:12.5px;outline:none;transition:.2s}
+  .pe-field input:focus,.pe-field select:focus{border-color:rgba(224,30,55,.5);background:#1c1c25}
+  .pe-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:11px;border-top:1px solid var(--line)}
+  .pe-view{font-size:11.5px;color:var(--c1);font-weight:600;text-decoration:none}.pe-view:hover{text-decoration:underline}
+  .pe-switch{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--dim);cursor:pointer;user-select:none}
+  .pe-switch input{display:none}
+  .pe-switch .tk{width:32px;height:18px;border-radius:20px;background:var(--panel2);border:1px solid var(--line);position:relative;transition:.25s}
+  .pe-switch .tk::after{content:"";position:absolute;top:1.5px;left:1.5px;width:13px;height:13px;border-radius:50%;background:var(--faint);transition:.25s}
+  .pe-switch input:checked+.tk{background:var(--red);border-color:var(--red)}.pe-switch input:checked+.tk::after{transform:translateX(14px);background:#fff}
+  .pe-empty{grid-column:1/-1;text-align:center;color:var(--dim);padding:50px 0}
+  .pe-savebar{position:sticky;bottom:0;margin-top:22px;background:linear-gradient(0deg,var(--bg) 60%,transparent);padding:16px 0 6px;display:flex;justify-content:center}
+  @media(max-width:1100px){.pe-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:700px){.pe-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="side">
+  <div class="logo"><img src="assets/logo.png" alt="Fotile"><span>ADMIN</span></div>
+
+  <div class="navlbl">Analytics</div>
+  <div class="navitem on" data-v="overview"><span class="ic">▦</span> Overview</div>
+  <div class="navitem" data-v="insights"><span class="ic">✦</span> Insights &amp; Actions <span class="badge">8</span></div>
+  <div class="navitem" data-v="traffic"><span class="ic">◔</span> Traffic &amp; Visitors</div>
+  <div class="navitem" data-v="audience"><span class="ic">◑</span> Audience &amp; Interests</div>
+  <div class="navitem" data-v="behavior"><span class="ic">◉</span> Behavior &amp; Clicks</div>
+  <div class="navitem" data-v="funnel"><span class="ic">⏣</span> Sales Funnel</div>
+  <div class="navitem" data-v="live"><span class="ic">◈</span> Live Activity <span class="badge">14</span></div>
+
+  <div class="navlbl">Manage Site</div>
+  <div class="navitem" data-v="content"><span class="ic">✎</span> Content &amp; Pages</div>
+  <div class="navitem" data-v="products"><span class="ic">⬚</span> Products</div>
+  <div class="navitem" data-v="blog"><span class="ic">📰</span> The Journal <span class="badge">63</span></div>
+  <div class="navitem" data-v="leads"><span class="ic">✉</span> Leads <span class="badge">6</span></div>
+  <div class="navitem" data-v="settings"><span class="ic">⚙</span> Settings</div>
+
+  <div class="foot">
+    <div class="av">A</div>
+    <div><b>Ali Younus</b><small>Administrator</small></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="top">
+    <div>
+      <h1 id="vtitle">Overview</h1>
+      <div class="sub" id="vsub">Your store at a glance · last 30 days</div>
+    </div>
+    <div class="actions">
+      <div class="rangebtns">
+        <button>24h</button><button>7d</button><button class="on">30d</button><button>90d</button>
+      </div>
+      <div class="livepill"><span class="d"></span> 42 online now</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ============ OVERVIEW ============ -->
+    <div class="view on" id="overview">
+      <div class="kpis">
+        <div class="kpi">
+          <div class="lbl"><span class="i" style="background:rgba(91,143,249,.15);color:var(--c1)">◔</span> Total Visitors</div>
+          <div class="val">48,290</div>
+          <div class="chg up">▲ 12.4% vs last period</div>
+          <svg class="spark" viewBox="0 0 200 42" preserveAspectRatio="none"><path d="M0,32 L20,28 L40,30 L60,22 L80,24 L100,16 L120,18 L140,10 L160,13 L180,6 L200,8" fill="none" stroke="var(--c1)" stroke-width="2"/></svg>
+        </div>
+        <div class="kpi">
+          <div class="lbl"><span class="i" style="background:rgba(97,212,165,.15);color:var(--c2)">⎋</span> Page Views</div>
+          <div class="val">173,410</div>
+          <div class="chg up">▲ 8.1%</div>
+          <svg class="spark" viewBox="0 0 200 42" preserveAspectRatio="none"><path d="M0,30 L25,26 L50,28 L75,20 L100,22 L125,14 L150,16 L175,9 L200,7" fill="none" stroke="var(--c2)" stroke-width="2"/></svg>
+        </div>
+        <div class="kpi">
+          <div class="lbl"><span class="i" style="background:rgba(246,196,69,.15);color:var(--c3)">◷</span> Avg. Time on Site</div>
+          <div class="val">3m 48s</div>
+          <div class="chg up">▲ 22s</div>
+          <svg class="spark" viewBox="0 0 200 42" preserveAspectRatio="none"><path d="M0,28 L25,24 L50,26 L75,25 L100,18 L125,20 L150,12 L175,14 L200,9" fill="none" stroke="var(--c3)" stroke-width="2"/></svg>
+        </div>
+        <div class="kpi">
+          <div class="lbl"><span class="i" style="background:rgba(224,30,55,.15);color:var(--red)">⏣</span> Checkouts</div>
+          <div class="val">312</div>
+          <div class="chg down">▼ 3.2%</div>
+          <svg class="spark" viewBox="0 0 200 42" preserveAspectRatio="none"><path d="M0,14 L25,18 L50,12 L75,20 L100,16 L125,24 L150,18 L175,26 L200,22" fill="none" stroke="var(--red)" stroke-width="2"/></svg>
+        </div>
+      </div>
+
+      <div class="row r-2">
+        <div class="card">
+          <div class="card-h"><h3>Visitors over time</h3><span class="hint">Visitors vs Checkouts · 30 days</span></div>
+          <svg id="areaChart" viewBox="0 0 720 260" style="width:100%;height:auto"></svg>
+          <div class="legend">
+            <span><i style="background:var(--c1)"></i> Visitors</span>
+            <span><i style="background:var(--red)"></i> Checkouts</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Traffic sources</h3></div>
+          <div class="donut-wrap">
+            <svg class="donut" id="donut" viewBox="0 0 42 42"></svg>
+            <div class="dlegend" id="dlegend"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row r-2">
+        <div class="card">
+          <div class="card-h"><h3>Most visited pages</h3><span class="hint">by page views</span></div>
+          <div class="barlist" id="toppages"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Live activity</h3><span class="hint">right now</span></div>
+          <div class="feed" id="ovfeed"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ TRAFFIC ============ -->
+    <!-- ============ INSIGHTS & ACTIONS (data fusion) ============ -->
+    <div class="view" id="insights">
+      <div class="insbanner">
+        <div class="ib-ic">✦</div>
+        <div>
+          <h2 id="insHeadline">This week: strong demand for range hoods — and a clear chance to grow premium sales.</h2>
+          <p id="insSummary"></p>
+        </div>
+      </div>
+      <div class="insgrid" id="insGrid"></div>
+    </div>
+
+    <div class="view" id="traffic">
+      <div class="kpis">
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(91,143,249,.15);color:var(--c1)">◔</span> New Visitors</div><div class="val">31,880</div><div class="chg up">▲ 15%</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(97,212,165,.15);color:var(--c2)">↻</span> Returning</div><div class="val">16,410</div><div class="chg up">▲ 6%</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(246,196,69,.15);color:var(--c3)">⚑</span> Bounce Rate</div><div class="val">38.2%</div><div class="chg up">▼ 2.1%</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(201,139,219,.15);color:var(--c4)">◫</span> Pages / Session</div><div class="val">3.6</div><div class="chg up">▲ 0.3</div></div>
+      </div>
+      <div class="row r-2e">
+        <div class="card">
+          <div class="card-h"><h3>Visitors by city</h3></div>
+          <div class="barlist" id="cities"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Device breakdown</h3></div>
+          <div class="donut-wrap"><svg class="donut" id="devdonut" viewBox="0 0 42 42"></svg><div class="dlegend" id="devlegend"></div></div>
+          <div class="card-h" style="margin-top:22px"><h3>Age &amp; Gender</h3><span class="hint">from GA4</span></div>
+          <div class="barlist" id="ages"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ AUDIENCE & INTERESTS ============ -->
+    <div class="view" id="audience">
+      <div class="kpis">
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(91,143,249,.15);color:var(--c1)">◑</span> Top Age Group</div><div class="val" style="font-size:28px">25–34</div><div class="chg up">34% of visitors</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(97,212,165,.15);color:var(--c2)">⚤</span> Gender Split</div><div class="val" style="font-size:28px">57 / 43</div><div class="chg up">♀ female / ♂ male</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(246,196,69,.15);color:var(--c3)">◎</span> Top Interest</div><div class="val" style="font-size:22px">Home &amp; Cooking</div><div class="chg up">affinity category</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(201,139,219,.15);color:var(--c4)">▣</span> Top Device</div><div class="val" style="font-size:28px">Mobile</div><div class="chg up">68% of sessions</div></div>
+      </div>
+
+      <div class="row r-2e">
+        <div class="card">
+          <div class="card-h"><h3>Age &amp; gender</h3><span class="hint">GA4 estimated demographics</span></div>
+          <div class="agebars" id="ageGender"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>What visitors are interested in</h3><span class="hint">GA4 affinity &amp; in-market categories</span></div>
+          <div class="barlist" id="interests"></div>
+        </div>
+      </div>
+
+      <div class="row r-2e">
+        <div class="card">
+          <div class="card-h"><h3>Where visitors come from</h3><span class="hint">traffic source</span></div>
+          <div class="barlist" id="sources"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Who's interested in what</h3><span class="hint">product interest by age group</span></div>
+          <table>
+            <thead><tr><th>Product category</th><th>Top age group</th><th>Skew</th></tr></thead>
+            <tbody id="ageInterest"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row r-2e">
+        <div class="card">
+          <div class="card-h"><h3>When they visit</h3><span class="hint">busiest shopping times</span></div>
+          <div class="barlist" id="timeofday"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Language &amp; browser</h3></div>
+          <div class="barlist" id="langbrowser"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ BEHAVIOR ============ -->
+    <div class="view" id="behavior">
+      <div class="kpis">
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(224,30,55,.15);color:var(--red)">☝</span> Total Clicks</div><div class="val">92,140</div><div class="chg up">▲ 9%</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(97,212,165,.15);color:var(--c2)">▶</span> Video Plays</div><div class="val">8,320</div><div class="chg up">▲ 18%</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(246,196,69,.15);color:var(--c3)">♡</span> Add to Cart</div><div class="val">1,940</div><div class="chg up">▲ 5%</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(91,143,249,.15);color:var(--c1)">⤢</span> Quote Clicks</div><div class="val">640</div><div class="chg up">▲ 11%</div></div>
+      </div>
+      <div class="row r-2e">
+        <div class="card">
+          <div class="card-h"><h3>Most clicked buttons &amp; links</h3></div>
+          <div class="barlist" id="clicks"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Most viewed products</h3><span class="hint">views vs add-to-cart</span></div>
+          <table>
+            <thead><tr><th>Product</th><th>Views</th><th>Cart</th><th>Rate</th></tr></thead>
+            <tbody id="prodviews"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row r-2e">
+        <div class="card">
+          <div class="card-h"><h3>Prices people check most</h3><span class="hint">product-price views &amp; "Request a Quote" clicks</span></div>
+          <table>
+            <thead><tr><th>Product</th><th>Price</th><th>Price views</th><th>Quote clicks</th></tr></thead>
+            <tbody id="pricecheck"></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>What visitors search for</h3><span class="hint">on-site search terms</span></div>
+          <div class="barlist" id="searchterms"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><h3>How far people read / scroll</h3><span class="hint">scroll depth — how much of a page they actually see</span></div>
+        <div class="barlist" id="scrolldepth"></div>
+      </div>
+    </div>
+
+    <!-- ============ FUNNEL ============ -->
+    <div class="view" id="funnel">
+      <div class="row r-2">
+        <div class="card">
+          <div class="card-h"><h3>Conversion funnel</h3><span class="hint">where visitors drop off</span></div>
+          <div class="funnel" id="funnelC"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><h3>Checkout summary</h3></div>
+          <div style="text-align:center;padding:20px 0 26px">
+            <div style="font-size:46px;font-weight:700;letter-spacing:-2px">2.1%</div>
+            <div style="color:var(--dim);font-size:13px">overall conversion rate</div>
+          </div>
+          <div class="dlegend">
+            <div class="dl"><span class="nm">Completed checkouts</span><b style="color:var(--good)">312</b></div>
+            <div class="dl"><span class="nm">Abandoned carts</span><b style="color:var(--crit)">1,628</b></div>
+            <div class="dl"><span class="nm">Avg. order value</span><b>Rs 214,000</b></div>
+            <div class="dl"><span class="nm">Quote requests</span><b>640</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h3>Recent checkouts</h3><span class="hint">who checked out</span></div>
+        <table>
+          <thead><tr><th>Customer</th><th>City</th><th>Product</th><th>Value</th><th>Status</th></tr></thead>
+          <tbody id="checkouts"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ LIVE ============ -->
+    <div class="view" id="live">
+      <div class="kpis">
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(62,201,138,.15);color:var(--good)">◈</span> Active Now</div><div class="val" id="liveNow">42</div><div class="chg up">live</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(91,143,249,.15);color:var(--c1)">◔</span> Last 30 min</div><div class="val">318</div><div class="chg up">visitors</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(246,196,69,.15);color:var(--c3)">⎋</span> Top page now</div><div class="val" style="font-size:22px">Moon Series</div><div class="chg up">18 viewing</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(224,30,55,.15);color:var(--red)">⏣</span> In checkout</div><div class="val">3</div><div class="chg up">right now</div></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h3>Live visitor stream</h3><span class="livepill"><span class="d"></span> updating</span></div>
+        <div class="feed" id="livefeed" style="max-height:520px"></div>
+      </div>
+    </div>
+
+    <!-- ============ CONTENT ============ -->
+    <div class="view" id="content">
+      <div class="card" style="margin-bottom:18px;background:linear-gradient(100deg,rgba(224,30,55,.08),transparent);border-color:rgba(224,30,55,.25)">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="font-size:30px">✎</div>
+          <div>
+            <h3 style="font-size:16px;margin-bottom:4px">Live editing — no developer needed</h3>
+            <p style="font-size:13px;color:var(--dim)">Click a page below → it opens in <b style="color:#fff">Edit Mode</b>. Click any text to retype it, or any image to swap it. Hit <b style="color:#fff">Save Page</b> to download the updated file, then drop it into your site folder.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-h" style="margin-bottom:18px"><h3 style="font-size:17px">Main pages</h3><span class="hint">Every live page on your site</span></div>
+      <div class="editgrid">
+        <a class="editcard" href="index.html?edit" target="_blank"><div class="eh">🎬</div><div class="eb"><h4>Homepage <span style="font-size:10px;background:var(--red);color:#fff;padding:2px 7px;border-radius:20px;vertical-align:middle;margin-left:4px">HOME</span></h4><p>The cinematic homepage — hero, tagline, before/after slider, chapters &amp; images.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="shop/index.html?edit" target="_blank"><div class="eh">🛍️</div><div class="eb"><h4>Products (Shop hub)</h4><p>Panorama banner, category tiles, headings &amp; help strip.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="moon-series/index.html?edit" target="_blank"><div class="eh">🌙</div><div class="eb"><h4>Moon Series</h4><p>Premium collection — planet banner, names, prices, photos.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="about-us/index.html?edit" target="_blank"><div class="eh">📖</div><div class="eb"><h4>About Us</h4><p>Company story, mission, awards, images.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="vision/index.html?edit" target="_blank"><div class="eh">✨</div><div class="eb"><h4>Our Vision <span style="font-size:10px;background:#3ec98a;color:#04120b;padding:2px 7px;border-radius:20px;vertical-align:middle;margin-left:4px">NEW</span></h4><p>Mission &amp; vision story page.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="faq/index.html?edit" target="_blank"><div class="eh">❓</div><div class="eb"><h4>FAQ <span style="font-size:10px;background:#3ec98a;color:#04120b;padding:2px 7px;border-radius:20px;vertical-align:middle;margin-left:4px">NEW</span></h4><p>Frequently asked questions &amp; answers.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="our-dealers/index.html?edit" target="_blank"><div class="eh">📍</div><div class="eb"><h4>Dealers</h4><p>Dealer list, search, city filters &amp; headings.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="contact-us/index.html?edit" target="_blank"><div class="eh">✉️</div><div class="eb"><h4>Contact</h4><p>Outlet details, all city locations, map &amp; form.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="cart/index.html?edit" target="_blank"><div class="eh">🛒</div><div class="eb"><h4>Cart</h4><p>Cart page, promo &amp; order-summary text.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="checkout/index.html?edit" target="_blank"><div class="eh">💳</div><div class="eb"><h4>Checkout</h4><p>Checkout steps &amp; payment page text.</p><div class="ed">Edit This Page →</div></div></a>
+      </div>
+
+      <div class="card-h" style="margin:34px 0 18px"><h3 style="font-size:17px">Category pages</h3><span class="hint">The 6 product category landing pages · edit banners &amp; intro copy</span></div>
+      <div class="editgrid">
+        <a class="editcard" href="product-category/kitchen-hood/index.html?edit" target="_blank"><div class="eh">🌀</div><div class="eb"><h4>Range Hoods</h4><p>Hero, intro &amp; heading text (products come from the Products tab).</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="product-category/hobs/index.html?edit" target="_blank"><div class="eh">🔥</div><div class="eb"><h4>Hobs &amp; Cooktops</h4><p>Hero, intro &amp; heading text.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="product-category/oven/index.html?edit" target="_blank"><div class="eh">🍳</div><div class="eb"><h4>Ovens</h4><p>Hero, intro &amp; heading text.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="product-category/oven/microwave-oven-prices-in-pakistan/index.html?edit" target="_blank"><div class="eh">📡</div><div class="eb"><h4>Microwaves</h4><p>Hero, intro &amp; heading text.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="product-category/dish-washer/index.html?edit" target="_blank"><div class="eh">🍽️</div><div class="eb"><h4>Dishwashers</h4><p>Hero, intro &amp; heading text.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="product-category/water-purifier/index.html?edit" target="_blank"><div class="eh">💧</div><div class="eb"><h4>Water Purifier</h4><p>Hero, intro &amp; heading text.</p><div class="ed">Edit This Page →</div></div></a>
+      </div>
+
+      <div class="card" style="margin-top:22px;background:var(--panel2)">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:22px">⬚</div>
+          <div>
+            <h3 style="font-size:15px;margin-bottom:4px">Editing products (names, prices, photos)</h3>
+            <p style="font-size:13px;color:var(--dim)">Product cards on the Products hub, category pages and the 58 product pages are all generated from one file. To change a product's name, price or photo, use the <b style="color:#fff">Products</b> tab in the sidebar — it's a full visual editor. (Editing here only changes fixed text like banners and headings.)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-h" style="margin:34px 0 18px"><h3 style="font-size:17px">The Journal (Blog) <span style="font-size:10px;background:#3ec98a;color:#04120b;padding:2px 7px;border-radius:20px;vertical-align:middle;margin-left:6px">NEW</span></h3><span class="hint">63 articles across 3 pages · story-mode timeline</span></div>
+      <div class="editgrid">
+        <a class="editcard" href="blog/index.html?edit" target="_blank"><div class="eh">📰</div><div class="eb"><h4>Journal — Page 1</h4><p>Blog hub · timeline story mode · latest articles.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="blog/page/2/index.html?edit" target="_blank"><div class="eh">📰</div><div class="eb"><h4>Journal — Page 2</h4><p>Older articles · same layout &amp; filters.</p><div class="ed">Edit This Page →</div></div></a>
+        <a class="editcard" href="blog/page/3/index.html?edit" target="_blank"><div class="eh">📰</div><div class="eb"><h4>Journal — Page 3</h4><p>Older articles · same layout &amp; filters.</p><div class="ed">Edit This Page →</div></div></a>
+      </div>
+
+      <div class="card" style="margin-top:22px;background:var(--panel2)">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:22px">✍️</div>
+          <div>
+            <h3 style="font-size:15px;margin-bottom:4px">Editing a blog article's words</h3>
+            <p style="font-size:13px;color:var(--dim)">All 63 article texts live in three files — <b style="color:#fff">blog-data.js</b>, <b style="color:#fff">blog-data-2.js</b> and <b style="color:#fff">blog-data-3.js</b> in your site folder. Open one in Notepad, find the article by its title, edit the text between the <b style="color:#fff">body:</b> backticks, and save. A visual article editor is on the roadmap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ PRODUCTS ============ -->
+    <div class="view" id="products">
+      <div class="card" style="margin-bottom:18px;background:linear-gradient(100deg,rgba(224,30,55,.08),transparent);border-color:rgba(224,30,55,.25)">
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="font-size:30px">⬚</div>
+          <div>
+            <h3 style="font-size:16px;margin-bottom:4px">Edit your catalogue — no developer needed</h3>
+            <p style="font-size:13px;color:var(--dim)">Change any product's <b style="color:#fff">name, model, category, price or photo</b> right here. When you're done, click <b style="color:#fff">Save &amp; Publish</b> — on the live site your changes go live instantly. In this preview they are kept in your browser only.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pe-tools">
+        <div class="pe-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="peSearch" type="text" placeholder="Search name or model…" autocomplete="off">
+        </div>
+        <div class="pe-filters" id="peFilters"></div>
+        <div class="pe-sp"></div>
+        <span class="pe-status" id="peStatus"></span>
+        <button class="btnr" id="peDownload">⚡&nbsp; Save &amp; Publish</button>
+      </div>
+      <div class="pe-grid" id="peGrid"></div>
+      <div class="pe-savebar"><button class="btnr" id="peDownload2" style="padding:13px 30px">⚡&nbsp; Save &amp; Publish</button></div>
+    </div>
+
+    <!-- ============ THE JOURNAL (BLOG) ============ -->
+    <div class="view" id="blog">
+      <div class="kpis" style="margin-bottom:22px">
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(91,143,249,.15);color:var(--c1)">📰</span> Total Articles</div><div class="val">63</div><div class="chg up">▲ across 3 pages</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(97,212,165,.15);color:var(--c2)">👁</span> Blog Views (30d)</div><div class="val">18,940</div><div class="chg up">▲ 12.4%</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(246,196,69,.15);color:var(--c3)">⏱</span> Avg. Read Time</div><div class="val">3m 48s</div><div class="chg up">▲ 0.5</div></div>
+        <div class="kpi"><div class="lbl"><span class="i" style="background:rgba(201,139,219,.15);color:var(--c4)">↗</span> Blog → Product</div><div class="val">6.2%</div><div class="chg up">▲ 1.1%</div></div>
+      </div>
+      <div class="card">
+        <div class="card-h"><h3>Top-performing articles</h3><span class="hint">Sample figures · connect GA4 for live data</span></div>
+        <table>
+          <thead><tr><th>Article</th><th>Category</th><th>Views</th><th>Avg. read</th><th></th></tr></thead>
+          <tbody id="blogtable"></tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-top:18px;background:var(--panel2)">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:22px">💡</div>
+          <div>
+            <h3 style="font-size:15px;margin-bottom:4px">Add or edit articles</h3>
+            <p style="font-size:13px;color:var(--dim)">Article text lives in <b style="color:#fff">blog-data.js / -2 / -3</b>. To add a new post, copy an existing block, give it a new slug, title, date, image and body — then add a matching card on the relevant blog page. Head to <b style="color:#fff">Content &amp; Pages</b> to edit the blog layouts visually.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ LEADS ============ -->
+    <div class="view" id="leads">
+      <div class="card">
+        <div class="card-h"><h3>Leads inbox</h3><span class="hint">Quote · Complaint · Service requests</span></div>
+        <table>
+          <thead><tr><th>Name</th><th>Type</th><th>Product</th><th>City</th><th>Received</th><th>Status</th></tr></thead>
+          <tbody id="leadtable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ SETTINGS ============ -->
+    <div class="view" id="settings">
+      <div class="ph">
+        <div class="pic">⚙</div>
+        <h2>Settings &amp; Team</h2>
+        <p>Manage staff accounts &amp; permissions, 2-factor login, contact details, and SEO defaults.</p>
+        <span class="soon">Coming as we build gradually</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="products-data.js"></script>
+<style>
+  /* fixed overlay - body is display:flex, so a normal block child would break the layout */
+  #demoBar{position:fixed;top:0;left:250px;right:0;z-index:9999;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    padding:11px 22px;font:600 13px Manrope,system-ui,sans-serif;color:#ffe9b0;
+    background:linear-gradient(90deg,#3a2a05,#241a04);border-bottom:1px solid rgba(230,199,140,.35);
+    box-shadow:0 8px 26px rgba(0,0,0,.45)}
+  .main{padding-top:48px}
+  @media(max-width:720px){#demoBar{left:0;font-size:12px;padding:9px 14px}.main{padding-top:60px}}
+  #demoBar b{color:#fff}
+  #demoBar .tagd{background:#e6c78c;color:#241a04;border-radius:50px;padding:3px 11px;font-size:10.5px;letter-spacing:1.5px;font-weight:800}
+</style>
+<script>
+/* ============================================================
+   PREVIEW DEMO MODE
+   This copy runs on the static preview (GitHub Pages), which cannot
+   run PHP. Edits are kept in this browser only so the interface can be
+   tried out - they do NOT change the website.
+   The real control panel on the live PHP host saves instantly.
+   ============================================================ */
+window.__FOTILE_DEMO = true;
+(function(){
+  try{
+    var saved = localStorage.getItem('fotile_demo_products');
+    if(saved){ var j=JSON.parse(saved); if(Array.isArray(j)&&j.length) window.FOTILE_PRODUCTS=j; }
+  }catch(e){}
+  document.addEventListener('DOMContentLoaded',function(){
+    var bar=document.createElement('div'); bar.id='demoBar';
+    bar.innerHTML='<span class="tagd">DEMO</span>'
+      +'<span>You are viewing the <b>preview</b> dashboard. Edits are saved in <b>this browser only</b> so you can try the interface \u2014 the website itself is not changed.</span>'
+      +'<span style="flex:1"></span>'
+      +'<button id="demoReset" style="background:none;border:1px solid rgba(255,255,255,.28);color:#ffe9b0;border-radius:50px;padding:6px 14px;font:600 12px inherit;cursor:pointer">Reset demo data</button>';
+    document.body.insertBefore(bar,document.body.firstChild);
+    document.getElementById('demoReset').onclick=function(){
+      try{localStorage.removeItem('fotile_demo_products');}catch(e){}
+      location.reload();
+    };
+    /* push the page down by exactly the banner's height (it wraps on narrow screens) */
+    function fit(){
+      var m=document.querySelector('.main');
+      if(m) m.style.paddingTop=(bar.offsetHeight+10)+'px';
+    }
+    fit(); addEventListener('resize',fit); setTimeout(fit,300);
+  });
+})();
+</script>
+<script>
+const C={c1:'#5b8ff9',c2:'#61d4a5',c3:'#f6c445',c4:'#c98bdb',c5:'#ef7d63',red:'#e01e37',good:'#3ec98a'};
+
+/* ---- nav switching ---- */
+const titles={overview:['Overview','Your store at a glance · last 30 days'],insights:['Insights & Actions','What the data means — and what to do about it'],traffic:['Traffic & Visitors','Where your visitors come from'],audience:['Audience & Interests','Who your visitors are and what they want'],behavior:['Behavior & Clicks','What visitors click, price-check and search'],funnel:['Sales Funnel','From visit to checkout'],live:['Live Activity','Real-time visitor stream'],content:['Content & Pages','Edit any page on your website'],products:['Products','Manage your catalogue'],blog:['The Journal','Your blog — 63 articles across 3 pages'],leads:['Leads','Quote, complaint & service requests'],settings:['Settings','Configuration & team']};
+document.querySelectorAll('.navitem').forEach(n=>n.onclick=()=>{
+  document.querySelectorAll('.navitem').forEach(x=>x.classList.remove('on'));n.classList.add('on');
+  const v=n.dataset.v;
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+  document.getElementById(v).classList.add('on');
+  document.getElementById('vtitle').textContent=titles[v][0];
+  document.getElementById('vsub').textContent=titles[v][1];
+});
+
+/* ---- area chart (visitors vs checkouts) ---- */
+(function(){
+  const W=720,H=260,pad=30;
+  const vis=[820,900,860,1100,1040,1250,1180,1320,1400,1280,1500,1620,1550,1700,1780,1660,1900,2050,1980,2200,2120,2340,2280,2500,2420,2680,2600,2820,2760,3010];
+  const chk=[6,7,6,9,8,11,10,12,13,11,14,15,13,16,15,14,17,19,18,20,19,21,20,23,22,24,23,26,25,28];
+  const maxV=Math.max(...vis),maxC=Math.max(...chk);
+  const X=i=>pad+i*(W-2*pad)/(vis.length-1);
+  const Yv=v=>H-pad-(v/maxV)*(H-2*pad);
+  const Yc=v=>H-pad-(v/maxC)*(H-2*pad);
+  let area='M'+X(0)+','+Yv(vis[0]);vis.forEach((v,i)=>area+=' L'+X(i)+','+Yv(v));
+  let fill=area+' L'+X(vis.length-1)+','+(H-pad)+' L'+X(0)+','+(H-pad)+' Z';
+  let cline='M'+X(0)+','+Yc(chk[0]);chk.forEach((v,i)=>cline+=' L'+X(i)+','+Yc(v));
+  let grid='';for(let g=0;g<=4;g++){const y=pad+g*(H-2*pad)/4;grid+=`<line x1="${pad}" y1="${y}" x2="${W-pad}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;}
+  document.getElementById('areaChart').innerHTML=`
+    <defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.c1}" stop-opacity=".35"/><stop offset="1" stop-color="${C.c1}" stop-opacity="0"/></linearGradient></defs>
+    ${grid}
+    <path d="${fill}" fill="url(#ag)"/>
+    <path d="${area}" fill="none" stroke="${C.c1}" stroke-width="2.5"/>
+    <path d="${cline}" fill="none" stroke="${C.red}" stroke-width="2.5"/>`;
+})();
+
+/* ---- donut (traffic sources) ---- */
+function donut(el,data){
+  let off=0,seg='';
+  data.forEach(d=>{const dash=d.v;seg+=`<circle cx="21" cy="21" r="15.9" fill="none" stroke="${d.c}" stroke-width="5" stroke-dasharray="${dash} ${100-dash}" stroke-dashoffset="${25-off}"/>`;off+=dash;});
+  document.getElementById(el).innerHTML=seg;
+}
+const traffic=[{n:'Google / Organic',v:52,c:C.c1},{n:'Direct',v:22,c:C.c2},{n:'Social (FB/IG)',v:16,c:C.c3},{n:'Referral',v:10,c:C.c4}];
+donut('donut',traffic);
+document.getElementById('dlegend').innerHTML=traffic.map(d=>`<div class="dl"><span class="nm"><i style="background:${d.c}"></i>${d.n}</span><b>${d.v}%</b></div>`).join('');
+
+/* ---- top pages ---- */
+const pages=[['Homepage',42100,C.c1],['Moon Series',28400,C.c4],['Products',21600,C.c2],['The Journal (Blog)',18900,C.c3],['Range Hoods',15200,C.c5],['Cart / Checkout',8300,C.red]];
+const pmax=Math.max(...pages.map(p=>p[1]));
+document.getElementById('toppages').innerHTML=pages.map(p=>`<div class="bl"><div class="bl-top"><b>${p[0]}</b><span>${p[1].toLocaleString()} views</span></div><div class="track"><div class="fill" style="width:${p[1]/pmax*100}%;background:${p[2]}"></div></div></div>`).join('');
+
+/* ---- cities ---- */
+const cities=[['Karachi',38,C.c1],['Lahore',31,C.c2],['Islamabad',14,C.c3],['Faisalabad',7,C.c4],['Multan',5,C.c5],['Other',5,C.red]];
+document.getElementById('cities').innerHTML=cities.map(c=>`<div class="bl"><div class="bl-top"><b>${c[0]}</b><span>${c[1]}%</span></div><div class="track"><div class="fill" style="width:${c[1]/38*100}%;background:${c[2]}"></div></div></div>`).join('');
+
+/* ---- devices ---- */
+const dev=[{n:'Mobile',v:64,c:C.c1},{n:'Desktop',v:29,c:C.c2},{n:'Tablet',v:7,c:C.c3}];
+donut('devdonut',dev);
+document.getElementById('devlegend').innerHTML=dev.map(d=>`<div class="dl"><span class="nm"><i style="background:${d.c}"></i>${d.n}</span><b>${d.v}%</b></div>`).join('');
+
+/* ---- ages ---- */
+const ages=[['25–34',34,C.c1],['35–44',28,C.c2],['45–54',18,C.c3],['18–24',12,C.c4],['55+',8,C.c5]];
+document.getElementById('ages').innerHTML=ages.map(a=>`<div class="bl"><div class="bl-top"><b>${a[0]}</b><span>${a[1]}%</span></div><div class="track"><div class="fill" style="width:${a[1]/34*100}%;background:${a[2]}"></div></div></div>`).join('');
+
+/* ---- clicks ---- */
+const clicks=[['"Request a Quote" button',14200,C.red],['Product cards',11800,C.c1],['"Explore Collection"',8600,C.c2],['WhatsApp button',6400,C.c3],['Video plays',5100,C.c4],['"Add to Cart"',3900,C.c5]];
+const cmax=Math.max(...clicks.map(c=>c[1]));
+document.getElementById('clicks').innerHTML=clicks.map(c=>`<div class="bl"><div class="bl-top"><b>${c[0]}</b><span>${c[1].toLocaleString()}</span></div><div class="track"><div class="fill" style="width:${c[1]/cmax*100}%;background:${c[2]}"></div></div></div>`).join('');
+
+/* ---- product views table ---- */
+const pv=[['Luna Range Hood',8400,410],['Magic Oven 4-in-1',7200,380],['Sink Dishwasher',5900,290],['Range Island Hood EA06',5100,240],['Gas Hob 73201',4300,180]];
+document.getElementById('prodviews').innerHTML=pv.map(p=>`<tr><td>${p[0]}</td><td>${p[1].toLocaleString()}</td><td>${p[2]}</td><td><span class="tag g">${(p[2]/p[1]*100).toFixed(1)}%</span></td></tr>`).join('');
+
+/* ================================================================
+   INSIGHTS & ACTIONS — DATA FUSION ENGINE
+   Each card fuses several signals (views · searches · price-checks ·
+   cart rate · demographics · blog reads) into one recommendation.
+   These are written as rules a real analytics pipeline would run.
+   ================================================================ */
+(function(){
+  const grid=document.getElementById('insGrid');if(!grid)return;
+  // weekly summary — fused narrative
+  document.getElementById('insSummary').innerHTML=
+    'Range hoods are your <b>most-viewed and most-searched</b> category, and the premium Moon Series has the <b>highest cart-conversion rate (5.3%)</b> despite fewer views — a sign premium demand is under-served. Most buyers are <b>25–44, mobile, arriving from Google &amp; Instagram</b>. Below are the 8 highest-impact moves the data points to this week.';
+
+  // fusion cards: type · impact · headline · why (fused evidence) · signal chips · action
+  const cards=[
+    {type:'sell',impact:'hi',badge:'Sell / Promote',
+     h:'Push the Luna Range Hood on the homepage hero.',
+     why:'It has the <b>most product views (8,400)</b>, the <b>#1 on-site search ("range hood price")</b>, and the most price-checks and quote clicks. Demand is proven — it just needs the top spot.',
+     chips:['8,400 views','1,420 searches','310 quote clicks'],
+     act:'Feature it in the homepage hero & first product tile'},
+
+    {type:'sell',impact:'hi',badge:'Sell / Promote',
+     h:'Give Moon Series more visibility — it converts best.',
+     why:'Moon Series has <b>fewer views but the highest cart rate (5.3%)</b>. When people see it, they want it — so more exposure should lift premium sales directly.',
+     chips:['5.3% cart rate','25–34 skew','premium margin'],
+     act:'Add a Moon Series banner to Products & blog pages'},
+
+    {type:'warn',impact:'hi',badge:'Opportunity',
+     h:'Lots of price-checks, fewer purchases — add trust & finance.',
+     why:'The Luna hood gets <b>6,200 price views but a smaller share buy</b>. High price-checking with lower conversion usually means <b>price hesitation</b> — reassurance closes the gap.',
+     chips:['6,200 price views','installments?','warranty trust'],
+     act:'Show warranty, reviews & an installment option near the price'},
+
+    {type:'warn',impact:'med',badge:'Opportunity',
+     h:'People search "water purifier" — but it\'s still a draft.',
+     why:'There are <b>410 on-site searches for water purifier</b> with no live product page (it\'s marked Draft). That\'s demand landing on a dead end.',
+     chips:['410 searches','page: Draft','missed sales'],
+     act:'Publish the Water Purifier product page'},
+
+    {type:'aud',impact:'hi',badge:'Who to Target',
+     h:'Run Instagram ads for Moon Series to 25–34.',
+     why:'Fusing audience + product: <b>Moon Series interest skews 25–34</b>, and <b>Instagram is a top source</b> for that group. A targeted premium campaign matches proven demand to the right channel.',
+     chips:['25–34','Instagram','premium buyers'],
+     act:'Launch an Instagram campaign · Moon Series · age 25–34'},
+
+    {type:'aud',impact:'med',badge:'Who to Target',
+     h:'Post & run promos in the evening (6–10pm).',
+     why:'<b>38% of visits happen 6–10pm</b>, and mobile dominates (68%). Timing posts, offers and WhatsApp follow-ups to the evening reaches people when they\'re actually browsing.',
+     chips:['38% evening','68% mobile','best reach'],
+     act:'Schedule social posts & offers for 6–10pm'},
+
+    {type:'seo',impact:'med',badge:'Content / SEO',
+     h:'Write a "Range Hood Price Guide for Pakistan".',
+     why:'"range hood price" is your <b>#1 search term (1,420)</b> and range hoods lead product views. A dedicated price-guide article will capture that search intent and funnel readers to buy.',
+     chips:['1,420 searches','high intent','ranks well'],
+     act:'Add a price-guide article to the Journal & link products'},
+
+    {type:'seo',impact:'med',badge:'Content / SEO',
+     h:'Your blog is quietly driving sales — do more of it.',
+     why:'The Journal converts <b>6.2% of readers toward products</b>, and the "6 Range Hood Styles" post is a top performer. Blog content is working — expanding it compounds the effect.',
+     chips:['6.2% blog→product','top: hood styles','low cost'],
+     act:'Publish 1–2 new buying-guide articles per week'}
+  ];
+
+  const impactLabel={hi:'High impact',med:'Medium impact'};
+  grid.innerHTML=cards.map(c=>`
+    <div class="ins ${c.type}">
+      <div class="ihead">
+        <span class="ibadge">${c.badge}</span>
+        <span class="iimpact ${c.impact}"><span class="dot"></span>${impactLabel[c.impact]}</span>
+      </div>
+      <h3>${c.h}</h3>
+      <div class="iwhy">${c.why}</div>
+      <div class="ichips">${c.chips.map(x=>`<span class="ichip">${x}</span>`).join('')}</div>
+      <div class="iact">${c.act}<span class="ar">→</span></div>
+    </div>`).join('');
+})();
+
+/* ========== AUDIENCE & INTERESTS (all GA4/Clarity-collectable) ========== */
+const bl=(id,rows,max,fmt)=>{const el=document.getElementById(id);if(!el)return;const m=max||Math.max(...rows.map(r=>r[1]));el.innerHTML=rows.map(r=>`<div class="bl"><div class="bl-top"><b>${r[0]}</b><span>${fmt?fmt(r[1]):r[1]+'%'}</span></div><div class="track"><div class="fill" style="width:${r[1]/m*100}%;background:${r[2]}"></div></div></div>`).join('');};
+
+/* age & gender split (male / female per band) */
+const ag=[['18–24',5,7],['25–34',15,19],['35–44',12,16],['45–54',8,10],['55–64',3,4],['65+',1,1]];
+const agEl=document.getElementById('ageGender');
+if(agEl){agEl.innerHTML=ag.map(a=>{const tot=a[1]+a[2];return `<div class="ab"><div class="agl">${a[0]}</div><div class="abars"><div class="m" style="width:${a[1]*2.4}%"></div><div class="f" style="width:${a[2]*2.4}%"></div><span class="apct">${tot}%</span></div></div>`;}).join('')+`<div class="abkey"><span><i style="background:${C.c1}"></i>Male 43%</span><span><i style="background:${C.red}"></i>Female 57%</span></div>`;}
+
+/* interests — GA4 affinity + in-market categories */
+bl('interests',[['Cooking &amp; Recipes',72,C.c1],['Home &amp; Garden',66,C.c2],['Home Improvement / Renovation',54,C.c3],['Home Décor Shoppers',47,C.c4],['Real Estate / New Homes',33,C.c5],['Family &amp; Parenting',28,C.red]],72,v=>v+'% affinity');
+
+/* traffic sources */
+bl('sources',[['Google Search (organic)',41,C.c2],['Direct',22,C.c1],['Facebook',15,C.c3],['Instagram',11,C.c4],['Google Ads',7,C.c5],['Referrals / other',4,C.red]],41);
+
+/* who's interested in what — product interest skew by age */
+const ai=[['Range Hoods','35–44','▲ family homes'],['Moon Series (premium)','25–34','▲ young professionals'],['Ovens &amp; Baking','25–34','▲ home bakers'],['Dishwashers','35–44','▲ busy families'],['Water &amp; Air Purifiers','45–54','▲ health-focused'],['Gas Hobs','35–54','▲ traditional cooks']];
+const aiEl=document.getElementById('ageInterest');
+if(aiEl)aiEl.innerHTML=ai.map(r=>`<tr><td><b style="font-weight:500">${r[0]}</b></td><td><span class="tag w">${r[1]}</span></td><td style="color:var(--dim)">${r[2]}</td></tr>`).join('');
+
+/* when they visit — hours */
+bl('timeofday',[['Evening (6–10pm)',38,C.red],['Afternoon (12–6pm)',29,C.c3],['Night (10pm–1am)',18,C.c4],['Morning (6am–12pm)',15,C.c1]],38);
+
+/* language & browser */
+bl('langbrowser',[['English',68,C.c1],['Urdu',31,C.c2],['Chrome (browser)',74,C.c3],['Safari',18,C.c4],['Other browsers',8,C.c5]],74);
+
+/* ========== BEHAVIOR — prices, search, scroll (all collectable) ========== */
+/* prices people check most: how often the product/price page is viewed + quote clicks */
+const pc=[['Luna Range Hood (Moon)','Rs 392,700',6200,310],['Magic Oven 4-in-1','Rs 249,000',5400,260],['Range Island Hood EA06','Rs 385,000',4100,190],['Sink Dishwasher SD2F','Rs 189,000',3800,150],['Built-in Oven KSG7003','Rs 255,000',2600,95],['Gas Hob (5-burner)','Rs 95,800',2200,70]];
+const pcEl=document.getElementById('pricecheck');
+if(pcEl)pcEl.innerHTML=pc.map(p=>`<tr><td><b style="font-weight:500">${p[0]}</b></td><td>${p[1]}</td><td>${p[2].toLocaleString()}</td><td><span class="tag w">${p[3]}</span></td></tr>`).join('');
+
+/* on-site search terms */
+bl('searchterms',[['range hood price',1420,C.red],['4 in 1 oven',980,C.c1],['dishwasher',760,C.c2],['moon series',640,C.c3],['gas hob',520,C.c4],['water purifier',410,C.c5]],1420,v=>v.toLocaleString()+' searches');
+
+/* scroll depth — how far people read a page */
+bl('scrolldepth',[['Saw 25% of page',96,C.c2],['Saw 50% of page',81,C.c1],['Saw 75% of page',58,C.c3],['Reached the bottom',37,C.red]],96);
+
+/* ---- funnel ---- */
+const fn=[['Visited site',48290,C.c1],['Viewed a product',22400,C.c2],['Added to cart',1940,C.c3],['Started checkout',720,C.c5],['Completed order',312,C.good]];
+const fmax=fn[0][1];
+document.getElementById('funnelC').innerHTML=fn.map((f,i)=>{
+  const w=f[1]/fmax*100;const drop=i>0?(100-f[1]/fn[i-1][1]*100).toFixed(0):null;
+  return `<div class="fstep"><div class="ft"><b>${f[0]}</b><span class="v">${f[1].toLocaleString()}</span></div><div class="fbar" style="width:${Math.max(w,14)}%;background:${f[2]}">${(f[1]/fmax*100).toFixed(1)}%</div>${drop?`<div class="drop">▼ ${drop}% drop-off</div>`:''}</div>`;
+}).join('');
+
+/* ---- checkouts table ---- */
+const ck=[['Ahmed R.','Lahore','Luna Range Hood','Rs 392,700','g','Paid'],['Sana K.','Karachi','Magic Oven 4-in-1','Rs 249,000','g','Paid'],['Farhan M.','Islamabad','Sink Dishwasher','Rs 189,000','w','Pending'],['Bilal T.','Multan','Gas Hob 73201','Rs 95,800','g','Paid'],['Hina A.','Karachi','Electric Oven','Rs 355,000','r','Abandoned']];
+document.getElementById('checkouts').innerHTML=ck.map(c=>`<tr><td>${c[0]}</td><td>${c[1]}</td><td>${c[2]}</td><td>${c[3]}</td><td><span class="tag ${c[4]}">${c[5]}</span></td></tr>`).join('');
+
+/* ---- products table ---- */
+/* ================= PRODUCT EDITOR ================= */
+(function(){
+  const grid=document.getElementById('peGrid'); if(!grid) return;
+  const CATS=['Range Hoods','Hobs & Cooktops','Ovens','Microwaves','Dishwashers','Water Purifier'];
+  const TAG={'Range Hoods':'Ventilation','Hobs & Cooktops':'Cooking','Ovens':'Cooking','Microwaves':'Cooking','Dishwashers':'Cleaning','Water Purifier':'Purification'};
+  // working copy of the live catalogue
+  const PE=(window.FOTILE_PRODUCTS||[]).map(p=>Object.assign({},p));
+  let filter='All', q='', dirty=false;
+  const statusEl=document.getElementById('peStatus');
+  function setDirty(){dirty=true;statusEl.classList.add('dirty');statusEl.textContent='● Unsaved changes — click Save & Publish';}
+  function esc(s){return String(s==null?'':s).replace(/'/g,"\\'").replace(/\n/g,' ');}
+  // filter chips
+  const fbar=document.getElementById('peFilters');
+  fbar.innerHTML=['All'].concat(CATS).map(c=>{
+    const n=c==='All'?PE.length:PE.filter(p=>p.cat===c).length;
+    return '<button class="pe-f'+(c==='All'?' on':'')+'" data-c="'+c+'">'+c+' ('+n+')</button>';
+  }).join('');
+  fbar.addEventListener('click',e=>{const b=e.target.closest('.pe-f');if(!b)return;filter=b.dataset.c;
+    fbar.querySelectorAll('.pe-f').forEach(x=>x.classList.toggle('on',x===b));render();});
+  document.getElementById('peSearch').addEventListener('input',e=>{q=e.target.value.toLowerCase();render();});
+
+  function saleOpts(v){v=String(v==null?'':v);var o=['','5','10','15','20','25','30','35','40','50'];
+    return o.map(function(x){return '<option value="'+x+'"'+(x===v?' selected':'')+'>'+(x===''?'No sale':x+'% OFF')+'</option>';}).join('');}
+  function card(p,i){
+    const opts=CATS.map(c=>'<option'+(c===p.cat?' selected':'')+'>'+c+'</option>').join('');
+    return '<div class="pe-card" data-i="'+i+'">'
+      +'<div class="pe-thumb" data-img="'+i+'"><img src="'+(p.img||'')+'" alt="">'+(p.sale?'<div class="pe-salebadge">'+p.sale+'% OFF</div>':'<div class="pe-salebadge" style="display:none"></div>')+'<div class="pe-rep">◲ Replace photo</div></div>'
+      +'<div class="pe-body">'
+      +'<div class="pe-field" style="margin-bottom:8px"><label>Name</label><input data-k="name" data-i="'+i+'" value="'+esc(p.name).replace(/"/g,'&quot;')+'"></div>'
+      +'<div class="pe-row">'
+      +'<div class="pe-field"><label>Model</label><input data-k="model" data-i="'+i+'" value="'+esc(p.model).replace(/"/g,'&quot;')+'"></div>'
+      +'<div class="pe-field"><label>Price</label><input data-k="price" data-i="'+i+'" placeholder="Request a Quote" value="'+esc(p.price).replace(/"/g,'&quot;')+'"></div>'
+      +'</div>'
+      +'<div class="pe-row">'
+      +'<div class="pe-field"><label>Category</label><select data-k="cat" data-i="'+i+'">'+opts+'</select></div>'
+      +'<div class="pe-field"><label>Sale %</label><select data-k="sale" data-i="'+i+'" class="pe-sale">'+saleOpts(p.sale)+'</select></div>'
+      +'</div>'
+      +'<div class="pe-foot">'
+      +'<label class="pe-switch"><input type="checkbox" data-k="featured" data-i="'+i+'"'+(p.featured?' checked':'')+'><span class="tk"></span> Featured</label>'
+      +'<a class="pe-view" href="/shop/'+p.slug+'/" target="_blank">View page ↗</a>'
+      +'</div></div></div>';
+  }
+  function render(){
+    const list=PE.map((p,i)=>({p,i})).filter(o=>(filter==='All'||o.p.cat===filter)
+      && (!q||(o.p.name+' '+o.p.model).toLowerCase().includes(q)));
+    grid.innerHTML=list.length?list.map(o=>card(o.p,o.i)).join(''):'<div class="pe-empty">No products match your search.</div>';
+    if(!dirty)statusEl.textContent=PE.length+' products';
+  }
+  // edits
+  grid.addEventListener('input',e=>{const el=e.target;const i=el.dataset.i,k=el.dataset.k;if(i==null||!k)return;
+    if(k==='featured')PE[i][k]=el.checked; else PE[i][k]=el.value;
+    if(k==='sale'){var cd=el.closest('.pe-card');var bb=cd&&cd.querySelector('.pe-salebadge');if(bb){if(el.value){bb.textContent=el.value+'% OFF';bb.style.display='';}else{bb.style.display='none';}}}
+    if(k==='cat')PE[i].tag=TAG[el.value]||PE[i].tag;
+    setDirty();});
+  grid.addEventListener('change',e=>{const el=e.target;if(el.dataset.k==='cat'){setDirty();}});
+  // image replace
+  grid.addEventListener('click',e=>{const th=e.target.closest('.pe-thumb');if(!th)return;const i=th.dataset.img;
+    const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+    inp.onchange=()=>{const f=inp.files[0];if(!f)return;const r=new FileReader();
+      r.onload=()=>{PE[i].img=r.result;th.querySelector('img').src=r.result;setDirty();};r.readAsDataURL(f);};
+    inp.click();});
+  // export  (DEMO: simulated instant save, stored in this browser only)
+  function download(){
+    const lines=["/* Fotile product catalogue — edited in the dashboard. Replace products-data.js in your site folder with this file. */",
+      "window.FOTILE_PRODUCTS = ["];
+    PE.forEach(p=>{lines.push("  {slug:'"+esc(p.slug)+"',name:'"+esc(p.name)+"',model:'"+esc(p.model)+"',cat:'"+esc(p.cat)
+      +"',tag:'"+esc(p.tag||TAG[p.cat]||'')+"',img:'"+esc(p.img)+"',price:'"+esc(p.price||'')+"',featured:"+(p.featured?'true':'false')+",sale:'"+esc(p.sale||'')+"'},");});
+    lines.push("];");
+    // DEMO MODE: keep the edits in this browser instead of downloading a file,
+    // so the Save & Publish flow can be tried exactly as it behaves on the live site.
+    try{ localStorage.setItem('fotile_demo_products', JSON.stringify(PE)); }catch(e){}
+    dirty=false; statusEl.classList.remove('dirty');
+    statusEl.textContent='✓ Saved (demo) — the live site is not changed';
+    demoToast(PE.length + ' products saved in this browser. On the live site this publishes instantly.');
+  }
+  function demoToast(msg){
+    var t=document.getElementById('dToast');
+    if(!t){t=document.createElement('div');t.id='dToast';
+      t.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);z-index:99999;'
+        +'padding:14px 24px;border-radius:50px;font:600 14px Manrope,system-ui,sans-serif;color:#fff;'
+        +'background:linear-gradient(135deg,#1a8a4a,#25c06a);box-shadow:0 18px 50px rgba(0,0,0,.55);opacity:0;'
+        +'transition:.35s cubic-bezier(.16,1,.3,1);max-width:92vw;text-align:center';
+      document.body.appendChild(t);}
+    t.textContent=msg;
+    requestAnimationFrame(function(){t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';});
+    clearTimeout(t.__h); t.__h=setTimeout(function(){t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},3800);
+  }
+  document.getElementById('peDownload').onclick=download;
+  const d2=document.getElementById('peDownload2');if(d2)d2.onclick=download;
+  render();
+})();
+
+/* ---- blog / journal table ---- */
+const bt=[
+  ['6 Range Hood Styles: Find the Perfect Fit','Range Hoods',3120,'6m 10s'],
+  ['Air Purifier for Modern Homes','Air & Water',2740,'7m 02s'],
+  ['Gas vs Electric Hobs — Which Is More Efficient?','Hobs',2310,'5m 40s'],
+  ['Best Built-in Ovens in Pakistan — Buyer’s Guide','Buying Guide',1980,'6m 55s'],
+  ['2025 Dishwasher Efficiency Stats','Dishwashers',1540,'5m 05s'],
+  ['The Benefits of Steam Ovens for Healthy Cooking','Ovens',1290,'4m 30s'],
+];
+const bte=document.getElementById('blogtable');
+if(bte)bte.innerHTML=bt.map(a=>`<tr><td><b style="font-weight:500">${a[0]}</b></td><td><span class="tag w">${a[1]}</span></td><td>${a[2].toLocaleString()}</td><td style="color:var(--dim)">${a[3]}</td><td><button class="btng" style="padding:6px 14px">Open</button></td></tr>`).join('');
+
+/* ---- leads table ---- */
+const ld=[['Ahmed Raza','Quote','Luna Range Hood','Lahore','2h ago','w'],['Sana Khan','Service','Magic Oven','Karachi','5h ago','g'],['Bilal Ahmed','Complaint','Gas Hob','Multan','1d ago','r'],['Hina Ali','Quote','Moon Series','Islamabad','1d ago','w'],['Usman T.','Quote','Dishwasher','Faisalabad','2d ago','g'],['Ayesha M.','Service','Range Hood','Karachi','3d ago','g']];
+const ltag={Quote:'w',Service:'g',Complaint:'r'};
+document.getElementById('leadtable').innerHTML=ld.map(l=>`<tr><td><b>${l[0]}</b></td><td><span class="tag ${ltag[l[1]]}">${l[1]}</span></td><td>${l[2]}</td><td>${l[3]}</td><td style="color:var(--dim)">${l[4]}</td><td><span class="tag ${l[5]}">${l[5]==='w'?'New':l[5]==='g'?'Handled':'Urgent'}</span></td></tr>`).join('');
+
+/* ---- live feed (animated) ---- */
+const acts=[
+  ['visited','the Homepage','Karachi','Mobile',C.c1],
+  ['is viewing','Moon Series','Lahore','Desktop',C.c4],
+  ['clicked','"Request a Quote"','Islamabad','Mobile',C.red],
+  ['added to cart','Magic Oven 4-in-1','Karachi','Mobile',C.c3],
+  ['viewed','Range Hoods','Faisalabad','Desktop',C.c2],
+  ['started','checkout','Lahore','Mobile',C.red],
+  ['played','a video','Multan','Mobile',C.c2],
+  ['visited','About Us','Karachi','Desktop',C.c1],
+  ['is viewing','Luna Range Hood','Sialkot','Mobile',C.c4],
+];
+function feedItem(a){
+  return `<div class="fitem"><div class="fdot" style="background:${a[4]}"></div><div class="ftx"><b>A visitor</b> ${a[1]} <b>${a[2]}</b><div class="fmeta">${a[3]} · ${a[4]===C.red?'high intent':'browsing'}</div></div><div class="ftime">just now</div></div>`;
+}
+function seedFeed(el,n){
+  const arr=[];for(let i=0;i<n;i++){arr.push(acts[Math.floor((i*7+3)%acts.length)]);}
+  document.getElementById(el).innerHTML=arr.map(feedItem).join('');
+}
+seedFeed('ovfeed',6);seedFeed('livefeed',14);
+let fi=0;
+setInterval(()=>{
+  const a=acts[fi%acts.length];fi++;
+  ['ovfeed','livefeed'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const div=document.createElement('div');div.innerHTML=feedItem(a);
+    el.prepend(div.firstChild);
+    if(el.children.length>(id==='livefeed'?18:8))el.removeChild(el.lastChild);
+  });
+  const ln=document.getElementById('liveNow');if(ln)ln.textContent=38+Math.floor((fi*13)%12);
+},2600);
+</script>
+</body>
+</html>

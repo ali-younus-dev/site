@@ -12,6 +12,11 @@ dashboard.php
 dashboard.html
 .admin-backups/
 
+# dashboard-demo.html IS published on purpose: it is the read-only preview
+# version of the control panel (no password, no server code, edits kept in the
+# viewer's browser only) so reviewers can see the dashboard on the preview link.
+!dashboard-demo.html
+
 # --- Local build / working files -----------------------------------
 *.tmp
 *.bak

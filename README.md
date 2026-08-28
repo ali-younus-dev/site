@@ -27,6 +27,12 @@ Open it on a phone as well as a laptop — the whole site is built mobile-first.
 | **Fotile Pulse** (`/newsletter/`) | Company updates, events, and a custom-built video player |
 | **Service Centre** (`/service-center/`) | Helpline **042-111-131-517**, live open/closed status, booking wizard, coverage radar |
 | **Contact** (`/contact-us/`) | One form covering quotes, service, and complaints |
+| **Staff Control Panel** (`/dashboard-demo.html`) | Preview of the admin dashboard — edit product names, prices, sale % and photos with no developer |
+
+> **About the control panel preview:** this preview link is static hosting, which cannot run
+> server code, so the demo keeps your edits **in your own browser only** — the website is not
+> changed. On the live site the same screen saves instantly to the server (press Save & Publish
+> and every page updates at once). Everything else about the screen is identical.
 
 ---
 

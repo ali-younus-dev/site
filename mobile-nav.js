@@ -68,7 +68,7 @@
     {name:'Ovens',            href:'/product-category/oven/',                                  desc:'Electric, steam & 4-in-1'},
     {name:'Microwaves',       href:'/product-category/oven/microwave-oven-prices-in-pakistan/',desc:'Built-in & grill'},
     {name:'Dishwashers',      href:'/product-category/dish-washer/',                           desc:'In-sink & built-in'},
-    {name:'Water & Air',      href:'/product-category/water-purifier/',                        desc:'Purity, measured'}
+    {name:'Water Purifiers',  href:'/product-category/water-purifier/',                        desc:'Purity, measured'}
   ];
 
   function activeKey(){
