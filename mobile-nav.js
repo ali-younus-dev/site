@@ -299,3 +299,24 @@
     }
   }
 })();
+
+/* ============================================================================
+   PRODUCT 360 STUDIO — loader
+   Product pages that have several photos (different angles, or colour/finish
+   variants) get a drag-to-rotate viewer. The viewer script decides for itself
+   whether the current product has extra views, so this just loads it on any
+   page that shows a product image. Nothing changes on products that only have
+   one photo.
+   ========================================================================== */
+(function(){
+  function load(){
+    if(!document.querySelector('.pdp-stage')) return;
+    if(window.__pgLoaded) return; window.__pgLoaded=1;
+    var s=document.createElement('script');
+    s.src=(window.__PBASE||'')+'product-gallery.js';
+    s.defer=true;
+    document.body.appendChild(s);
+  }
+  if(document.readyState!=='loading') load();
+  else document.addEventListener('DOMContentLoaded',load);
+})();

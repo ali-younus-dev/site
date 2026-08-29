@@ -23,6 +23,7 @@ Open it on a phone as well as a laptop — the whole site is built mobile-first.
 | **Home** | Cinematic video hero, scroll-lit statement text, auto-cycling product showcase |
 | **The F20 Refrigerator** (`/fridge/`) | Launch page — press the fridge doors to open them, then tap the glowing points |
 | **Products** (`/shop/`) | 58 products, video banner, live sale badges, full spec tables on every product |
+| **360° product views** | On products photographed from several angles, drag the picture to turn it — try [Range Hood 9050](shop/range-hood-9050/) and [Gas Hob GAL90506](shop/gas-hob-gal90506/). Products that come in more than one finish get colour switches — try [Oven KSG7003AT-Y](shop/electric-built-in-oven-ksg7003at-y/) and [Microwave 25800K-C2G](shop/microwave-oven-25800k-c2g/). Tap the picture for a full-screen look. |
 | **Moon Series** (`/moon-series/`) | Planet-zoom cinematic banner for the premium collection |
 | **Fotile Pulse** (`/newsletter/`) | Company updates, events, and a custom-built video player |
 | **Service Centre** (`/service-center/`) | Helpline **042-111-131-517**, live open/closed status, booking wizard, coverage radar |
