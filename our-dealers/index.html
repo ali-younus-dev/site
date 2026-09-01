@@ -67,6 +67,23 @@
     .dhero p{font-size:16.5px}
   }
 
+  /* COVERAGE MAP BAND */
+  .cover{position:relative;background:#0d0507;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cover .map{display:block;width:100%;height:auto}
+  .cover .txt{position:absolute;right:6%;top:50%;transform:translateY(-50%);max-width:360px;z-index:2}
+  .cover .ey2{display:inline-flex;align-items:center;gap:11px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#d9b9bd;font-weight:700;margin-bottom:18px}
+  .cover .ey2 .dot{width:6px;height:6px;background:var(--red);border-radius:50%}
+  .cover h2{font-size:clamp(26px,2.6vw,40px);font-weight:200;line-height:1.05;letter-spacing:-1.5px;margin-bottom:16px}
+  .cover h2 b{font-weight:600}
+  .cover p{font-size:15.5px;font-weight:300;color:#d3cfd0;margin-bottom:26px}
+  .cover .nums{display:flex;gap:34px}
+  .cover .nums div b{display:block;font-size:34px;font-weight:200;letter-spacing:-1.5px;line-height:1}
+  .cover .nums div span{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:#b09a9d;font-weight:600}
+  @media(max-width:940px){
+    .cover .txt{position:static;transform:none;max-width:none;padding:26px 24px 40px;text-align:center}
+    .cover .nums{justify-content:center;gap:40px}
+  }
+
   /* CONTROLS */
   .controls{position:sticky;top:64px;z-index:50;background:rgba(11,11,13,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:20px 0}
   .controls .row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
@@ -176,13 +193,28 @@
 
 <!-- HERO -->
 <header class="dhero">
-  <div class="bg" style="background-image:url('../assets/dealers-banner.jpg');filter:none;background-position:center 30%"></div>
+  <div class="bg" style="background-image:url('../assets/dealers-hero.jpg');filter:none;background-position:center 34%"></div>
   <div class="in"><div class="wrap">
     <div class="ey"><span class="dot"></span>Find Fotile Near You</div>
     <h1>Our <b>Dealers.</b></h1>
     <p>Experience Fotile in person. Visit an authorized dealer or showroom across Pakistan to see our premium appliances live.</p>
   </div></div>
 </header>
+
+<!-- COVERAGE MAP -->
+<section class="cover">
+  <img class="map" src="../assets/dealers-map.jpg" alt="Map of Pakistan showing Fotile dealer cities: Karachi, Lahore, Faisalabad, Multan, Sargodha, Sahiwal and Hyderabad" loading="lazy">
+  <div class="txt">
+    <div class="ey2"><span class="dot"></span>Nationwide Coverage</div>
+    <h2>From Karachi to <b>Sargodha.</b></h2>
+    <p>Authorized Fotile dealers and service partners across every major city in Pakistan — so help is never far from your kitchen.</p>
+    <div class="nums">
+      <div><b>33</b><span>Dealers</span></div>
+      <div><b>12</b><span>Cities</span></div>
+      <div><b>20+</b><span>Years</span></div>
+    </div>
+  </div>
+</section>
 
 <!-- CONTROLS -->
 <div class="controls"><div class="wrap"><div class="row">

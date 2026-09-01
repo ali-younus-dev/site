@@ -56,7 +56,14 @@
   .npill:hover{background:var(--red);border-color:var(--red);color:#fff}
 
   /* HERO */
-  .bhero{padding:170px 0 40px;position:relative;text-align:center}
+  .bhero{padding:170px 0 40px;position:relative;text-align:center;overflow:hidden}
+  .bhero .bgimg{position:absolute;inset:-4%;z-index:0;background-size:cover;background-position:center 46%;
+     animation:jkb 26s ease-in-out infinite alternate}
+  @keyframes jkb{0%{transform:scale(1)}100%{transform:scale(1.09)}}
+  .bhero::after{content:"";position:absolute;inset:0;z-index:1;
+     background:linear-gradient(180deg,rgba(11,11,13,.86) 0%,rgba(11,11,13,.6) 34%,rgba(11,11,13,.84) 72%,var(--bg) 100%)}
+  .bhero > .wrap{position:relative;z-index:2}
+  @media(prefers-reduced-motion:reduce){.bhero .bgimg{animation:none}}
   .bhero .ey{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--steel-lt);font-weight:600;margin-bottom:24px;opacity:0;animation:fu 1s .2s forwards}
   .bhero .ey .ln{width:34px;height:1px;background:var(--red)}
   .bhero h1{font-size:clamp(44px,6.4vw,92px);font-weight:200;line-height:1;letter-spacing:-3px;opacity:0;animation:fu 1.1s .4s forwards}
@@ -239,7 +246,9 @@
 </nav>
 
 <!-- HERO -->
-<header class="bhero"><div class="wrap">
+<header class="bhero">
+  <div class="bgimg" style="background-image:url('../assets/journal-hero.jpg')"></div>
+  <div class="wrap">
   <div class="ey"><span class="ln"></span>The Fotile Journal</div>
   <h1>Guides &amp; <b>inspiration.</b></h1>
   <p>Buying guides, kitchen tips and appliance insights to help you cook, clean and live better — from the leading kitchen brand in Pakistan.</p>

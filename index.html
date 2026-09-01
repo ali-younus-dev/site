@@ -228,8 +228,8 @@
 
   /* ===== FULL-WIDTH BANNER SHOWCASE ===== */
   .banner-show{position:relative;min-height:64vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;border-top:1px solid var(--line)}
-  .banner-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06);filter:brightness(.5) grayscale(.15);animation:kenburns 24s ease-in-out infinite alternate}
-  .banner-show::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 50%,rgba(11,11,13,.35),rgba(11,11,13,.82))}
+  .banner-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.06);filter:brightness(.84) saturate(1.06);animation:kenburns 24s ease-in-out infinite alternate}
+  .banner-show::after{content:"";position:absolute;inset:0;background:radial-gradient(72% 58% at 50% 44%,rgba(11,11,13,.74),rgba(11,11,13,.40) 62%,rgba(11,11,13,.30) 100%),linear-gradient(180deg,rgba(11,11,13,.5),transparent 26%,transparent 74%,rgba(11,11,13,.72))}
   .banner-in{position:relative;z-index:2;max-width:760px;padding:70px 30px}
 
   /* ===== HEALTH / EDUCATION SPLIT ===== */
@@ -820,8 +820,7 @@
 
 <!-- ===== IMMERSIVE CHAPTER 03 · MOON SERIES ===== -->
 <section class="chapter" id="ch-moon">
-  <div class="chmedia"><div class="chbg" style="background-image:url('assets/moon-new-home-img.jpg')"></div></div>
-  <img class="chprod" src="assets/moon-series-hoobs-hood.png" alt="Fotile Moon Series" loading="lazy">
+  <div class="chmedia"><div class="chbg" style="background-image:url('assets/moon-scene.jpg');filter:brightness(.95) saturate(1.05)"></div></div>
   <div class="chtime"><b>03</b> <span class="tt">/ 03</span> &nbsp;·&nbsp; MOON SERIES</div>
   <div class="chword">MOON</div>
   <div class="chin"><div class="cx">
@@ -899,8 +898,7 @@
 
 <!-- FULL-WIDTH BANNER SHOWCASE -->
 <section class="banner-show">
-  <!-- PLACEHOLDER banner image (hosted). Later swap to assets/banner-strip.jpg with your own. -->
-  <div class="banner-bg" id="bannerBg" style="background-image:url('https://images.unsplash.com/photo-1556909212-d5b604d0c90d?q=80&w=2400&auto=format&fit=crop')"></div>
+  <div class="banner-bg" id="bannerBg" style="background-image:url('assets/home-standard.jpg')"></div>
   <div class="banner-in reveal">
     <div class="kick" style="justify-content:center"><span class="dot"></span>The Fotile Standard</div>
     <h2 class="h2" style="margin:18px 0 18px">Designed for the way<br>Pakistan <b>cooks.</b></h2>
