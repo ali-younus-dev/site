@@ -204,7 +204,12 @@
   @media(max-width:600px){.cats{grid-template-columns:1fr}.cat.wide{grid-column:span 1}.fgrid{grid-template-columns:1fr}}
 </style>
 <style>
-  .chero{padding:150px 0 10px;text-align:center;position:relative}
+  .chero{padding:150px 0 10px;text-align:center;position:relative;overflow:hidden}
+  .chero .heat{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center 42%;opacity:.42;pointer-events:none;
+    -webkit-mask-image:radial-gradient(78% 86% at 50% 42%,transparent 4%,rgba(0,0,0,.45) 44%,#000 92%);
+    mask-image:radial-gradient(78% 86% at 50% 42%,transparent 4%,rgba(0,0,0,.45) 44%,#000 92%)}
+  .chero > .wrap{position:relative;z-index:1}
+  @media(max-width:820px){.chero .heat{opacity:.30}}
   .crumb{font-size:12.5px;letter-spacing:.5px;color:var(--txt-dim);margin-bottom:20px}
   .crumb a{color:var(--txt-dim);transition:.3s}.crumb a:hover{color:var(--champ-lt)}
   .chero h1{font-size:clamp(44px,7vw,96px);font-weight:200;line-height:.98;letter-spacing:-3px}
@@ -233,7 +238,9 @@
   <div class="nr"><span class="ic">⌕</span><a href="/cart/" class="ic" style="position:relative;text-decoration:none">🛒<b data-cart-count style="position:absolute;top:-8px;right:-9px;background:#e01e37;color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a><a href="/contact-us/" class="npill">Request a Quote</a></div>
 </nav>
 
-<header class="chero"><div class="wrap">
+<header class="chero">
+  <div class="heat" style="background-image:url('../../assets/texture-filament.jpg')"></div>
+  <div class="wrap">
   <div class="crumb"><a href="/shop/">Products</a> / Ovens</div>
   <h1>Built-in <b>Ovens.</b></h1>
   <p class="sub">Electric, steam and combi ovens that turn everyday cooking into craft.</p>
