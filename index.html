@@ -52,9 +52,10 @@
   @keyframes drift1{0%{transform:translate(0,0) scale(1)}100%{transform:translate(8vw,6vh) scale(1.15)}}
   @keyframes drift2{0%{transform:translate(0,0) scale(1.1)}100%{transform:translate(-7vw,-5vh) scale(1)}}
   /* cursor-following spotlight */
-  .spot{position:fixed;top:0;left:0;width:640px;height:640px;z-index:1;pointer-events:none;border-radius:50%;
-    background:radial-gradient(circle,rgba(200,20,45,.14),transparent 66%);transform:translate(-50%,-50%);
-    transition:opacity .6s;opacity:0;mix-blend-mode:screen;will-change:left,top}
+  .spot{position:fixed;top:0;left:0;width:440px;height:440px;z-index:999;pointer-events:none;border-radius:50%;
+    background:radial-gradient(circle at center,rgba(224,30,55,.18) 0%,rgba(224,30,55,.10) 20%,rgba(224,30,55,.035) 44%,transparent 72%);
+    transform:translate3d(-50%,-50%,0);transition:opacity .2s ease;opacity:0;mix-blend-mode:screen;
+    will-change:transform,opacity;filter:blur(.15px)}
   /* fine film grain — kills flat black */
   .grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
@@ -206,6 +207,7 @@
   .tile.contain{background:radial-gradient(72% 66% at 50% 36%,#2a2c31 0%,#191a1e 44%,#111216 84%)}
   .tile.contain .ti{background-size:contain;background-repeat:no-repeat;background-position:center 42%;filter:none}
   .tile.contain:hover .ti{transform:scale(1.04)}
+  .purifier-tile .ti{background-size:contain;background-position:center 42%;padding:4%;}
   .tile.contain::after{background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.7))}
   .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.82))}
   .tile .cap{position:absolute;left:0;bottom:0;z-index:2;padding:30px;width:100%}
@@ -328,9 +330,15 @@
   .fopts.fopts-7{grid-template-columns:repeat(4,1fr);max-width:860px}
   @media(max-width:900px){.fopts.fopts-7{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:600px){.fopts.fopts-7{grid-template-columns:1fr 1fr}}
-  .fopt{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px 16px;cursor:pointer;transition:.3s;display:flex;flex-direction:column;align-items:center;gap:12px;font-weight:600;font-size:14px}
-  .fopt span{font-size:34px;transition:.3s}
-  .fopt:hover{border-color:rgba(224,30,55,.5);transform:translateY(-5px);background:#17171b}.fopt:hover span{transform:scale(1.15)}
+  .fopt{position:relative;isolation:isolate;background:linear-gradient(145deg,rgba(22,22,26,.98),rgba(15,15,18,.98));border:1px solid rgba(255,255,255,.075);border-radius:16px;padding:28px 16px;cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s,background .4s,box-shadow .4s;display:flex;flex-direction:column;align-items:center;gap:13px;font-weight:600;font-size:14px;overflow:hidden}
+  .fopt::before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:radial-gradient(120px 80px at 50% 0%,rgba(224,30,55,.055),transparent 72%);opacity:.7;pointer-events:none;z-index:-1}
+  .fopt::after{content:"";position:absolute;left:18%;right:18%;bottom:-26px;height:34px;border-radius:50%;background:radial-gradient(closest-side,rgba(224,30,55,.10),transparent 72%);filter:blur(15px);opacity:.0;transition:opacity .45s;pointer-events:none}
+  .fopt span{width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.045),rgba(255,255,255,.012) 58%,transparent 72%);color:#f2f2f3;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s,color .4s}
+  .fopt span svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .fopt:hover{border-color:rgba(224,30,55,.28);transform:translateY(-4px);background:linear-gradient(145deg,rgba(26,23,27,.99),rgba(16,15,18,.99));box-shadow:0 14px 34px rgba(0,0,0,.24),0 0 22px rgba(224,30,55,.045)}
+  .fopt:hover::after{opacity:1}
+  .fopt:hover span{transform:translateY(-1px) scale(1.03);border-color:rgba(224,30,55,.42);color:#fff;box-shadow:0 0 0 1px rgba(224,30,55,.08),0 0 18px rgba(224,30,55,.08),inset 0 0 18px rgba(224,30,55,.035)}
+  .fopt:focus-visible{outline:none;border-color:rgba(224,30,55,.48);box-shadow:0 0 0 3px rgba(224,30,55,.10)}
   .fres{display:none}.fres.on{display:block;animation:qf .5s}
   .fres .rstage{width:220px;height:220px;margin:0 auto 24px;background:radial-gradient(circle at 50% 40%,#2b2d33 0%,#1a1b1f 46%,#101115 88%);border-radius:20px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--line)}
   .fres .rstage img{width:80%;height:80%;object-fit:contain;filter:drop-shadow(0 20px 30px rgba(0,0,0,.5))}
@@ -691,6 +699,111 @@
 </style>
   <link rel="canonical" href="https://fotilepk.com/">
 <script>window.__PBASE="";</script>
+
+<style id="fotile-premium-v2">
+/* ==========================================================
+   FOTILE PREMIUM V2 — editorial luxury / precision interaction
+   ========================================================== */
+:root{
+  --p-glow:rgba(224,30,55,.075);
+  --p-glow-strong:rgba(224,30,55,.14);
+  --p-white:rgba(255,255,255,.92);
+  --p-muted:rgba(255,255,255,.55);
+}
+body{background:
+  radial-gradient(70vw 45vw at 82% 18%,rgba(122,15,30,.06),transparent 72%),
+  radial-gradient(55vw 40vw at 8% 62%,rgba(224,30,55,.045),transparent 75%),
+  var(--bg);
+}
+/* finer ambient grain + edge vignette */
+.aura{opacity:.82}
+.grain{opacity:.035}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(120% 90% at 50% 45%,transparent 60%,rgba(0,0,0,.28) 100%);mix-blend-mode:multiply}
+
+/* navigation: luxury glass */
+.cbar,.nav{backdrop-filter:blur(16px) saturate(120%);-webkit-backdrop-filter:blur(16px) saturate(120%)}
+.cbar{background:linear-gradient(180deg,rgba(5,5,7,.32),transparent);}
+.nav.solid{background:rgba(8,8,10,.64);box-shadow:0 12px 50px rgba(0,0,0,.18)}
+.nav .nlinks a,.cbar .cmid a,.cbar .cright a{letter-spacing:.45px}
+
+/* premium buttons */
+.btn-r,.btn-l,.npill{position:relative;overflow:hidden;isolation:isolate}
+.btn-r::after,.btn-l::after,.npill::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.16) 48%,transparent 66%);transform:translateX(-120%);transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.btn-r:hover::after,.btn-l:hover::after,.npill:hover::after{transform:translateX(120%)}
+.btn-r{box-shadow:0 10px 34px rgba(224,30,55,.14)}
+.btn-r:hover{box-shadow:0 18px 42px rgba(224,30,55,.22)}
+
+/* all card surfaces — softer glass, sharp editorial border */
+.tile,.tcard,.jcard,.badge-c,.lstat,.fopt,.film,.sc-stage,.edu .evis{box-shadow:0 16px 40px rgba(0,0,0,.12)}
+.tile,.tcard,.jcard,.badge-c,.fopt{border-color:rgba(255,255,255,.07)}
+
+/* collection tiles */
+.tile{transition:transform .7s cubic-bezier(.16,1,.3,1),border-color .5s,box-shadow .7s}
+.tile::after{transition:opacity .6s}
+.tile:hover{transform:translateY(-7px);border-color:rgba(224,30,55,.20);box-shadow:0 28px 70px rgba(0,0,0,.28),0 0 26px rgba(224,30,55,.045)}
+.tile .cap{padding:32px}
+.tile .cap small{font-size:10px;letter-spacing:2.4px}
+.tile .cap h4{font-size:27px;letter-spacing:-.8px}
+.tile .go{letter-spacing:.15px}
+.tile.contain .ti{background-position:center 38%}
+.purifier-tile .ti{background-size:contain !important;background-position:center center !important;transform:none !important;filter:brightness(.94) contrast(1.02) !important;inset:2% 3% 24% 3% !important}
+.purifier-tile::after{background:linear-gradient(180deg,transparent 44%,rgba(11,11,13,.90) 100%)}
+.purifier-tile::before{content:"";position:absolute;inset:12% 16% 27%;background:radial-gradient(closest-side,rgba(255,255,255,.035),transparent 72%);filter:blur(14px);pointer-events:none;z-index:0}
+
+/* chapter media gets cinema-grade contrast */
+.chapter .chmedia img,.chapter .chmedia .chbg{filter:brightness(.57) saturate(.96) contrast(1.04)}
+.chapter:hover .chmedia img,.chapter:hover .chmedia .chbg{transform:scale(1.115)}
+.chapter .chin{filter:drop-shadow(0 10px 30px rgba(0,0,0,.25))}
+
+/* finder section: more breathing room and hairline framing */
+.finderband{background:linear-gradient(180deg,rgba(255,255,255,.008),transparent 20%,rgba(122,15,30,.025) 100%)}
+.finder{max-width:900px}
+.fopts.fopts-7{gap:16px;max-width:900px}
+.fopt{min-height:164px;justify-content:center;border-radius:18px;background:linear-gradient(145deg,rgba(22,22,26,.9),rgba(13,13,16,.96));}
+.fopt::before{inset:1px;opacity:1;background:radial-gradient(170px 100px at var(--mx,50%) var(--my,0%),rgba(224,30,55,.09),transparent 74%)}
+.fopt::after{left:14%;right:14%;bottom:-34px;height:40px;filter:blur(19px)}
+.fopt span{width:60px;height:60px;border-color:rgba(255,255,255,.17);background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.008));box-shadow:0 0 0 1px rgba(255,255,255,.015),0 10px 28px rgba(0,0,0,.20)}
+.fopt span::after{content:"";position:absolute;width:60px;height:60px;border-radius:50%;border:1px solid rgba(224,30,55,.0);transition:.5s}
+.fopt:hover{transform:translateY(-6px);border-color:rgba(224,30,55,.22);box-shadow:0 20px 44px rgba(0,0,0,.30),0 0 34px rgba(224,30,55,.07)}
+.fopt:hover::after{opacity:1}
+.fopt:hover span{border-color:rgba(224,30,55,.34);box-shadow:0 0 0 1px rgba(224,30,55,.08),0 0 24px rgba(224,30,55,.09),inset 0 0 16px rgba(224,30,55,.025)}
+.fopt:active{transform:translateY(-2px) scale(.992)}
+.fopt svg{display:block}
+
+/* selected state — premium instead of flashy */
+.fopt.is-selected{border-color:rgba(224,30,55,.38);box-shadow:0 18px 44px rgba(0,0,0,.28),0 0 36px rgba(224,30,55,.08),inset 0 0 28px rgba(224,30,55,.02)}
+.fopt.is-selected span{border-color:rgba(224,30,55,.48);box-shadow:0 0 0 1px rgba(224,30,55,.12),0 0 24px rgba(224,30,55,.10)}
+
+/* reveal easing */
+.reveal{transition:opacity 1.15s cubic-bezier(.16,1,.3,1),transform 1.15s cubic-bezier(.16,1,.3,1)}
+
+/* stats/cards */
+.lstat:hover,.tcard:hover,.badge-c:hover,.jcard:hover{transform:translateY(-6px);box-shadow:0 22px 58px rgba(0,0,0,.25)}
+.tcard .stars{font-size:13px;letter-spacing:3px}
+.jcard .jimg{filter:saturate(.82) contrast(1.04)}
+
+/* films */
+.film{border-radius:10px}
+.film .pl i{background:rgba(8,8,10,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.film:hover .pl i{box-shadow:0 14px 40px rgba(224,30,55,.20)}
+
+/* form */
+.news input{background:rgba(255,255,255,.025);box-shadow:inset 0 1px 0 rgba(255,255,255,.025)}
+.news input:focus{box-shadow:0 0 0 3px rgba(224,30,55,.06),0 14px 40px rgba(0,0,0,.22)}
+
+/* subtle section dividers */
+section[style*="border-top"]{position:relative}
+section[style*="border-top"]::marker{display:none}
+
+/* accessibility / reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .tile,.tcard,.jcard,.badge-c,.lstat,.fopt,.film,.btn-r,.btn-l{transition:none!important}
+  .btn-r::after,.btn-l::after,.npill::after{display:none}
+}
+@media(max-width:900px){.fopt{min-height:148px}}
+@media(max-width:600px){.fopt{min-height:132px;padding:22px 12px}.fopt span{width:54px;height:54px}.tile .cap{padding:24px}.tile .cap h4{font-size:22px}}
+</style>
+
 </head>
 <body>
 
@@ -905,7 +1018,7 @@
     <a href="/product-category/hobs/" class="tile t-sm contain reveal r2"><div class="ti" style="background-image:url('assets/products/gas-hob-gal90506.png')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></a>
     <a href="/moon-series/" class="tile t-sm contain reveal r3"><div class="ti" style="background-image:url('assets/moon-new-home-img.jpg')"></div><div class="cap"><small>Premium</small><h4>Moon Series</h4><div class="go">Explore premium →</div></div></a>
     <a href="/product-category/oven/" class="tile t-md contain reveal"><div class="ti" style="background-image:url('assets/products/built-in-oven-kms7008.png')"></div><div class="cap"><small>Ovens</small><h4>Built-in Ovens</h4><div class="go">Shop ovens →</div></div></a>
-    <a href="/product-category/water-purifier/" class="tile t-md reveal r2"><div class="ti" style="background-image:url('assets/products/water-purifier.png')"></div><div class="cap"><small>Purity</small><h4>Water Purifiers</h4><div class="go">Shop purifiers →</div></div></a>
+    <a href="/product-category/water-purifier/" class="tile t-md contain reveal r2 purifier-tile luxury-tile"><div class="ti" style="background-image:url('assets/products/water-purifier.png')"></div><div class="cap"><small>Purity</small><h4>Water Purifiers</h4><div class="go">Shop purifiers →</div></div></a>
   </div>
 </div></section>
 
@@ -1055,31 +1168,31 @@
     <div class="fstepq on" data-step="0">
       <h3>What matters most in your kitchen?</h3>
       <div class="fopts fopts-7">
-        <div class="fopt" data-v="hood"><span>🔥</span>Clearing smoke</div>
-        <div class="fopt" data-v="hob"><span>🍳</span>Everyday cooking</div>
-        <div class="fopt" data-v="oven"><span>🔆</span>Baking &amp; roasting</div>
-        <div class="fopt" data-v="micro"><span>⚡</span>Quick reheating</div>
-        <div class="fopt" data-v="dish"><span>💧</span>Saving time on dishes</div>
-        <div class="fopt" data-v="water"><span>🌊</span>Cleaner water</div>
-        <div class="fopt" data-v="lux"><span>✨</span>A premium kitchen</div>
+        <div class="fopt" data-v="hood"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-1.2 3.2-5.2 5.3-5.2 9.1a5.2 5.2 0 0 0 10.4 0c0-2.4-1.4-4.3-2.7-5.8-.2 2.1-1.3 3.2-2.5 4.1-.2-2.2-1-4.4 0-7.4Z"/><path d="M9.2 16.4a3 3 0 0 0 5.6 0"/></svg></span>Clearing smoke</div>
+        <div class="fopt" data-v="hob"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/><circle cx="15" cy="15" r="1.2"/></svg></span>Everyday cooking</div>
+        <div class="fopt" data-v="oven"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M7.5 8h9M8 12h8v5H8z"/><path d="M10 14.5h4"/></svg></span>Baking &amp; roasting</div>
+        <div class="fopt" data-v="micro"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7"/></svg></span>Quick reheating</div>
+        <div class="fopt" data-v="dish"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M8.5 7.5h7M9 11c1.7 1.3 4.3 1.3 6 0"/><path d="M8 20h8"/></svg></span>Saving time on dishes</div>
+        <div class="fopt" data-v="water"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.8c-2.5 3.1-5 5.9-5 9a5 5 0 0 0 10 0c0-3.1-2.5-5.9-5-9Z"/><path d="M9 14.2c.5 1.2 1.5 1.8 3 1.8"/></svg></span>Cleaner water</div>
+        <div class="fopt" data-v="lux"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></span>A premium kitchen</div>
       </div>
     </div>
     <div class="fstepq" data-step="1">
       <h3>How big is your kitchen?</h3>
       <div class="fopts">
-        <div class="fopt" data-v="s"><span>🏠</span>Compact</div>
-        <div class="fopt" data-v="m"><span>🏡</span>Family kitchen</div>
-        <div class="fopt" data-v="l"><span>🏰</span>Large / open</div>
-        <div class="fopt" data-v="lux"><span>✨</span>Premium</div>
+        <div class="fopt" data-v="s"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 11.2 8.5-7 8.5 7"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-5h5v5"/></svg></span>Compact</div>
+        <div class="fopt" data-v="m"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 11.2 8.5-7 8.5 7"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 15h6"/><path d="M12 12v6"/></svg></span>Family kitchen</div>
+        <div class="fopt" data-v="l"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V8l4 3V7l4 3V5l4 3v-2l4 3v11"/><path d="M3 20h18"/></svg></span>Large / open</div>
+        <div class="fopt" data-v="lux"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></span>Premium</div>
       </div>
     </div>
     <div class="fstepq" data-step="2">
       <h3>Your priority?</h3>
       <div class="fopts">
-        <div class="fopt" data-v="value"><span>💰</span>Best value</div>
-        <div class="fopt" data-v="balance"><span>⚖️</span>Balanced</div>
-        <div class="fopt" data-v="premium"><span>👑</span>Premium quality</div>
-        <div class="fopt" data-v="flag"><span>💎</span>The very best</div>
+        <div class="fopt" data-v="value"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.7 8.8c-.7-.6-1.6-.9-2.6-.9-1.6 0-2.7.8-2.7 1.9 0 1.2 1.1 1.7 2.7 2 1.6.3 2.7.8 2.7 2s-1.1 1.9-2.7 1.9c-1 0-2-.3-2.8-1"/><path d="M12 6.7v10.6"/></svg></span>Best value</div>
+        <div class="fopt" data-v="balance"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M6 7h12"/><path d="m6 7-3 6h6L6 7Z"/><path d="m18 7-3 6h6l-3-6Z"/><path d="M8 20h8"/></svg></span>Balanced</div>
+        <div class="fopt" data-v="premium"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 4 4 4-6 4 6 4-4-1.5 10H5.5L4 7Z"/><path d="M6.5 20h11"/></svg></span>Premium quality</div>
+        <div class="fopt" data-v="flag"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 6-7 12L5 9l7-6Z"/><path d="m5 9 7 2 7-2M12 11v10"/></svg></span>The very best</div>
       </div>
     </div>
     <div class="fres" id="fres">
@@ -1230,14 +1343,7 @@
   document.querySelectorAll('.lstat b').forEach(el=>cio.observe(el));
   // FAQ accordion
   document.querySelectorAll('.faqi .q').forEach(q=>q.onclick=()=>q.parentElement.classList.toggle('open'));
-  // Cursor-following maroon spotlight — the page feels lit & alive
-  (function(){
-    const spot=document.getElementById('spot');if(!spot)return;
-    let tx=innerWidth/2,ty=innerHeight/2,cx=tx,cy=ty;
-    addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;spot.style.opacity='1';},{passive:true});
-    addEventListener('pointerleave',()=>spot.style.opacity='0');
-    (function loop(){cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;spot.style.left=cx+'px';spot.style.top=cy+'px';requestAnimationFrame(loop);})();
-  })();
+  // Global cursor spotlight is initialized in the final premium interaction block below.
   /* ===== BEFORE/AFTER COMPARE SLIDER (premium) ===== */
   (function(){
     const ba=document.getElementById('ba');if(!ba)return;
@@ -1499,5 +1605,65 @@
 <script src="home-enhance.js"></script>
 <script src="mobile-nav.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "Fotile Pakistan", "url": "https://fotilepk.com/", "logo": "https://fotilepk.com/assets/logo.png", "telephone": "+92-42-111-131-517", "areaServed": "PK", "sameAs": ["https://www.facebook.com/fotile.pk", "https://www.instagram.com/fotilepak/", "https://www.linkedin.com/company/fotilepk/"]}</script>
+
+<script id="fotile-premium-v2-js">
+(function(){
+  /* Cursor-reactive card lighting: tiny movement, no gimmick */
+  const cards=document.querySelectorAll('.fopt,.tile,.tcard,.jcard,.badge-c');
+  cards.forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+      card.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+    });
+    card.addEventListener('pointerleave',()=>{
+      card.style.removeProperty('--mx');card.style.removeProperty('--my');
+    });
+  });
+
+  /* Finder selection state, then move cleanly to the next question */
+  document.querySelectorAll('.fstepq .fopt').forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      opt.parentElement.querySelectorAll('.fopt').forEach(x=>x.classList.remove('is-selected'));
+      opt.classList.add('is-selected');
+    },true);
+  });
+
+  /* Soft 3D depth on cards: only on precision pointers */
+  if(matchMedia('(pointer:fine)').matches){
+    document.querySelectorAll('.tile,.tcard,.jcard,.badge-c').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect();
+        const rx=((e.clientY-r.top)/r.height-.5)*-1.8;
+        const ry=((e.clientX-r.left)/r.width-.5)*2.1;
+        card.style.transform=`perspective(900px) translateY(-5px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+      });
+      card.addEventListener('pointerleave',()=>card.style.transform='');
+    });
+  }
+
+  /* Precision cursor spotlight — GPU transform, direct tracking */
+  const spot=document.getElementById('spot');
+  if(spot && matchMedia('(pointer:fine)').matches){
+    let x=innerWidth/2,y=innerHeight/2;
+    let visible=false;
+    let raf=0;
+    const move=e=>{
+      // Move the actual glow immediately with the pointer; no left/top layout updates.
+      spot.style.transform=`translate3d(${e.clientX}px,${e.clientY}px,0) translate3d(-50%,-50%,0)`;
+      if(!visible){visible=true;spot.style.opacity='1';}
+    };
+    const hide=()=>{visible=false;spot.style.opacity='0';};
+    addEventListener('pointermove',move,{passive:true});
+    document.addEventListener('mouseleave',hide,{passive:true});
+    addEventListener('blur',hide,{passive:true});
+    // Keep a tiny heartbeat only to prevent stale compositing on some browsers.
+    const tick=()=>{raf=requestAnimationFrame(tick);};
+    raf=requestAnimationFrame(tick);
+  }
+
+})();
+</script>
+
 </body>
 </html>
