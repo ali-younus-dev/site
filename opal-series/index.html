@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotile Opal Series | Premium Kitchen Appliances Pakistan</title>
+<meta name="description" content="The Fotile Opal Series — porcelain-white gas hobs, steam ovens and range hoods that hold the whole room’s light. Available in Pakistan.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fotile Pakistan">
+<meta property="og:title" content="Fotile Opal Series | Premium Kitchen Appliances Pakistan">
+<meta property="og:description" content="Explore the Fotile Opal Series — porcelain-white gas hobs, steam ovens and range hoods, built for first light.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fotile Opal Series | Premium Kitchen Appliances Pakistan">
+<meta name="twitter:description" content="Explore the Fotile Opal Series — porcelain-white gas hobs, steam ovens and range hoods, built for first light.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15171c;--ink-soft:#4b4c48;--ink-dim:#6f7069;
+    --bg:#faf9f6;--panel:#ffffff;--line:rgba(21,23,28,.09);--red:#e01e37;
+    /* First Light accent — a warm honey gold, a pale dawn sky, and a legible bronze for text/icons */
+    --accent:#9c6f2f;--accent-lt:#c99a54;
+    --gold:#b8863f;--gold-lt:#e3bd82;
+    --sky:#dbe6ee;--dawn:#f4dfc4;
+    --goldgrad:linear-gradient(120deg,#8a5f28,#b0803c 34%,#cf9f57 68%,#8f6329);
+    --font:"Manrope",system-ui,-apple-system,sans-serif;
+    --prog:0%;--day:0;--mx:50%;--my:18%;--dial:.3;
+    --d0:1.5s;--d1:1.7s;--d2:2s;--d3:2.2s;--d4:2.6s;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold-lt);color:var(--ink)}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 44px}
+
+  /* the day, washing quietly behind the page — cool at the top, warming toward the bottom as you scroll */
+  .daycycle{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(1200px 700px at 15% -10%, rgba(219,230,238,calc(.55 - var(--day)*.4)), transparent 60%),
+      radial-gradient(1000px 650px at 88% 115%, rgba(216,171,106,calc(.10 + var(--day)*.30)), transparent 60%)}
+
+  /* a soft warm light that follows the cursor across the whole page */
+  /* a composited sprite, moved with transform only — no repaint on mouse move */
+  .lightfield{position:fixed;left:0;top:0;width:1120px;height:1120px;margin:-560px 0 0 -560px;
+    z-index:20;pointer-events:none;will-change:transform;contain:strict;
+    transform:translate3d(var(--lfx,50vw),var(--lfy,18vh),0);
+    background:radial-gradient(circle closest-side, rgba(255,214,158,.28), rgba(255,214,158,.07) 45%, transparent 72%)}
+  @media(max-width:860px){.lightfield{display:none}}
+
+
+  /* OPENING — a drop falls on still dark water; the ring it makes carries the
+     light outward and leaves porcelain behind it. Everything below the canvas
+     is a working fallback for machines with no WebGL. */
+  html.pllock,html.pllock body{overflow:hidden!important}
+  .preloader{position:fixed;inset:0;z-index:5000;overflow:hidden;cursor:pointer;
+    background:#101720;transition:opacity .85s cubic-bezier(.16,1,.3,1)}
+  .preloader.done{opacity:0;pointer-events:none}
+  .pl-water{position:absolute;inset:0;width:100%;height:100%;display:block}
+  /* fallback wash: a light circle opens from the impact point */
+  .preloader::after{content:"";position:absolute;left:50%;top:50%;width:0;height:0;border-radius:50%;
+    background:radial-gradient(circle,#faf9f6 58%,#e7eaec 78%,#cfd8dd 100%);
+    transform:translate(-50%,-50%);animation:plOpen 1.7s .56s cubic-bezier(.3,.8,.3,1) forwards}
+  .preloader.gl::after{display:none}
+  @keyframes plOpen{from{width:0;height:0;opacity:.9}to{width:320vmax;height:320vmax;opacity:1}}
+  .pl-drop{position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;
+    border-radius:50%;z-index:3;
+    background:radial-gradient(circle at 36% 30%,#ffffff,#cfe6ee 55%,#8fb6c4);
+    box-shadow:0 0 22px 6px rgba(214,236,244,.55);
+    transform:translateY(-64vh) scaleY(1.5) scaleX(.72);opacity:0;
+    animation:plFall .56s cubic-bezier(.55,0,.95,.45) forwards,plSplat .22s .56s ease-out forwards}
+  @keyframes plFall{0%{transform:translateY(-64vh) scaleY(1.5) scaleX(.72);opacity:0}
+    14%{opacity:1}
+    100%{transform:translateY(0) scaleY(1.9) scaleX(.62);opacity:1}}
+  @keyframes plSplat{to{transform:translateY(6px) scaleY(.12) scaleX(3.4);opacity:0}}
+  .pl-word{position:absolute;left:0;right:0;top:50%;text-align:center;z-index:4;pointer-events:none;
+    transform:translateY(-50%);opacity:0;animation:plWord 1.5s .84s cubic-bezier(.16,1,.3,1) forwards}
+  .pl-word b{display:block;font-size:clamp(34px,7vw,74px);font-weight:200;letter-spacing:.42em;
+    text-indent:.42em;line-height:1;
+    background:var(--opalgrad,linear-gradient(105deg,#2e8f96,#6a63b4 30%,#b8577c 55%,#b6852f 78%,#2e8f96));
+    background-size:280% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:opalDrift 9s ease-in-out infinite}
+  .pl-word i{display:block;margin-top:18px;font-style:normal;font-size:9.5px;font-weight:700;
+    letter-spacing:5px;text-indent:5px;text-transform:uppercase;color:rgba(90,96,104,.7)}
+  @keyframes plWord{0%{opacity:0;transform:translateY(calc(-50% + 16px));letter-spacing:0}
+    26%{opacity:1;transform:translateY(-50%)}
+    70%{opacity:1;transform:translateY(-50%)}
+    100%{opacity:0;transform:translateY(calc(-50% - 10px))}}
+  .pl-skip{position:absolute;right:22px;bottom:20px;z-index:5;font-size:9px;letter-spacing:2.6px;
+    text-transform:uppercase;font-weight:700;color:rgba(120,130,140,.55);opacity:0;
+    animation:fu .6s 1.1s forwards;pointer-events:none}
+
+  @media (prefers-reduced-motion: reduce){
+    :root{--d0:.05s;--d1:.1s;--d2:.15s;--d3:.2s;--d4:.25s}
+    .preloader{display:none}
+  }
+
+  /* NAV — permanently glassy so it reads over any part of the hero photo, not just after scroll */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:22px 44px;transition:.5s cubic-bezier(.16,1,.3,1);border-bottom:1px solid rgba(255,255,255,.55);margin-top:26px;
+    background:rgba(255,255,255,.4);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);box-shadow:0 10px 30px rgba(20,22,28,.05)}
+  .nav.solid{background:rgba(255,255,255,.88);backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);border-bottom-color:var(--line);padding:16px 44px;margin-top:0;box-shadow:0 1px 0 var(--line)}
+  .nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:var(--prog);background:linear-gradient(90deg,var(--sky),var(--dawn),var(--gold-lt),var(--gold));transition:width .15s linear;pointer-events:none}
+  @supports not (backdrop-filter: blur(1px)){ .nav{background:rgba(255,255,255,.9)} .nav.solid{background:rgba(255,255,255,.96)} }
+  .nav .brand img{height:20px;filter:brightness(0);opacity:.86}
+  .nlinks{display:flex;gap:34px;font-size:13.5px;font-weight:500;letter-spacing:.2px}
+  .nlinks a{position:relative;opacity:.74;transition:.3s;padding:3px 0;color:var(--ink)}.nlinks a:hover{opacity:1}
+  .nlinks a.active{opacity:1;color:var(--accent)}
+  .nlinks a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--accent);transition:.35s}
+  .nlinks a:hover::after,.nlinks a.active::after{width:100%}
+  .nr{display:flex;align-items:center;gap:24px;font-size:14px}
+  .nr .ic{opacity:.6;cursor:pointer;transition:.3s;font-size:15px;color:var(--ink)}.nr .ic:hover{opacity:1}
+  .npill{font-size:13px;font-weight:600;border:1px solid rgba(156,111,47,.35);color:var(--accent);padding:10px 22px;border-radius:4px;transition:.35s}
+  .npill:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+  /* HERO — real kitchen photography, a beam of light passing through the room */
+  .mhero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;background:#f3efe7}
+  .mhero .photo{position:absolute;inset:0;overflow:hidden}
+  .mhero .photo img{width:100%;height:100%;object-fit:cover;object-position:center 38%;transform:scale(1.03)}
+  .mhero .photo::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(115deg,transparent 35%,rgba(255,236,205,.55) 48%,transparent 62%);background-size:220% 220%;animation:lightsweep 9s ease-in-out infinite}
+  @keyframes lightsweep{0%{background-position:120% -20%}50%{background-position:-20% 60%}100%{background-position:120% -20%}}
+  @media (prefers-reduced-motion: reduce){ .mhero .photo::after{animation:none} }
+  .mhero::before{content:"";position:absolute;top:0;left:0;right:0;height:170px;z-index:2;background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,0));pointer-events:none}
+  .mhero::after{content:"";position:absolute;inset:0;z-index:2;
+    background:linear-gradient(90deg,rgba(250,249,246,.96) 4%,rgba(250,249,246,.78) 32%,rgba(250,249,246,.32) 58%,rgba(250,249,246,.06) 78%)}
+  .mhero .in{position:relative;z-index:3;width:100%}
+  .hero-fade{position:absolute;left:0;right:0;bottom:0;height:150px;z-index:4;background:linear-gradient(180deg,rgba(250,249,246,0),var(--bg) 92%);pointer-events:none}
+  .m-ey{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:26px;opacity:0;animation:fu 1.1s var(--d0) forwards}
+  .m-ey .ln{width:38px;height:1px;background:linear-gradient(90deg,var(--accent),transparent)}
+  .mhero h1{font-size:clamp(46px,7.4vw,104px);font-weight:200;line-height:.98;letter-spacing:-3px;margin-bottom:26px;opacity:0;animation:fu 1.3s var(--d1) forwards;color:var(--ink)}
+  .mhero h1 b{font-weight:500;background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .mhero .lead{max-width:490px;font-size:18px;font-weight:300;color:var(--ink-soft);margin-bottom:36px;opacity:0;animation:fu 1.3s var(--d2) forwards}
+  .mhero .hcta{display:flex;gap:16px;flex-wrap:wrap;opacity:0;animation:fu 1.3s var(--d3) forwards}
+  @keyframes fu{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+  .btn-g{background:var(--ink);color:#fff;padding:15px 32px;border-radius:5px;font-weight:600;font-size:14px;transition:.4s;display:inline-flex;align-items:center;gap:9px}
+  .btn-g:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(20,22,28,.22)}
+  .btn-o{border:1px solid rgba(20,22,28,.28);color:var(--ink);padding:15px 32px;border-radius:5px;font-weight:500;font-size:14px;transition:.4s}
+  .btn-o:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .hscroll{position:absolute;bottom:34px;left:44px;z-index:5;font-size:11px;letter-spacing:2px;color:var(--ink-dim);display:flex;align-items:center;gap:12px;opacity:0;animation:fu 1s var(--d4) forwards}
+  .hscroll .l{width:40px;height:1px;background:rgba(20,22,28,.25);position:relative;overflow:hidden}
+  .hscroll .l::after{content:"";position:absolute;inset:0;background:var(--accent);animation:sweep 2.4s infinite}
+  @keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+  /* HERO BADGE — a small floating credential over the photo */
+  .hbadge{position:absolute;z-index:5;top:150px;right:44px;display:flex;align-items:center;gap:11px;padding:11px 20px 11px 12px;border-radius:50px;
+    background:rgba(255,255,255,.55);backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);
+    border:1px solid rgba(255,255,255,.65);box-shadow:0 18px 40px rgba(20,22,28,.14);opacity:0;animation:fu 1.2s 1.5s forwards}
+  .hbadge .hb-ic{width:32px;height:32px;border-radius:50%;background:var(--goldgrad);display:flex;align-items:center;justify-content:center;font-size:13px;flex:none}
+  .hbadge b{display:block;font-size:12.5px;font-weight:700;color:var(--ink);letter-spacing:-.1px}
+  .hbadge span{display:block;font-size:10px;color:var(--ink-dim);letter-spacing:.8px;text-transform:uppercase;margin-top:2px}
+  @media(max-width:1000px){.hbadge{display:none}}
+
+  /* MARQUEE — a bold contrast band, motion between the hero and the story */
+  .marquee{position:relative;overflow:hidden;background:var(--ink);padding:17px 0}
+  .marquee .mq-track{display:flex;width:max-content;animation:mqScroll 28s linear infinite;white-space:nowrap}
+  .marquee:hover .mq-track{animation-play-state:paused}
+  .marquee span{display:inline-flex;align-items:center;font-size:12.5px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;color:#fff;padding:0 22px}
+  .marquee .mq-dot{color:var(--gold-lt);font-size:9px;padding:0}
+  @keyframes mqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.marquee .mq-track{animation:none}}
+
+  /* LIGHT DIAL — a before/after comparison slider, dragged straight on the photo */
+  .lightdial{border-top:1px solid var(--line)}
+  .ld-head{max-width:620px;margin-bottom:52px}
+  .ld-head p{margin-top:14px}
+  .ld-stage{max-width:900px;margin:0 auto}
+  .ld-frame{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:16/8;box-shadow:0 40px 80px rgba(20,22,28,.16);cursor:ew-resize;touch-action:pan-y;user-select:none}
+  .ld-frame:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+  .ld-layer{position:absolute;inset:0}
+  .ld-img{width:100%;height:100%;object-fit:cover;display:block}
+  .ld-after .ld-img{filter:brightness(1.08) saturate(1.16)}
+  .ld-before .ld-img{filter:brightness(.72) saturate(.6) contrast(1.05)}
+  .ld-grade{position:absolute;inset:0;pointer-events:none}
+  .ld-grade-warm{background:linear-gradient(160deg,rgba(227,189,130,.3),rgba(184,134,63,.18) 65%);mix-blend-mode:soft-light}
+  .ld-grade-cool{background:linear-gradient(160deg,rgba(180,200,214,.55),rgba(150,170,190,.28) 60%);mix-blend-mode:multiply}
+  .ld-clip{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--dial)*100%) 0 0);will-change:clip-path}
+  .ld-tag{position:absolute;top:18px;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#fff;
+    background:rgba(20,22,28,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:7px 14px;border-radius:50px;pointer-events:none;z-index:3}
+  .ld-tag-l{left:18px}
+  .ld-tag-r{right:18px}
+  .ld-divider{position:absolute;top:0;bottom:0;left:calc(var(--dial)*100%);width:0;z-index:4;pointer-events:none}
+  .ld-divider::before{content:"";position:absolute;top:0;bottom:0;left:-1px;width:2px;background:#fff;box-shadow:0 0 18px rgba(0,0,0,.28)}
+  .ld-grip{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:1px;color:var(--ink);box-shadow:0 12px 30px rgba(20,22,28,.28);pointer-events:none}
+  .ld-readout{text-align:center;margin-top:26px;font-size:15px;font-weight:500;color:var(--ink)}
+  .ld-readout b{color:var(--accent);font-weight:700}
+  @media(max-width:600px){.ld-frame{aspect-ratio:4/5}}
+
+  /* MID-PAGE BANNER — full-bleed background image, swap the path for your own photo */
+  .midbanner{position:relative;min-height:74vh;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    background-image:url("../assets/white/scene-a.jpg"), linear-gradient(160deg,#cfd6c6,#ecdfc4 55%,#c99a54);
+    background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat}
+  .midbanner .mb-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,23,28,.20),rgba(21,23,28,.42) 45%,rgba(21,23,28,.72));pointer-events:none}
+  .midbanner .mb-in{position:relative;z-index:2;text-align:center;max-width:640px;padding:0 24px}
+  .midbanner .kick{justify-content:center;color:var(--gold-lt)}
+  .midbanner .h2{color:#fff}
+  .midbanner p{color:rgba(255,255,255,.92);text-shadow:0 2px 18px rgba(0,0,0,.5);font-weight:300;margin-top:18px}
+  @media(max-width:700px){.midbanner{min-height:58vh}}
+
+  /* INTRO */
+  section{position:relative}
+  .pad{padding:clamp(90px,13vh,160px) 0}
+  .kick{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .kick .dot{width:5px;height:5px;background:var(--accent);border-radius:50%}
+  .h2{font-size:clamp(32px,4.6vw,64px);font-weight:200;line-height:1.03;letter-spacing:-2px;color:var(--ink)}
+  .h2 b{font-weight:500;background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dim{color:var(--ink-dim);font-weight:300}
+  .reveal{opacity:0;transform:translateY(48px);transition:1s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  .r2{transition-delay:.1s}.r3{transition-delay:.2s}.r4{transition-delay:.3s}
+
+  .intro{text-align:center;max-width:900px;margin:0 auto}
+  .intro .big{font-size:clamp(26px,3.6vw,50px);font-weight:200;line-height:1.28;letter-spacing:-1px;margin-top:28px;color:var(--ink-soft)}
+  .intro .big b{font-weight:400;color:var(--ink)}
+
+  /* PRODUCT COLLECTION — bright gallery cards */
+  .col-h{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;margin-bottom:56px}
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .pcard{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;transition:.4s;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(20,22,28,.04),0 14px 32px -18px rgba(20,22,28,.18)}
+  .pcard:hover{transform:translateY(-6px);border-color:rgba(156,111,47,.3);box-shadow:0 30px 55px rgba(20,22,28,.10)}
+  .pcard .stage{position:relative;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    background:radial-gradient(72% 66% at 50% 58%,#f6f4f0 0%,#fff 74%)}
+  /* the products are true cut-outs now, so the shadow is the product's own
+     silhouette: one tight contact pass, one wide ambient pass */
+  .pcard .stage img{width:100%;height:100%;object-fit:contain;padding:7% 5% 11%;
+    transform:scale(var(--pz,1));
+    filter:drop-shadow(0 2px 3px rgba(20,22,28,.10))
+           drop-shadow(var(--sx,0px) var(--sy,20px) 26px rgba(20,22,28,.17));
+    transition:transform .6s cubic-bezier(.16,1,.3,1),filter .5s ease-out}
+  .pcard:hover .stage img{transform:scale(calc(var(--pz,1) * 1.045))}
+  /* flat, wide pieces need less inset or they read small beside the tall ones */
+  .pcard .stage img.wide{padding:6% 0 9%}
+  .fband .stage img.wide{padding:3% 0 6%}
+  .pcard .badge{position:absolute;top:16px;left:16px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);border:1px solid rgba(156,111,47,.3);padding:5px 12px;border-radius:50px;font-weight:700;z-index:2;background:#fff}
+  .pcard .info{padding:26px;flex:1;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+  .pcard .cat{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);font-weight:600;margin-bottom:8px}
+  .pcard h3{font-size:19px;font-weight:500;margin-bottom:14px;letter-spacing:-.4px;line-height:1.2;color:var(--ink)}
+  .pcard .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--line)}
+  .pcard .price{font-size:16px;font-weight:600;letter-spacing:-.2px;color:var(--ink)}
+  .pcard .price span{font-size:11px;color:var(--ink-dim);display:block;font-weight:500;letter-spacing:1px;text-transform:uppercase;margin-top:3px}
+  .pcard .arrow{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:.35s;color:var(--accent)}
+  .pcard:hover .arrow{background:var(--ink);border-color:var(--ink);color:#fff;transform:rotate(-45deg)}
+
+  /* FEATURE BANDS — floating photography, mask-faded into the page */
+  .fband{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .fband .wrap{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:center;min-height:64vh}
+  .fband .txt{padding:80px 60px 80px 0}
+  .fband.rev .txt{order:2;padding:80px 0 80px 60px}
+  .fband.rev .stage{order:1}
+  .fband .stage{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+  .fband .stage::before{content:"";position:absolute;width:82%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(circle,rgba(184,134,63,.09),rgba(184,134,63,.03) 46%,transparent 68%);top:9%}
+  /* no mask: these are cut-outs, so the edges are meant to be seen */
+  .fband .stage img{position:relative;width:100%;height:100%;object-fit:contain;padding:4% 2% 8%;
+    filter:drop-shadow(0 3px 4px rgba(20,22,28,.09))
+           drop-shadow(var(--sx,0px) var(--sy,26px) 34px rgba(20,22,28,.18));
+    transition:filter .5s ease-out}
+  .fband h2{margin:16px 0 18px}
+  .fband p{color:var(--ink-dim);font-size:16px;font-weight:300;margin-bottom:24px;max-width:440px}
+  .flist{list-style:none;margin-bottom:30px}
+  .flist li{padding:11px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;font-weight:400;font-size:15px;color:var(--ink-soft)}
+  .flist li::before{content:"◆";color:var(--accent);font-size:9px}
+
+  /* STANDARD / STATS */
+  .standard-bg{background:#f6f5f1}
+  .mn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;max-width:820px;margin:0 auto}
+  .mn-ring{text-align:center;position:relative}
+  .mn-ring svg{width:180px;height:180px;transform:rotate(-90deg)}
+  .mn-ring circle{fill:none;stroke-width:5}
+  .mn-ring circle.bg{stroke:rgba(20,22,28,.08)}
+  .mn-ring circle.val{stroke:var(--accent);stroke-linecap:round;stroke-dasharray:327;stroke-dashoffset:327;transition:stroke-dashoffset 1.7s cubic-bezier(.16,1,.3,1)}
+  .reveal.in .mn-ring circle.val{stroke-dashoffset:var(--off)}
+  .mn-c{position:absolute;top:90px;left:0;right:0;transform:translateY(-50%)}
+  .mn-c b{font-size:40px;font-weight:200;letter-spacing:-2px;color:var(--ink)}
+  .mn-c i{font-style:normal;font-size:15px;color:var(--accent);margin-left:3px}
+  .mn-l{display:block;margin-top:16px;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-dim);font-weight:500}
+  .mn-note{text-align:center;color:var(--ink-dim);font-size:13px;font-weight:300;margin-top:44px}
+  @media(max-width:760px){.mn-grid{grid-template-columns:1fr;gap:26px}.mn-ring svg{width:150px;height:150px}.mn-c{top:75px}}
+
+  /* CTA */
+  .cta{position:relative;overflow:hidden;text-align:center;border-top:1px solid var(--line)}
+  .cta .glow{position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:60vw;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(184,134,63,.10),transparent 60%)}
+  .cta .in{position:relative;z-index:2;max-width:680px;margin:0 auto}
+  .cta h2{margin-bottom:18px}
+  .cta p{color:var(--ink-dim);font-size:17px;font-weight:300;margin-bottom:34px}
+
+  /* FOOTER */
+  footer{background:#fbfaf8;padding:84px 0 36px;border-top:1px solid var(--line)}
+  .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:56px}
+  footer img.fl{height:22px;filter:brightness(0);opacity:.86;margin-bottom:22px}
+  .fdesc{color:var(--ink-dim);font-size:14px;font-weight:300;max-width:300px}
+  footer h5{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--ink);margin-bottom:20px;font-weight:700}
+  footer a.fli{display:block;color:var(--ink-dim);font-size:14px;padding:7px 0;font-weight:300;transition:.3s}
+  footer a.fli:hover{color:var(--accent)}
+  .fbot{display:flex;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid var(--line);color:#9a9d92;font-size:13px;flex-wrap:wrap;gap:14px}
+  .fsoc{display:flex;gap:12px}
+  .fsoc a{width:36px;height:36px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:.3s;font-size:13px;color:var(--ink)}
+  .fsoc a:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+  .wa{position:fixed;right:26px;bottom:26px;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;font-size:24px;z-index:900;box-shadow:0 12px 28px rgba(37,211,102,.35)}
+  .flag{position:fixed;top:0;left:0;right:0;z-index:2000;background:#fff;color:var(--ink-dim);text-align:center;padding:6px;font-size:11.5px;font-weight:500;letter-spacing:.5px;border-bottom:1px solid var(--line)}
+  .flag b{color:var(--accent)}
+
+  @media(max-width:1000px){
+    .wrap{padding:0 28px}.nav{padding:18px 28px}.nav.solid{padding:14px 28px}
+    .nlinks{display:none}
+    .pgrid{grid-template-columns:1fr 1fr}
+    .fband .wrap{grid-template-columns:1fr;gap:40px;min-height:auto;padding:70px 0}
+    .fband .txt,.fband.rev .txt{padding:0;order:initial}
+    .fband.rev .stage{order:initial}
+    .fgrid{grid-template-columns:1fr 1fr}
+    .mhero .photo img{object-position:center 30%}
+  }
+  @media(max-width:600px){
+    .pgrid{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}
+    .mhero h1{font-size:44px}
+  }
+
+  /* ---------------------------------------------------------------------
+     LIGHT-GROUND NAV OVERRIDE
+     The shared navbar (mobile-nav.js) ships dark-theme colours — pale grey
+     links meant for a near-black page. On this cream ground they vanish, so
+     the bar is re-coloured here. Scoped to this page only.
+     --------------------------------------------------------------------- */
+  .nav{background:rgba(255,255,255,.88)!important;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%)}
+  .nav.solid{background:rgba(255,255,255,.96)!important;box-shadow:0 1px 0 var(--line)}
+  #nav .nlinks>a,#nav .nlinks .snav-lnk{color:#3a3c40!important}
+  #nav .nlinks>a:hover,#nav .nlinks .snav-lnk:hover,
+  #nav .nlinks>a.active,#nav .nlinks .snav-lnk.active{color:#15171c!important}
+  #nav .nr a,#nav .nr .ic,#nav .nr button{color:#3a3c40!important}
+  .navtoggle span{background:#15171c!important}
+
+  /* On phones the hero copy sits over the full photo with nothing behind it,
+     so a soft cream scrim keeps the paragraph readable. */
+  @media(max-width:820px){
+    .mhero .photo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+      background:linear-gradient(180deg,rgba(250,249,246,.94) 0%,rgba(250,249,246,.80) 34%,rgba(250,249,246,.44) 62%,rgba(250,249,246,.22) 100%)}
+    .mhero .lead{color:#3c3d39}
+  }
+
+  /* ======================================================================
+     OPAL — play of colour
+     An opal is plain white until light moves through it. Everything below
+     is that idea: a live caustic light field in the hero, and an iridescent
+     ramp that stands in for the stone's fire wherever the page needs accent.
+     ====================================================================== */
+  :root{
+    --op-1:#7fd4d8;  /* sea      */
+    --op-2:#b9a8e8;  /* violet   */
+    --op-3:#f2a6bf;  /* rose     */
+    --op-4:#f6cf8c;  /* amber    */
+    --op-5:#9fe0b6;  /* mint     */
+    --opalgrad:linear-gradient(105deg,#2e8f96 0%,#6a63b4 22%,#b8577c 44%,#b6852f 66%,#3f8f6b 86%,#2e8f96 100%);
+  }
+  /* Accent words: the opal's fire, drifting. Deep enough to stay legible on cream. */
+  .mhero h1 b,.h2 b,h1 b{
+    font-weight:500;background:var(--opalgrad);background-size:280% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:opalDrift 14s ease-in-out infinite;
+  }
+  @keyframes opalDrift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+  /* Hero light field ---------------------------------------------------- */
+  .mhero .photo{background:#eae6de}
+  #opalCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;
+    transition:opacity 1.4s ease-out;z-index:1}
+  #opalCanvas.live{opacity:1}
+  .mhero.gl .photo img{opacity:0}
+  .mhero .photo img{transition:opacity 1.2s ease-out}
+  .mhero .in{z-index:3}
+
+  /* A whisper of moving light on the eyebrow rule */
+  .m-ey .ln{background:var(--opalgrad);background-size:280% 100%;animation:opalDrift 14s ease-in-out infinite}
+
+  /* Play-of-colour band -------------------------------------------------- */
+  .opalplay{position:relative;padding:118px 0 126px;background:#f6f3ed;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+  .opalplay .wrap{position:relative;z-index:2}
+  .opalplay .ohead{text-align:center;max-width:620px;margin:0 auto 52px}
+  .opalplay .ohead p{color:var(--ink-soft);font-weight:300;font-size:16.5px;margin-top:16px}
+  .slab{position:relative;max-width:1000px;margin:0 auto;aspect-ratio:21/9;border-radius:22px;overflow:hidden;
+    background:linear-gradient(180deg,#fdfdfc,#f0ece4);cursor:crosshair;
+    box-shadow:0 2px 3px rgba(20,22,28,.05),0 40px 80px -40px rgba(20,22,28,.35);
+    border:1px solid rgba(255,255,255,.9);isolation:isolate}
+  /* the stone's fire — a wide conic sweep that follows the pointer */
+  .slab .fire{position:absolute;inset:-40%;
+    background:conic-gradient(from calc(var(--mx,50) * 2.2deg) at calc(var(--mx,50) * 1%) calc(var(--my,50) * 1%),
+      var(--op-1),var(--op-2),var(--op-3),var(--op-4),var(--op-5),var(--op-1));
+    filter:blur(42px) saturate(165%);
+    opacity:.0;transition:opacity 1.1s ease-out;mix-blend-mode:multiply}
+  .slab.awake .fire{opacity:.64}
+  /* milky opal body sitting over the fire */
+  .slab .milk{position:absolute;inset:0;background:
+      radial-gradient(120% 90% at calc(var(--mx,50) * 1%) calc(var(--my,50) * 1%),rgba(255,255,255,0) 0%,rgba(255,255,255,.40) 46%,rgba(255,255,255,.86) 80%);
+    transition:background .25s ease-out}
+  .slab .sheen{position:absolute;inset:0;background:
+      linear-gradient(115deg,transparent 38%,rgba(255,255,255,.75) 50%,transparent 62%);
+    transform:translateX(calc((var(--mx,50) - 50) * 0.9%));transition:transform .5s cubic-bezier(.16,1,.3,1)}
+  .slab .ocopy{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:0 28px;pointer-events:none}
+  .slab .ocopy b{display:block;font-size:clamp(24px,3.6vw,46px);font-weight:200;letter-spacing:-1.6px;color:var(--ink);line-height:1.06}
+  .slab .ocopy span{margin-top:14px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ink-dim);font-weight:600}
+  .slab .ocopy .hint{margin-top:20px;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;
+    opacity:1;transition:opacity .5s}
+  .slab.awake .ocopy .hint{opacity:0}
+  .oswatch{display:flex;gap:10px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+  .oswatch i{width:44px;height:6px;border-radius:50px;display:block}
+  @media(max-width:820px){
+    .opalplay{padding:78px 0 84px}
+    .slab{aspect-ratio:4/5;border-radius:18px}
+    .slab.awake .fire{opacity:.6}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .mhero h1 b,.h2 b,h1 b,.m-ey .ln{animation:none}
+    .slab .fire,.slab .sheen{transition:none}
+  }
+
+  /* ======================================================================
+     PORCELAIN
+     The white here is a surface, not an empty page: a ceramic tooth, a
+     little warmth pooled in one corner, and light falling from above.
+     ====================================================================== */
+  body{
+    background-color:var(--bg);
+    background-image:
+      /* the woven tooth + grain, baked once into a 192px tile (was two repeating
+         gradients plus a live SVG turbulence filter — those were re-rasterised
+         on every scroll frame) */
+      url("../assets/porcelain.png"),
+      radial-gradient(130% 68% at 50% -14%, rgba(255,255,255,.95), rgba(255,255,255,0) 58%),
+      radial-gradient(70% 46% at 10% 6%,  rgba(226,214,196,.40), rgba(226,214,196,0) 72%),
+      radial-gradient(60% 40% at 96% 30%, rgba(202,219,226,.28), rgba(202,219,226,0) 70%);
+    background-repeat:repeat,no-repeat,no-repeat,no-repeat;
+    /* everything scrolls with the page: a single `fixed` layer forces the whole
+       viewport to repaint on every frame */
+    background-attachment:scroll,scroll,scroll,scroll;
+    background-size:192px 192px,auto,auto,auto;
+  }
+  /* sections that paint their own ground keep the tooth */
+  .opalplay,.standard-bg,.cta,.fband{position:relative}
+  .opalplay::before,.standard-bg::before,.cta::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:url("../assets/porcelain.png") repeat;background-size:192px 192px;opacity:.9;z-index:0}
+  .opalplay>*,.standard-bg>*,.cta>*{position:relative;z-index:1}
+
+  /* ======================================================================
+     THE HOUR
+     One kitchen, one finish — moved through the day. The photograph is
+     graded, a sun is placed, and the caustic light field takes the colour
+     of whatever hour you have stopped on.
+     ====================================================================== */
+  .hour{position:relative}
+  .hr-head{max-width:640px;margin:0 auto 56px;text-align:center}
+  .hr-head p{margin-top:18px;font-size:16.5px}
+  .hr-stage{max-width:1120px;margin:0 auto}
+  .hr-frame{position:relative;aspect-ratio:21/9;border-radius:20px;overflow:hidden;
+    background:#efece5;isolation:isolate;
+    box-shadow:0 2px 4px rgba(20,22,28,.06),0 46px 90px -50px rgba(20,22,28,.45);
+    filter:brightness(var(--hb,1)) contrast(var(--hc,1)) saturate(var(--hs,1)) hue-rotate(var(--hh,0deg));
+    transition:filter .5s linear}
+  .hr-frame>img,.hr-frame>canvas{position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center 54%;display:block}
+  .hr-frame>canvas{z-index:1;opacity:0;transition:opacity 1.2s ease-out}
+  .hr-frame>canvas.live{opacity:1}
+  .hr-frame.gl>img{opacity:0}
+  /* the colour the hour casts over everything */
+  .hr-grade{position:absolute;inset:0;z-index:2;mix-blend-mode:soft-light;
+    background:linear-gradient(var(--hang,160deg),var(--hc1,#ffffff),var(--hc2,#ffffff));
+    opacity:var(--hgo,.5);transition:background .5s linear,opacity .5s linear}
+  /* and the sun that is casting it */
+  .hr-cast{position:absolute;inset:0;z-index:2;mix-blend-mode:color;pointer-events:none;
+    background:var(--hcast,#ffffff);opacity:var(--hca,.1);transition:background .5s linear,opacity .5s linear}
+  .hr-sun{position:absolute;inset:0;z-index:3;mix-blend-mode:screen;pointer-events:none;
+    background:radial-gradient(38% 60% at var(--hsx,50%) var(--hsy,14%),
+      rgba(255,240,214,var(--hsa,.2)),rgba(255,240,214,0) 62%);
+    transition:background .5s linear}
+  .hr-frame::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:4;
+    background:linear-gradient(0deg,rgba(12,13,18,.58),rgba(12,13,18,0));pointer-events:none}
+  .hr-read{position:absolute;left:26px;bottom:24px;z-index:5;color:#fff;
+    text-shadow:0 2px 18px rgba(0,0,0,.6);pointer-events:none}
+  .hr-read b{display:block;font-size:clamp(20px,2.4vw,30px);font-weight:300;letter-spacing:-.02em;line-height:1}
+  .hr-read span{display:block;margin-top:7px;font-size:11px;letter-spacing:3px;font-weight:700;opacity:.85}
+
+  /* the track: a day, laid out flat */
+  .hr-track{position:relative;margin:34px auto 0;max-width:920px;height:54px;cursor:ew-resize;
+    touch-action:pan-y;outline:none}
+  .hr-rail{position:absolute;left:0;right:0;top:15px;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,#9fb2c4,#e7c38f 22%,#f6f1e6 52%,#e0a765 80%,#8e8bb4)}
+  .hr-rail::after{content:"";position:absolute;inset:0;background:rgba(250,249,246,.55)}
+  .hr-fill{position:absolute;left:0;top:15px;height:2px;border-radius:2px;width:var(--hp,50%);
+    background:linear-gradient(90deg,#9fb2c4,#e7c38f 22%,#f6f1e6 52%,#e0a765 80%,#8e8bb4);
+    background-size:920px 2px}
+  .hr-knob{position:absolute;top:16px;left:var(--hp,50%);width:26px;height:26px;margin:-13px 0 0 -13px;
+    border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(20,22,28,.14),0 8px 20px rgba(20,22,28,.22);
+    display:grid;place-items:center;transition:transform .3s var(--ease,ease)}
+  .hr-knob::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--hdot,#e0a765);
+    box-shadow:0 0 12px var(--hdot,#e0a765);transition:background .5s linear}
+  .hr-track:hover .hr-knob,.hr-track.drag .hr-knob{transform:scale(1.14)}
+  .hr-ticks{position:absolute;left:0;right:0;top:30px;display:flex;justify-content:space-between;
+    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;color:var(--ink-dim)}
+  .hr-ticks span{position:relative;padding-top:12px;flex:0 0 auto}
+  .hr-ticks span::before{content:"";position:absolute;top:0;left:50%;width:1px;height:6px;
+    background:currentColor;opacity:.4}
+  .hr-ticks span:first-child{transform:translateX(-4px)}
+  .hr-ticks span:last-child{transform:translateX(4px)}
+  .hr-hint{text-align:center;margin-top:26px;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;
+    font-weight:700;color:var(--accent);transition:opacity .5s}
+  .hr-stage.touched .hr-hint{opacity:0}
+  @media(max-width:820px){
+    .hr-frame{aspect-ratio:4/5}
+    .hr-read{left:18px;bottom:18px}
+    .hr-ticks span:nth-child(2),.hr-ticks span:nth-child(5){display:none}
+  }
+</style>
+  <link rel="canonical" href="https://fotilepk.com/opal-series/">
+<script>window.__PBASE="../";</script>
+</head>
+<body>
+
+<!-- OPENING: still dark water. One drop. The light spreads out from where it fell. -->
+<div class="preloader" id="preloader" role="presentation" aria-hidden="true">
+  <canvas class="pl-water" id="plWater" aria-hidden="true"></canvas>
+  <span class="pl-drop" id="plDrop"></span>
+  <div class="pl-word" id="plWord"><b>OPAL</b><i>Fotile — Opal Series</i></div>
+  <div class="pl-skip">Tap to skip</div>
+</div>
+<noscript><style>.preloader{display:none!important}</style></noscript>
+
+<div class="daycycle" aria-hidden="true"></div>
+<div class="lightfield" aria-hidden="true"></div>
+
+<div class="flag">CONCEPT <b>·</b> Opal Series — every colour, hiding in white <b>·</b> real Fotile products &amp; imagery <b>·</b> products are clickable (detail pages coming)</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="/home-regular/" class="brand"><img src="../assets/logo.png" alt="FOTILE"></a>
+  <div class="nlinks">
+    <a href="/shop/">Products</a>
+    <a href="/moon-series/">Moon Series</a>
+    <a href="/opal-series/" class="active">Opal Series</a>
+    <a href="/about-us/">About</a>
+    <a href="/blog/">Journal</a>
+    <a href="/our-dealers/">Dealers</a>
+    <a href="/contact-us/">Contact</a>
+  </div>
+  <div class="nr">
+    <span class="ic">⌕</span><a href="/cart/" class="ic" style="position:relative;text-decoration:none">🛒<b data-cart-count style="position:absolute;top:-8px;right:-9px;background:var(--red,#e01e37);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a>
+    <a href="/contact-us/" class="npill">Request a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="mhero">
+  <div class="photo">
+    <img id="opalSrc" src="../assets/white/scene-b.jpg" alt="Fotile Opal Series appliances in a bright, sunlit kitchen">
+    <canvas id="opalCanvas" aria-hidden="true"></canvas>
+  </div>
+  <div class="in"><div class="wrap">
+    <div class="m-ey"><span class="ln"></span>Introducing The Opal Series</div>
+    <h1>Every colour,<br>hiding in <b>white.</b></h1>
+    <p class="lead">An opal looks like plain white stone until light moves through it. The Opal Series is built on that idea — porcelain surfaces that gather the whole room's light and quietly give it back. The Moon Series owns the night. This one owns the morning.</p>
+    <div class="hcta">
+      <a href="#collection" class="btn-g">Explore The Collection →</a>
+      <a href="#play" class="btn-o">See The Colour</a>
+    </div>
+  </div></div>
+  <div class="hero-fade"></div>
+  <div class="hscroll">SCROLL <span class="l"></span></div>
+  <div class="hbadge"><span class="hb-ic">◍</span><span><b>Opal Series</b><span>2026 Collection</span></span></div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true"><div class="mq-track">
+  <span>Porcelain White<span class="mq-dot">✦</span></span>
+  <span>96% Smoke Capture<span class="mq-dot">✦</span></span>
+  <span>48dB Whisper Quiet<span class="mq-dot">✦</span></span>
+  <span>1650 m³/h Peak Airflow<span class="mq-dot">✦</span></span>
+  <span>Battery-Pulse Ignition<span class="mq-dot">✦</span></span>
+  <span>Steam + Bake in One<span class="mq-dot">✦</span></span>
+  <span>Porcelain White<span class="mq-dot">✦</span></span>
+  <span>96% Smoke Capture<span class="mq-dot">✦</span></span>
+  <span>48dB Whisper Quiet<span class="mq-dot">✦</span></span>
+  <span>1650 m³/h Peak Airflow<span class="mq-dot">✦</span></span>
+  <span>Battery-Pulse Ignition<span class="mq-dot">✦</span></span>
+  <span>Steam + Bake in One<span class="mq-dot">✦</span></span>
+</div></div>
+
+<!-- INTRO -->
+<section class="pad" id="light"><div class="wrap intro reveal">
+  <div class="kick"><span class="dot"></span>First Light</div>
+  <p class="big">Fotile's <b>Opal Series</b> takes the same relentless engineering behind every Fotile appliance and sets it in the clearest light in the kitchen — porcelain white, unhurried, built for the way morning actually feels.</p>
+</div></section>
+
+<!-- LIGHT DIAL — a before/after comparison slider, dragged straight on the photo -->
+<!-- PLAY OF COLOUR -->
+<section class="opalplay" id="play">
+  <div class="wrap">
+    <div class="ohead reveal">
+      <div class="kick" style="justify-content:center"><span class="dot"></span>Play Of Colour</div>
+      <h2 class="h2" style="margin-top:18px">White, until the <b>light moves.</b></h2>
+      <p>Move across the stone. Opal has no pigment of its own — the colour is light, bent by the structure underneath. Fotile's porcelain finish works the same way in a kitchen.</p>
+    </div>
+    <div class="slab reveal" id="slab">
+      <div class="fire"></div>
+      <div class="milk"></div>
+      <div class="sheen"></div>
+      <div class="ocopy">
+        <b>One finish.<br>Every light in the room.</b>
+        <span>Porcelain White · Opal Series</span>
+        <span class="hint">Move across the stone</span>
+      </div>
+    </div>
+    <div class="oswatch reveal">
+      <i style="background:var(--op-1)"></i><i style="background:var(--op-2)"></i>
+      <i style="background:var(--op-3)"></i><i style="background:var(--op-4)"></i>
+      <i style="background:var(--op-5)"></i>
+    </div>
+  </div>
+</section>
+
+<!-- THE HOUR -->
+<section class="pad hour" id="lightdial">
+  <div class="wrap">
+    <div class="hr-head reveal">
+      <div class="kick" style="justify-content:center"><span class="dot"></span>The Hour</div>
+      <h2 class="h2" style="margin-top:18px">Same white.<br>Every <b>light of the day.</b></h2>
+      <p class="dim" style="font-size:16.5px">Porcelain has no colour of its own — it takes the hour it is standing in. This is one kitchen, one finish, moved from first light to dusk.</p>
+    </div>
+
+    <div class="hr-stage reveal" id="hrStage">
+      <div class="hr-frame" id="hrFrame">
+        <img id="hrImg" src="../assets/Charcoal_kitchen_with_white_appl…_2K_20260917105139.jpeg" alt="A Fotile Opal Series kitchen, shown at different hours of the day">
+        <canvas id="hrCanvas" aria-hidden="true"></canvas>
+        <div class="hr-grade"></div>
+        <div class="hr-cast"></div>
+        <div class="hr-sun"></div>
+        <div class="hr-read"><b id="hrName">Midday</b><span id="hrTime">12:30</span></div>
+      </div>
+
+      <div class="hr-track" id="hrTrack" role="slider" tabindex="0"
+           aria-label="Hour of the day" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60">
+        <div class="hr-rail"></div>
+        <div class="hr-fill"></div>
+        <div class="hr-knob"></div>
+        <div class="hr-ticks">
+          <span>05:00</span><span>08:00</span><span>11:00</span>
+          <span>14:00</span><span>17:00</span><span>19:30</span>
+        </div>
+      </div>
+      <div class="hr-hint">Drag through the day</div>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="pad" id="collection" style="border-top:1px solid var(--line)"><div class="wrap">
+  <div class="col-h reveal">
+    <div>
+      <div class="kick"><span class="dot"></span>The Collection</div>
+      <h2 class="h2" style="margin-top:18px">Three appliances,<br>first <b>thing.</b></h2>
+    </div>
+    <p class="dim" style="max-width:360px;font-size:15px">Each Opal Series piece is built for kitchens that let the morning in. Click any piece to explore.</p>
+  </div>
+
+  <div class="pgrid">
+    <a class="pcard reveal" href="#">
+      <div class="stage"><span class="badge">Precision Flame</span><img class="wide" style="--pz:1.06" src="../assets/white/p1.webp" alt="Fotile Built-in Gas Hob GHG88330-W"></div>
+      <div class="info"><span class="cat">Gas Hob</span><h3>Fotile Built-in Gas Hob GHG88330-W</h3>
+        <div class="foot"><div class="price">Request a Quote<span>Opal Series</span></div><div class="arrow">→</div></div></div>
+    </a>
+    <a class="pcard reveal r2" href="#">
+      <div class="stage"><span class="badge">Steam + Bake</span><img src="../assets/white/p3.webp" alt="Fotile Built-in Combi Steam Oven"></div>
+      <div class="info"><span class="cat">Combi Oven</span><h3>Fotile Built-in Combi Steam Oven</h3>
+        <div class="foot"><div class="price">Request a Quote<span>Opal Series</span></div><div class="arrow">→</div></div></div>
+    </a>
+    <a class="pcard reveal r3" href="#">
+      <div class="stage"><span class="badge">Whisper Suction</span><img src="../assets/white/p6.webp" alt="Fotile Slant Range Hood"></div>
+      <div class="info"><span class="cat">Range Hood</span><h3>Fotile Slant Range Hood</h3>
+        <div class="foot"><div class="price">Request a Quote<span>Opal Series</span></div><div class="arrow">→</div></div></div>
+    </a>
+  </div>
+</div></section>
+
+<!-- FEATURE BAND — HOB -->
+<section class="fband"><div class="wrap">
+  <div class="txt reveal">
+    <div class="kick"><span class="dot"></span>The Flame</div>
+    <h2 class="h2">Flame, <b>refined.</b></h2>
+    <p>A burner set tuned for everything from a slow simmer to a full wok sear, built into a single sheet of tempered white glass that wipes clean in one pass.</p>
+    <ul class="flist">
+      <li>5.0kW rated power burner</li>
+      <li>1.7kW precision simmer burner</li>
+      <li>Battery-pulse ignition — no mains wiring needed</li>
+      <li>Seamless tempered white glass top</li>
+    </ul>
+    <a href="#collection" class="btn-g">See The Hob →</a>
+  </div>
+  <div class="stage reveal r2"><img class="wide" src="../assets/white/p2.webp" alt="Fotile Built-in Gas Hob GHG88330-W, angled view"></div>
+</div></section>
+
+<!-- FEATURE BAND — OVEN -->
+<section class="fband rev"><div class="wrap">
+  <div class="txt reveal">
+    <div class="kick"><span class="dot"></span>The Chamber</div>
+    <h2 class="h2">Steam meets <b>bake.</b></h2>
+    <p>Switch between steam and dry heat without switching appliances — delicate dumplings one night, a full roast the next, all behind one softly lit glass door.</p>
+    <ul class="flist">
+      <li>Dedicated Steam mode for delicate cooking</li>
+      <li>Bake &amp; roast presets, plus Auxiliary functions</li>
+      <li>Multi-level racking, evenly lit interior</li>
+      <li>Simple four-icon touch control</li>
+    </ul>
+    <a href="#collection" class="btn-g">See The Oven →</a>
+  </div>
+  <div class="stage reveal r2"><img src="../assets/white/p4.webp" alt="Fotile Built-in Combi Steam Oven, door open"></div>
+</div></section>
+
+<!-- FEATURE BAND — HOOD -->
+<section class="fband"><div class="wrap">
+  <div class="txt reveal">
+    <div class="kick"><span class="dot"></span>The Draw</div>
+    <h2 class="h2">Whisper, not <b>roar.</b></h2>
+    <p>A slim wall-mounted silhouette finished in pristine white, built to clear a heavy-cooking kitchen without ever raising its voice.</p>
+    <ul class="flist">
+      <li>Auto-sensing smoke capture</li>
+      <li>Slim wall-mount silhouette</li>
+      <li>Digital touch display</li>
+      <li>Finished to disappear into white cabinetry</li>
+    </ul>
+    <a href="#collection" class="btn-g">See The Hood →</a>
+  </div>
+  <div class="stage reveal r2"><img src="../assets/white/p5.webp" alt="Fotile Slant Range Hood, tilted open"></div>
+</div></section>
+
+<!-- MID-PAGE BANNER — drop your own image into the .midbanner background-image path in the CSS above -->
+<section class="midbanner reveal" id="story">
+  <div class="mb-overlay"></div>
+  <div class="wrap mb-in">
+    <div class="kick"><span class="dot" style="background:var(--gold-lt)"></span>The Feeling</div>
+    <h2 class="h2" style="margin-top:16px">Kitchens should feel like<br><b>morning</b>, not machinery.</h2>
+    <p>Every Opal Series piece is finished to disappear into the cabinetry — so the room reads as one calm surface, not a wall of appliances.</p>
+  </div>
+</section>
+
+<!-- THE FOTILE STANDARD -->
+<section class="pad standard-bg"><div class="wrap">
+  <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto 54px">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>The Fotile Standard</div>
+    <h2 class="h2" style="margin-top:16px">Engineering that holds<br>across the <b>range.</b></h2>
+  </div>
+  <div class="mn-grid reveal">
+    <div class="mn-ring">
+      <svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="val" cx="60" cy="60" r="52" style="--off:13"/></svg>
+      <div class="mn-c"><b>96</b><i>%</i></div><span class="mn-l">Smoke Capture</span></div>
+    <div class="mn-ring">
+      <svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="val" cx="60" cy="60" r="52" style="--off:65"/></svg>
+      <div class="mn-c"><b>48</b><i>dB</i></div><span class="mn-l">Whisper-quiet</span></div>
+    <div class="mn-ring">
+      <svg viewBox="0 0 120 120"><circle class="bg" cx="60" cy="60" r="52"/><circle class="val" cx="60" cy="60" r="52" style="--off:33"/></svg>
+      <div class="mn-c"><b>1650</b><i>m³/h</i></div><span class="mn-l">Peak airflow</span></div>
+  </div>
+  <p class="mn-note">The benchmark Fotile builds every range hood around.</p>
+</div></section>
+
+<!-- CTA -->
+<section class="pad cta">
+  <div class="glow"></div>
+  <div class="wrap"><div class="in reveal">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>Own The Morning</div>
+    <h2 class="h2">Bring the <b>Opal Series</b> home.</h2>
+    <p>Request a private consultation and our team will help you specify the Opal Series pieces that fit your kitchen.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="/contact-us/" class="btn-g">Request a Quote →</a>
+      <a href="/our-dealers/" class="btn-o">Find a Showroom</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div>
+      <img class="fl" src="../assets/logo.png" alt="FOTILE">
+      <p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
+      <div class="fsoc" style="margin-top:24px"><a href="#">f</a><a href="#">◎</a><a href="#">in</a><a href="#">▶</a></div>
+    </div>
+    <div><h5>Collection</h5><a class="fli" href="/product-category/kitchen-hood/">Range Hoods</a><a class="fli" href="/product-category/oven/">Ovens</a><a class="fli" href="/product-category/hobs/">Hobs</a><a class="fli" href="/moon-series/">Moon Series</a><a class="fli" href="/opal-series/">Opal Series</a></div>
+    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="#">Blog</a><a class="fli" href="/contact-us/">Contact</a></div>
+    <div><h5>Support</h5><a class="fli" href="#">Track Order</a><a class="fli" href="#">Schedule Service</a><a class="fli" href="#">Warranty</a><a class="fli" href="#">042-111-131-517</a></div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 Fotile Pakistan — All Rights Reserved.</span>
+    <span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/refund_returns/" style="transition:.3s">Refunds</a><a href="/shipping-policy/" style="transition:.3s">Shipping</a><a href="/privacy-policy/" style="transition:.3s">Privacy Policy</a><a href="/terms-and-conditions/" style="transition:.3s">Terms &amp; Conditions</a></span>
+  </div>
+</div></footer>
+
+<a class="wa" href="#">💬</a>
+
+<script>
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ===== OPENING: one drop on still dark water =====================
+     The drop falls (CSS), lands at 660ms, and from that instant a real
+     wave is integrated on the GPU: a decaying sine packet travelling
+     outward from the impact, with two smaller drops behind it. The
+     leading front carries the light — everything it has passed is
+     porcelain, everything ahead of it is still night. No WebGL? the
+     CSS circle underneath does the same job more simply.            */
+  (function(){
+    const pl=document.getElementById('preloader');
+    if(!pl) return;
+    const root=document.documentElement;
+    const IMPACT=560, LIFE=2420;
+    let revealed=false, raf=0, gl=null;
+
+    function reveal(){
+      if(revealed) return; revealed=true;
+      if(raf) cancelAnimationFrame(raf);
+      pl.classList.add('done');
+      root.classList.remove('pllock');
+      setTimeout(function(){
+        if(gl){ const e=gl.getExtension('WEBGL_lose_context'); if(e) e.loseContext(); }
+        pl.remove();
+      },900);
+    }
+    pl.addEventListener('click',reveal);
+    addEventListener('keydown',function(e){ if(e.key==='Escape') reveal(); });
+
+    if(reduceMotion){ pl.remove(); return; }
+    root.classList.add('pllock');
+    setTimeout(function(){ root.classList.remove('pllock'); },6000);  // failsafe
+
+    /* ---- the water ---- */
+    const cv=document.getElementById('plWater');
+    try{
+      gl = cv.getContext('webgl',{alpha:false,antialias:false,depth:false,
+                                  powerPreference:'low-power'})
+        || cv.getContext('experimental-webgl',{alpha:false});
+    }catch(e){ gl=null; }
+
+    if(gl){
+      const VS='attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+      const FS=[
+      'precision mediump float;',
+      'uniform vec2 u_res; uniform float u_t;',
+      /* one decaying wave packet leaving a drop */
+      'float wv(vec2 p, vec2 o, float t0, float amp){',
+      '  float tt = u_t - t0; if(tt <= 0.0) return 0.0;',
+      '  float r = length(p - o);',
+      '  float f = r - 0.72*tt;',                          /* distance ahead of the front */
+      '  float env = exp(-16.0*f*f) * exp(-2.0*r) * exp(-0.62*tt);',
+      '  return amp * sin(f*30.0) * env;',
+      '}',
+      'float H(vec2 p){',
+      '  return wv(p, vec2(0.0), 0.0, 1.0)',
+      '       + wv(p, vec2( 0.15,-0.11), 0.34, 0.36)',
+      '       + wv(p, vec2(-0.19, 0.13), 0.60, 0.28)',
+      '       + wv(p, vec2( 0.25, 0.20), 1.02, 0.24);',
+      '}',
+      'void main(){',
+      '  float m = min(u_res.x, u_res.y);',
+      '  vec2 p = (gl_FragCoord.xy - 0.5*u_res) / m;',
+      '  float h = H(p);',
+      '  float e = 3.0/m;',
+      '  vec3 n = normalize(vec3(H(p+vec2(e,0.0))-H(p-vec2(e,0.0)),',
+      '                          H(p+vec2(0.0,e))-H(p-vec2(0.0,e)), e*7.0));',
+      /* the light travels out with the leading front, then tops itself up */
+      '  float r = length(p);',
+      '  float lit = smoothstep(0.0, 0.34, 0.72*u_t*1.06 - r);',
+      '  lit = max(lit, smoothstep(1.75, 2.45, u_t));',
+      '  vec3 night = mix(vec3(0.062,0.072,0.086), vec3(0.100,0.115,0.134),',
+      '                   clamp(gl_FragCoord.y/u_res.y,0.0,1.0));',
+      '  vec3 day   = mix(vec3(0.980,0.976,0.965), vec3(0.912,0.929,0.940),',
+      '                   clamp(1.0-gl_FragCoord.y/u_res.y,0.0,1.0));',
+      '  vec3 col = mix(night, day, lit);',
+      /* glints riding the ripples — bright on dark water, barely there on porcelain */
+      '  vec3 L = normalize(vec3(-0.42, 0.58, 0.70));',
+      '  float sp = pow(max(dot(n,L),0.0), 34.0);',
+      '  col += sp * mix(0.42, 0.14, lit) * vec3(0.92,0.96,1.0);',
+      /* the opal: a narrow band of thin-film colour on the slopes only */
+      '  float slope = clamp(abs(h)*8.0, 0.0, 1.0);',
+      '  vec3 iri = 0.5 + 0.5*cos(6.28318*(vec3(0.0,0.28,0.56) + h*2.4 + 0.10));',
+      '  col = mix(col, col*0.72 + iri*0.40, slope * mix(0.14, 0.26, lit));',
+      /* the strike itself */
+      '  col += vec3(0.88,0.94,1.0) * exp(-70.0*r*r) * exp(-5.0*u_t) * 0.5;',
+      /* vignette so the frame never reads flat */
+      '  col *= 1.0 - 0.16*smoothstep(0.35, 1.15, r);',
+      '  gl_FragColor = vec4(col, 1.0);',
+      '}'].join('\n');
+
+      function sh(type,src){ const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+        return gl.getShaderParameter(s,gl.COMPILE_STATUS) ? s : null; }
+      const vs=sh(gl.VERTEX_SHADER,VS), fs=sh(gl.FRAGMENT_SHADER,FS);
+      if(!vs||!fs){ gl=null; }
+      else{
+        const pr=gl.createProgram(); gl.attachShader(pr,vs); gl.attachShader(pr,fs); gl.linkProgram(pr);
+        if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){ gl=null; }
+        else{
+          gl.useProgram(pr);
+          const buf=gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+          gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+          const la=gl.getAttribLocation(pr,'a');
+          gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la,2,gl.FLOAT,false,0,0);
+          const uRes=gl.getUniformLocation(pr,'u_res'), uT=gl.getUniformLocation(pr,'u_t');
+
+          const DPR=Math.min(devicePixelRatio||1, 1.3);
+          function size(){
+            const w=Math.round(innerWidth*DPR), h=Math.round(innerHeight*DPR);
+            if(cv.width!==w||cv.height!==h){ cv.width=w; cv.height=h; gl.viewport(0,0,w,h); }
+            gl.uniform2f(uRes,cv.width,cv.height);
+          }
+          size(); addEventListener('resize',size,{passive:true});
+
+          if(gl.getError()===gl.NO_ERROR){
+            pl.classList.add('gl');
+            const t0=performance.now()+IMPACT;
+            (function frame(now){
+              if(revealed) return;
+              gl.uniform1f(uT, Math.max(0,(now-t0)/1000));
+              gl.drawArrays(gl.TRIANGLES,0,3);
+              raf=requestAnimationFrame(frame);
+            })(performance.now());
+          }
+        }
+      }
+    }
+
+    /* hand the page back the moment the water has cleared */
+    setTimeout(function(){ pl.style.pointerEvents='none'; root.classList.remove('pllock'); }, LIFE-380);
+    setTimeout(reveal,LIFE);
+  })();
+
+  /* ===== NAV solid state + scroll progress + the day-cycle wash ===== */
+  const nav=document.getElementById('nav');
+  const rootEl=document.documentElement;
+  function onScroll(){
+    nav.classList.toggle('solid',scrollY>50);
+    const max=rootEl.scrollHeight-rootEl.clientHeight;
+    const pct=max>0?Math.min(1,scrollY/max):0;
+    nav.style.setProperty('--prog',(pct*100)+'%');
+    rootEl.style.setProperty('--day',pct.toFixed(3));
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ===== FIRST LIGHT: a light that follows the cursor, and shadows that fall away from it ===== */
+  (function(){
+    const fine = matchMedia('(pointer:fine)').matches && !reduceMotion;
+    if(!fine) return; // touch / reduced-motion: the CSS defaults already look intentional
+
+    const shadowEls=Array.from(document.querySelectorAll('.pcard .stage img, .fband .stage img'));
+    let mx=innerWidth*0.5, my=innerHeight*0.18, tx=mx, ty=my, raf=null;
+
+    function tick(){
+      mx+=(tx-mx)*0.12; my+=(ty-my)*0.12;
+      rootEl.style.setProperty('--mx', mx.toFixed(1)+'px');
+      rootEl.style.setProperty('--my', my.toFixed(1)+'px');
+      rootEl.style.setProperty('--lfx', mx.toFixed(1)+'px');
+      rootEl.style.setProperty('--lfy', my.toFixed(1)+'px');
+
+      shadowEls.forEach(el=>{
+        const r=el.getBoundingClientRect();
+        if(r.bottom<-100 || r.top>innerHeight+100) return;
+        const cx=r.left+r.width/2, cy=r.top+r.height/2;
+        const dx=cx-mx, dy=cy-my;
+        const dist=Math.hypot(dx,dy)||1;
+        const nx=dx/dist, ny=dy/dist;
+        const intensity=Math.max(.25,1-dist/900);
+        const ox=nx*20*intensity, oy=ny*20*intensity+14;
+        el.style.setProperty('--sx', ox.toFixed(1)+'px');
+        el.style.setProperty('--sy', oy.toFixed(1)+'px');
+      });
+
+      if(Math.hypot(tx-mx,ty-my)>0.4){ raf=requestAnimationFrame(tick); } else { raf=null; }
+    }
+
+    addEventListener('pointermove',e=>{ tx=e.clientX; ty=e.clientY; if(!raf) raf=requestAnimationFrame(tick); },{passive:true});
+    raf=requestAnimationFrame(tick);
+  })();
+
+  /* ===== LIGHT DIAL: before/after comparison slider, dragged on the photo itself ===== */
+  (function(){
+    const stage=document.getElementById('ldStage');
+    const frame=document.getElementById('ldFrame');
+    const readout=document.getElementById('ldReadout');
+    if(!stage||!frame) return;
+
+    const stops=[
+      {t:0,   label:'Dawn',          mood:'Deep dawn'},
+      {t:.25, label:'Early morning', mood:'First light'},
+      {t:.5,  label:'Midday',        mood:'Full bloom'},
+      {t:.75, label:'Afternoon',     mood:'Warm & bright'},
+      {t:1,   label:'Golden hour',   mood:'Full golden'}
+    ];
+
+    function setDial(v){
+      v=Math.max(0,Math.min(1,v));
+      stage.style.setProperty('--dial',v.toFixed(3));
+      frame.setAttribute('aria-valuenow',Math.round(v*100));
+      let nearest=stops[0],nd=1;
+      stops.forEach(s=>{const d=Math.abs(s.t-v); if(d<nd){nd=d;nearest=s;}});
+      if(readout) readout.innerHTML=nearest.label+' — <b>'+nearest.mood+'</b>';
+      return v;
+    }
+    function fromClientX(x){
+      const r=frame.getBoundingClientRect();
+      return (x-r.left)/r.width;
+    }
+    let dragging=false, curV=.42;
+    frame.addEventListener('pointerdown',e=>{ dragging=true; curV=setDial(fromClientX(e.clientX)); frame.setPointerCapture(e.pointerId); });
+    frame.addEventListener('pointermove',e=>{ if(dragging) curV=setDial(fromClientX(e.clientX)); },{passive:true});
+    frame.addEventListener('pointerup',()=>dragging=false);
+    frame.addEventListener('pointercancel',()=>dragging=false);
+    frame.addEventListener('keydown',e=>{
+      if(e.key==='ArrowLeft'||e.key==='ArrowDown'){ curV=setDial(curV-.05); e.preventDefault(); }
+      if(e.key==='ArrowRight'||e.key==='ArrowUp'){ curV=setDial(curV+.05); e.preventDefault(); }
+    });
+    curV=setDial(.42);
+  })();
+
+  /* ===== COUNT-UP: the Fotile Standard numbers climb into place on reveal ===== */
+  (function(){
+    const grid=document.querySelector('.mn-grid');
+    if(!grid) return;
+    const nums=Array.from(grid.querySelectorAll('.mn-c b'));
+    const targets=nums.map(el=>parseFloat(el.textContent));
+    let fired=false;
+    const obs=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(e.isIntersecting && !fired){
+          fired=true;
+          nums.forEach((el,i)=>{
+            const target=targets[i], start=performance.now(), dur=1300;
+            (function frame(now){
+              const p=Math.min(1,(now-start)/dur);
+              const eased=1-Math.pow(1-p,3);
+              el.textContent=Math.round(target*eased);
+              if(p<1) requestAnimationFrame(frame); else el.textContent=target;
+            })(start);
+          });
+          obs.disconnect();
+        }
+      });
+    },{threshold:.4});
+    obs.observe(grid);
+  })();
+</script>
+<script src="../cart.js"></script>
+<script src="../editor.js"></script>
+<script src="../ambient.js"></script>
+<script>window.FotileAmbient&&FotileAmbient.mount({theme:"opal"});</script>
+<script src="../mobile-nav.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "Fotile Pakistan", "url": "https://fotilepk.com/", "logo": "https://fotilepk.com/assets/logo.png", "telephone": "+92-42-111-131-517", "areaServed": "PK", "sameAs": ["https://www.facebook.com/fotile.pk"]}</script>
+<script>
+/* ============================================================================
+   OPAL LIGHT FIELD — the hero
+   A WebGL pass over the hero photograph that behaves like light through water:
+   a caustic network drifts across the surface, the image refracts very slightly
+   underneath it, and the bright filaments carry an opal's play-of-colour.
+   Moving the pointer pushes a ripple out from where you touched.
+
+   It is decoration, so it fails quietly: no WebGL, a slow device, or
+   "reduce motion" and the plain photograph simply stays as it is.
+   ========================================================================== */
+window.mountCaustics = function(hero, img, cv, opt){
+  opt = opt || {};
+  var POS = (opt.posY==null ? 0.38 : opt.posY);   /* matches the CSS object-position */
+  var AMT = (opt.amount==null ? 1 : opt.amount);
+  if(!hero || !img || !cv) return null;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+
+  var gl = cv.getContext('webgl',{alpha:false,antialias:false,powerPreference:'low-power'})
+        || cv.getContext('experimental-webgl');
+  if(!gl) return null;
+
+  var VS = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+
+  var FS = [
+  'precision mediump float;',
+  'uniform sampler2D uTex;',
+  'uniform vec2  uRes;',
+  'uniform vec2  uImg;',
+  'uniform float uTime;',
+  'uniform vec2  uPtr;',
+  'uniform float uPulse;',
+  'uniform float uAmt;',
+  'uniform float uPos;',
+  'uniform vec3  uTone;',
+
+  /* layered, domain-warped wave field — the surface of the water */
+  'float waves(vec2 p, float t){',
+  '  float v = 0.0; vec2 q = p;',
+  '  for(int i=0;i<4;i++){',
+  '    float f = float(i);',
+  '    q += vec2(sin(q.y*1.7 + t*0.55 + f*1.3), cos(q.x*1.6 - t*0.47 + f*1.7)) * 0.34;',
+  '    v += sin(q.x*2.05 + q.y*1.85 + t*(0.62 + f*0.13));',
+  '  }',
+  '  return v * 0.25;',
+  '}',
+
+  /* cosine ramp standing in for the stone\'s fire */
+  'vec3 fire(float x){',
+  '  vec3 c = 0.5 + 0.5*cos(6.28318*(vec3(0.06,0.30,0.56) + x));',
+  '  return mix(vec3(dot(c, vec3(0.333))), c, 0.62);',
+  '}',
+
+  'void main(){',
+  '  vec2 frag = gl_FragCoord.xy;',
+  '  float ca = uRes.x/uRes.y, ia = uImg.x/uImg.y;',
+  '  vec2 uv = frag/uRes; uv.y = 1.0 - uv.y;',
+  /* object-fit: cover, object-position: center 38% */
+  '  if(ca > ia){ float h = ia/ca; uv.y = (uv.y - 0.5)*h + uPos; }',
+  '  else       { float w = ca/ia; uv.x = (uv.x - 0.5)*w + 0.5;  }',
+
+  '  vec2 sp = vec2(uv.x*ca, uv.y) * 6.2;',
+  '  float t = uTime;',
+  '  float w  = waves(sp, t);',
+  '  float wx = waves(sp + vec2(0.9,0.0), t);',
+  '  float wy = waves(sp + vec2(0.0,1.4), t);',
+
+  /* the photograph refracts a little under the surface */
+  '  vec2 warp = vec2(wx, wy) * 0.0068 * uAmt;',
+  '  vec3 base = texture2D(uTex, clamp(uv + warp, 0.001, 0.999)).rgb;',
+
+  /* thin bright filaments where the surface focuses light */
+  '  float caus  = pow(1.0 - abs(w), 8.0);',
+  '  float caus2 = pow(1.0 - abs(waves(sp*1.9 + 4.0, t*0.8)), 14.0);',
+  '  float light = caus*0.70 + caus2*0.40;',
+  /* highlights are already blown out — let the shimmer live in the mid-tones */
+  '  float room = 1.0 - smoothstep(0.70, 0.98, dot(base, vec3(0.333)));',
+  '  light *= 0.30 + 0.70*room;',
+  /* and keep the copy column calm */
+  '  light *= mix(0.22, 1.0, smoothstep(0.06, 0.48, frag.x/uRes.x));',
+
+  /* pointer ripple, decaying in space and time */
+  '  vec2 pp = vec2(uPtr.x*ca, uPtr.y);',
+  '  vec2 cp = vec2(uv.x*ca, uv.y);',
+  '  float d = distance(cp, pp);',
+  '  float ring = sin(d*46.0 - uPulse*8.5) * exp(-d*5.5) * exp(-uPulse*1.35);',
+
+  '  vec3 tint = fire(w*0.42 + t*0.022);',
+  '  vec3 col  = base;',
+  '  col += light * 0.27 * uAmt * mix(uTone, tint, 0.58);',
+  '  col += ring * 0.11 * uAmt * mix(vec3(1.0), fire(d*2.2), 0.65);',
+  '  col  = mix(col, col * (0.985 + 0.032*tint), 0.35*uAmt);',
+
+  /* let it fade out toward the bottom so the section edge stays clean */
+  '  float fade = smoothstep(0.0, 0.32, frag.y/uRes.y);',
+  '  gl_FragColor = vec4(mix(base, col, fade), 1.0);',
+  '}'].join('\n');
+
+  function sh(type,src){
+    var s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s);
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS)) return null;
+    return s;
+  }
+  var vs=sh(gl.VERTEX_SHADER,VS), fs=sh(gl.FRAGMENT_SHADER,FS);
+  if(!vs||!fs) return null;
+  var pr=gl.createProgram(); gl.attachShader(pr,vs); gl.attachShader(pr,fs); gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)) return null;
+  gl.useProgram(pr);
+
+  var buf=gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  var loc=gl.getAttribLocation(pr,'p');
+  gl.enableVertexAttribArray(loc);
+  gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+
+  var U={};
+  ['uTex','uRes','uImg','uTime','uPtr','uPulse','uAmt','uPos','uTone'].forEach(function(n){U[n]=gl.getUniformLocation(pr,n);});
+  var tone=[1,1,1];
+
+  var tex=gl.createTexture();
+  function upload(){
+    gl.bindTexture(gl.TEXTURE_2D,tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,false);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGB,gl.RGB,gl.UNSIGNED_BYTE,img);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+    gl.uniform1i(U.uTex,0);
+    gl.uniform2f(U.uImg,img.naturalWidth||1600,img.naturalHeight||900);
+  }
+
+  var dpr=Math.min(devicePixelRatio||1,1.5);
+  function size(){
+    var r=hero.getBoundingClientRect();
+    cv.width =Math.max(1,Math.round(r.width*dpr));
+    cv.height=Math.max(1,Math.round(r.height*dpr));
+    gl.viewport(0,0,cv.width,cv.height);
+    gl.uniform2f(U.uRes,cv.width,cv.height);
+  }
+
+  var ptr=[0.5,0.55], pulse=9, t0=performance.now(), visible=true, raf=0;
+  hero.addEventListener('pointermove',function(e){
+    var r=hero.getBoundingClientRect();
+    ptr=[(e.clientX-r.left)/r.width, 1-(e.clientY-r.top)/r.height];
+    pulse=0;
+  },{passive:true});
+
+  function frame(now){
+    raf=0;
+    if(!visible) return;
+    var t=(now-t0)/1000;
+    pulse+=0.016;
+    gl.uniform1f(U.uTime,t);
+    gl.uniform1f(U.uPulse,pulse);
+    gl.uniform2f(U.uPtr,ptr[0],ptr[1]);
+    gl.uniform1f(U.uAmt,Math.min(1,t/2.2)*AMT);
+    gl.uniform1f(U.uPos,POS);
+    gl.uniform3f(U.uTone,tone[0],tone[1],tone[2]);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+    raf=requestAnimationFrame(frame);
+  }
+  function play(){ if(!raf && visible) raf=requestAnimationFrame(frame); }
+
+  /* stop the loop whenever the hero is off-screen or the tab is hidden */
+  if(window.IntersectionObserver){
+    new IntersectionObserver(function(es){
+      visible=es[0].isIntersecting && !document.hidden;
+      if(visible) play();
+    },{threshold:0.01}).observe(hero);
+  }
+  document.addEventListener('visibilitychange',function(){
+    visible=!document.hidden; if(visible) play();
+  });
+  addEventListener('resize',function(){ size(); },{passive:true});
+
+  function start(){
+    /* file:// treats every file as its own origin, so a texture upload can throw.
+       If it does we leave the plain <img> exactly as it is. */
+    if(!img.naturalWidth) return;
+    try{ upload(); size(); }catch(e){ return; }
+    if(gl.getError()!==gl.NO_ERROR) return;
+    hero.classList.add('gl');
+    cv.classList.add('live');
+    play();
+  }
+  if(img.complete && img.naturalWidth) start();
+  else img.addEventListener('load',start,{once:true});
+
+  /* the caller can tint the light — the hour of the day decides its colour */
+  return { tone:function(r,g,b){ tone=[r,g,b]; } };
+};
+
+/* the hero's own light field */
+window.mountCaustics(document.querySelector('.mhero'),
+                     document.getElementById('opalSrc'),
+                     document.getElementById('opalCanvas'), {posY:0.38});
+
+/* ----------------------------------------------------------------------------
+   PLAY OF COLOUR — the opal slab
+   The fire underneath only appears where the pointer is, the way an opal only
+   shows colour at the angle light happens to enter it.
+   -------------------------------------------------------------------------- */
+(function(){
+  var slab=document.getElementById('slab'); if(!slab) return;
+  function at(x,y){
+    var r=slab.getBoundingClientRect();
+    slab.style.setProperty('--mx', ((x-r.left)/r.width*100).toFixed(1));
+    slab.style.setProperty('--my', ((y-r.top)/r.height*100).toFixed(1));
+    slab.classList.add('awake');
+  }
+  slab.addEventListener('pointermove',function(e){at(e.clientX,e.clientY);},{passive:true});
+  slab.addEventListener('pointerdown',function(e){at(e.clientX,e.clientY);},{passive:true});
+  /* phones have no hover, so it wakes itself and drifts once it scrolls in */
+  if(window.matchMedia('(hover: none)').matches && window.IntersectionObserver){
+    new IntersectionObserver(function(es,ob){
+      if(!es[0].isIntersecting) return; ob.disconnect();
+      slab.classList.add('awake');
+      var a=0, id=setInterval(function(){
+        a+=0.045;
+        slab.style.setProperty('--mx',(50+38*Math.cos(a)).toFixed(1));
+        slab.style.setProperty('--my',(50+30*Math.sin(a*1.3)).toFixed(1));
+      },50);
+      setTimeout(function(){clearInterval(id);},14000);
+    },{threshold:0.35}).observe(slab);
+  }
+})();
+</script>
+
+<script>
+/* ============================================================================
+   THE HOUR
+   A day, laid out flat. Six stops from first light to dusk; everything in
+   between is interpolated — the grade over the photograph, the position and
+   warmth of the sun, and the colour of the caustic light field underneath.
+   ========================================================================== */
+(function(){
+  var frame=document.getElementById('hrFrame');
+  if(!frame) return;
+  var track=document.getElementById('hrTrack'),
+      stage=document.getElementById('hrStage'),
+      nameEl=document.getElementById('hrName'),
+      timeEl=document.getElementById('hrTime');
+
+  /* name, clock, grade colours, exposure, sun placement, and the tint the
+     water-light takes at that hour */
+  var STOPS=[
+    {p:0.00,n:'First light',t:'05:20',c1:'#5d76a0',c2:'#1d2540',b:.60,c:1.10,s:.62,h:-10,go:.88,cast:'#5f7fc8',ca:.60,sx:'8%', sy:'82%',sa:.08,dot:'#7f93b4',tone:[.66,.77,1.00]},
+    {p:0.20,n:'Sunrise',    t:'06:40',c1:'#ffcf90',c2:'#a85f33',b:.90,c:1.04,s:1.08,h:  4,go:.72,cast:'#ff9f4d',ca:.40,sx:'13%',sy:'58%',sa:.38,dot:'#e8a765',tone:[1.00,.82,.60]},
+    {p:0.40,n:'Morning',    t:'09:10',c1:'#fff4e0',c2:'#e9decb',b:1.04,c:1.00,s:1.00,h:  1,go:.42,cast:'#ffe3bb',ca:.20,sx:'30%',sy:'30%',sa:.24,dot:'#f0cf9a',tone:[1.00,.95,.86]},
+    {p:0.60,n:'Midday',     t:'12:30',c1:'#ffffff',c2:'#eef2f5',b:1.10,c:.97, s:.94,h:  0,go:.28,cast:'#f4f8ff',ca:.06,sx:'52%',sy:'8%', sa:.18,dot:'#f7f3ea',tone:[1.00,1.00,1.00]},
+    {p:0.80,n:'Golden hour',t:'17:40',c1:'#ffc873',c2:'#b55a22',b:.97,c:1.06,s:1.16,h:  6,go:.74,cast:'#ff9c33',ca:.46,sx:'84%',sy:'44%',sa:.44,dot:'#e0a765',tone:[1.00,.74,.45]},
+    {p:1.00,n:'Dusk',       t:'19:15',c1:'#8d84c4',c2:'#1f2340',b:.58,c:1.12,s:.70,h:-14,go:.90,cast:'#6f68c6',ca:.62,sx:'93%',sy:'76%',sa:.12,dot:'#8e8bb4',tone:[.66,.69,.98]}
+  ];
+
+  function hx(h){ h=h.replace('#',''); return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+  function mixHex(a,b,t){ var A=hx(a),B=hx(b);
+    return 'rgb('+Math.round(A[0]+(B[0]-A[0])*t)+','+Math.round(A[1]+(B[1]-A[1])*t)+','+Math.round(A[2]+(B[2]-A[2])*t)+')'; }
+  function num(a,b,t){ return a+(b-a)*t; }
+  function pct(a,b,t){ return num(parseFloat(a),parseFloat(b),t).toFixed(1)+'%'; }
+
+  var caustics=null;
+  function apply(v){
+    v=Math.max(0,Math.min(1,v));
+    var i=0; while(i<STOPS.length-2 && v>STOPS[i+1].p) i++;
+    var A=STOPS[i], B=STOPS[i+1], t=(v-A.p)/(B.p-A.p);
+    var st=frame.style;
+    st.setProperty('--hc1',mixHex(A.c1,B.c1,t));
+    st.setProperty('--hc2',mixHex(A.c2,B.c2,t));
+    st.setProperty('--hb',num(A.b,B.b,t).toFixed(3));
+    st.setProperty('--hc',num(A.c,B.c,t).toFixed(3));
+    st.setProperty('--hs',num(A.s,B.s,t).toFixed(3));
+    st.setProperty('--hh',num(A.h,B.h,t).toFixed(1)+'deg');
+    st.setProperty('--hsx',pct(A.sx,B.sx,t));
+    st.setProperty('--hsy',pct(A.sy,B.sy,t));
+    st.setProperty('--hsa',num(A.sa,B.sa,t).toFixed(3));
+    st.setProperty('--hgo',num(A.go,B.go,t).toFixed(3));
+    st.setProperty('--hcast',mixHex(A.cast,B.cast,t));
+    st.setProperty('--hca',num(A.ca,B.ca,t).toFixed(3));
+    if(track){
+      track.style.setProperty('--hp',(v*100).toFixed(2)+'%');
+      track.style.setProperty('--hdot',mixHex(A.dot,B.dot,t));
+      track.setAttribute('aria-valuenow',Math.round(v*100));
+      track.setAttribute('aria-valuetext',(t<.5?A.n:B.n));
+    }
+    if(nameEl) nameEl.textContent = t<.5 ? A.n : B.n;
+    if(timeEl) timeEl.textContent = t<.5 ? A.t : B.t;
+    if(caustics) caustics.tone(num(A.tone[0],B.tone[0],t),num(A.tone[1],B.tone[1],t),num(A.tone[2],B.tone[2],t));
+  }
+
+  /* the same light field as the hero, tinted by the hour */
+  if(window.mountCaustics){
+    caustics = window.mountCaustics(frame,
+      document.getElementById('hrImg'),
+      document.getElementById('hrCanvas'), {posY:0.54, amount:0.85});
+  }
+
+  var v=0.6, touched=false;
+  function set(x){ v=x; apply(v); }
+  function fromX(clientX){
+    var r=track.getBoundingClientRect();
+    set((clientX-r.left)/r.width);
+    if(!touched){ touched=true; stage.classList.add('touched'); clearInterval(auto); }
+  }
+  var drag=false;
+  track.addEventListener('pointerdown',function(e){
+    drag=true; track.classList.add('drag');
+    try{ track.setPointerCapture(e.pointerId); }catch(x){}
+    fromX(e.clientX);
+  });
+  track.addEventListener('pointermove',function(e){ if(drag) fromX(e.clientX); });
+  function up(){ drag=false; track.classList.remove('drag'); }
+  addEventListener('pointerup',up); addEventListener('pointercancel',up);
+  track.addEventListener('keydown',function(e){
+    var d = e.key==='ArrowRight' ? .06 : e.key==='ArrowLeft' ? -.06 : 0;
+    if(!d) return;
+    e.preventDefault(); set(Math.max(0,Math.min(1,v+d)));
+    if(!touched){ touched=true; stage.classList.add('touched'); clearInterval(auto); }
+  });
+
+  /* Run the day once when it scrolls into view, so it is obvious it moves. */
+  var auto=null;
+  if(window.IntersectionObserver){
+    new IntersectionObserver(function(es,ob){
+      if(!es[0].isIntersecting) return;
+      ob.disconnect();
+      if(touched) return;
+      var a=0, dir=1;
+      auto=setInterval(function(){
+        if(touched){ clearInterval(auto); return; }
+        a+=0.004*dir;
+        if(a>=1){ a=1; dir=-1; } else if(a<=0.08 && dir<0){ clearInterval(auto); return; }
+        set(a);
+      },26);
+    },{threshold:.35}).observe(frame);
+  }
+
+  apply(v);
+})();
+</script>
+
+</body>
+</html>

@@ -54,22 +54,28 @@
     {label:'Home',        href:'/',              key:'home'},
     {label:'Products',    href:'/shop/',         key:'products', mega:true},
     {label:'Moon Series', href:'/moon-series/',  key:'moon'},
+    {label:'<span class="yy" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#f2efe9"/><path d="M50,2 A48,48 0 0,0 50,98 A24,24 0 0,1 50,50 A24,24 0 0,0 50,2 Z" fill="#0b0b0f"/><circle cx="50" cy="26" r="7.4" fill="#f2efe9"/><circle cx="50" cy="74" r="7.4" fill="#0b0b0f"/><circle cx="50" cy="26" r="2.5" fill="#2f8e8c"/><circle cx="50" cy="74" r="2.5" fill="#e2b48c"/></svg></span>Two Halves', href:'/two-halves/', key:'two'},
     {label:'About',       href:'/about-us/',     key:'about'},
     {label:'Journal',     href:'/blog/',         key:'journal'},
-    {label:'Pulse',       href:'/newsletter/',   key:'pulse'},
+    /* Pulse is a DRAFT — flip PULSE_LIVE to true to put it back in the menu */
+    {label:'Pulse',       href:'/newsletter/',   key:'pulse', draft:true},
     {label:'Dealers',     href:'/our-dealers/',  key:'dealers'},
     {label:'Service',     href:'/service-center/', key:'service'},
     {label:'Contact',     href:'/contact-us/',   key:'contact'}
   ];
+  var PULSE_LIVE = false;                 /* <- set to true to relaunch the Pulse page */
+
   var CATS=[
-    {name:'Refrigerator',      href:'/fridge/',                                                 desc:'NEW · The F20, coming soon'},
-    {name:'Range Hoods',      href:'/product-category/kitchen-hood/',                          desc:'Powerful, whisper-quiet ventilation'},
-    {name:'Hobs & Cooktops',  href:'/product-category/hobs/',                                  desc:'Gas, induction & ceramic'},
-    {name:'Ovens',            href:'/product-category/oven/',                                  desc:'Electric, steam & 4-in-1'},
-    {name:'Microwaves',       href:'/product-category/oven/microwave-oven-prices-in-pakistan/',desc:'Built-in & grill'},
-    {name:'Dishwashers',      href:'/product-category/dish-washer/',                           desc:'In-sink & built-in'},
-    {name:'Water Purifiers',  href:'/product-category/water-purifier/',                        desc:'Purity, measured'}
+    {name:'Refrigerator',     href:'/fridge/',                                                 desc:'The F20 — nitrogen fresh-keeping', img:'fridge', tag:'New'},
+    {name:'Opal Series',      href:'/opal-series/',                                            desc:'Every colour, hiding in white',    img:'opal',   tag:'New'},
+    {name:'Range Hoods',      href:'/product-category/kitchen-hood/',                          desc:'Powerful, whisper-quiet',          img:'hoods'},
+    {name:'Hobs & Cooktops',  href:'/product-category/hobs/',                                  desc:'Gas, induction & ceramic',         img:'hobs'},
+    {name:'Ovens',            href:'/product-category/oven/',                                  desc:'Electric, steam & 4-in-1',         img:'ovens'},
+    {name:'Microwaves',       href:'/product-category/oven/microwave-oven-prices-in-pakistan/',desc:'Built-in & grill',                 img:'micro'},
+    {name:'Dishwashers',      href:'/product-category/dish-washer/',                           desc:'In-sink & built-in',               img:'dish'},
+    {name:'Water Purifiers',  href:'/product-category/water-purifier/',                        desc:'Purity, measured',                 img:'water'}
   ];
+  function liveLinks(){ return LINKS.filter(function(l){ return !l.draft || PULSE_LIVE; }); }
 
   function activeKey(){
     var p=(location.pathname||'').toLowerCase();
@@ -84,29 +90,94 @@
   }
 
   var css = ''
-  + '#nav .nlinks{display:flex;align-items:center;gap:30px}'
-  + '#nav .nlinks .snav-lnk,#nav .nlinks>a{position:relative;font-family:Manrope,system-ui,sans-serif;font-size:14px;font-weight:500;letter-spacing:.2px;color:#c7cace;text-decoration:none;padding:6px 0;transition:color .25s;white-space:nowrap;background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px}'
+  + '#nav .nlinks{display:flex;align-items:center;gap:19px;flex-wrap:nowrap}'
+  + '#nav .nlinks .yy{display:inline-block;width:15px;height:15px;margin-right:8px;vertical-align:-3px;border-radius:50%;box-shadow:0 0 0 1px currentColor;overflow:hidden;flex:none;opacity:.92}'
+  + '#nav .nlinks .yy svg{display:block;width:100%;height:100%;animation:yySpin 26s linear infinite}'
+  + '@keyframes yySpin{to{transform:rotate(360deg)}}'
+  + '.mobmenu .yy{display:inline-block;width:15px;height:15px;margin-right:9px;vertical-align:-3px;border-radius:50%;overflow:hidden}'
+  + '.mobmenu .yy svg{display:block;width:100%;height:100%}'
+  + '@media(prefers-reduced-motion:reduce){#nav .nlinks .yy svg{animation:none}}'
+  + '#nav .nlinks .snav-lnk,#nav .nlinks>a{position:relative;font-family:Manrope,system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:.1px;color:#c7cace;text-decoration:none;padding:6px 0;transition:color .25s;white-space:nowrap;background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px}'
   + '#nav .nlinks .snav-lnk:hover,#nav .nlinks>a:hover{color:#fff}'
   + '#nav .nlinks .snav-lnk.active,#nav .nlinks>a.active{color:#fff}'
   + '#nav .nlinks .snav-lnk.active::after,#nav .nlinks>a.active::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:2px;border-radius:2px;background:linear-gradient(90deg,#c8ccd2,#eef1f4)}'
   + '#nav .snav-car{font-size:9px;opacity:.7;transition:transform .3s}'
   + '#nav .snav-prod{position:relative;display:inline-flex;align-items:center}'
   + '#nav .snav-prod:hover .snav-car{transform:rotate(180deg)}'
-  + '.snav-mega{position:fixed;left:0;right:0;top:0;z-index:1000;display:flex;justify-content:center;padding:66px 24px 24px;opacity:0;visibility:hidden;transform:translateY(-10px);pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}'
-  + '.snav-mega.show{opacity:1;visibility:visible;transform:none}'
-  + '.snav-mega-in{width:100%;max-width:940px;pointer-events:auto;display:grid;grid-template-columns:1.6fr 1fr;gap:26px;background:rgba(14,15,18,.94);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:26px;box-shadow:0 40px 90px rgba(0,0,0,.6)}'
-  + '.snav-cats-h{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:#7d818a;font-weight:700;margin-bottom:16px}'
-  + '.snav-cgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}'
-  + '.snav-cat{display:block;padding:13px 14px;border-radius:12px;text-decoration:none;transition:background .2s,transform .2s;border:1px solid transparent}'
-  + '.snav-cat:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.09)}'
-  + '.snav-cat b{display:block;font-size:14.5px;font-weight:600;color:#f1f2f4;letter-spacing:-.2px}'
-  + '.snav-cat span{display:block;font-size:12px;color:#868a91;margin-top:3px;font-weight:300}'
-  + '.snav-feat{position:relative;display:flex;flex-direction:column;justify-content:flex-end;border-radius:14px;text-decoration:none;overflow:hidden;padding:22px;min-height:190px;background:radial-gradient(120% 100% at 20% 0%,#2a2d33 0%,#141518 55%,#0d0e11 100%);border:1px solid rgba(255,255,255,.09)}'
-  + '.snav-feat-k{font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:#c8ccd2;font-weight:700}'
-  + '.snav-feat-t{font-size:22px;font-weight:200;letter-spacing:-.6px;color:#fff;margin:8px 0 14px;line-height:1.1}'
-  + '.snav-feat-go{font-size:13px;font-weight:600;color:#eef1f4}.snav-feat:hover .snav-feat-go{color:#fff}'
-  + '.snav-feat-go span{color:#c8ccd2}'
+  + '.snav-mega{position:fixed;left:0;right:0;top:0;z-index:1000;display:flex;justify-content:center;padding:62px 24px 24px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .34s cubic-bezier(.16,1,.3,1),visibility 0s .34s}'
+  + '.snav-mega.show{opacity:1;visibility:visible;transition:opacity .34s cubic-bezier(.16,1,.3,1),visibility 0s}'
+  + '.snav-mega-in{width:100%;max-width:1080px;pointer-events:auto;position:relative;overflow:hidden;'
+  +   'display:grid;grid-template-columns:1.52fr .95fr;gap:0;'
+  +   'background:linear-gradient(158deg,#191b20 0%,#101116 46%,#0b0c0f 100%);'
+  +   'border:1px solid rgba(255,255,255,.12);border-radius:20px;'
+  +   'box-shadow:0 50px 110px rgba(0,0,0,.62),0 2px 0 rgba(255,255,255,.05) inset;'
+  +   'transform:translateY(-14px) scale(.985);opacity:0;transition:transform .42s cubic-bezier(.16,1,.3,1),opacity .34s}'
+  + '.snav-mega.show .snav-mega-in{transform:none;opacity:1}'
+  /* a hairline of brand light along the top edge */
+  + '.snav-mega-in::before{content:"";position:absolute;left:12%;right:12%;top:0;height:1px;'
+  +   'background:linear-gradient(90deg,transparent,rgba(224,30,55,.55),rgba(240,217,160,.5),transparent)}'
+  + '.snav-cats{padding:24px 22px 20px 24px;min-width:0}'
+  + '.snav-cats-h{font-size:10px;letter-spacing:2.4px;text-transform:uppercase;color:#7d818a;font-weight:700;margin-bottom:14px}'
+  + '.snav-cgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px}'
+  /* each category is a real row: product, name, one line of why */
+  + '.snav-cat{display:flex;align-items:center;gap:13px;padding:10px 12px;border-radius:13px;text-decoration:none;'
+  +   'border:1px solid transparent;transition:background .22s,border-color .22s,transform .28s cubic-bezier(.16,1,.3,1)}'
+  + '.snav-cat:hover{background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.1);transform:translateX(3px)}'
+  + '.snav-cat .snav-th{flex:0 0 48px;width:48px;height:48px;border-radius:11px;display:grid;place-items:center;'
+  +   'background:radial-gradient(78% 72% at 50% 22%,rgba(255,255,255,.17),rgba(255,255,255,.05) 70%);'
+  +   'border:1px solid rgba(255,255,255,.1);overflow:hidden;transition:background .25s}'
+  + '.snav-cat:hover .snav-th{background:radial-gradient(78% 72% at 50% 22%,rgba(255,255,255,.24),rgba(255,255,255,.07) 70%)}'
+  + '.snav-cat .snav-th img{width:100%;height:100%;object-fit:contain;padding:5px;'
+  +   'transition:transform .45s cubic-bezier(.16,1,.3,1);filter:drop-shadow(0 4px 8px rgba(0,0,0,.5))}'
+  + '.snav-cat:hover .snav-th img{transform:scale(1.1)}'
+  + '.snav-cat .snav-tx{min-width:0;flex:1}'
+  + '.snav-cat b{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:#f1f2f4;letter-spacing:-.2px}'
+  + '.snav-cat i{font-style:normal;font-size:8.5px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;'
+  +   'color:#ffd9df;background:rgba(224,30,55,.9);padding:3px 6px;border-radius:4px;line-height:1}'
+  + '.snav-cat span{display:block;font-size:11.5px;color:#8a8e95;margin-top:3px;font-weight:300;'
+  +   'white-space:nowrap;overflow:hidden;text-overflow:ellipsis}'
+  /* the right rail: one real feature, one cross-link */
+  + '.snav-rail{display:flex;flex-direction:column;gap:10px;padding:24px 24px 20px 4px;min-width:0;overflow:hidden}'
+  + '.snav-feat{position:relative;flex:1 1 auto;display:flex;flex-direction:column;justify-content:flex-end;'
+  +   'border-radius:15px;text-decoration:none;overflow:hidden;padding:18px 18px 16px;min-height:168px;'
+  +   'border:1px solid rgba(255,255,255,.1);background:#0d0e11}'
+  + '.snav-feat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;'
+  +   'transition:transform .8s cubic-bezier(.16,1,.3,1)}'
+  + '.snav-feat:hover img{transform:scale(1.06)}'
+  + '.snav-feat::after{content:"";position:absolute;inset:0;z-index:1;'
+  +   'background:linear-gradient(0deg,rgba(6,6,9,.96) 24%,rgba(6,6,9,.52) 58%,rgba(6,6,9,.06))}'
+  + '.snav-feat>*{position:relative;z-index:2}'
+  + '.snav-feat-k{font-size:9.5px;letter-spacing:2.2px;text-transform:uppercase;color:#ff8b9b;font-weight:800}'
+  + '.snav-feat-t{font-size:21px;font-weight:200;letter-spacing:-.5px;color:#fff;margin:7px 0 10px;line-height:1.12}'
+  + '.snav-feat-go{font-size:12.5px;font-weight:600;color:#eef1f4}'
+  + '.snav-feat-go span{color:#ff8b9b;transition:margin-left .3s}'
+  + '.snav-feat:hover .snav-feat-go span{margin-left:4px}'
+  /* Two Halves: the two grounds, side by side */
+  + '.snav-two{flex:0 0 auto;position:relative;display:flex;align-items:center;gap:12px;padding:12px 15px;border-radius:15px;'
+  +   'text-decoration:none;border:1px solid rgba(255,255,255,.12);overflow:hidden;'
+  +   'background:linear-gradient(100deg,#111218,#0a0a0d 55%,#15161c);'
+  +   'transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s}'
+  + '.snav-two:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.22)}'
+  + '.snav-two svg{width:20px;height:20px;flex:none;border-radius:50%;box-shadow:0 0 0 1px rgba(255,255,255,.18)}'
+  + '.snav-two b{flex:1;font-size:13px;font-weight:600;color:#f4f2f7;letter-spacing:-.2px}'
+  + '.snav-two em{font-style:normal;font-size:9.5px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}'
+  + '.snav-two em u{text-decoration:none;color:#e2b48c}.snav-two em s{text-decoration:none;color:#5f6067;margin:0 4px}'
+  + '.snav-two em q{quotes:none;color:#2f8e8c}'
+  /* the closing strip */
+  + '.snav-foot{grid-column:1 / -1;display:flex;align-items:center;gap:22px;flex-wrap:wrap;'
+  +   'padding:13px 24px;border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.022)}'
+  + '.snav-foot a{font-size:12px;color:#9a9ea6;text-decoration:none;font-weight:500;transition:color .2s;display:inline-flex;align-items:center;gap:7px}'
+  + '.snav-foot a:hover{color:#fff}'
+  + '.snav-foot a::before{content:"";width:4px;height:4px;border-radius:50%;background:#e01e37;opacity:.55}'
+  + '.snav-foot .snav-all{margin-left:auto;color:#eef1f4;font-weight:600}'
+  + '.snav-foot .snav-all::before{display:none}'
+  + '@media(max-width:1260px){.snav-mega-in{max-width:960px}.snav-cat span{display:none}.snav-cat b{font-size:13.5px}}'
   + 'html,body{overflow-x:hidden;max-width:100%}'
+  /* overflow-x:hidden turns the page into a scroll container, which silently
+     kills position:sticky everywhere. overflow-x:clip clips exactly the same
+     way without becoming one, so sticky sections keep working. Browsers that
+     lack `clip` just keep the line above. */
+  + '@supports (overflow-x:clip){html,body{overflow-x:clip}}'
   + '*{-webkit-tap-highlight-color:transparent}'
   + '.navtoggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:26px;background:none;border:none;padding:0;cursor:pointer;z-index:1002}'
   + '.navtoggle span{display:block;height:2px;width:26px;background:#fff;border-radius:2px;transition:.32s cubic-bezier(.16,1,.3,1)}'
@@ -120,13 +191,14 @@
   + '.mobmenu a:active{color:#fff;padding-left:8px}'
   + '.mobmenu .mm-sub{font-size:15px;color:#9aa0a8;padding:11px 2px 11px 16px;border-bottom:1px solid rgba(255,255,255,.05)}'
   + '.mobmenu a.cta{margin-top:26px;border:none;color:#14171b;background:linear-gradient(135deg,#c8ccd2,#eef1f4);border-radius:8px;text-align:center;padding:17px;font-weight:600;font-size:16px;letter-spacing:0}'
-  + '@media(max-width:860px){#nav .nlinks{display:none!important}.snav-mega{display:none!important}.navtoggle{display:flex}#nav .nr .ic{display:none}#nav .nr .npill{display:none}#nav .nr{gap:14px}.flag{display:none!important}.cbar{display:none!important}#nav.nav{opacity:1!important;pointer-events:auto!important;margin-top:0!important;background:rgba(12,11,10,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}}'
+  + '@media(max-width:1180px){#nav .nlinks{display:none!important}.snav-mega{display:none!important}.navtoggle{display:flex}#nav .nr .ic{display:none}#nav .nr .npill{display:none}#nav .nr{gap:14px}.flag{display:none!important}.cbar{display:none!important}#nav.nav{opacity:1!important;pointer-events:auto!important;margin-top:0!important;background:rgba(12,11,10,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}}'
   + '@media(min-width:861px){.navtoggle{display:none!important}.mobmenu{display:none!important}}';
   var st=document.createElement('style'); st.textContent=css; document.head.appendChild(st);
 
   function build(){
     var nav=document.querySelector('#nav')||document.querySelector('.nav');
     if(!nav||nav.__snav) return; nav.__snav=1;
+    var B = window.__PBASE || '';          /* so the menu's thumbnails work from any folder depth */
     var akey=activeKey();
 
     var brand=nav.querySelector('.brand');
@@ -142,16 +214,40 @@
     var nl=nav.querySelector('.nlinks');
     if(nl){
       var html='';
-      LINKS.forEach(function(l){
+      liveLinks().forEach(function(l){
         var act=(l.key===akey)?' active':'';
         if(l.mega){
           html+='<span class="snav-prod">'
              +  '<a class="snav-lnk'+act+'" href="'+l.href+'">'+l.label+' <span class="snav-car">▾</span></a>'
              +  '<div class="snav-mega"><div class="snav-mega-in">'
              +    '<div class="snav-cats"><div class="snav-cats-h">Shop by category</div><div class="snav-cgrid">'
-             +      CATS.map(function(c){return '<a class="snav-cat" href="'+c.href+'"><b>'+c.name+'</b><span>'+c.desc+'</span></a>';}).join('')
+             +      CATS.map(function(c){
+                      return '<a class="snav-cat" href="'+c.href+'">'
+                           +   '<span class="snav-th"><img src="'+B+'assets/nav/'+c.img+'.webp" alt="" loading="lazy" decoding="async"></span>'
+                           +   '<span class="snav-tx"><b>'+c.name+(c.tag?' <i>'+c.tag+'</i>':'')+'</b><span>'+c.desc+'</span></span>'
+                           + '</a>';
+                    }).join('')
              +    '</div></div>'
-             +    '<a class="snav-feat" href="/shop/"><div class="snav-feat-k">The Full Collection</div><div class="snav-feat-t">Every Fotile<br>appliance</div><div class="snav-feat-go">Browse all 58 <span>&rarr;</span></div></a>'
+             +    '<div class="snav-rail">'
+             +      '<a class="snav-feat" href="/fridge/">'
+             +        '<img src="'+B+'assets/nav/feat-f20.jpg" alt="" loading="lazy" decoding="async">'
+             +        '<div class="snav-feat-k">New · Coming soon</div>'
+             +        '<div class="snav-feat-t">The F20<br>refrigerator</div>'
+             +        '<div class="snav-feat-go">See the F20 <span>&rarr;</span></div>'
+             +      '</a>'
+             +      '<a class="snav-two" href="/two-halves/">'
+             +        '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#f2efe9"/>'
+             +          '<path d="M50,0 A50,50 0 0,0 50,100 A25,25 0 0,1 50,50 A25,25 0 0,0 50,0 Z" fill="#0b0b0f"/>'
+             +          '<circle cx="50" cy="25" r="7.6" fill="#f2efe9"/><circle cx="50" cy="75" r="7.6" fill="#0b0b0f"/></svg>'
+             +        '<b>Two Halves</b><em><u>Moon</u><s>·</s><q>Opal</q></em>'
+             +      '</a>'
+             +    '</div>'
+             +    '<div class="snav-foot">'
+             +      '<a href="/our-dealers/">Find a dealer</a>'
+             +      '<a href="/service-center/">Service &amp; support</a>'
+             +      '<a href="/contact-us/?enquire=private-demo">Book a demo</a>'
+             +      '<a class="snav-all" href="/shop/">Browse all 58 appliances &rarr;</a>'
+             +    '</div>'
              +  '</div></div>'
              +  '</span>';
         } else {
@@ -183,7 +279,7 @@
     nr.appendChild(btn);
     var menu=document.createElement('div'); menu.className='mobmenu';
     var mh='';
-    LINKS.forEach(function(l){
+    liveLinks().forEach(function(l){
       var act=(l.key===akey)?'active':'';
       mh+='<a class="'+act+'" href="'+l.href+'">'+l.label+'</a>';
       if(l.mega){ CATS.forEach(function(c){ mh+='<a class="mm-sub" href="'+c.href+'">'+c.name+'</a>'; }); }

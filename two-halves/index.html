@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Halves, One Kitchen | Fotile Moon &amp; Opal Series</title>
+<meta name="description" content="The Fotile Moon Series owns the night; the Opal Series owns the morning. Two halves of one kitchen — drag the balance and see both.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://fotilepk.com/two-halves/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fotile Pakistan">
+<meta property="og:title" content="Two Halves, One Kitchen | Fotile Moon &amp; Opal Series">
+<meta property="og:description" content="Obsidian and porcelain. Night and morning. Two Fotile collections built from the same engineering.">
+<meta property="og:image" content="https://fotilepk.com/assets/moon-scene.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script>window.__PBASE="../";</script>
+
+<style>
+  /* Self-hosted so the page loads the same everywhere, including China. */
+  @font-face{font-family:"Manrope";src:url("../assets/fonts/manrope.woff2") format("woff2");
+    font-weight:200 800;font-display:swap;font-style:normal}
+
+  /* ======================================================================
+     TWO HALVES
+     One page, two natures. A single number — --s, from 0 (night) to 1
+     (morning) — drives the ground, the ink, the accent and the boundary
+     between the two worlds. Everything else follows from it.
+     ====================================================================== */
+  :root{
+    /* the two poles */
+    --n-bg:#07070a; --n-ink:#f5f3f7; --n-dim:#8d8895; --n-line:rgba(255,255,255,.12); --n-acc:#e2b48c;
+    --d-bg:#faf8f4; --d-ink:#14161b; --d-dim:#6f7069; --d-line:rgba(20,22,28,.12); --d-acc:#2f8e8c;
+    /* the neutral ground the page rests on — between the two, but not a blend of them */
+    --bg:#0d0f13; --ink:#f5f3f7; --dim:#8d8895; --line:rgba(255,255,255,.11);
+    --acc:#b6a08c;   /* the one value that does track the balance */
+    --s:.5;
+    --red:#e01e37;
+    --font:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --ease:cubic-bezier(.16,1,.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.6;
+    overflow-x:hidden;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--red);color:#fff}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 44px}
+  .pad{padding:132px 0}
+
+  /* ---- shared type ------------------------------------------------- */
+  .kick{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:3px;
+    text-transform:uppercase;font-weight:700;color:var(--acc)}
+  .kick .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+  .kick .ln{width:36px;height:1px;background:currentColor;opacity:.6}
+  h1,h2,h3{font-weight:200;letter-spacing:-.035em;line-height:1.0;text-wrap:balance}
+  h2{font-size:clamp(34px,5.4vw,76px)}
+  h3{font-size:clamp(26px,3.4vw,44px)}
+  b{font-weight:500}
+  .body{font-weight:300;color:var(--dim);font-size:17px;line-height:1.72;max-width:52ch}
+  .cjk{font-size:13px;letter-spacing:.7em;opacity:.55;font-weight:400}
+
+  /* reveal on scroll */
+  .rv{opacity:0;transform:translateY(38px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+  .rv.in{opacity:1;transform:none}
+  .rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.36s}
+
+  /* ===================== NAV ========================================= */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;
+    justify-content:space-between;padding:22px 44px;transition:padding .45s var(--ease),background .45s}
+  .nav.solid{padding:14px 44px;background:rgba(13,15,19,.84);
+    backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+    border-bottom:1px solid var(--line)}
+  .nav,.nav a{color:#f5f3f7}
+  .nav .brand img{height:19px;filter:brightness(0) invert(1)}
+  .nlinks{display:flex;gap:30px;font-size:13.5px;font-weight:500}
+  .nlinks a{opacity:.7;transition:opacity .3s}.nlinks a:hover,.nlinks a.active{opacity:1}
+  .nr{display:flex;align-items:center;gap:22px;font-size:14px}
+  .npill{font-size:12.5px;font-weight:700;border:1px solid var(--line);padding:10px 20px;
+    border-radius:4px;transition:.35s}
+  .npill:hover{background:var(--red);border-color:var(--red);color:#fff}
+  @media(max-width:1080px){.nlinks,.nr .ic{display:none}}
+
+  /* ===================== 01 · THE BALANCE ============================ */
+  .balance{position:relative;height:100svh;min-height:620px;overflow:hidden;
+    background:var(--n-bg);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+  .side{position:absolute;inset:0}
+  .side img{width:100%;height:100%;object-fit:cover}
+  .side.night img,.side.day img{object-position:center 52%}
+  .side::after{content:"";position:absolute;inset:0}
+  .side.night::after{background:linear-gradient(90deg,rgba(6,6,9,.82),rgba(6,6,9,.42) 48%,rgba(6,6,9,.62))}
+  .side.day::after{background:linear-gradient(270deg,rgba(250,248,244,.86),rgba(250,248,244,.40) 48%,rgba(250,248,244,.62))}
+  /* the morning sits on top, clipped by the taiji S-curve */
+  .side.day{z-index:2;clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%);will-change:clip-path}
+
+  /* the seam itself — a thread of light following the curve */
+  .seam{position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:overlay;opacity:.9}
+  .seam path{fill:none;stroke:#fff;stroke-width:1.6;vector-effect:non-scaling-stroke}
+
+  .bal-in{position:absolute;inset:0;z-index:4;pointer-events:none}
+  /* Each half's words live inside that half: the same S-curve that divides the
+     two kitchens cuts the type, so a line can be half in the night. */
+  .blayer{position:absolute;inset:0;display:flex;align-items:center;will-change:clip-path}
+  .blayer.right{justify-content:flex-end;text-align:right}
+  .bcol{padding:0 clamp(24px,5vw,86px);max-width:min(560px,46vw)}
+  .bcol .t{display:block;font-size:clamp(38px,5.6vw,82px);font-weight:200;line-height:.98;letter-spacing:-.04em}
+  .bcol .t b{font-weight:500}
+  .bcol p{margin-top:20px;font-weight:300;font-size:16px;line-height:1.7;max-width:34ch}
+  .blayer.right .bcol p{margin-left:auto}
+  .bcol .cjk{margin-bottom:22px;opacity:.85}
+  .bcol .go{display:inline-flex;align-items:center;gap:10px;margin-top:30px;font-size:12px;
+    letter-spacing:2.4px;text-transform:uppercase;font-weight:700;pointer-events:auto;
+    padding-bottom:6px;border-bottom:1px solid currentColor;transition:gap .35s var(--ease)}
+  .bcol .go:hover{gap:18px}
+  .blayer.left .bcol{color:#f5f3f7}
+  .blayer.left .cjk,.blayer.left p{color:#b7b2bf}
+  .blayer.left .go{color:var(--n-acc)}
+  .blayer.right .bcol{color:#14161b}
+  .blayer.right .cjk,.blayer.right p{color:#5d5f5c}
+  .blayer.right .go{color:var(--d-acc)}
+
+  /* A dark band across the top carries the navbar and the title, so both stay
+     legible whichever world is underneath them. */
+  .balance::before{content:"";position:absolute;left:0;right:0;top:0;height:42%;z-index:3;
+    background:linear-gradient(180deg,rgba(6,6,9,.78),rgba(6,6,9,.42) 46%,rgba(6,6,9,0));
+    pointer-events:none}
+  .bal-title{position:absolute;left:50%;top:15.5%;transform:translateX(-50%);z-index:5;text-align:center;
+    pointer-events:none;width:min(92vw,760px);color:#fff}
+  .bal-title .cjk{margin-bottom:14px;opacity:.7;letter-spacing:1em}
+  .bal-title h1{font-size:clamp(28px,4.2vw,58px);font-weight:200;
+    text-shadow:0 2px 40px rgba(0,0,0,.45)}
+
+  /* the handle: a live taiji you drag */
+  .handle{position:absolute;top:50%;z-index:6;width:86px;height:86px;margin:-43px 0 0 -43px;
+    left:calc(var(--s) * 100%);border-radius:50%;display:grid;place-items:center;
+    background:rgba(128,128,128,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    box-shadow:0 0 0 1px rgba(255,255,255,.35),0 18px 40px rgba(0,0,0,.35);
+    transition:transform .4s var(--ease),box-shadow .4s}
+  .balance:hover .handle,.balance.dragging .handle{transform:scale(1.08)}
+  .balance.dragging .handle{box-shadow:0 0 0 1px rgba(255,255,255,.7),0 0 46px rgba(255,255,255,.35)}
+  .handle svg{width:54px;height:54px;animation:spin 26s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .handle .arr{position:absolute;font-size:11px;color:#fff;opacity:.85;mix-blend-mode:difference}
+  .handle .arr.l{left:-26px}.handle .arr.r{right:-26px}
+
+  .bal-hint{position:absolute;left:50%;bottom:38px;transform:translateX(-50%);z-index:6;
+    font-size:10.5px;letter-spacing:3.4px;text-transform:uppercase;font-weight:700;color:#fff;
+    mix-blend-mode:difference;display:flex;align-items:center;gap:14px;transition:opacity .6s}
+  .balance.touched .bal-hint{opacity:0}
+  .bal-hint i{display:block;width:34px;height:1px;background:currentColor;position:relative;overflow:hidden}
+  .bal-hint i::after{content:"";position:absolute;inset:0;background:#fff;animation:sweep 2.6s infinite}
+  @keyframes sweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+  /* A phone screen is tall, so the two worlds divide top and bottom instead.
+     Night takes the upper half, morning the lower — the same curve, turned. */
+  @media(max-width:900px){
+    .blayer{justify-content:flex-start;text-align:left}
+    .blayer.left{align-items:flex-start;padding-top:23vh}
+    .blayer.right{align-items:flex-end;padding-bottom:13vh}
+    .blayer.right .bcol p{margin-left:0}
+    .bcol{max-width:none;padding:0 24px}
+    .bcol .t{font-size:clamp(34px,10vw,52px)}
+    .bcol .cjk{margin-bottom:14px}
+    .bcol p{font-size:15px}
+    .bcol .go{margin-top:20px}
+    .side.night::after{background:linear-gradient(180deg,rgba(6,6,9,.86),rgba(6,6,9,.5) 60%,rgba(6,6,9,.6))}
+    .side.day::after{background:linear-gradient(0deg,rgba(250,248,244,.92),rgba(250,248,244,.5) 55%,rgba(250,248,244,.6))}
+    .balance::before{height:26%}
+    .handle{left:50%!important;top:calc(var(--s) * 100%)}
+    .handle .arr.l{left:auto;right:auto;top:-24px;transform:rotate(90deg)}
+    .handle .arr.r{left:auto;right:auto;bottom:-24px;transform:rotate(90deg)}
+    .bal-title{top:8%}
+    .handle{width:66px;height:66px;margin:-33px 0 0 -33px}
+    .handle svg{width:42px;height:42px}
+  }
+
+  /* ===================== 02 · THE SYMBOL ============================= */
+  .symbol{position:relative;text-align:center;background:var(--bg);color:var(--ink)}
+  .taiji{width:min(52vw,330px);height:min(52vw,330px);margin:0 auto 54px;display:block;
+    filter:drop-shadow(0 34px 70px rgba(0,0,0,.55))}
+  .taiji .rot{transform-origin:120px 120px;animation:spin 72s linear infinite}
+  .sym-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);
+    max-width:900px;margin:66px auto 0;text-align:left}
+  .sym-grid h4{font-size:13px;letter-spacing:2.6px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+  .sym-grid .n h4{color:var(--n-acc)}
+  .sym-grid .d h4{color:var(--d-acc)}
+  .sym-grid p{font-weight:300;color:var(--dim);font-size:16px;line-height:1.75}
+  @media(max-width:760px){.sym-grid{grid-template-columns:1fr;gap:34px;margin-top:44px}}
+
+  /* ===================== 00 · THE OPENING ============================ */
+  html.iolock,html.iolock body{overflow:hidden!important}
+  #intro{position:fixed;inset:0;z-index:4000;overflow:hidden;cursor:pointer;
+    opacity:1;visibility:visible}
+  #intro.done{opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .5s ease,visibility 0s .5s}
+  #intro .ioback{position:absolute;inset:0;background:#0b0c10}
+  #intro .iowrap{position:absolute;left:50%;top:50%;
+    width:var(--iw,240px);height:var(--iw,240px);
+    margin-left:calc(var(--iw,240px) / -2);margin-top:calc(var(--iw,240px) / -2);
+    transform:rotate(-168deg)}
+  #intro .iohalf{position:absolute;inset:0;transform-origin:50% 50%;
+    will-change:transform,opacity;backface-visibility:hidden}
+  #intro .iohalf svg{width:100%;height:100%;display:block;overflow:visible;
+    shape-rendering:geometricPrecision}
+  #intro .ioword{position:absolute;left:0;right:0;top:calc(50% + var(--iw,240px) * .68);
+    text-align:center;pointer-events:none;opacity:0;
+    mix-blend-mode:difference;color:#fff}
+  #intro .ioword b{display:block;font-size:clamp(24px,3.6vw,38px);font-weight:200;
+    letter-spacing:.32em;text-indent:.32em;line-height:1}
+  #intro .ioword i{display:block;margin-top:15px;font-style:normal;font-size:9.5px;
+    font-weight:700;letter-spacing:5.4px;text-indent:5.4px;text-transform:uppercase;opacity:.85}
+  #intro .ioskip{position:absolute;right:22px;bottom:20px;font-size:9px;letter-spacing:2.6px;
+    text-transform:uppercase;font-weight:700;color:#fff;mix-blend-mode:difference;
+    opacity:0;transition:opacity .6s ease;pointer-events:none}
+  #intro.hint .ioskip{opacity:.5}
+  @media(prefers-reduced-motion:reduce){
+    #intro .iowrap{transform:rotate(0deg)}
+  }
+
+  /* ===================== 03/04 · THE TWO CHAPTERS ==================== */
+  .chapter{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+  .chapter .cbg{position:absolute;inset:0;z-index:0}
+  .chapter .cbg img{width:100%;height:100%;object-fit:cover}
+  .chapter .cin{position:relative;z-index:2;width:100%}
+  .chapter .num{font-size:11px;letter-spacing:4px;font-weight:700;opacity:.55;margin-bottom:22px}
+  .chapter .cbody{max-width:44ch;font-weight:300;font-size:17px;line-height:1.75;margin-top:26px}
+  .chapter .ctext{max-width:640px}
+
+  /* NIGHT — the hood sits left of frame, so the words sit right. */
+  .ch-night{background:var(--n-bg);color:var(--n-ink)}
+  .ch-night .cbg img{object-position:34% center}
+  .ch-night .cbg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(270deg,rgba(6,6,9,.985),rgba(6,6,9,.94) 30%,rgba(6,6,9,.5) 58%,rgba(6,6,9,0) 84%),
+               linear-gradient(0deg,var(--n-bg),rgba(6,6,9,0) 34%)}
+  .ch-night .cin .wrap{display:flex;justify-content:flex-end}
+  .ch-night .ctext{text-align:right}
+  .ch-night .cbody{color:#a8a3b0;margin-left:auto}
+  .ch-night .cstats{justify-content:flex-end}
+
+  /* MORNING — the hood sits right of frame, so the words sit left. */
+  .ch-day{background:var(--d-bg);color:var(--d-ink)}
+  .ch-day .cbg img{object-position:62% center;filter:saturate(1.08) contrast(1.06)}
+  .ch-day .cbg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(250,248,244,.985),rgba(250,248,244,.93) 26%,rgba(250,248,244,.46) 52%,rgba(250,248,244,0) 78%),
+               linear-gradient(0deg,var(--d-bg),rgba(250,248,244,0) 26%)}
+  .ch-day .cbody{color:#5d5f5c}
+
+  .cstats{display:flex;gap:44px;margin-top:44px;flex-wrap:wrap}
+  .cstats b{display:block;font-size:clamp(30px,3.6vw,50px);font-weight:200;letter-spacing:-.04em;line-height:1}
+  .cstats span{font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;font-weight:700;opacity:.55}
+  .cstats sup{font-size:.42em;font-weight:500;margin-left:2px;vertical-align:super}
+  .enter{display:inline-flex;align-items:center;gap:12px;margin-top:46px;font-size:12px;
+    letter-spacing:2.6px;text-transform:uppercase;font-weight:700;padding:16px 32px;
+    border-radius:50px;transition:.4s var(--ease)}
+  .ch-night .enter{background:var(--n-acc);color:#14100c}
+  .ch-night .enter:hover{background:#fff;transform:translateY(-3px)}
+  .ch-day .enter{background:var(--d-ink);color:var(--d-bg)}
+  .ch-day .enter:hover{background:var(--d-acc);transform:translateY(-3px)}
+  @media(max-width:900px){
+    .chapter{min-height:86svh;padding:96px 0 110px}
+    .ch-night .cin .wrap{display:block}
+    .ch-night .ctext,.ch-night .cbody,.ch-night .cstats{text-align:left;justify-content:flex-start;margin-left:0}
+    .ch-night .cbg::after{background:linear-gradient(0deg,var(--n-bg) 14%,rgba(6,6,9,.72) 62%,rgba(6,6,9,.42))}
+    .ch-day .cbg::after{background:linear-gradient(0deg,var(--d-bg) 14%,rgba(250,248,244,.8) 62%,rgba(250,248,244,.5))}
+    .cstats{gap:28px}
+  }
+
+  /* ===================== 05 · THE DOT IN THE EYE ===================== */
+  /* Each card is one room. Inside it, a perfect circle holds the other room —
+     the dot in the eye, literally. Hover opens the dot. */
+  .eye{background:var(--bg);color:var(--ink);position:relative;overflow:hidden}
+  .eye::before{content:"";position:absolute;left:50%;top:-12%;width:min(94vw,1180px);aspect-ratio:1;
+    transform:translateX(-50%);pointer-events:none;opacity:.5;
+    background:radial-gradient(closest-side,rgba(226,180,140,.10),transparent 70%),
+               radial-gradient(closest-side,rgba(47,142,140,.09),transparent 68%);
+    background-position:32% 40%,68% 60%;background-size:70% 70%,70% 70%;background-repeat:no-repeat}
+  .eye .wrap{position:relative;z-index:1}
+  .eye .head{text-align:center;max-width:700px;margin:0 auto 64px}
+  .eye .head p{margin-top:20px}
+
+  .eyes{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px);align-items:stretch}
+  .eyecard{position:relative;border-radius:26px;overflow:hidden;min-height:min(78vh,660px);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(28px,2.6vw,42px);
+    isolation:isolate;transition:transform .8s var(--ease),box-shadow .8s var(--ease)}
+  .eyecard:hover{transform:translateY(-10px)}
+  .eyecard.n{color:#f6f4f8;background:#08080b;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+  .eyecard.d{color:#14161b;background:#f8f5f0;box-shadow:0 30px 70px rgba(0,0,0,.30)}
+  .eyecard:hover.n{box-shadow:0 44px 96px rgba(0,0,0,.6)}
+  .eyecard:hover.d{box-shadow:0 44px 96px rgba(0,0,0,.42)}
+
+  .eyecard .ph{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .eyecard .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);
+    transition:transform 1.4s var(--ease)}
+  .eyecard:hover .ph img{transform:scale(1.07)}
+  .eyecard .ph::after{content:"";position:absolute;inset:0}
+  .eyecard.n .ph::after{background:linear-gradient(0deg,rgba(6,6,9,.95) 6%,rgba(6,6,9,.6) 40%,rgba(6,6,9,.06) 72%)}
+  .eyecard.d .ph::after{background:linear-gradient(0deg,rgba(250,248,244,.95) 6%,rgba(250,248,244,.62) 40%,rgba(250,248,244,.04) 72%)}
+
+  /* the dot */
+  .spot{position:absolute;z-index:2;top:clamp(56px,7vw,88px);
+    width:clamp(112px,14.5vw,186px);aspect-ratio:1;border-radius:50%;overflow:hidden;
+    transition:width .9s var(--ease),transform .9s var(--ease),box-shadow .9s var(--ease)}
+  .eyecard.n .spot{right:clamp(26px,2.8vw,44px);box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.22),0 0 44px rgba(226,180,140,.14)}
+  .eyecard.d .spot{left:clamp(26px,2.8vw,44px);box-shadow:0 18px 44px rgba(20,22,28,.28),0 0 0 1px rgba(20,22,28,.16),0 0 44px rgba(47,142,140,.14)}
+  .spot img{width:100%;height:100%;object-fit:cover;transform:scale(1.14);
+    transition:transform 1.4s var(--ease)}
+  .eyecard:hover .spot{width:clamp(168px,23vw,290px)}
+  .eyecard:hover .spot img{transform:scale(1)}
+  .eyecard.n:hover .spot{box-shadow:0 26px 60px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.4),0 0 70px rgba(226,180,140,.24)}
+  .eyecard.d:hover .spot{box-shadow:0 26px 60px rgba(20,22,28,.3),0 0 0 1px rgba(20,22,28,.28),0 0 70px rgba(47,142,140,.22)}
+  .spot .glyph{position:absolute;inset:0;display:grid;place-items:center;
+    font-size:clamp(30px,4.4vw,52px);font-weight:200;line-height:1;
+    text-shadow:0 2px 18px rgba(0,0,0,.45);transition:opacity .7s var(--ease)}
+  .eyecard.n .spot .glyph{color:rgba(20,22,28,.5);text-shadow:0 2px 18px rgba(255,255,255,.4)}
+  .eyecard.d .spot .glyph{color:rgba(255,255,255,.72)}
+  .eyecard:hover .spot .glyph{opacity:0}
+  .slab{position:absolute;z-index:2;top:calc(clamp(56px,7vw,88px) + clamp(112px,14.5vw,186px) + 16px);
+    font-size:9.5px;letter-spacing:2.4px;text-transform:uppercase;font-weight:700;
+    transition:opacity .5s var(--ease),transform .9s var(--ease)}
+  .eyecard.n .slab{right:clamp(26px,2.8vw,44px);text-align:right;color:var(--n-acc);
+    text-shadow:0 2px 12px rgba(0,0,0,.85),0 0 22px rgba(0,0,0,.6)}
+  .eyecard.d .slab{left:clamp(26px,2.8vw,44px);text-align:left;color:#1d6f6d;
+    text-shadow:0 2px 12px rgba(255,255,255,.95),0 0 22px rgba(255,255,255,.8)}
+  .eyecard:hover .slab{opacity:0;transform:translateY(8px)}
+
+  .eyecard .tag{position:absolute;top:clamp(24px,2.4vw,34px);z-index:3;font-size:10px;letter-spacing:2.6px;
+    text-transform:uppercase;font-weight:700;padding:8px 15px;border-radius:50px;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .eyecard.n .tag{left:clamp(24px,2.4vw,34px);color:var(--n-acc);
+    border:1px solid color-mix(in srgb,var(--n-acc) 40%,transparent);background:rgba(6,6,9,.35)}
+  .eyecard.d .tag{right:clamp(24px,2.4vw,34px);color:#1d6f6d;
+    border:1px solid color-mix(in srgb,var(--d-acc) 45%,transparent);background:rgba(255,255,255,.45)}
+
+  .eyecard h3{font-size:clamp(23px,2.5vw,33px);margin-bottom:12px;position:relative;z-index:2}
+  .eyecard p{font-weight:300;font-size:15.5px;line-height:1.7;max-width:42ch;position:relative;z-index:2}
+  .eyecard.n p{color:#b3aeba}.eyecard.d p{color:#55574f}
+  .eymeta{position:relative;z-index:2;display:flex;gap:30px;flex-wrap:wrap;
+    margin-top:26px;padding-top:20px;border-top:1px solid}
+  .eyecard.n .eymeta{border-color:rgba(255,255,255,.16)}
+  .eyecard.d .eymeta{border-color:rgba(20,22,28,.14)}
+  .eymeta div{min-width:96px}
+  .eymeta i{display:block;font-style:normal;font-size:9.5px;letter-spacing:2.2px;
+    text-transform:uppercase;font-weight:700;opacity:.5;margin-bottom:6px}
+  .eymeta b{font-size:14px;font-weight:500;letter-spacing:-.01em}
+  .eyecard.n .eymeta b{color:var(--n-acc)}
+  .eyecard.d .eymeta b{color:#1d6f6d}
+
+  .eyefoot{text-align:center;margin-top:52px;font-size:13px;font-weight:300;color:var(--dim)}
+  .eyefoot b{color:var(--acc);font-weight:500}
+  @media(max-width:860px){
+    .eyes{grid-template-columns:1fr;gap:20px}
+    .eyecard{min-height:0;aspect-ratio:auto;padding:26px}
+    .eyecard .ph{position:relative;height:340px;border-radius:18px;margin:-26px -26px 22px}
+    .eyecard.n .ph::after{background:linear-gradient(0deg,rgba(6,6,9,.9),transparent 55%)}
+    .eyecard.d .ph::after{background:linear-gradient(0deg,rgba(250,248,244,.9),transparent 55%)}
+    .spot{top:232px;width:118px}
+    .slab{display:none}
+    .eyecard:hover{transform:none}
+    .eyecard:hover .spot{width:118px}
+    .eyecard .spot .glyph{font-size:34px}
+    .eymeta{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+    .eymeta div{min-width:0}
+    .eymeta b{font-size:13px}
+    .eyefoot{margin-top:34px;font-size:12.5px}
+  }
+
+  /* ===================== THE SCORE (ambient audio toggle) ============ */
+  /* Nothing plays until it is asked for. The mark is a taiji that spins
+     while the room is breathing and rests when it is silent. */
+  .score{position:fixed;right:22px;bottom:22px;z-index:900;display:flex;align-items:center;gap:0;
+    height:48px;padding:0;border-radius:50px;cursor:pointer;
+    background:rgba(10,11,14,.62);border:1px solid rgba(255,255,255,.16);
+    backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);
+    box-shadow:0 14px 40px rgba(0,0,0,.45);
+    transition:gap .6s var(--ease),padding .6s var(--ease),background .5s,border-color .5s,transform .5s var(--ease);
+    opacity:0;transform:translateY(14px);pointer-events:none}
+  .score.ready{opacity:1;transform:none;pointer-events:auto}
+  .score:hover{background:rgba(14,15,19,.82);border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+  .score .mk{width:46px;height:46px;flex:0 0 46px;display:grid;place-items:center}
+  .score .mk svg{width:23px;height:23px;display:block}
+  .score .mk .rot{transform-origin:50px 50px}
+  .score.on .mk .rot{animation:spin 14s linear infinite}
+  .score .lbl{font-size:10px;letter-spacing:2.4px;text-transform:uppercase;font-weight:700;
+    color:#cfc8d2;white-space:nowrap;max-width:0;overflow:hidden;opacity:0;
+    transition:max-width .6s var(--ease),opacity .4s,padding .6s var(--ease)}
+  .score:hover .lbl,.score.hint .lbl{max-width:150px;opacity:1;padding-right:20px}
+  .score.on .lbl{color:var(--acc)}
+  .score .eq{display:flex;align-items:flex-end;gap:2px;height:11px;margin-left:-4px;
+    max-width:0;overflow:hidden;opacity:0;transition:max-width .5s var(--ease),opacity .4s}
+  .score.on .eq{max-width:20px;opacity:1;margin-right:16px;margin-left:0}
+  .score .eq i{display:block;width:2px;background:var(--acc);border-radius:2px;height:4px;
+    animation:eqb 1.15s ease-in-out infinite}
+  .score .eq i:nth-child(2){animation-delay:.22s}
+  .score .eq i:nth-child(3){animation-delay:.44s}
+  @keyframes eqb{0%,100%{height:3px;opacity:.55}50%{height:11px;opacity:1}}
+  @media(max-width:860px){
+    .score{right:14px;bottom:14px;height:44px}
+    .score .mk{width:42px;height:42px;flex:0 0 42px}
+    .score:hover .lbl{max-width:0;opacity:0;padding-right:0}
+    .score.hint .lbl{max-width:130px;opacity:1;padding-right:16px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .score.on .mk .rot{animation:none}
+    .score .eq i{animation:none;height:7px}
+  }
+
+  /* ===================== 06 · SAME BONES ============================= */
+  /* one light breath before the doors */
+  .bones{position:relative;background:var(--d-bg);color:var(--d-ink);text-align:center}
+  .bones .kick{color:var(--d-acc)}
+  .bones .body{color:var(--d-dim)}
+  .bones .bgrid{background:var(--d-line);border-color:var(--d-line)!important}
+  .bones .bcell{background:var(--d-bg)}
+  .bones .bcell span{color:var(--d-dim)}
+  .bones .bcell sup{color:var(--d-acc)}
+  .bones .bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:70px;
+    border-top:1px solid;border-bottom:1px solid}
+  .bones .bcell{padding:50px 22px}
+  .bones .bcell b{display:block;font-size:clamp(32px,4vw,58px);font-weight:200;letter-spacing:-.04em;line-height:1}
+  .bones .bcell sup{font-size:.4em;font-weight:500;vertical-align:super;color:var(--acc)}
+  .bones .bcell span{display:block;margin-top:12px;font-size:10.5px;letter-spacing:2.2px;
+    text-transform:uppercase;font-weight:700;color:var(--dim)}
+  @media(max-width:860px){.bones .bgrid{grid-template-columns:1fr 1fr}}
+
+  /* ===================== 07 · CHOOSE YOUR LIGHT ===================== */
+  /* The closing pair carries the same seam as the opening one. */
+  .doors{position:relative;height:min(84svh,760px);min-height:520px;overflow:hidden;
+    border-top:1px solid var(--line);cursor:ew-resize}
+  .door{position:absolute;inset:0;overflow:hidden;display:flex;align-items:flex-end}
+  .door.d{z-index:2;will-change:clip-path}
+  .door img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    transition:transform 1.2s var(--ease)}
+  .door:hover img{transform:scale(1.05)}
+  .door.n .din{max-width:min(46vw,520px)}
+  .door.d .din{margin-left:auto;text-align:right;max-width:min(46vw,520px)}
+  .door.d .dp{margin-left:auto}
+  .dseam{position:absolute;inset:0;z-index:3;pointer-events:none;mix-blend-mode:overlay;opacity:.85}
+  .dseam path{fill:none;stroke:#fff;stroke-width:1.4;vector-effect:non-scaling-stroke}
+  .door::after{content:"";position:absolute;inset:0;transition:opacity .7s}
+  .door.n::after{background:linear-gradient(0deg,rgba(6,6,9,.94),rgba(6,6,9,.35) 60%,rgba(6,6,9,.55))}
+  .door.d::after{background:linear-gradient(0deg,rgba(250,248,244,.94),rgba(250,248,244,.3) 60%,rgba(250,248,244,.45))}
+  .door .din{position:relative;z-index:2;padding:clamp(30px,4vw,60px);width:100%}
+  .door.n .din{color:#f5f3f7}.door.d .din{color:#14161b}
+  .door .dk{font-size:10.5px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:16px}
+  .door.n .dk{color:var(--n-acc)}.door.d .dk{color:var(--d-acc)}
+  .door .dt{font-size:clamp(28px,3.6vw,54px);font-weight:200;letter-spacing:-.04em;line-height:1}
+  .door .dp{margin-top:16px;font-weight:300;font-size:15.5px;max-width:34ch;opacity:.8}
+  .door .dgo{display:inline-flex;align-items:center;gap:10px;margin-top:26px;font-size:11.5px;
+    letter-spacing:2.4px;text-transform:uppercase;font-weight:700;
+    padding-bottom:6px;border-bottom:1px solid currentColor;transition:gap .35s var(--ease)}
+  .door:hover .dgo{gap:20px}
+  @media(max-width:860px){
+    .doors{display:flex;flex-direction:column;height:auto;cursor:auto}
+    .door{position:relative;inset:auto;min-height:420px}
+    .door.d{clip-path:none!important}
+    .door.n .din,.door.d .din{max-width:none;margin-left:0;text-align:left}
+    .door.d .dp{margin-left:0}
+    .dseam{display:none}
+  }
+
+  /* ===================== FOOTER ===================================== */
+  footer{background:var(--n-bg);color:var(--n-ink);padding:88px 0 40px;border-top:1px solid var(--n-line)}
+  .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:54px}
+  .fl{height:20px;filter:brightness(0) invert(1);margin-bottom:22px}
+  .fdesc{font-size:14px;font-weight:300;color:#8d8895;max-width:300px;line-height:1.7}
+  .fsoc{display:flex;gap:10px}
+  .fsoc a{width:34px;height:34px;border:1px solid var(--n-line);border-radius:50%;display:grid;
+    place-items:center;font-size:12px;color:#8d8895;transition:.3s}
+  .fsoc a:hover{background:var(--red);border-color:var(--red);color:#fff}
+  footer h5{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:#f5f3f7;margin-bottom:18px;font-weight:700}
+  .fli{display:block;font-size:14px;font-weight:300;color:#8d8895;padding:6px 0;transition:.25s}
+  .fli:hover{color:#f5f3f7}
+  .fbot{margin-top:60px;padding-top:26px;border-top:1px solid var(--n-line);display:flex;
+    justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12.5px;color:#6f6b78}
+  .fbot a:hover{color:#f5f3f7}
+  @media(max-width:860px){.fgrid{grid-template-columns:1fr 1fr;gap:38px}}
+  @media(max-width:560px){.fgrid{grid-template-columns:1fr}.wrap{padding:0 22px}.pad{padding:86px 0}}
+
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+      transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .rv{opacity:1;transform:none}
+  }
+</style>
+<noscript><style>#intro{display:none!important}</style></noscript>
+<script>
+/* lock the page under the opening — with a failsafe in case anything below fails */
+(function(){var d=document.documentElement;
+ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){d.className+=' iolock';}
+ setTimeout(function(){d.classList.remove('iolock');},6000);})();
+</script>
+</head>
+<body>
+
+<!-- ============ 00 · THE OPENING ============ -->
+<!-- The mark draws itself, turns upright, swallows the screen, then parts. -->
+<div id="intro" aria-hidden="true">
+  <div class="ioback"></div>
+  <div class="iowrap">
+    <div class="iohalf io-dark">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50,2 A48,48 0 0,0 50,98 A24,24 0 0,1 50,50 A24,24 0 0,0 50,2 Z"
+              fill="#0b0b0f" stroke="rgba(246,242,236,.55)" stroke-width="0.13"/>
+        <g class="iodots">
+          <circle cx="50" cy="26" r="7.4" fill="#f2efe9"/>
+          <circle cx="50" cy="26" r="2.5" fill="#2f8e8c"/>
+        </g>
+      </svg>
+    </div>
+    <div class="iohalf io-light">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path fill-rule="evenodd" fill="#f4f0ea"
+              d="M50,2 A48,48 0 1,0 50,98 A48,48 0 1,0 50,2 Z
+                 M50,2 A48,48 0 0,0 50,98 A24,24 0 0,1 50,50 A24,24 0 0,0 50,2 Z"/>
+        <g class="iodots">
+          <circle cx="50" cy="74" r="7.4" fill="#0b0b0f"/>
+          <circle cx="50" cy="74" r="2.5" fill="#e2b48c"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="ioword"><b>兩半</b><i>Two Halves</i></div>
+  <div class="ioskip">Tap to skip</div>
+</div>
+<script>
+/* ---- the opening ---------------------------------------------------------
+   One mark. It arrives spinning, settles upright, grows until its own S-curve
+   is the whole screen, and then the two halves walk away from each other —
+   night to the left, morning to the right — leaving the hero already in place. */
+(function(){
+  var el=document.getElementById('intro');
+  if(!el) return;
+  var root=document.documentElement, done=false;
+
+  function finish(){
+    if(done) return; done=true;
+    el.classList.add('done');
+    root.classList.remove('iolock');
+    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },700);
+  }
+  el.addEventListener('click',finish);
+  addEventListener('keydown',function(e){ if(e.key==='Escape') finish(); });
+
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(reduce || !el.animate){ setTimeout(finish,420); return; }
+
+  var vw=innerWidth, vh=innerHeight;
+  var W=Math.max(150,Math.min(250,Math.round(Math.min(vw,vh)*0.33)));
+  el.style.setProperty('--iw',W+'px');
+
+  var cover=Math.sqrt(vw*vw+vh*vh)/(0.96*W)*1.16;   /* until the circle swallows the frame */
+  var bulge=0.24*W*cover;                            /* how far each half reaches past centre */
+  var out=vw*0.5+bulge+140;
+
+  var D=2800,
+      EIN='cubic-bezier(.16,1,.3,1)',
+      EGROW='cubic-bezier(.68,0,.26,1)',
+      EPART='cubic-bezier(.6,0,.1,1)';
+
+  function run(node,frames,opts){ if(node) return node.animate(frames,opts); }
+
+  run(el.querySelector('.iowrap'),
+      [{transform:'rotate(-168deg)'},{transform:'rotate(0deg)'}],
+      {duration:1760,easing:EIN,fill:'both'});
+
+  [['.io-dark',-1],['.io-light',1]].forEach(function(p){
+    run(el.querySelector(p[0]),[
+      {transform:'translateX(0px) scale(0.05)',opacity:0,offset:0,   easing:EIN},
+      {transform:'translateX(0px) scale(1)',   opacity:1,offset:0.25,easing:'linear'},
+      {transform:'translateX(0px) scale(1)',   opacity:1,offset:0.30,easing:EGROW},
+      {transform:'translateX(0px) scale('+cover.toFixed(3)+')',opacity:1,offset:0.62,easing:EPART},
+      {transform:'translateX('+(p[1]*out).toFixed(0)+'px) scale('+cover.toFixed(3)+')',opacity:1,offset:1}
+    ],{duration:D,fill:'both'});
+  });
+
+  /* the two eyes dissolve as the mark outgrows them */
+  [].forEach.call(el.querySelectorAll('.iodots'),function(g){
+    run(g,[{opacity:1,offset:0},{opacity:1,offset:0.29},{opacity:0,offset:0.50},{opacity:0,offset:1}],
+        {duration:D,easing:'linear',fill:'both'});
+  });
+
+  run(el.querySelector('.ioback'),
+      [{opacity:1,offset:0},{opacity:1,offset:0.61},{opacity:0,offset:0.72},{opacity:0,offset:1}],
+      {duration:D,easing:'linear',fill:'both'});
+
+  run(el.querySelector('.ioword'),
+      [{opacity:0,offset:0},{opacity:0,offset:0.07},{opacity:1,offset:0.20},
+       {opacity:1,offset:0.40},{opacity:0,offset:0.52},{opacity:0,offset:1}],
+      {duration:D,easing:'linear',fill:'both'});
+
+  setTimeout(function(){ el.classList.add('hint'); },900);
+  /* once the halves start parting there is nothing left to skip — hand the page back */
+  setTimeout(function(){ el.classList.remove('hint'); el.style.pointerEvents='none';
+                         root.classList.remove('iolock'); },Math.round(D*0.62)+40);
+  setTimeout(finish,D+90);
+})();
+</script>
+
+<nav class="nav" id="nav">
+  <a href="/" class="brand"><img src="../assets/logo.png" alt="FOTILE"></a>
+  <div class="nlinks">
+    <a href="/shop/">Products</a>
+    <a href="/moon-series/">Moon Series</a>
+    <a href="/opal-series/">Opal Series</a>
+    <a href="/two-halves/" class="active">Two Halves</a>
+    <a href="/about-us/">About</a>
+    <a href="/our-dealers/">Dealers</a>
+    <a href="/contact-us/">Contact</a>
+  </div>
+  <div class="nr">
+    <span class="ic">⌕</span>
+    <a href="/cart/" class="ic" style="position:relative"><span>🛒</span><b data-cart-count style="position:absolute;top:-8px;right:-9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a>
+    <a href="/contact-us/" class="npill">Request a Quote</a>
+  </div>
+</nav>
+
+<!-- ============ 01 · THE BALANCE ============ -->
+<header class="balance" id="balance" role="group" aria-label="Drag to shift between the Moon Series and the Opal Series" tabindex="0">
+  <div class="side night"><img src="../assets/moon-room.jpg" alt="A Fotile Moon Series kitchen — obsidian cabinetry, warm low light" fetchpriority="high"></div>
+  <div class="side day" id="daySide"><img src="../assets/opal-room.jpg" alt="A Fotile Opal Series kitchen — porcelain white in morning light" fetchpriority="high"></div>
+
+  <svg class="seam" id="seam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path id="seamPath" d=""/></svg>
+
+  <div class="bal-title">
+    <div class="cjk">陰 · 陽</div>
+    <h1>Two halves of one kitchen.</h1>
+  </div>
+
+  <div class="bal-in">
+    <div class="blayer left" id="layNight"><div class="bcol">
+      <div class="cjk">陰 · YIN</div>
+      <span class="t">The night<br>is <b>ours.</b></span>
+      <p>Obsidian glass. Rose-gold. A presence that only wakes after dark.</p>
+      <a class="go" href="#night">Enter the Moon <span>→</span></a>
+    </div></div>
+    <div class="blayer right" id="layDay"><div class="bcol">
+      <div class="cjk">陽 · YANG</div>
+      <span class="t">So is the<br><b>morning.</b></span>
+      <p>Porcelain white. Light gathered, held, and quietly given back.</p>
+      <a class="go" href="#day">Enter the Opal <span>→</span></a>
+    </div></div>
+  </div>
+
+  <div class="handle" id="handle" aria-hidden="true">
+    <span class="arr l">◀</span>
+    <svg viewBox="0 0 200 200"><g class="rot">
+      <circle cx="100" cy="100" r="97" fill="#f7f4ee"/>
+      <path d="M100,3 A97,97 0 0,0 100,197 A48.5,48.5 0 0,1 100,100 A48.5,48.5 0 0,0 100,3 Z" fill="#08080c"/>
+      <circle cx="100" cy="51.5" r="15" fill="#f7f4ee"/>
+      <circle cx="100" cy="148.5" r="15" fill="#08080c"/>
+      <circle cx="100" cy="51.5" r="4.6" fill="#2f8e8c"/>
+      <circle cx="100" cy="148.5" r="4.6" fill="#e2b48c"/>
+      <circle cx="100" cy="100" r="97" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2"/>
+    </g></svg>
+    <span class="arr r">▶</span>
+  </div>
+
+  <div class="bal-hint"><i></i> Drag to shift the balance <i></i></div>
+</header>
+
+<!-- ============ 02 · THE SYMBOL ============ -->
+<section class="pad symbol">
+  <div class="wrap">
+    <svg class="taiji rv" viewBox="0 0 240 240" aria-label="Taiji — two halves that each contain the other"><defs>
+      <radialGradient id="obs" cx="36%" cy="26%" r="78%">
+        <stop offset="0" stop-color="#2a2a34"/><stop offset=".55" stop-color="#14141b"/><stop offset="1" stop-color="#050508"/>
+      </radialGradient>
+      <radialGradient id="pearl" cx="64%" cy="26%" r="78%">
+        <stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f4efe6"/><stop offset="1" stop-color="#ddd6ca"/>
+      </radialGradient>
+      <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e2b48c"/><stop offset=".5" stop-color="#5f6068" stop-opacity=".5"/><stop offset="1" stop-color="#2f8e8c"/>
+      </linearGradient>
+      <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+        <stop offset=".62" stop-color="#b6a08c" stop-opacity=".22"/><stop offset="1" stop-color="#b6a08c" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="3.4"/>
+      </filter>
+    </defs>
+      <circle cx="120" cy="120" r="118" fill="url(#halo)"/>
+      <g class="rot">
+        <circle cx="120" cy="120" r="100" fill="url(#pearl)"/>
+        <path d="M120,20 A100,100 0 0,0 120,220 A50,50 0 0,1 120,120 A50,50 0 0,0 120,20 Z" fill="url(#obs)"/>
+        <!-- each half is rimmed in the accent of the collection it stands for -->
+        <path d="M120,20 A100,100 0 0,0 120,220" fill="none" stroke="#e2b48c" stroke-width="1.7" opacity=".62"/>
+        <path d="M120,20 A100,100 0 0,0 120,220" fill="none" stroke="#e2b48c" stroke-width="4" opacity=".28" filter="url(#glow)"/>
+        <path d="M120,220 A100,100 0 0,0 120,20" fill="none" stroke="#2f8e8c" stroke-width="1.5" opacity=".42"/>
+        <!-- the S itself, caught in light -->
+        <path d="M120,220 A50,50 0 0,1 120,120 A50,50 0 0,0 120,20" fill="none" stroke="#ffffff" stroke-width="1" opacity=".18"/>
+        <!-- a speck of morning inside the night, and of night inside the morning -->
+        <circle cx="120" cy="70" r="16" fill="url(#pearl)"/>
+        <circle cx="120" cy="170" r="16" fill="url(#obs)"/>
+        <circle cx="120" cy="70" r="5.2" fill="#2f8e8c"/>
+        <circle cx="120" cy="170" r="5.2" fill="#e2b48c"/>
+        <circle cx="120" cy="70" r="5.2" fill="#2f8e8c" opacity=".75" filter="url(#glow)"/>
+        <circle cx="120" cy="170" r="5.2" fill="#e2b48c" opacity=".75" filter="url(#glow)"/>
+        <!-- one continuous ring last, so no seam shows where the halves meet -->
+        <circle cx="120" cy="120" r="100" fill="none" stroke="url(#rim)" stroke-width="1.4" opacity=".85"/>
+      </g>
+    </svg>
+
+    <div style="text-align:center">
+      <div class="kick rv" style="justify-content:center"><span class="dot"></span>The Idea</div>
+      <h2 class="rv d1" style="margin-top:22px">Neither half is<br>the <b>whole kitchen.</b></h2>
+    </div>
+
+    <div class="sym-grid">
+      <div class="n rv d2">
+        <h4>陰 · The dark holds a light</h4>
+        <p>A Moon Series kitchen is obsidian glass and shadow — and then a thread of rose-gold catches the one lamp still on. The dark is never only dark. That single warm line is what stops it feeling like equipment.</p>
+      </div>
+      <div class="d rv d3">
+        <h4>陽 · The light holds a dark</h4>
+        <p>An Opal Series kitchen is porcelain and morning — and then a panel of black glass anchors the whole wall. The light is never only light. That one deep note is what stops it feeling like a showroom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · NIGHT ============ -->
+<section class="chapter ch-night" id="night">
+  <div class="cbg"><img src="../assets/room-night.jpg" alt="A matte black Fotile kitchen at night — obsidian range hood, warm under-cabinet light and a stone island" loading="lazy"></div>
+  <div class="cin"><div class="wrap">
+    <div class="ctext">
+      <div class="num rv">01 / 陰 &nbsp;·&nbsp; MOON SERIES</div>
+      <h2 class="rv d1">Built for the hour<br>after <b>everyone leaves.</b></h2>
+      <p class="cbody rv d2">Obsidian glass, rose-gold detailing and a silhouette that disappears into a dark wall. The Moon Series was drawn for kitchens that are used late, lit low, and looked at as furniture rather than appliances.</p>
+      <div class="cstats rv d2">
+        <div><b>48<sup>dB</sup></b><span>Whisper Quiet</span></div>
+        <div><b>1650<sup>m³/h</sup></b><span>Peak Airflow</span></div>
+        <div><b>96<sup>%</sup></b><span>Smoke Capture</span></div>
+      </div>
+      <a class="enter rv d3" href="/moon-series/">Enter the Moon Series <span>→</span></a>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 04 · MORNING ============ -->
+<section class="chapter ch-day" id="day">
+  <div class="cbg"><img src="../assets/room-day.jpg" alt="A white and oak Fotile kitchen in morning light — porcelain range hood, marble island and open garden doors" loading="lazy"></div>
+  <div class="cin"><div class="wrap">
+    <div class="ctext">
+      <div class="num rv">02 / 陽 &nbsp;·&nbsp; OPAL SERIES</div>
+      <h2 class="rv d1">Built for the hour<br>before <b>anyone speaks.</b></h2>
+      <p class="cbody rv d2">Porcelain white, seamless tempered glass, a surface that takes the whole room's light and gives it back. The Opal Series was drawn for kitchens that are used first thing, in daylight, before the day has started making demands.</p>
+      <div class="cstats rv d2">
+        <div><b>5.0<sup>kW</sup></b><span>Power Burner</span></div>
+        <div><b>4<sup>-in-1</sup></b><span>Steam + Bake</span></div>
+        <div><b>96<sup>%</sup></b><span>Smoke Capture</span></div>
+      </div>
+      <a class="enter rv d3" href="/opal-series/">Enter the Opal Series <span>→</span></a>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============ 05 · THE DOT IN THE EYE ============ -->
+<section class="pad eye">
+  <div class="wrap">
+    <div class="head">
+      <div class="kick rv" style="justify-content:center"><span class="dot"></span>The Dot In The Eye</div>
+      <h2 class="rv d1" style="margin-top:22px">Each one carries<br>a piece of the <b>other.</b></h2>
+      <p class="body rv d2" style="margin:20px auto 0">In the symbol, the dark half holds a spot of light and the light half holds a spot of dark. It is not decoration — it is the reason the shape holds together. The same is true of these two collections.</p>
+    </div>
+    <div class="eyes">
+      <div class="eyecard n rv d1">
+        <div class="ph"><img src="../assets/eye-night.jpg" alt="A Fotile Moon Series range hood in a matte black kitchen, its rose-gold edge catching the under-cabinet light" loading="lazy"></div>
+        <span class="tag">陰 · Moon Series</span>
+        <div class="spot"><img src="../assets/eye-day.jpg" alt="" loading="lazy"><span class="glyph">陽</span></div>
+        <span class="slab">the light it keeps</span>
+        <h3>A line of rose-gold<br>in all that black.</h3>
+        <p>One warm metal edge across an obsidian face. In daylight you barely register it. At night it is the only thing in the room that glows.</p>
+        <div class="eymeta">
+          <div><i>Face</i><b>Obsidian glass</b></div>
+          <div><i>Accent</i><b>Rose gold</b></div>
+          <div><i>Reads as</i><b>Furniture</b></div>
+        </div>
+      </div>
+      <div class="eyecard d rv d2">
+        <div class="ph"><img src="../assets/eye-day.jpg" alt="A Fotile Opal Series range hood in a white marble kitchen, its black glass panel set into porcelain" loading="lazy"></div>
+        <span class="tag">陽 · Opal Series</span>
+        <div class="spot"><img src="../assets/eye-night.jpg" alt="" loading="lazy"><span class="glyph">陰</span></div>
+        <span class="slab">the dark it keeps</span>
+        <h3>A panel of black glass<br>in all that white.</h3>
+        <p>One deep, reflective strip set into porcelain. It gives a white kitchen somewhere to rest its eye — and keeps the room from reading as a showroom.</p>
+        <div class="eymeta">
+          <div><i>Face</i><b>Porcelain white</b></div>
+          <div><i>Accent</i><b>Black glass</b></div>
+          <div><i>Reads as</i><b>Daylight</b></div>
+        </div>
+      </div>
+    </div>
+    <p class="eyefoot rv d3">Hover either room to open its dot — <b>each one already contains the other.</b></p>
+  </div>
+</section>
+
+<!-- ============ 06 · SAME BONES ============ -->
+<section class="pad bones">
+  <div class="wrap">
+    <div class="kick rv" style="justify-content:center"><span class="ln"></span>Same Bones<span class="ln"></span></div>
+    <h2 class="rv d1" style="margin-top:24px">Two finishes.<br>One <b>engine.</b></h2>
+    <p class="body rv d2" style="margin:22px auto 0;text-align:center">Colour is the only argument between them. Underneath, both collections run the same three-stage fume engineering, the same motor, the same twenty years of Fotile testing.</p>
+    <div class="bgrid">
+      <div class="bcell rv"><b>96<sup>%</sup></b><span>Smoke Capture</span></div>
+      <div class="bcell rv d1"><b>48<sup>dB</sup></b><span>Whisper Quiet</span></div>
+      <div class="bcell rv d2"><b>20<sup>+</sup></b><span>Years In Pakistan</span></div>
+      <div class="bcell rv d3"><b>18</b><span>Design Awards</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 · CHOOSE YOUR LIGHT ============ -->
+<section class="doors" id="doors">
+  <svg class="dseam" id="dseam" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path id="dseamPath" d=""/></svg>
+  <a class="door n" href="/moon-series/">
+    <img src="../assets/moon-room.jpg" alt="" loading="lazy">
+    <div class="din">
+      <div class="dk">陰 · Yin</div>
+      <div class="dt">Take the night.</div>
+      <p class="dp">Obsidian glass, rose-gold, and a kitchen that only shows itself after dark.</p>
+      <span class="dgo">Moon Series <span>→</span></span>
+    </div>
+  </a>
+  <a class="door d" id="doorDay" href="/opal-series/">
+    <img src="../assets/opal-room.jpg" alt="" loading="lazy">
+    <div class="din">
+      <div class="dk">陽 · Yang</div>
+      <div class="dt">Take the morning.</div>
+      <p class="dp">Porcelain white, every colour hiding inside it, waiting for the light to move.</p>
+      <span class="dgo">Opal Series <span>→</span></span>
+    </div>
+  </a>
+</section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div>
+      <img class="fl" src="../assets/logo.png" alt="FOTILE">
+      <p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
+      <div class="fsoc" style="margin-top:24px"><a href="#">f</a><a href="#">◎</a><a href="#">in</a><a href="#">▶</a></div>
+    </div>
+    <div><h5>Collection</h5><a class="fli" href="/moon-series/">Moon Series</a><a class="fli" href="/opal-series/">Opal Series</a><a class="fli" href="/product-category/kitchen-hood/">Range Hoods</a><a class="fli" href="/product-category/oven/">Ovens</a></div>
+    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="/blog/">Journal</a><a class="fli" href="/contact-us/">Contact</a></div>
+    <div><h5>Support</h5><a class="fli" href="/service-center/">Schedule Service</a><a class="fli" href="#">Warranty</a><a class="fli" href="tel:042111131517">042-111-131-517</a></div>
+  </div>
+  <div class="fbot">
+    <span>© 2026 Fotile Pakistan — All Rights Reserved.</span>
+    <span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/privacy-policy/">Privacy Policy</a><a href="/terms-and-conditions/">Terms &amp; Conditions</a></span>
+  </div>
+</div></footer>
+
+<!-- ============ THE SCORE ============ -->
+<button class="score" id="score" type="button" aria-pressed="false" aria-label="Play the ambient score for this page">
+  <span class="mk" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <g class="rot" style="transform-origin:50px 50px">
+        <circle cx="50" cy="50" r="48" fill="#f2efe9"/>
+        <path d="M50,2 A48,48 0 0,0 50,98 A24,24 0 0,1 50,50 A24,24 0 0,0 50,2 Z" fill="#0b0b0f"/>
+        <circle cx="50" cy="26" r="7.4" fill="#f2efe9"/>
+        <circle cx="50" cy="74" r="7.4" fill="#0b0b0f"/>
+        <circle cx="50" cy="26" r="2.5" fill="#2f8e8c"/>
+        <circle cx="50" cy="74" r="2.5" fill="#e2b48c"/>
+      </g>
+    </svg>
+  </span>
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="lbl" id="scoreLbl">Play the score</span>
+</button>
+
+<script src="../mobile-nav.js"></script>
+<script src="../cart.js"></script>
+<script>
+/* ============================================================================
+   THE BALANCE
+   One number runs the page. --s goes from 0 (all night) to 1 (all morning).
+   It positions the boundary, fades each column, and interpolates the ground,
+   the ink and the accent so the whole page changes temperature with it.
+   ========================================================================== */
+(function(){
+  var bal=document.getElementById('balance');
+  if(!bal) return;
+  var day=document.getElementById('daySide'),
+      seam=document.getElementById('seamPath'),
+      layN=document.getElementById('layNight'),
+      layD=document.getElementById('layDay'),
+      root=document.documentElement;
+
+  /* the two poles, as [r,g,b] */
+  var NIGHT={acc:[226,180,140]}, DAY={acc:[47,142,140]};
+
+  function mix(a,b,t){
+    return 'rgb('+Math.round(a[0]+(b[0]-a[0])*t)+','+
+                  Math.round(a[1]+(b[1]-a[1])*t)+','+
+                  Math.round(a[2]+(b[2]-a[2])*t)+')';
+  }
+
+  /* The boundary is the taiji S: a single sine over the full height, so it
+     bulges one way above the middle and the other way below it. */
+  var N=40;
+  var mqStack = window.matchMedia('(max-width:900px)');
+  function clipFor(s){
+    var stacked = mqStack.matches;
+    var amp = 6.5 * Math.sin(Math.PI * Math.max(0,Math.min(1,s)));  /* flat at the edges */
+    var pts=[], d='';
+    for(var i=0;i<=N;i++){
+      var t=i/N, o=s*100 + amp*Math.sin(t*Math.PI*2);   /* o = position across the seam */
+      var X = stacked ? t*100 : o,
+          Y = stacked ? o     : t*100;
+      pts.push(X.toFixed(2)+'% '+Y.toFixed(2)+'%');
+      d+=(i?'L':'M')+X.toFixed(2)+','+Y.toFixed(2);
+    }
+    var list=pts.join(',');
+    return stacked
+      ? { clip :'polygon('+list+',100% 100%,0% 100%)',   /* below the seam — morning */
+          clipL:'polygon(0% 0%,'+list+',100% 0%)',       /* above the seam — night   */
+          path : d }
+      : { clip :'polygon('+list+',100% 100%,100% 0%)',   /* right of the seam        */
+          clipL:'polygon(0% 0%,'+list+',0% 100%)',       /* left of the seam         */
+          path : d };
+  }
+
+  var s=0.5, target=0.5, raf=0, touched=false;
+
+  function paint(){
+    raf=0;
+    s += (target - s) * 0.16;
+    if(Math.abs(target - s) < 0.0006) s = target;
+
+    var g=clipFor(s);
+    day.style.clipPath = g.clip;
+    if(layD) layD.style.clipPath = g.clip;
+    if(layN) layN.style.clipPath = g.clipL;
+    if(seam) seam.setAttribute('d', g.path);
+
+    root.style.setProperty('--s', s.toFixed(4));
+    root.style.setProperty('--acc', mix(NIGHT.acc, DAY.acc, s));
+
+    if(s !== target) raf=requestAnimationFrame(paint);
+  }
+  function go(v){
+    target = Math.max(0.06, Math.min(0.94, v));
+    if(!raf) raf=requestAnimationFrame(paint);
+  }
+  function fromEvent(e){
+    var r=bal.getBoundingClientRect();
+    go(mqStack.matches ? (e.clientY - r.top) / r.height
+                       : (e.clientX - r.left) / r.width);
+    if(!touched){ touched=true; bal.classList.add('touched'); }
+  }
+
+  /* hover tracks; press-and-drag commits */
+  var dragging=false;
+  bal.addEventListener('pointermove',function(e){
+    if(e.pointerType==='touch' && !dragging) return;   /* don't hijack a scroll */
+    fromEvent(e);
+  },{passive:true});
+  /* only claim the gesture once a finger is actually down on the handle area */
+  bal.addEventListener('touchmove',function(e){ if(dragging) e.preventDefault(); },{passive:false});
+  bal.addEventListener('pointerdown',function(e){
+    dragging=true; bal.classList.add('dragging');
+    try{ bal.setPointerCapture(e.pointerId); }catch(x){}
+    fromEvent(e);
+  });
+  function release(){ dragging=false; bal.classList.remove('dragging'); }
+  addEventListener('pointerup',release); addEventListener('pointercancel',release);
+
+  /* keyboard: the hero is focusable, so arrows move the balance */
+  bal.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'){ e.preventDefault(); go(target-0.08); touched=true; bal.classList.add('touched'); }
+    if(e.key==='ArrowRight'){ e.preventDefault(); go(target+0.08); touched=true; bal.classList.add('touched'); }
+  });
+
+  /* Nobody has touched it yet: breathe, slowly, so it reads as interactive. */
+  var idle=null;
+  function breathe(){
+    if(touched){ clearInterval(idle); return; }
+    var t=Date.now()/2600;
+    go(0.5 + Math.sin(t)*0.11);
+  }
+  setTimeout(function(){ if(!touched) idle=setInterval(breathe,40); }, 2200);
+
+  /* Leaving the hero settles it back to balance. */
+  bal.addEventListener('pointerleave',function(){ if(!dragging) go(0.5); });
+
+  go(0.5);
+  addEventListener('resize',function(){ var t=target; target=t+0.0001; if(!raf) raf=requestAnimationFrame(paint); },{passive:true});
+
+  /* The closing doors reuse the same curve, tracking the pointer the same way. */
+  var doors=document.getElementById('doors'),
+      doorDay=document.getElementById('doorDay'),
+      dseam=document.getElementById('dseamPath');
+  if(doors && doorDay){
+    var ds=0.5, dt=0.5, draf=0;
+    function dpaint(){
+      draf=0;
+      ds += (dt-ds)*0.14;
+      if(Math.abs(dt-ds)<0.0008) ds=dt;
+      var g=clipFor(ds);
+      doorDay.style.clipPath=g.clip;
+      if(dseam) dseam.setAttribute('d',g.path);
+      if(ds!==dt) draf=requestAnimationFrame(dpaint);
+    }
+    function dgo(v){ dt=Math.max(0.2,Math.min(0.8,v)); if(!draf) draf=requestAnimationFrame(dpaint); }
+    doors.addEventListener('pointermove',function(e){
+      if(e.pointerType==='touch') return;
+      var r=doors.getBoundingClientRect();
+      dgo((e.clientX-r.left)/r.width);
+    },{passive:true});
+    doors.addEventListener('pointerleave',function(){ dgo(0.5); });
+    dgo(0.5);
+  }
+})();
+
+/* ---- reveal on scroll ---------------------------------------------------- */
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in');}); return; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
+/* ---- THE SCORE ----------------------------------------------------------
+   No audio file. The page plays itself: a slow D drone with a third that
+   glides from minor (F) to major (F#) as you travel from night to morning,
+   struck pentatonic bells over the top, everything through a generated
+   hall. Never autoplays — the visitor asks for it.                        */
+(function(){
+  var btn=document.getElementById('score'), lbl=document.getElementById('scoreLbl');
+  if(!btn) return;
+  var AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC){ btn.remove(); return; }
+
+  var ctx=null, on=false, master=null, bus=null, tone=null, pad=null, timer=0, alive=[];
+  var mix=0.5;                       /* 0 = night, 1 = morning */
+  var MIDI=function(m){ return 440*Math.pow(2,(m-69)/12); };
+  var NIGHT=[0,3,5,7,10,12,15], DAY=[0,2,4,7,9,12,14];   /* D pentatonics */
+
+  function hall(){                   /* a small generated impulse response */
+    var len=Math.floor(ctx.sampleRate*3.6), b=ctx.createBuffer(2,len,ctx.sampleRate);
+    for(var c=0;c<2;c++){
+      var d=b.getChannelData(c);
+      for(var i=0;i<len;i++){
+        var t=i/len;
+        d[i]=(Math.random()*2-1)*Math.pow(1-t,2.6)*(1-t*0.35);
+      }
+    }
+    return b;
+  }
+
+  function build(){
+    ctx=new AC();
+    master=ctx.createGain(); master.gain.value=0;
+    var comp=ctx.createDynamicsCompressor();
+    comp.threshold.value=-20; comp.knee.value=22; comp.ratio.value=3.4;
+    comp.attack.value=0.02; comp.release.value=0.5;
+    master.connect(comp); comp.connect(ctx.destination);
+
+    tone=ctx.createBiquadFilter(); tone.type='lowpass'; tone.frequency.value=900; tone.Q.value=0.4;
+    bus=ctx.createGain(); bus.gain.value=1;
+    bus.connect(tone);
+
+    var wet=ctx.createConvolver(); wet.buffer=hall();
+    var wg=ctx.createGain(); wg.gain.value=0.72;
+    var dg=ctx.createGain(); dg.gain.value=0.5;
+    tone.connect(dg); dg.connect(master);
+    tone.connect(wet); wet.connect(wg); wg.connect(master);
+
+    /* --- the drone: root, fifth, and the third that changes its mind --- */
+    pad={v:[]};
+    [[38,'sine',0.12],[50,'sine',0.10],[57,'triangle',0.045],[65,'sine',0.036]]
+      .forEach(function(spec,i){
+        var o=ctx.createOscillator(), g=ctx.createGain(), f=ctx.createBiquadFilter();
+        o.type=spec[1]; o.frequency.value=MIDI(spec[0]);
+        o.detune.value=(i%2?5:-5);
+        f.type='lowpass'; f.frequency.value=1400; f.Q.value=0.3;
+        g.gain.value=0;
+        o.connect(f); f.connect(g); g.connect(bus);
+        /* a second, slightly detuned partner keeps it breathing */
+        var o2=ctx.createOscillator(); o2.type=spec[1];
+        o2.frequency.value=MIDI(spec[0]); o2.detune.value=(i%2?-7:8);
+        var g2=ctx.createGain(); g2.gain.value=0.55;
+        o2.connect(g2); g2.connect(f);
+        /* slow tremolo so it never sits still */
+        var lfo=ctx.createOscillator(), la=ctx.createGain();
+        lfo.frequency.value=0.035+i*0.017; la.gain.value=spec[2]*0.34;
+        lfo.connect(la); la.connect(g.gain);
+        o.start(); o2.start(); lfo.start();
+        pad.v.push({g:g,lvl:spec[2],o:o,o2:o2,midi:spec[0]});
+      });
+
+    /* --- bells ------------------------------------------------------- */
+    function bell(midi,when,vel){
+      var pan=ctx.createStereoPanner?ctx.createStereoPanner():null;
+      var out=ctx.createGain(); out.gain.value=0;
+      if(pan){ pan.pan.value=(Math.random()*2-1)*0.62; out.connect(pan); pan.connect(bus); }
+      else out.connect(bus);
+      var parts=[[1,1],[2.01,0.28],[2.76,0.16],[4.07,0.07]];
+      var dur=5.2+Math.random()*3.4;
+      parts.forEach(function(p){
+        var o=ctx.createOscillator(), g=ctx.createGain();
+        o.type='sine'; o.frequency.value=MIDI(midi)*p[0];
+        o.detune.value=(Math.random()*2-1)*4;
+        g.gain.setValueAtTime(0,when);
+        g.gain.linearRampToValueAtTime(p[1]*vel,when+0.012+p[1]*0.05);
+        g.gain.exponentialRampToValueAtTime(0.0001,when+dur*(0.45+p[1]*0.55));
+        o.connect(g); g.connect(out);
+        o.start(when); o.stop(when+dur+0.2);
+        alive.push(o);
+        o.onended=function(){ var k=alive.indexOf(o); if(k>=0) alive.splice(k,1); };
+      });
+      out.gain.setValueAtTime(1,when);
+    }
+
+    var last=-99;
+    function schedule(){
+      if(!on) return;
+      var scale = mix>0.5 ? DAY : NIGHT;
+      var oct = mix>0.62 ? 24 : (mix<0.34 ? 0 : 12);
+      var deg = scale[Math.floor(Math.random()*scale.length)];
+      var m = 50+deg+oct + (Math.random()<0.22?12:0);
+      if(m===last && Math.random()<0.7) m += (Math.random()<0.5?-12:12);
+      last=m;
+      var vel=(0.09+Math.random()*0.075)*(m>78?0.72:1);
+      bell(m,ctx.currentTime+0.05,vel);
+      if(Math.random()<0.34)                       /* an answering voice */
+        bell(m+(Math.random()<0.5?7:-5),ctx.currentTime+1.1+Math.random()*1.4,vel*0.55);
+      timer=setTimeout(schedule, 2600+Math.random()*4200);
+    }
+    pad.schedule=schedule;
+  }
+
+  function setMix(v){
+    mix=Math.max(0,Math.min(1,v));
+    if(!ctx||!on) return;
+    var t=ctx.currentTime;
+    tone.frequency.setTargetAtTime(560+mix*1750,t,1.6);
+    /* the third glides F -> F#: the whole page changes key as you scroll */
+    pad.v.forEach(function(v){
+      if(v.midi===65){
+        v.o.frequency.setTargetAtTime(MIDI(65+mix),t,2.4);
+        v.o2.frequency.setTargetAtTime(MIDI(65+mix),t,2.4);
+        v.g.gain.setTargetAtTime(v.lvl*(0.7+mix*0.5),t,2.4);
+      } else if(v.midi===38){
+        v.g.gain.setTargetAtTime(v.lvl*(1.15-mix*0.5),t,2.4);
+      }
+    });
+  }
+
+  function start(){
+    if(!ctx) build();
+    if(ctx.state==='suspended') ctx.resume();
+    on=true;
+    var t=ctx.currentTime;
+    master.gain.cancelScheduledValues(t);
+    master.gain.setValueAtTime(master.gain.value,t);
+    master.gain.linearRampToValueAtTime(0.30,t+4.5);
+    pad.v.forEach(function(v){ v.g.gain.setTargetAtTime(v.lvl,t,3.2); });
+    setMix(mix);
+    pad.schedule();
+    btn.classList.add('on'); btn.setAttribute('aria-pressed','true');
+    lbl.textContent='Sound on';
+    try{ sessionStorage.setItem('fotile-score','1'); }catch(e){}
+  }
+  function stop(){
+    on=false;
+    if(timer){ clearTimeout(timer); timer=0; }
+    if(ctx){
+      var t=ctx.currentTime;
+      master.gain.cancelScheduledValues(t);
+      master.gain.setValueAtTime(master.gain.value,t);
+      master.gain.linearRampToValueAtTime(0.0001,t+1.6);
+      pad.v.forEach(function(v){ v.g.gain.setTargetAtTime(0,t,0.6); });
+    }
+    btn.classList.remove('on'); btn.setAttribute('aria-pressed','false');
+    lbl.textContent='Play the score';
+    try{ sessionStorage.setItem('fotile-score','0'); }catch(e){}
+  }
+
+  btn.addEventListener('click',function(){ on?stop():start(); });
+
+  /* the score follows the page: night at the top, morning further down */
+  var docH=function(){ return Math.max(1,document.body.scrollHeight-innerHeight); };
+  var night=document.getElementById('night'), day=document.getElementById('day');
+  addEventListener('scroll',function(){
+    var v=0.5;
+    if(night&&day){
+      var a=night.getBoundingClientRect(), b=day.getBoundingClientRect(), h=innerHeight;
+      if(a.top<h*0.6 && a.bottom>h*0.3) v=0.12;
+      else if(b.top<h*0.6 && b.bottom>h*0.3) v=0.9;
+      else v=Math.min(1,Math.max(0,scrollY/docH()))*0.8+0.1;
+    } else v=Math.min(1,scrollY/docH());
+    setMix(v);
+  },{passive:true});
+
+  /* reveal the control once the hero has settled, and nudge it once */
+  setTimeout(function(){
+    btn.classList.add('ready');
+    var was=null; try{ was=sessionStorage.getItem('fotile-score'); }catch(e){}
+    if(was!=='0'){
+      btn.classList.add('hint');
+      setTimeout(function(){ btn.classList.remove('hint'); },4200);
+    }
+  },1600);
+
+  addEventListener('visibilitychange',function(){
+    if(!ctx||!on) return;
+    if(document.hidden) ctx.suspend(); else ctx.resume();
+  });
+})();
+
+/* ---- nav goes solid once the hero is behind you -------------------------- */
+(function(){
+  var nav=document.getElementById('nav'), bal=document.getElementById('balance');
+  if(!nav) return;
+  function onScroll(){ nav.classList.toggle('solid', scrollY > 40); }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+})();
+</script>
+</body>
+</html>

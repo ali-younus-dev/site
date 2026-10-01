@@ -47,39 +47,59 @@
 
   /* HERO */
   .dhero{min-height:64vh;position:relative;overflow:hidden;display:flex;align-items:center}
-  .dhero .bg{position:absolute;inset:-4%;background-size:cover;background-position:center;filter:grayscale(.15) contrast(1.05) brightness(.5);animation:kb 24s ease-in-out infinite alternate}
-  @keyframes kb{0%{transform:scale(1)}100%{transform:scale(1.12)}}
-  .dhero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,11,13,.92),rgba(11,11,13,.5) 55%,rgba(11,11,13,.25))}
-  .dhero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,var(--bg),transparent 34%)}
+  /* The hero carries no stock art: the country itself, drawn from real
+     borders, sits behind the words with a pin on every dealer city. */
+  .dhero{position:relative;overflow:hidden;background:
+      radial-gradient(90% 70% at 88% 40%,rgba(224,30,55,.13),transparent 62%),
+      radial-gradient(70% 60% at 8% 0%,rgba(255,255,255,.05),transparent 60%),#0b0b0d}
+  .dhero .pkwash{position:absolute;right:-2%;top:50%;transform:translateY(-50%);
+    height:132%;aspect-ratio:1/1.06;z-index:0;pointer-events:none;
+    background:url('../assets/pk-dots.png') no-repeat center/contain;opacity:.46;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 34%,#000 82%,transparent),linear-gradient(180deg,transparent 4%,#000 20%);
+    mask-image:linear-gradient(90deg,transparent,#000 34%,#000 82%,transparent),linear-gradient(180deg,transparent 4%,#000 20%);
+    -webkit-mask-composite:source-in;mask-composite:intersect}
+  .dhero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,var(--bg),transparent 30%)}
   .dhero .in{position:relative;z-index:2;width:100%}
   .ey{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--steel-lt);font-weight:600;margin-bottom:24px;opacity:0;animation:fu 1s .2s forwards}
   .ey .dot{width:6px;height:6px;background:var(--red);border-radius:50%}
   .dhero h1{font-size:clamp(42px,6.5vw,88px);font-weight:200;line-height:1;letter-spacing:-3px;margin-bottom:22px;opacity:0;animation:fu 1.1s .4s forwards}
   .dhero h1 b{font-weight:600}
   .dhero p{max-width:500px;font-size:18px;font-weight:300;color:#cbcdd1;opacity:0;animation:fu 1.1s .7s forwards}
+  .hstats{display:flex;gap:40px;margin-top:38px;opacity:0;animation:fu 1.1s .95s forwards;flex-wrap:wrap}
+  .hstats div b{display:block;font-size:clamp(30px,3.4vw,46px);font-weight:200;letter-spacing:-2px;line-height:1}
+  .hstats div b i{font-style:normal;color:var(--red);font-weight:300}
+  .hstats div span{display:block;margin-top:9px;font-size:10.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--steel-lt);font-weight:600}
   @keyframes fu{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-  /* Phones crop the banner to a narrow strip, so the map pin goes up top and the
-     copy sits underneath on solid dark instead of on top of the map. */
   @media(max-width:820px){
-    .dhero{min-height:78vh;align-items:flex-end;padding-bottom:44px}
-    .dhero .bg{background-position:60% 6%!important}
-    .dhero::after{background:linear-gradient(180deg,rgba(11,11,13,.30) 0%,rgba(11,11,13,.55) 34%,rgba(11,11,13,.92) 52%,rgba(11,11,13,.97) 100%)}
+    .dhero{min-height:auto;padding:118px 0 54px}
+    .dhero .pkwash{right:-18%;height:88%;opacity:.3}
     .dhero p{font-size:16.5px}
+    .hstats{gap:26px;margin-top:30px}
   }
 
   /* COVERAGE MAP BAND */
-  .cover{position:relative;background:#0d0507;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .cover .map{display:block;width:100%;height:auto}
-  .cover .txt{position:absolute;right:6%;top:50%;transform:translateY(-50%);max-width:360px;z-index:2}
+  .cover{position:relative;background:linear-gradient(180deg,#0c0c0e,#0a0a0c);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:70px 0 64px}
+  .cover .cin{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,60px);align-items:center}
+  .cover .mapwrap{position:relative;min-height:430px;aspect-ratio:1/.82}
+  .cover canvas{width:100%;height:100%;display:block;position:absolute;inset:0;cursor:pointer}
+  .cover .txt{max-width:420px}
   .cover .ey2{display:inline-flex;align-items:center;gap:11px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#d9b9bd;font-weight:700;margin-bottom:18px}
   .cover .ey2 .dot{width:6px;height:6px;background:var(--red);border-radius:50%}
   .cover h2{font-size:clamp(26px,2.6vw,40px);font-weight:200;line-height:1.05;letter-spacing:-1.5px;margin-bottom:16px}
   .cover h2 b{font-weight:600}
-  .cover p{font-size:15.5px;font-weight:300;color:#d3cfd0;margin-bottom:26px}
-  .cover .nums{display:flex;gap:34px}
-  .cover .nums div b{display:block;font-size:34px;font-weight:200;letter-spacing:-1.5px;line-height:1}
-  .cover .nums div span{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:#b09a9d;font-weight:600}
-  @media(max-width:940px){
+  .cover p{font-size:15.5px;font-weight:300;color:#b9babd;margin-bottom:26px}
+  .cover .legend{display:flex;flex-direction:column;gap:2px;margin-top:4px}
+  .cover .lgi{display:flex;align-items:center;gap:12px;padding:8px 12px;border-radius:10px;cursor:pointer;
+    border:1px solid transparent;transition:background .2s,border-color .2s}
+  .cover .lgi:hover,.cover .lgi.on{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+  .cover .lgi em{font-style:normal;width:7px;height:7px;border-radius:50%;background:var(--red);flex:none;
+    box-shadow:0 0 10px rgba(224,30,55,.8)}
+  .cover .lgi b{flex:1;font-size:13.5px;font-weight:500;color:#e9eaec}
+  .cover .lgi span{font-size:11.5px;color:#8e8f94;font-variant-numeric:tabular-nums}
+  @media(max-width:920px){
+    .cover .cin{grid-template-columns:1fr}
+    .cover .mapwrap{min-height:340px;order:-1}
     .cover .txt{position:static;transform:none;max-width:none;padding:26px 24px 40px;text-align:center}
     .cover .nums{justify-content:center;gap:40px}
   }
@@ -193,27 +213,30 @@
 
 <!-- HERO -->
 <header class="dhero">
-  <div class="bg" style="background-image:url('../assets/dealers-hero.jpg');filter:none;background-position:center 34%"></div>
+  <div class="pkwash" aria-hidden="true"></div>
   <div class="in"><div class="wrap">
     <div class="ey"><span class="dot"></span>Find Fotile Near You</div>
     <h1>Our <b>Dealers.</b></h1>
-    <p>Experience Fotile in person. Visit an authorized dealer or showroom across Pakistan to see our premium appliances live.</p>
+    <p>Experience Fotile in person. Visit an authorised dealer or showroom across Pakistan to see our premium appliances live.</p>
+    <div class="hstats">
+      <div><b id="hsD">35</b><span>Authorised Dealers</span></div>
+      <div><b id="hsC">12</b><span>Cities</span></div>
+      <div><b>20<i>+</i></b><span>Years in Pakistan</span></div>
+    </div>
   </div></div>
 </header>
 
 <!-- COVERAGE MAP -->
 <section class="cover">
-  <img class="map" src="../assets/dealers-map.jpg" alt="Map of Pakistan showing Fotile dealer cities: Karachi, Lahore, Faisalabad, Multan, Sargodha, Sahiwal and Hyderabad" loading="lazy">
-  <div class="txt">
-    <div class="ey2"><span class="dot"></span>Nationwide Coverage</div>
-    <h2>From Karachi to <b>Sargodha.</b></h2>
-    <p>Authorized Fotile dealers and service partners across every major city in Pakistan — so help is never far from your kitchen.</p>
-    <div class="nums">
-      <div><b>33</b><span>Dealers</span></div>
-      <div><b>12</b><span>Cities</span></div>
-      <div><b>20+</b><span>Years</span></div>
+  <div class="wrap"><div class="cin">
+    <div class="mapwrap"><canvas id="pkmap" aria-label="Map of Pakistan showing every city with a Fotile dealer"></canvas></div>
+    <div class="txt">
+      <div class="ey2"><span class="dot"></span>Nationwide Coverage</div>
+      <h2>From Karachi to <b>Sialkot.</b></h2>
+      <p>Authorised Fotile dealers and service partners in every major city — so help is never far from your kitchen. Tap a city to see its dealers.</p>
+      <div class="legend" id="legend"></div>
     </div>
-  </div>
+  </div></div>
 </section>
 
 <!-- CONTROLS -->
@@ -265,6 +288,7 @@
 
 <a class="wa" href="#">💬</a>
 
+<script src="../world-dots.js"></script>
 <script>
   const nav=document.getElementById('nav');
   addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>50));
@@ -308,6 +332,111 @@
     {c:"Bahawalpur",n:"Qadir Enterprises",a:"Multan Road, Near Flyover",p:["0300-8680151"]},
     {c:"Faisalabad",n:"Universal Electronics",a:"Main Susan Road, Opp Social Security Hospital",p:["041-8710739"]},
   ];
+
+  /* ---- real coordinates, so every pin lands where the city actually is ---- */
+  const CITY_POS={
+    Karachi:[67.010,24.861], Lahore:[74.343,31.549], Faisalabad:[73.079,31.418],
+    Multan:[71.478,30.196], Hyderabad:[68.377,25.396], Sialkot:[74.531,32.493],
+    Gujrat:[74.079,32.574], Sargodha:[72.671,32.083], Sahiwal:[73.106,30.666],
+    'Rahim Yar Khan':[70.295,28.420], Kharian:[73.866,32.812], Bahawalpur:[71.683,29.398]
+  };
+
+  /* ---- the coverage map: Pakistan drawn from Natural Earth borders -------- */
+  function mountMap(){
+    var cv=document.getElementById('pkmap'); if(!cv||!window.__WD) return;
+    var WD=window.__WD, PK=WD.pk, B=WD.pkBox, cx=cv.getContext('2d');
+    var counts={}; DEALERS.forEach(function(d){ counts[d.c]=(counts[d.c]||0)+1; });
+    var pins=Object.keys(CITY_POS).filter(function(c){return counts[c];})
+      .map(function(c){ return {c:c,lon:CITY_POS[c][0],lat:CITY_POS[c][1],n:counts[c]}; });
+    var hot=null, W=0, H=0, sc=1, ox=0, oy=0, t0=performance.now(), raf=0, vis=true;
+
+    function size(){
+      var r=cv.parentNode.getBoundingClientRect(), dpr=Math.min(devicePixelRatio||1,2);
+      W=r.width; H=r.height;
+      cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+      cx.setTransform(dpr,0,0,dpr,0,0);
+      var mw=B[2]-B[0], mh=B[3]-B[1];
+      sc=Math.min(W*0.98/mw, H*0.96/mh);
+      ox=(W-mw*sc)/2; oy=(H-mh*sc)/2;
+    }
+    function P(lon,lat){ return [ox+(lon-B[0])*sc, oy+(B[3]-lat)*sc]; }
+
+    function draw(now){
+      raf=0; if(!vis) return;
+      var t=(now-t0)/1000;
+      cx.clearRect(0,0,W,H);
+      /* the country */
+      var r=Math.max(1,sc*0.25*0.34);
+      for(var i=0;i<PK.length;i++){
+        var q=P(PK[i][0],PK[i][1]);
+        cx.fillStyle='rgba(206,212,226,.20)';
+        cx.beginPath(); cx.arc(q[0],q[1],r,0,6.2832); cx.fill();
+      }
+      /* the dealer cities */
+      pins.forEach(function(pn,i){
+        var q=P(pn.lon,pn.lat), on=(hot===pn.c||activeCity===pn.c);
+        var rad=4+Math.min(pn.n,17)*0.42;
+        var ring=((t*0.55)+i*0.13)%1;
+        cx.strokeStyle='rgba(224,30,55,'+((1-ring)*(on?.75:.42))+')'; cx.lineWidth=1.2;
+        cx.beginPath(); cx.arc(q[0],q[1],rad+ring*(on?26:16),0,6.2832); cx.stroke();
+        var g=cx.createRadialGradient(q[0],q[1],0,q[0],q[1],rad*2.6);
+        g.addColorStop(0,'rgba(255,70,95,'+(on?.6:.34)+')'); g.addColorStop(1,'rgba(255,70,95,0)');
+        cx.fillStyle=g; cx.beginPath(); cx.arc(q[0],q[1],rad*2.6,0,6.2832); cx.fill();
+        cx.fillStyle=on?'#fff':'#ff5570';
+        cx.beginPath(); cx.arc(q[0],q[1],rad,0,6.2832); cx.fill();
+        if(on || pn.n>=5){
+          cx.font='600 '+(W<430?9:10.5)+'px Manrope,system-ui,sans-serif';
+          cx.fillStyle=on?'rgba(255,255,255,.96)':'rgba(230,232,238,.62)';
+          cx.fillText(pn.c.toUpperCase(), q[0]+rad+7, q[1]+3.5);
+        }
+      });
+      raf=requestAnimationFrame(draw);
+    }
+    function play(){ if(!raf&&vis) raf=requestAnimationFrame(draw); }
+
+    function hit(e){
+      var r=cv.getBoundingClientRect(), mx=e.clientX-r.left, my=e.clientY-r.top, best=null, bd=26;
+      pins.forEach(function(pn){ var q=P(pn.lon,pn.lat), d=Math.hypot(q[0]-mx,q[1]-my); if(d<bd){bd=d;best=pn.c;} });
+      return best;
+    }
+    cv.addEventListener('pointermove',function(e){
+      var h=hit(e); if(h!==hot){ hot=h; cv.style.cursor=h?'pointer':'default'; play(); }
+    },{passive:true});
+    cv.addEventListener('pointerleave',function(){ hot=null; });
+    cv.addEventListener('click',function(e){ var h=hit(e); if(h){ pickCity(h); } });
+
+    addEventListener('resize',function(){ size(); play(); },{passive:true});
+    if(window.IntersectionObserver){
+      new IntersectionObserver(function(es){ vis=es[0].isIntersecting&&!document.hidden; if(vis) play(); },
+        {threshold:.01}).observe(cv);
+    }
+    document.addEventListener('visibilitychange',function(){ vis=!document.hidden; if(vis) play(); });
+    size(); play();
+
+    /* the city list beside the map doubles as the legend */
+    var lg=document.getElementById('legend');
+    if(lg){
+      lg.innerHTML=pins.slice().sort(function(a,b){return b.n-a.n;}).map(function(pn){
+        return '<div class="lgi" data-c="'+pn.c+'"><em></em><b>'+pn.c+'</b><span>'+pn.n+'</span></div>';
+      }).join('');
+      lg.addEventListener('click',function(e){
+        var row=e.target.closest('.lgi'); if(row) pickCity(row.getAttribute('data-c'));
+      });
+      lg.addEventListener('pointerover',function(e){
+        var row=e.target.closest('.lgi'); hot=row?row.getAttribute('data-c'):null; play();
+      });
+      lg.addEventListener('pointerleave',function(){ hot=null; });
+    }
+  }
+
+  function pickCity(c){
+    activeCity=(activeCity===c)?'All':c;
+    document.querySelectorAll('.chip').forEach(function(x){ x.classList.toggle('on', x.textContent===activeCity); });
+    document.querySelectorAll('.lgi').forEach(function(x){ x.classList.toggle('on', x.getAttribute('data-c')===activeCity); });
+    render();
+    var r=document.getElementById('results');
+    if(r) window.scrollTo({top:r.getBoundingClientRect().top+scrollY-120,behavior:'smooth'});
+  }
 
   // City order (major first)
   const ORDER=["Karachi","Lahore","Faisalabad","Multan","Hyderabad","Sialkot","Gujrat","Sargodha","Sahiwal","Rahim Yar Khan","Kharian","Bahawalpur"];
@@ -357,6 +486,12 @@
       </div>`).join('');
   }
   render();
+  mountMap();
+
+  /* the hero numbers are counted, never typed */
+  var _d=document.getElementById('hsD'), _c=document.getElementById('hsC');
+  if(_d) _d.textContent=DEALERS.length;
+  if(_c) _c.textContent=cities.length;
 </script>
 <script src="../cart.js"></script>
 <script src="../editor.js"></script>

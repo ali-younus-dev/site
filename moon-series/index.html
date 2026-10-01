@@ -63,6 +63,40 @@
   .npill{font-size:13px;font-weight:600;border:1px solid rgba(216,180,106,.4);color:var(--gold-lt);padding:10px 22px;border-radius:4px;transition:.35s}
   .npill:hover{background:var(--gold);border-color:var(--gold);color:#000}
 
+  /* ===== THE OPENING · TOTALITY =================================== */
+  html.eclock,html.eclock body{overflow:hidden!important}
+  #eclipse{position:fixed;inset:0;z-index:5000;overflow:hidden;cursor:pointer;
+    background:#04040a;transition:opacity .8s cubic-bezier(.16,1,.3,1)}
+  #eclipse.done{opacity:0;pointer-events:none;visibility:hidden;transition:opacity .8s ease,visibility 0s .8s}
+  #eclipse .ec-sky{position:absolute;inset:0;width:100%;height:100%;display:block}
+  /* fallback for machines with no WebGL: a gold ring that opens and swallows the frame */
+  #eclipse::after{content:"";position:absolute;left:50%;top:50%;width:26vmin;height:26vmin;
+    margin:-13vmin 0 0 -13vmin;border-radius:50%;background:#04040a;
+    box-shadow:0 0 0 2px rgba(240,217,160,.85),0 0 60px 14px rgba(216,180,106,.45);
+    animation:ecOpen 2.1s .4s cubic-bezier(.5,0,.25,1) forwards}
+  #eclipse.gl::after{display:none}
+  @keyframes ecOpen{0%{transform:scale(.1);opacity:0}
+    18%{transform:scale(1);opacity:1}
+    46%{transform:scale(1);opacity:1}
+    100%{transform:scale(22);opacity:1;box-shadow:0 0 0 0 rgba(240,217,160,0),0 0 0 0 rgba(216,180,106,0)}}
+  #eclipse .ec-word{position:absolute;left:0;right:0;top:50%;text-align:center;z-index:4;
+    pointer-events:none;transform:translateY(-50%);opacity:0;
+    animation:ecWord 1.06s 1.5s cubic-bezier(.16,1,.3,1) forwards}
+  #eclipse .ec-word b{display:block;font-size:clamp(40px,8vw,86px);font-weight:200;line-height:1;
+    letter-spacing:.3em;text-indent:.3em;
+    background:linear-gradient(120deg,#fff 6%,var(--gold-lt) 42%,var(--gold) 78%,#fff);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    filter:drop-shadow(0 0 26px rgba(216,180,106,.45))}
+  #eclipse .ec-word i{display:block;margin-top:20px;font-style:normal;font-size:9.5px;font-weight:700;
+    letter-spacing:5.4px;text-indent:5.4px;text-transform:uppercase;color:rgba(240,217,160,.72)}
+  @keyframes ecWord{0%{opacity:0;transform:translateY(calc(-50% + 14px))}
+    28%{opacity:1;transform:translateY(-50%)}
+    66%{opacity:1;transform:translateY(-50%)}
+    100%{opacity:0;transform:translateY(calc(-50% - 8px))}}
+  #eclipse .ec-skip{position:absolute;right:22px;bottom:20px;z-index:5;font-size:9px;
+    letter-spacing:2.6px;text-transform:uppercase;font-weight:700;color:rgba(240,217,160,.42);
+    opacity:0;animation:fu .6s 1s forwards;pointer-events:none}
+
   /* HERO — cosmic */
   .mhero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:center}
   /* real dark-planet banner: keep planet on the RIGHT, text over dark space on the LEFT.
@@ -189,8 +223,158 @@
 </style>
   <link rel="canonical" href="https://fotilepk.com/moon-series/">
 <script>window.__PBASE="../";</script>
+<noscript><style>#eclipse{display:none!important}</style></noscript>
+<script>
+(function(){var d=document.documentElement;
+ if(!matchMedia('(prefers-reduced-motion:reduce)').matches){d.className+=' eclock';}
+ setTimeout(function(){d.classList.remove('eclock');},6500);})();
+</script>
 </head>
 <body>
+
+<!-- ============ THE OPENING · TOTALITY ============ -->
+<!-- The moon crosses the light, the ring flares, and the dark it leaves
+     behind is the page itself. -->
+<div id="eclipse" role="presentation" aria-hidden="true">
+  <canvas class="ec-sky" id="ecSky" aria-hidden="true"></canvas>
+  <div class="ec-word"><b>月</b><i>Fotile — Moon Series</i></div>
+  <div class="ec-skip">Tap to skip</div>
+</div>
+<script>
+/* ---- THE OPENING · TOTALITY ---------------------------------------------
+   A real eclipse, integrated per pixel: the sun burns, the moon walks in
+   from the upper left, the last sliver collapses into a diamond ring, the
+   corona flares — and then the moon keeps growing until its shadow IS the
+   page. Nothing to download; it is all maths.                             */
+(function(){
+  var el=document.getElementById('eclipse');
+  if(!el) return;
+  var root=document.documentElement, LIFE=2620, done=false, raf=0, gl=null;
+
+  function finish(){
+    if(done) return; done=true;
+    if(raf) cancelAnimationFrame(raf);
+    el.classList.add('done');
+    root.classList.remove('eclock');
+    setTimeout(function(){
+      if(gl){ var x=gl.getExtension('WEBGL_lose_context'); if(x) x.loseContext(); }
+      if(el.parentNode) el.parentNode.removeChild(el);
+    },850);
+  }
+  el.addEventListener('click',finish);
+  addEventListener('keydown',function(e){ if(e.key==='Escape') finish(); });
+
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ el.remove(); return; }
+
+  var cv=document.getElementById('ecSky');
+  try{
+    gl = cv.getContext('webgl',{alpha:false,antialias:false,depth:false,powerPreference:'low-power'})
+      || cv.getContext('experimental-webgl',{alpha:false});
+  }catch(e){ gl=null; }
+
+  if(gl){
+    var VS='attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+    var FS=[
+    'precision mediump float;',
+    'uniform vec2 u_res; uniform float u_t;',
+    'float h21(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123); }',
+    'float stars(vec2 q,float t){',
+    '  vec2 g=q*20.0, i=floor(g), f=fract(g);',
+    '  float h=h21(i);',
+    '  if(h<0.885) return 0.0;',
+    '  vec2 c=vec2(h21(i+1.37),h21(i+7.71));',
+    '  float d=length(f-c), b=(h-0.885)/0.115;',
+    '  float tw=0.55+0.45*sin(t*1.8+h*41.0);',
+    '  return smoothstep(0.17,0.0,d)*b*b*tw;',
+    '}',
+    'void main(){',
+    '  float m=min(u_res.x,u_res.y);',
+    '  vec2 p=(gl_FragCoord.xy-0.5*u_res)/m;',
+    '  float d=length(p);',
+    '  float RS=0.150;',
+    /* the moon walks in from the upper left and stops dead centre */
+    '  float ph=clamp(u_t/1.45,0.0,1.0); ph=ph*ph*(3.0-2.0*ph);',
+    '  vec2 mc=mix(vec2(-0.66,0.10),vec2(0.0),ph);',
+    '  float cover=1.0-smoothstep(0.0,0.30,length(mc));',
+    '  float grow=smoothstep(1.90,2.70,u_t);',
+    '  float RM=0.158+grow*grow*3.2;',
+    '  float dm=length(p-mc);',
+    /* --- sky --- */
+    '  vec3 col=vec3(0.016,0.016,0.031);',
+    '  col+=vec3(0.050,0.042,0.078)*exp(-d*1.5)*0.55;',
+    '  col+=vec3(0.85,0.88,1.0)*stars(p,u_t)*0.9*(1.0-grow);',
+    /* --- the light we are about to lose --- */
+    '  col+=vec3(1.0,0.86,0.62)*exp(-max(d-RS,0.0)*10.0)*0.34*(1.0-cover*0.82);',
+    /* --- corona: streaked, alive, only near totality --- */
+    '  float ang=atan(p.y,p.x);',
+    '  float streak=0.55+0.25*sin(ang*11.0+1.7)+0.20*sin(ang*23.0-0.9)+0.14*sin(ang*5.0+3.1);',
+    '  float cor=exp(-max(d-RS,0.0)*11.0)*max(streak,0.0);',
+    '  cor*=cover*(1.0-smoothstep(2.00,2.45,u_t));',
+    '  col+=vec3(1.0,0.84,0.58)*cor*0.95;',
+    /* --- the sun --- */
+    '  float sun=smoothstep(RS,RS-0.005,d);',
+    '  col=mix(col,mix(vec3(1.0,0.98,0.93),vec3(1.0,0.87,0.63),smoothstep(0.0,RS,d)),sun);',
+    /* --- the moon over it --- */
+    '  float moon=smoothstep(RM,RM-0.0035,dm);',
+    '  col=mix(col,vec3(0.020,0.020,0.039),moon);',
+    /* --- chromosphere: a thin hot line along the moon limb --- */
+    '  float limb=exp(-pow((dm-RM)*120.0,2.0))*cover*(1.0-smoothstep(1.90,2.35,u_t));',
+    '  col+=vec3(1.0,0.72,0.46)*limb*0.85;',
+    /* --- the diamond ring, on the side the moon has not reached --- */
+    '  vec2 dpt=-normalize(mc+vec2(0.0001,0.0001))*RS;',
+    '  vec2 q=p-dpt; float dd=dot(q,q);',
+    '  float dia=smoothstep(0.55,0.93,cover)*(1.0-smoothstep(0.93,1.0,cover));',
+    '  col+=vec3(1.0,0.93,0.78)*dia*(exp(-900.0*dd)*2.2+exp(-90.0*dd)*0.5+exp(-9.0*dd)*0.12);',
+    '  float sx=exp(-abs(q.y)*300.0)*exp(-abs(q.x)*5.2);',
+    '  float sy=exp(-abs(q.x)*300.0)*exp(-abs(q.y)*5.2);',
+    '  col+=vec3(1.0,0.88,0.66)*dia*(sx+sy)*0.42;',
+    '  col*=1.0-0.28*smoothstep(0.40,1.15,d);',
+    '  gl_FragColor=vec4(col,1.0);',
+    '}'].join('\n');
+
+    function sh(t,s){ var x=gl.createShader(t); gl.shaderSource(x,s); gl.compileShader(x);
+      return gl.getShaderParameter(x,gl.COMPILE_STATUS)?x:null; }
+    var vs=sh(gl.VERTEX_SHADER,VS), fs=sh(gl.FRAGMENT_SHADER,FS);
+    if(!vs||!fs){ gl=null; }
+    else{
+      var pr=gl.createProgram();
+      gl.attachShader(pr,vs); gl.attachShader(pr,fs); gl.linkProgram(pr);
+      if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){ gl=null; }
+      else{
+        gl.useProgram(pr);
+        var buf=gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+        gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+        var la=gl.getAttribLocation(pr,'a');
+        gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la,2,gl.FLOAT,false,0,0);
+        var uRes=gl.getUniformLocation(pr,'u_res'), uT=gl.getUniformLocation(pr,'u_t');
+        var DPR=Math.min(window.devicePixelRatio||1,1.3);
+        function size(){
+          var w=Math.round(innerWidth*DPR), h=Math.round(innerHeight*DPR);
+          if(cv.width!==w||cv.height!==h){ cv.width=w; cv.height=h; gl.viewport(0,0,w,h); }
+          gl.uniform2f(uRes,cv.width,cv.height);
+        }
+        size(); addEventListener('resize',size,{passive:true});
+        if(gl.getError()===gl.NO_ERROR){
+          el.classList.add('gl');
+          var t0=performance.now();
+          (function frame(now){
+            if(done) return;
+            gl.uniform1f(uT,(now-t0)/1000);
+            gl.drawArrays(gl.TRIANGLES,0,3);
+            raf=requestAnimationFrame(frame);
+          })(performance.now());
+        }
+      }
+    }
+  }
+
+  /* the shadow has filled the frame — give the page back before the fade */
+  setTimeout(function(){ el.style.pointerEvents='none'; root.classList.remove('eclock'); },LIFE-330);
+  setTimeout(finish,LIFE);
+})();
+</script>
+
 <canvas class="stars" id="starsFar"></canvas>
 <canvas class="stars" id="starsNear"></canvas>
 
@@ -262,9 +446,7 @@
     </a>
     <a class="pcard reveal r3" href="#">
       <div class="stage"><span class="badge">4-in-1</span>
-        <video class="pcard-video" muted loop playsinline preload="metadata" poster="assets/products/magic-oven-4-in-1-hyzk26-e1.png">
-          <source src="../assets/video/combi-oven.mp4" type="video/mp4">
-        </video>
+        <div class="stage"><img src="../assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png" alt="combi-oven-4-in-1-hyzk72-h-1y"></div>
       </div>
       <div class="info"><span class="cat">Combo Oven</span><h3>Fotile Luna Combo 4-in-1</h3>
         <div class="foot"><div class="price">Rs 375,000<span>Moon Series</span></div><div class="arrow">→</div></div></div>
@@ -275,7 +457,7 @@
         <div class="foot"><div class="price">Rs 475,000<span>Moon Series</span></div><div class="arrow">→</div></div></div>
     </a>
     <a class="pcard reveal r2" href="#">
-      <div class="stage"><img src="../assets/products/electric-built-in-oven-ksg7003at-y.png" alt="Electric Oven KSG7003AT-Y"></div>
+      <div class="stage"><img src="../assets/products/microwave-oven-hw25800p-c2t-y.png" alt="Electric Oven KSG7003AT-Y"></div>
       <div class="info"><span class="cat">Electric Oven</span><h3>Electric Oven KSG7003AT-Y</h3>
         <div class="foot"><div class="price">Rs 355,000<span>Moon Series</span></div><div class="arrow">→</div></div></div>
     </a>
@@ -492,6 +674,8 @@
 </script>
 <script src="../cart.js"></script>
 <script src="../editor.js"></script>
+<script src="../ambient.js"></script>
+<script>window.FotileAmbient&&FotileAmbient.mount({theme:"moon"});</script>
 <script src="../mobile-nav.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Store", "name": "Fotile Pakistan", "url": "https://fotilepk.com/", "logo": "https://fotilepk.com/assets/logo.png", "telephone": "+92-42-111-131-517", "areaServed": "PK", "sameAs": ["https://www.facebook.com/fotile.pk"]}</script>
 </body>

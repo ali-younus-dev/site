@@ -38,7 +38,7 @@
     var ov=document.createElement('div'); ov.className='lp-ov';
     ov.innerHTML=''
       +'<div class="lp" role="dialog" aria-label="Fotile F20 refrigerator launch">'
-      +  '<div class="lp-img" style="background-image:url(\''+B+'assets/launch/coming-soon.jpg\')"></div>'
+      +  '<div class="lp-img" style="background-image:url(\''+B+'assets/f20/f20-shut.jpg\');background-position:center 38%"></div>'
       +  '<button class="lp-x" aria-label="Close">&#10005;</button>'
       +  '<div class="lp-b">'
       +    '<div class="lp-k"><span class="d"></span>New Launch &middot; Coming Soon</div>'
@@ -58,6 +58,10 @@
     // clicking the CTA also marks as seen
     ov.querySelector('.lp-cta').addEventListener('click',function(){try{sessionStorage.setItem('fotile_f20_seen','1');}catch(e){}});
   }
-  function boot(){ setTimeout(show, 1400); }
+  function boot(){
+    /* never compete with the opening: wait for it, then give the hero a moment */
+    if(window.__WI_ACTIVE){ addEventListener('fotile:intro-done',function(){ setTimeout(show, 2600); },{once:true}); }
+    else setTimeout(show, 1400);
+  }
   if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded',boot);
 })();
