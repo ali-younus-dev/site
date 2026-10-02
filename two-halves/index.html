@@ -83,7 +83,8 @@
 
   /* ===================== 01 · THE BALANCE ============================ */
   .balance{position:relative;height:100svh;min-height:620px;overflow:hidden;
-    background:var(--n-bg);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+    background:var(--n-bg);touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize;-webkit-tap-highlight-color:transparent}
+  @media (hover:none) and (max-width:900px){.balance{cursor:pointer;touch-action:pan-y pinch-zoom}}
   .side{position:absolute;inset:0}
   .side img{width:100%;height:100%;object-fit:cover}
   .side.night img,.side.day img{object-position:center 52%}
@@ -147,6 +148,8 @@
     font-size:10.5px;letter-spacing:3.4px;text-transform:uppercase;font-weight:700;color:#fff;
     mix-blend-mode:difference;display:flex;align-items:center;gap:14px;transition:opacity .6s}
   .balance.touched .bal-hint{opacity:0}
+  .bal-hint .h-tap{display:none}
+  @media (hover:none) and (max-width:900px){.bal-hint .h-drag{display:none}.bal-hint .h-tap{display:inline}}
   .bal-hint i{display:block;width:34px;height:1px;background:currentColor;position:relative;overflow:hidden}
   .bal-hint i::after{content:"";position:absolute;inset:0;background:#fff;animation:sweep 2.6s infinite}
   @keyframes sweep{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
@@ -655,7 +658,7 @@
     <span class="arr r">▶</span>
   </div>
 
-  <div class="bal-hint"><i></i> Drag to shift the balance <i></i></div>
+  <div class="bal-hint"><i></i> <span class="h-drag">Drag to shift the balance</span><span class="h-tap">Tap to shift the balance</span> <i></i></div>
 </header>
 
 <!-- ============ 02 · THE SYMBOL ============ -->
@@ -941,27 +944,67 @@
     target = Math.max(0.06, Math.min(0.94, v));
     if(!raf) raf=requestAnimationFrame(paint);
   }
-  function fromEvent(e){
+  function fromEvent(e,horizontal){
     var r=bal.getBoundingClientRect();
-    go(mqStack.matches ? (e.clientY - r.top) / r.height
-                       : (e.clientX - r.left) / r.width);
+    go((mqStack.matches && !horizontal) ? (e.clientY - r.top) / r.height
+                                        : (e.clientX - r.left) / r.width);
     if(!touched){ touched=true; bal.classList.add('touched'); }
   }
 
-  /* hover tracks; press-and-drag commits */
-  var dragging=false;
+  /* ------------------------------------------------------------------ *
+     POINTER MODEL
+
+     Mouse / pen: hovering tracks the balance, exactly as before.
+
+     Touch: this hero is a full screen tall, so a finger landing on it is
+     almost always someone trying to scroll past. It used to claim the
+     gesture on `pointerdown` and preventDefault every `touchmove`, which
+     made the whole first screen a scroll trap on a phone.
+
+     Now a finger is treated as a scroll until it proves otherwise:
+       - stacked (phone) layout: the seam is horizontal, so dragging it
+         would fight the page. Instead a *tap* flips between night and day.
+         Nothing is ever preventDefault-ed, so scrolling always works.
+       - wide layout on a touch screen (tablet): a drag is allowed, but only
+         after a clearly sideways movement wins an axis lock.
+   * ------------------------------------------------------------------ */
+  var dragging=false, pend=null;
+  var TAP_SLOP=10, CLAIM=12, AXIS=1.4;
+
   bal.addEventListener('pointermove',function(e){
-    if(e.pointerType==='touch' && !dragging) return;   /* don't hijack a scroll */
-    fromEvent(e);
+    if(e.pointerType!=='touch'){ fromEvent(e); return; }
+    if(dragging){ fromEvent(e,true); return; }
+    if(!pend || e.pointerId!==pend.id) return;
+    var dx=e.clientX-pend.x, dy=e.clientY-pend.y;
+    if(Math.abs(dx)>TAP_SLOP || Math.abs(dy)>TAP_SLOP) pend.moved=true;
+    if(Math.abs(dy)>TAP_SLOP && Math.abs(dy)>=Math.abs(dx)){ pend=null; return; }  /* a scroll */
+    if(!mqStack.matches && Math.abs(dx)>CLAIM && Math.abs(dx)>Math.abs(dy)*AXIS){
+      dragging=true; bal.classList.add('dragging');
+      try{ bal.setPointerCapture(e.pointerId); }catch(x){}
+      fromEvent(e,true);
+    }
   },{passive:true});
-  /* only claim the gesture once a finger is actually down on the handle area */
+
+  /* only ever blocks the page once a sideways drag has actually been claimed */
   bal.addEventListener('touchmove',function(e){ if(dragging) e.preventDefault(); },{passive:false});
+
   bal.addEventListener('pointerdown',function(e){
+    if(e.pointerType==='touch'){ pend={x:e.clientX,y:e.clientY,id:e.pointerId,moved:false}; return; }
     dragging=true; bal.classList.add('dragging');
     try{ bal.setPointerCapture(e.pointerId); }catch(x){}
     fromEvent(e);
   });
-  function release(){ dragging=false; bal.classList.remove('dragging'); }
+
+  bal.addEventListener('pointerup',function(e){
+    if(e.pointerType==='touch' && pend && !pend.moved && !dragging){
+      /* a clean tap: flip the balance */
+      go(target>0.5 ? 0.18 : 0.82);
+      touched=true; bal.classList.add('touched');
+    }
+    pend=null;
+  });
+
+  function release(){ dragging=false; pend=null; bal.classList.remove('dragging'); }
   addEventListener('pointerup',release); addEventListener('pointercancel',release);
 
   /* keyboard: the hero is focusable, so arrows move the balance */
@@ -980,7 +1023,13 @@
   setTimeout(function(){ if(!touched) idle=setInterval(breathe,40); }, 2200);
 
   /* Leaving the hero settles it back to balance. */
-  bal.addEventListener('pointerleave',function(){ if(!dragging) go(0.5); });
+  /* On touch the pointer is destroyed the moment the finger lifts, so
+     pointerleave fires straight after every tap and would snap the balance
+     back before you saw it move. Mouse only. */
+  bal.addEventListener('pointerleave',function(e){
+    if(e.pointerType==='touch') return;
+    if(!dragging) go(0.5);
+  });
 
   go(0.5);
   addEventListener('resize',function(){ var t=target; target=t+0.0001; if(!raf) raf=requestAnimationFrame(paint); },{passive:true});
