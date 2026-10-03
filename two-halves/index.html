@@ -190,35 +190,33 @@
   .sym-grid p{font-weight:300;color:var(--dim);font-size:16px;line-height:1.75}
   @media(max-width:760px){.sym-grid{grid-template-columns:1fr;gap:34px;margin-top:44px}}
 
-  /* ===================== 00 · THE OPENING ============================ */
+  /* ===================== 00 · THE OPENING ============================
+     THE TURNING.
+
+     One solid disc, drawn per frame on a single canvas — never two stacked
+     layers, so the halves can never drift out of register. It starts edge-on
+     (a blade of light), turns on its vertical axis until the face is square
+     to you, opens its two eyes, grows until its own S-curve is the screen,
+     and then the two halves turn away from each other and leave the hero
+     already split along the same line.                                     */
   html.iolock,html.iolock body{overflow:hidden!important}
   #intro{position:fixed;inset:0;z-index:4000;overflow:hidden;cursor:pointer;
-    opacity:1;visibility:visible}
+    opacity:1;visibility:visible;background:#07080b}
   #intro.done{opacity:0;visibility:hidden;pointer-events:none;
-    transition:opacity .5s ease,visibility 0s .5s}
-  #intro .ioback{position:absolute;inset:0;background:#0b0c10}
-  #intro .iowrap{position:absolute;left:50%;top:50%;
-    width:var(--iw,240px);height:var(--iw,240px);
-    margin-left:calc(var(--iw,240px) / -2);margin-top:calc(var(--iw,240px) / -2);
-    transform:rotate(-168deg)}
-  #intro .iohalf{position:absolute;inset:0;transform-origin:50% 50%;
-    will-change:transform,opacity;backface-visibility:hidden}
-  #intro .iohalf svg{width:100%;height:100%;display:block;overflow:visible;
-    shape-rendering:geometricPrecision}
-  #intro .ioword{position:absolute;left:0;right:0;top:calc(50% + var(--iw,240px) * .68);
-    text-align:center;pointer-events:none;opacity:0;
-    mix-blend-mode:difference;color:#fff}
-  #intro .ioword b{display:block;font-size:clamp(24px,3.6vw,38px);font-weight:200;
-    letter-spacing:.32em;text-indent:.32em;line-height:1}
-  #intro .ioword i{display:block;margin-top:15px;font-style:normal;font-size:9.5px;
-    font-weight:700;letter-spacing:5.4px;text-indent:5.4px;text-transform:uppercase;opacity:.85}
+    transition:opacity .55s ease,visibility 0s .55s}
+  #intro canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  #intro .ioword{position:absolute;left:0;right:0;top:50%;
+    margin-top:calc(var(--iw,280px) * .62);
+    text-align:center;pointer-events:none;opacity:0;color:#fff;
+    text-shadow:0 2px 46px rgba(0,0,0,.9);will-change:opacity,transform}
+  #intro .ioword b{display:block;font-size:clamp(26px,3.8vw,42px);font-weight:200;
+    letter-spacing:.34em;text-indent:.34em;line-height:1}
+  #intro .ioword i{display:block;margin-top:16px;font-style:normal;font-size:9.5px;
+    font-weight:700;letter-spacing:5.6px;text-indent:5.6px;text-transform:uppercase;opacity:.66}
   #intro .ioskip{position:absolute;right:22px;bottom:20px;font-size:9px;letter-spacing:2.6px;
-    text-transform:uppercase;font-weight:700;color:#fff;mix-blend-mode:difference;
+    text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.5);
     opacity:0;transition:opacity .6s ease;pointer-events:none}
-  #intro.hint .ioskip{opacity:.5}
-  @media(prefers-reduced-motion:reduce){
-    #intro .iowrap{transform:rotate(0deg)}
-  }
+  #intro.hint .ioskip{opacity:1}
 
   /* ===================== 03/04 · THE TWO CHAPTERS ==================== */
   .chapter{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
@@ -490,7 +488,7 @@
 /* lock the page under the opening — with a failsafe in case anything below fails */
 (function(){var d=document.documentElement;
  if(!matchMedia('(prefers-reduced-motion:reduce)').matches){d.className+=' iolock';}
- setTimeout(function(){d.classList.remove('iolock');},6000);})();
+ setTimeout(function(){d.classList.remove('iolock');},7000);})();
 </script>
 </head>
 <body>
@@ -498,104 +496,306 @@
 <!-- ============ 00 · THE OPENING ============ -->
 <!-- The mark draws itself, turns upright, swallows the screen, then parts. -->
 <div id="intro" aria-hidden="true">
-  <div class="ioback"></div>
-  <div class="iowrap">
-    <div class="iohalf io-dark">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <path d="M50,2 A48,48 0 0,0 50,98 A24,24 0 0,1 50,50 A24,24 0 0,0 50,2 Z"
-              fill="#0b0b0f" stroke="rgba(246,242,236,.55)" stroke-width="0.13"/>
-        <g class="iodots">
-          <circle cx="50" cy="26" r="7.4" fill="#f2efe9"/>
-          <circle cx="50" cy="26" r="2.5" fill="#2f8e8c"/>
-        </g>
-      </svg>
-    </div>
-    <div class="iohalf io-light">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <path fill-rule="evenodd" fill="#f4f0ea"
-              d="M50,2 A48,48 0 1,0 50,98 A48,48 0 1,0 50,2 Z
-                 M50,2 A48,48 0 0,0 50,98 A24,24 0 0,1 50,50 A24,24 0 0,0 50,2 Z"/>
-        <g class="iodots">
-          <circle cx="50" cy="74" r="7.4" fill="#0b0b0f"/>
-          <circle cx="50" cy="74" r="2.5" fill="#e2b48c"/>
-        </g>
-      </svg>
-    </div>
-  </div>
+  <canvas id="ioCv"></canvas>
   <div class="ioword"><b>兩半</b><i>Two Halves</i></div>
   <div class="ioskip">Tap to skip</div>
 </div>
 <script>
-/* ---- the opening ---------------------------------------------------------
-   One mark. It arrives spinning, settles upright, grows until its own S-curve
-   is the whole screen, and then the two halves walk away from each other —
-   night to the left, morning to the right — leaving the hero already in place. */
+/* ---- the opening · THE TURNING -------------------------------------------
+   The whole mark is ONE model, rasterised fresh every frame onto one canvas.
+   There are no stacked DOM layers to fall out of register, which is what made
+   the old version read as a figure 8 halfway through.
+
+   The disc is treated as a real coin with thickness, turning on its vertical
+   axis. A Y-rotation of theta is exactly a horizontal squash by cos(theta),
+   so the S-curve stays geometrically true at every angle, and at 90 degrees
+   the whole thing collapses to a blade of light.
+
+     0.00-0.06  a blade of light, edge-on
+     0.06-0.40  it turns to face you, overshoots a few degrees, settles
+     0.40-0.52  the rim catches a specular, the two eyes open
+     0.52-0.66  it holds; the name
+     0.66-0.84  it grows until its own S-curve is the screen
+     0.84-1.00  the halves turn away from each other and leave
+   -------------------------------------------------------------------------- */
 (function(){
-  var el=document.getElementById('intro');
-  if(!el) return;
-  var root=document.documentElement, done=false;
+  var el=document.getElementById('intro'), cv=document.getElementById('ioCv');
+  if(!el||!cv) return;
+  var root=document.documentElement, done=false, raf=0;
 
   function finish(){
     if(done) return; done=true;
+    cancelAnimationFrame(raf);
     el.classList.add('done');
     root.classList.remove('iolock');
-    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },700);
+    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },760);
   }
   el.addEventListener('click',finish);
   addEventListener('keydown',function(e){ if(e.key==='Escape') finish(); });
 
+  var ctx=cv.getContext('2d');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(reduce || !el.animate){ setTimeout(finish,420); return; }
+  if(reduce || !ctx){ setTimeout(finish,420); return; }
 
-  var vw=innerWidth, vh=innerHeight;
-  var W=Math.max(150,Math.min(250,Math.round(Math.min(vw,vh)*0.33)));
-  el.style.setProperty('--iw',W+'px');
+  /* ---------------- geometry ------------------------------------------- */
+  var W=0,H=0,dpr=1,R=0,COVER=1;
+  function size(){
+    dpr=Math.min(2,devicePixelRatio||1);
+    W=innerWidth; H=innerHeight;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    R=Math.max(96,Math.min(178,Math.round(Math.min(W,H)*0.215)));
+    el.style.setProperty('--iw',(R*2)+'px');
+    /* grow until the disc's own circle swallows the viewport diagonal */
+    COVER=Math.sqrt(W*W+H*H)/(2*R)*1.18;
+  }
+  size();
+  addEventListener('resize',size,{passive:true});
 
-  var cover=Math.sqrt(vw*vw+vh*vh)/(0.96*W)*1.16;   /* until the circle swallows the frame */
-  var bulge=0.24*W*cover;                            /* how far each half reaches past centre */
-  var out=vw*0.5+bulge+140;
+  var PI=Math.PI;
 
-  var D=2800,
-      EIN='cubic-bezier(.16,1,.3,1)',
-      EGROW='cubic-bezier(.68,0,.26,1)',
-      EPART='cubic-bezier(.6,0,.1,1)';
+  /* The dark half: the left semicircle, then the small arc bulging right,
+     then the small arc bulging left — the canonical taijitu division. */
+  function darkPath(){
+    var p=new Path2D();
+    p.moveTo(0,-R);
+    p.arc(0,0,R,-PI/2,PI/2,true);          /* big arc, through the left */
+    p.arc(0,R/2,R/2,PI/2,-PI/2,true);      /* small arc, bulging right  */
+    p.arc(0,-R/2,R/2,PI/2,3*PI/2,false);   /* small arc, bulging left   */
+    p.closePath();
+    return p;
+  }
+  /* The light half is the complement: the full circle with the dark half
+     punched out of it, filled even-odd. */
+  function lightPath(){
+    var p=new Path2D();
+    p.arc(0,0,R,0,2*PI);
+    p.addPath(darkPath());
+    return p;
+  }
+  var P_DARK=null,P_LIGHT=null,P_RING=null;
+  function buildPaths(){
+    P_DARK=darkPath(); P_LIGHT=lightPath();
+    P_RING=new Path2D(); P_RING.arc(0,0,R,0,2*PI);
+  }
+  buildPaths();
+  addEventListener('resize',buildPaths,{passive:true});
 
-  function run(node,frames,opts){ if(node) return node.animate(frames,opts); }
+  /* ---------------- easing --------------------------------------------- */
+  function clamp(v){ return v<0?0:v>1?1:v; }
+  function seg(t,a,b){ return clamp((t-a)/(b-a)); }
+  function outExpo(x){ return x>=1?1:1-Math.pow(2,-10*x); }
+  function inOutCubic(x){ return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2; }
+  function outBack(x){ var c=1.70158,c3=c+1; return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2); }
 
-  run(el.querySelector('.iowrap'),
-      [{transform:'rotate(-168deg)'},{transform:'rotate(0deg)'}],
-      {duration:1760,easing:EIN,fill:'both'});
+  /* ---------------- one frame ------------------------------------------ */
+  var D=3000, t0=0;
 
-  [['.io-dark',-1],['.io-light',1]].forEach(function(p){
-    run(el.querySelector(p[0]),[
-      {transform:'translateX(0px) scale(0.05)',opacity:0,offset:0,   easing:EIN},
-      {transform:'translateX(0px) scale(1)',   opacity:1,offset:0.25,easing:'linear'},
-      {transform:'translateX(0px) scale(1)',   opacity:1,offset:0.30,easing:EGROW},
-      {transform:'translateX(0px) scale('+cover.toFixed(3)+')',opacity:1,offset:0.62,easing:EPART},
-      {transform:'translateX('+(p[1]*out).toFixed(0)+'px) scale('+cover.toFixed(3)+')',opacity:1,offset:1}
+  function drawHalf(path, isDark, cosT, dx, scale, alpha, blur){
+    ctx.save();
+    ctx.globalAlpha=alpha;
+    if(blur>0.05) ctx.filter='blur('+blur.toFixed(2)+'px)';
+    ctx.translate(W/2+dx, H/2);
+    ctx.scale(scale,scale);
+
+    /* the thickness of the coin: a sliver of edge pushed out behind the face */
+    var sinT=Math.sqrt(Math.max(0,1-cosT*cosT));
+    var edge=R*0.055*sinT;
+    if(edge>0.4){
+      ctx.save();
+      ctx.scale(cosT===0?0.0001:Math.abs(cosT),1);
+      ctx.translate((cosT>=0?-1:1)*edge/Math.max(0.08,Math.abs(cosT)),0);
+      ctx.fillStyle=isDark?'#000':'#8f887c';
+      ctx.fill(path,'evenodd');
+      ctx.restore();
+    }
+
+    /* the face, squashed by cos(theta) — a true Y rotation */
+    ctx.scale(cosT===0?0.0001:cosT,1);
+
+    var g;
+    if(isDark){
+      g=ctx.createLinearGradient(-R,-R,R*0.6,R);
+      g.addColorStop(0,'#21242c'); g.addColorStop(0.5,'#0e1015'); g.addColorStop(1,'#05060a');
+    }else{
+      g=ctx.createLinearGradient(-R*0.4,-R,R,R);
+      g.addColorStop(0,'#fffefb'); g.addColorStop(0.52,'#f2eee7'); g.addColorStop(1,'#d8d2c7');
+    }
+    ctx.fillStyle=g;
+    ctx.fill(path,'evenodd');
+
+    /* carved rim */
+    ctx.lineWidth=Math.max(0.6,R*0.009);
+    ctx.strokeStyle=isDark?'rgba(226,232,244,.42)':'rgba(120,110,95,.3)';
+    ctx.stroke(path);
+    ctx.restore();
+  }
+
+  function drawEye(isDark, cosT, dx, scale, alpha, pop){
+    if(alpha<=0.01) return;
+    ctx.save();
+    ctx.globalAlpha=alpha;
+    ctx.translate(W/2+dx, H/2);
+    ctx.scale(scale,scale);
+    ctx.scale(cosT===0?0.0001:cosT,1);
+    var cy=isDark?-R/2:R/2, r=R*0.155*pop;
+    ctx.beginPath(); ctx.arc(0,cy,r,0,2*PI);
+    ctx.fillStyle=isDark?'#f7f4ee':'#090a0e';
+    ctx.fill();
+    ctx.lineWidth=Math.max(0.5,R*0.007);
+    ctx.strokeStyle=isDark?'rgba(0,0,0,.2)':'rgba(255,255,255,.16)';
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function frame(now){
+    if(!t0) t0=now;
+    var t=clamp((now-t0)/D);
+
+    /* ---- the turn: 90deg edge-on -> 0deg face-on, with a small overshoot */
+    var turnIn=seg(t,0.05,0.34);
+    var theta=(1-outExpo(turnIn))*(PI/2);
+    if(turnIn>0.72) theta-=Math.sin((turnIn-0.72)/0.28*PI)*0.14;   /* overshoot */
+
+    /* ---- the leaving turn, once it has covered the screen -------------- */
+    var partT=seg(t,0.80,1);
+    var partE=inOutCubic(partT);
+    theta+=partE*0.42;
+
+    var cosT=Math.cos(theta);
+
+    /* ---- scale: small, then swells until it owns the frame ------------- */
+    var grow=seg(t,0.58,0.82);
+    var scale=1+(COVER-1)*inOutCubic(grow);
+    var intro=outExpo(seg(t,0,0.26));
+    scale*=0.42+0.58*intro;
+
+    /* ---- separation ---------------------------------------------------- */
+    var spread=partE*(W*0.62+R*scale*0.55);
+    var blur=partE*5.5;
+    var alpha=1-clamp((partT-0.72)/0.28)*0.35;
+
+    /* ---- paint --------------------------------------------------------- */
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,H);
+
+    /* the room the disc sits in, dimming out once the disc owns the frame */
+    var backA=1-clamp(seg(t,0.76,0.92));
+    if(backA>0){
+      ctx.save(); ctx.globalAlpha=backA;
+      var bg=ctx.createRadialGradient(W/2,H*0.44,0,W/2,H*0.44,Math.max(W,H)*0.72);
+      bg.addColorStop(0,'#15171e'); bg.addColorStop(0.5,'#0c0d12'); bg.addColorStop(1,'#06070a');
+      ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+      ctx.restore();
+    }
+
+    /* night on the left, morning on the right, as the halves separate */
+    if(partT>0){
+      ctx.save(); ctx.globalAlpha=Math.sin(partT*PI)*0.5;
+      var wl=ctx.createRadialGradient(W*0.14,H/2,0,W*0.14,H/2,W*0.6);
+      wl.addColorStop(0,'rgba(47,142,140,.5)'); wl.addColorStop(1,'rgba(47,142,140,0)');
+      ctx.fillStyle=wl; ctx.fillRect(0,0,W,H);
+      var wr=ctx.createRadialGradient(W*0.86,H/2,0,W*0.86,H/2,W*0.6);
+      wr.addColorStop(0,'rgba(226,180,140,.45)'); wr.addColorStop(1,'rgba(226,180,140,0)');
+      ctx.fillStyle=wr; ctx.fillRect(0,0,W,H);
+      ctx.restore();
+    }
+
+    /* the shadow it casts while it is still an object in a room */
+    var shA=Math.min(1,intro)*(1-clamp(seg(t,0.54,0.72)));
+    if(shA>0.01){
+      ctx.save(); ctx.globalAlpha=shA*0.55;
+      var sr=R*scale;
+      var sg=ctx.createRadialGradient(W/2,H/2+sr*1.12,0,W/2,H/2+sr*1.12,sr*1.1);
+      sg.addColorStop(0,'rgba(0,0,0,.85)'); sg.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=sg;
+      ctx.beginPath(); ctx.ellipse(W/2,H/2+sr*1.12,sr*1.05,sr*0.17,0,0,2*PI); ctx.fill();
+      ctx.restore();
+    }
+
+    /* the glow the disc throws while it is small */
+    if(intro>0.05 && t<0.74){
+      ctx.save(); ctx.globalAlpha=0.5*intro*(1-clamp(seg(t,0.54,0.74)));
+      var gr=ctx.createRadialGradient(W/2,H/2,R*scale*0.6,W/2,H/2,R*scale*2.3);
+      gr.addColorStop(0,'rgba(190,205,230,.22)'); gr.addColorStop(1,'rgba(190,205,230,0)');
+      ctx.fillStyle=gr; ctx.fillRect(0,0,W,H);
+      ctx.restore();
+    }
+
+    /* Edge-on, a disc is a line. Below a couple of degrees the squash would
+       render nothing at all, so the first beat is drawn as what it actually
+       is: a blade of light, standing in the dark. */
+    if(Math.abs(cosT)<0.075){
+      var k=1-Math.abs(cosT)/0.075;
+      var bh=R*scale, bw=Math.max(1.4,R*scale*0.05*(1-k*0.55));
+      ctx.save();
+      ctx.globalCompositeOperation='lighter';
+      ctx.globalAlpha=0.85*k*alpha;
+      var bgl=ctx.createLinearGradient(W/2-bw*9,0,W/2+bw*9,0);
+      bgl.addColorStop(0,'rgba(170,196,236,0)');
+      bgl.addColorStop(0.5,'rgba(206,224,255,.5)');
+      bgl.addColorStop(1,'rgba(170,196,236,0)');
+      ctx.fillStyle=bgl; ctx.fillRect(W/2-bw*9,H/2-bh,bw*18,bh*2);
+      ctx.globalAlpha=k*alpha;
+      var bld=ctx.createLinearGradient(0,H/2-bh,0,H/2+bh);
+      bld.addColorStop(0,'rgba(255,255,255,0)');
+      bld.addColorStop(0.5,'rgba(255,255,255,.96)');
+      bld.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle=bld;
+      ctx.fillRect(W/2-bw/2,H/2-bh,bw,bh*2);
+      ctx.restore();
+    }
+
+    /* the two halves — dark leaves left, light leaves right */
+    drawHalf(P_DARK ,true ,cosT,-spread,scale,alpha,blur);
+    drawHalf(P_LIGHT,false,cosT, spread,scale,alpha,blur);
+
+    /* the eyes open after the face has settled, and close as it swells */
+    var eyeIn=seg(t,0.34,0.48), eyeOut=1-clamp(seg(t,0.62,0.74));
+    var pop=eyeIn<=0?0:outBack(eyeIn);
+    drawEye(true ,cosT,-spread,scale,Math.min(eyeIn>0?1:0,eyeOut)*alpha,pop);
+    drawEye(false,cosT, spread,scale,Math.min(eyeIn>0?1:0,eyeOut)*alpha,pop);
+
+    /* one specular band crossing the face as it settles */
+    var sp=seg(t,0.28,0.50);
+    if(sp>0 && sp<1){
+      ctx.save();
+      ctx.globalCompositeOperation='lighter';
+      ctx.globalAlpha=Math.sin(sp*PI)*0.5;
+      ctx.translate(W/2,H/2); ctx.scale(scale,scale);
+      ctx.scale(cosT===0?0.0001:cosT,1);
+      ctx.clip(P_RING);
+      var x=-R*1.6+sp*R*3.2;
+      var lg=ctx.createLinearGradient(x-R*0.5,-R,x+R*0.5,R);
+      lg.addColorStop(0,'rgba(255,255,255,0)');
+      lg.addColorStop(0.5,'rgba(255,255,255,.75)');
+      lg.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.fillStyle=lg; ctx.fillRect(-R*1.1,-R*1.1,R*2.2,R*2.2);
+      ctx.restore();
+    }
+
+    if(t<1 && !done) raf=requestAnimationFrame(frame);
+  }
+  raf=requestAnimationFrame(frame);
+
+  /* ---------------- the name, the skip, the handback -------------------- */
+  var word=el.querySelector('.ioword');
+  if(word && word.animate){
+    word.animate([
+      {opacity:0,transform:'translateY(16px)',offset:0},
+      {opacity:0,transform:'translateY(16px)',offset:0.34,easing:'cubic-bezier(.16,1,.3,1)'},
+      {opacity:1,transform:'translateY(0)',   offset:0.46,easing:'linear'},
+      {opacity:1,transform:'translateY(0)',   offset:0.58},
+      {opacity:0,transform:'translateY(-12px)',offset:0.68},
+      {opacity:0,transform:'translateY(-12px)',offset:1}
     ],{duration:D,fill:'both'});
-  });
+  }
 
-  /* the two eyes dissolve as the mark outgrows them */
-  [].forEach.call(el.querySelectorAll('.iodots'),function(g){
-    run(g,[{opacity:1,offset:0},{opacity:1,offset:0.29},{opacity:0,offset:0.50},{opacity:0,offset:1}],
-        {duration:D,easing:'linear',fill:'both'});
-  });
-
-  run(el.querySelector('.ioback'),
-      [{opacity:1,offset:0},{opacity:1,offset:0.61},{opacity:0,offset:0.72},{opacity:0,offset:1}],
-      {duration:D,easing:'linear',fill:'both'});
-
-  run(el.querySelector('.ioword'),
-      [{opacity:0,offset:0},{opacity:0,offset:0.07},{opacity:1,offset:0.20},
-       {opacity:1,offset:0.40},{opacity:0,offset:0.52},{opacity:0,offset:1}],
-      {duration:D,easing:'linear',fill:'both'});
-
-  setTimeout(function(){ el.classList.add('hint'); },900);
-  /* once the halves start parting there is nothing left to skip — hand the page back */
+  setTimeout(function(){ el.classList.add('hint'); },1000);
+  /* once the halves start leaving there is nothing left to skip */
   setTimeout(function(){ el.classList.remove('hint'); el.style.pointerEvents='none';
-                         root.classList.remove('iolock'); },Math.round(D*0.62)+40);
-  setTimeout(finish,D+90);
+                         root.classList.remove('iolock'); },Math.round(D*0.82));
+  setTimeout(finish,D+120);
 })();
 </script>
 
