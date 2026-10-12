@@ -165,8 +165,6 @@
   .aw-mark b{font-size:clamp(30px,3.4vw,46px);font-weight:200;letter-spacing:-1.5px;color:#fff;line-height:1}
   .aw-mark b i{font-style:normal;color:var(--red2);font-size:.5em}
   .aw-mark img{max-height:56px;max-width:150px;width:auto;height:auto;object-fit:contain;filter:brightness(0) invert(1)}
-  .aw-mark img.aw-gold{filter:none;max-height:52px;max-width:52px;border-radius:7px;box-shadow:0 6px 18px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06)}
-  .aw span b{color:var(--gold);font-weight:600}
   .aw-mark .fx-if{font:800 32px/1 var(--font);color:#fff;letter-spacing:-1px;display:inline-flex;align-items:baseline}
   .aw-mark .fx-if i{font-style:normal;color:var(--gold);font-weight:600;margin-left:5px;font-size:.6em;letter-spacing:1px}
   .aw span{display:block;font-size:12.5px;color:var(--dim)}
@@ -739,7 +737,7 @@
 </style>
 <link rel="stylesheet" href="./f20-premium.css?v=16">
 <noscript><style>.loader{display:none!important}.reveal,.fh-l .kick,.fh-l h1,.fh-l p,.fh-cta,.fh-r{opacity:1!important;transform:none!important}.stmt .w{opacity:1!important}</style></noscript>
-<link rel="stylesheet" href="./f20-studio.css?v=26">
+<link rel="stylesheet" href="./f20-studio.css?v=29">
 </head><body class="f20-premium">
 
 <div class="sprog" id="sprog"></div>
@@ -822,7 +820,7 @@
 <section class="awards"><div class="wrap">
   <div class="aw reveal"><div class="aw-mark"><b data-count="106">0</b></div><span>Global design awards<br>(EMAMI Studio, Berlin)</span></div>
   <div class="aw reveal"><div class="aw-mark"><img src="../assets/awards/red-dot.png" alt="Red Dot Design Award" loading="lazy"></div><span>9× Red Dot Design<br>Awards</span></div>
-  <div class="aw reveal"><div class="aw-mark"><img class="aw-gold" src="../assets/awards/if-gold.png" alt="iF Gold Award 2025" loading="lazy" width="360" height="361"></div><span>iF <b>Gold Award 2025</b><br>the only refrigerator to win it</span></div>
+  <div class="aw reveal"><div class="aw-mark"><b>iF</b></div><span>The only refrigerator<br>brand to win it</span></div>
   <div class="aw reveal"><div class="aw-mark"><b>#1</b></div><span>Kitchen brand<br>across Asia</span></div>
 </div></section>
 
@@ -847,6 +845,7 @@
   <div class="ptw reveal">
     <div class="f20-studio" id="f20-studio">
       <div class="f20-studio-head"><span><i></i> F20 · PRODUCT EXPLORER</span><div><button id="f20-photo-toggle" type="button" aria-pressed="false">Studio renders</button><button id="f20-dim-toggle" type="button" aria-pressed="false">Dimensions <span>↗</span></button></div></div>
+      <div class="f20-kitchen-settings"><div><span>A PLACE FOR YOUR F20</span><p id="f20-kitchen-caption" aria-live="polite">The F20, in every detail.</p></div><div role="group" aria-label="F20 kitchen setting"><button type="button" data-f20-setting="studio" aria-pressed="true"><i class="f20-swatch-studio"></i>Studio</button><button type="button" data-f20-setting="oak" aria-pressed="false"><i class="f20-swatch-oak"></i>Warm oak</button><button type="button" data-f20-setting="stone" aria-pressed="false"><i class="f20-swatch-stone"></i>Soft stone</button><button type="button" data-f20-setting="midnight" aria-pressed="false"><i class="f20-swatch-midnight"></i>Midnight</button></div></div>
       <div class="f20-viewport" id="f20-viewport" role="group" aria-label="Interactive F20 refrigerator model">
         <div class="f20-model-mount" id="f20-model-mount"></div>
         <img class="f20-photo" id="f20-photo" src="./reference/manual-front.webp" alt="Official FOTILE F20 front view extracted from page 6 of the supplied brochure" width="1279" height="960">
@@ -856,7 +855,8 @@
         <div class="f20-hotspots" id="f20-hotspots" hidden><button data-part="0" aria-label="Explore adjustable shelves">1</button><button data-part="1" aria-label="Explore nitrogen preservation chamber">2</button><button data-part="2" aria-label="Explore defrost compartment">3</button><button data-part="3" aria-label="Explore fresh-storage zone">4</button></div>
       </div>
       <div class="f20-controls"><div class="f20-angle-label"><label for="f20-angle">DRAG TO ROTATE</label><output id="f20-angle-output" for="f20-angle">−20°</output></div><input id="f20-angle" type="range" min="-65" max="65" step="1" value="-20" aria-label="Rotate the F20"><div class="f20-presets"><button type="button" data-model-angle="0">Front</button><button type="button" data-model-angle="-35">Left</button><button type="button" data-model-angle="35">Right</button><button type="button" id="f20-open">Open doors <span>↗</span></button><button type="button" id="f20-freezer">Freezer <span>+</span></button></div></div>
-      <div class="f20-drawer-controls" role="group" aria-label="Open individual interior drawers"><header><span>EXPLORE THE DRAWERS</span><button id="f20-detail-view" type="button" aria-pressed="false">Close-up view ↗</button></header><div><button type="button" data-drawer="0" aria-expanded="false">Nitrogen <span>+</span></button><button type="button" data-drawer="1" aria-expanded="false">Defrost <span>+</span></button><button type="button" data-drawer="2" aria-expanded="false">Fresh storage <span>+</span></button></div><p>Tap a drawer to slide it open. Doors open automatically.</p></div>
+      <div class="f20-drawer-controls" role="group" aria-label="Open individual interior drawers"><header><span>EXPLORE THE DRAWERS</span><div class="f20-interior-options"><button id="f20-stock" type="button" aria-pressed="true">Hide contents</button><button id="f20-detail-view" type="button" aria-pressed="false">Close-up view ↗</button></div></header><div><button type="button" data-drawer="0" aria-expanded="false">Nitrogen <span>+</span></button><button type="button" data-drawer="1" aria-expanded="false">Defrost <span>+</span></button><button type="button" data-drawer="2" aria-expanded="false">Fresh storage <span>+</span></button></div><p>Tap a drawer to slide it open. Doors open automatically.</p></div>
+      <p class="f20-kitchen-note" id="f20-kitchen-note" hidden>Kitchen setting is illustrative. Confirm cabinetry and ventilation clearances with your installer.</p>
       <p class="f20-model-note">Exterior proportions follow the installation drawing. Interior shown schematically. <a href="./reference/FOTILE-F20-brochure.pdf#page=6" target="_blank" rel="noopener">View brochure ↗</a></p>
     </div>
     <div class="pmeta">
@@ -934,22 +934,17 @@
       <div><b>Lychees</b><span>still juicy</span></div>
     </div>
   </div>
-  <div class="fstats fstats-one">
-    <div class="fstat reveal fstat-lead">
-      <div class="fnum"><span data-count="7">0</span></div>
-      <div class="funit">Days*</div>
-      <span>and still worth eating</span>
-    </div>
-    <ul class="fstat-list reveal">
-      <li><b>Romaine lettuce</b><span>still green, still crisp</span></li>
-      <li><b>Cherries</b><span>still firm, still glossy</span></li>
-      <li><b>Lychees</b><span>still juicy under the shell</span></li>
-    </ul>
+  <div class="fstats">
+    <div class="fstat reveal"><div class="fnum"><span data-count="7">0</span></div><div class="funit">Days*</div><span>Cherries<br><small>still juicy</small></span></div>
+    <div class="fstat reveal"><div class="fnum"><span data-count="7">0</span></div><div class="funit">Days*</div><span>Lettuce<br><small>stays green</small></span></div>
+    <div class="fstat reveal"><div class="fnum"><span data-count="7">0</span></div><div class="funit">Days*</div><span>Lychees<br><small>stays fresh</small></span></div>
   </div>
   <p class="f20-source-note">*7-day freshness examples shown in the FOTILE brochure; results depend on ingredients and storage conditions.</p>
   <div class="chwrap">
     <div class="chbox reveal" id="chbox">
       <canvas id="chCanvas" aria-hidden="true"></canvas>
+      <div class="ch-food" role="img" aria-label="Fresh lettuce, cherries and lychees in the illustrated nitrogen preservation atmosphere"><div class="ch-food-slice ch-lettuce"><span>LETTUCE</span></div><div class="ch-food-slice ch-cherries"><span>CHERRIES</span></div><div class="ch-food-slice ch-lychees"><span>LYCHEES</span></div></div>
+      <div class="ch-seal" aria-hidden="true"><i></i><span>N₂ PROTECTED<small>SEALED FRESHNESS</small></span></div>
       <div class="chread"><b><span id="chN2">0</span><i>%</i></b><span>Nitrogen in the chamber</span></div>
       <div class="px-chamber-caption">N₂ / PRESERVATION ATMOSPHERE</div>
       <div class="chkey"><em style="--c:#5aa2e8">Nitrogen</em><em style="--c:#e0455f">Oxygen</em></div>
@@ -1315,5 +1310,5 @@
 <script src="../mobile-nav.js"></script>
 <script src="../cart.js"></script>
 <script src="./f20-premium.js?v=24" defer></script>
-<script defer src="./f20-studio.bundle.js?v=26"></script>
+<script defer src="./f20-studio.bundle.js?v=29"></script>
 </body></html>

@@ -2,6 +2,8 @@
  * drawing: W .894, H 1.910, D .575. The conflicting .984 specification is disclosed
  * on the page. Interior geometry is schematic, based on the p4 layout. */
 import * as THREE from './vendor/three.module.js';
+import {createF20Kitchen} from './f20-kitchen.js';
+import {stockF20} from './f20-contents.js';
 import { RoomEnvironment } from './vendor/RoomEnvironment.js';
 import { RoundedBoxGeometry } from './vendor/RoundedBoxGeometry.js';
 import frontImageUrl from './reference/manual-front.webp';
@@ -41,7 +43,7 @@ async function initialize(){
  const key=new THREE.DirectionalLight(0xfff7ef,1.65);key.position.set(-3,4.5,4);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-2;key.shadow.camera.right=2;key.shadow.camera.top=3;key.shadow.camera.bottom=-2;key.shadow.normalBias=.01;scene.add(key);
  const fill=new THREE.DirectionalLight(0xcbdcff,1);fill.position.set(3,3,2);scene.add(fill);
  const rim=new THREE.DirectionalLight(0xfc344e,.65);rim.position.set(-2,2,-2);scene.add(rim);
- const model=new THREE.Group();scene.add(model);
+ const model=new THREE.Group();scene.add(model);let kitchen=null,setting='studio';
  model.rotation.y=THREE.MathUtils.degToRad(-20);
  const shellMat=new THREE.MeshStandardMaterial({color:0x424348,metalness:.58,roughness:.37});
  const edgeMat=new THREE.MeshStandardMaterial({color:0x292b30,metalness:.5,roughness:.4});
@@ -184,7 +186,7 @@ async function initialize(){
  // Door hinges pivot at the physical edges, not at the image centre.
  const left=new THREE.Group(),right=new THREE.Group();left.position.set(-.447,0,.2625);right.position.set(.447,0,.2625);model.add(left,right);
  const doorWidth=.444,doorHeight=1.104,doorY=1.352;
- const doorShells=[],hingeLinks=[];
+ const doorShells=[],hingeLinks=[],contentsBins=[];
  // Concealed hinge links bring the door bins clear of the full-width drawer.
  for(const side of [-1,1])for(const y of [.823,1.879]){
    const link=box(.09,.01,.037,side*.447,y,.251,railMat,model,.002);
@@ -202,7 +204,7 @@ async function initialize(){
    }
    box(.009,doorHeight-.047,.012,x-sign*(doorWidth/2-.023),doorY,-.048,lightMat,hinge,.003);
    for(const y of [1.58,1.31,1.055]){
-     const bin=new THREE.Group();bin.position.set(x,y,-.102);hinge.add(bin);
+     const bin=new THREE.Group();bin.position.set(x,y,-.102);hinge.add(bin);contentsBins.push({bin,sign,y});
      box(.354,.009,.11,0,0,0,doorBinMat,bin,.007);
      tubWall(.354,.088,.11,.007,.043,0,doorBinMat,bin,.019);
      tubWall(.356,.003,.112,.004,.088,0,railMat,bin,.019);
@@ -278,6 +280,7 @@ async function initialize(){
  label('Air-Circle Pro',.21,.024,0,1.48,-.244,model,'#687579',27);
  studio.dataset.interiorSkin='brushed satin metal, molded liners and independent drawers';
  // Soft contact shadow, no holographic wireframe or stretched image panels.
+ const contents=stockF20({model,bins:contentsBins,nitrogen,fresh,defrost});let stocked=true;
  const floor=new THREE.Mesh(new THREE.PlaneGeometry(6,6),new THREE.ShadowMaterial({opacity:.07,depthWrite:false}));floor.rotation.x=-Math.PI/2;floor.position.y=-.003;floor.receiveShadow=true;scene.add(floor);
  const shadowCanvas=document.createElement('canvas');shadowCanvas.width=256;shadowCanvas.height=256;const shadowCtx=shadowCanvas.getContext('2d');const shadowGradient=shadowCtx.createRadialGradient(128,128,15,128,128,125);shadowGradient.addColorStop(0,'rgba(0,0,0,.65)');shadowGradient.addColorStop(.4,'rgba(0,0,0,.32)');shadowGradient.addColorStop(1,'rgba(0,0,0,0)');shadowCtx.fillStyle=shadowGradient;shadowCtx.fillRect(0,0,256,256);const contact=new THREE.Mesh(new THREE.PlaneGeometry(1.6,1.15),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(shadowCanvas),transparent:true,depthWrite:false}));contact.rotation.x=-Math.PI/2;contact.position.y=.001;model.add(contact);
  const dimGroup=new THREE.Group();model.add(dimGroup);dimGroup.visible=false;
@@ -332,6 +335,16 @@ async function initialize(){
  $('#f20-freezer').addEventListener('click',()=>{leavePhotos();freezer=!freezer;$('#f20-freezer').innerHTML=`Freezer <span>${freezer?'−':'+'}</span>`;$('#f20-freezer').setAttribute('aria-expanded',String(freezer));$('#f20-state-label').textContent=freezer?'LOWER FREEZER · TWO INNER DRAWERS':open?'113° OPENING · SIX DOOR RACKS':'FRENCH 3-DOOR · 508 L';requestRender();});
  $('#f20-dim-toggle').addEventListener('click',()=>{dimensions=!dimensions;studio.classList.toggle('dimensions-on',dimensions);$('#f20-dim-toggle').setAttribute('aria-pressed',String(dimensions));dimGroup.visible=dimensions;if(dimensions){setOpen(false);freezer=false;$('#f20-freezer').innerHTML='Freezer <span>+</span>';$('#f20-freezer').setAttribute('aria-expanded','false');setAngle(-28);if(photoMode)$('#f20-photo-toggle').click();}requestRender();});
  $('#f20-photo-toggle').addEventListener('click',()=>{photoMode=!photoMode;if(photoMode){inlineDetail.hidden=true;renderIndex=open?1:0;}studio.classList.toggle('photo-mode',photoMode);$('#f20-photo-toggle').setAttribute('aria-pressed',String(photoMode));updatePhoto();requestRender();});
+ const roomBounds=new THREE.Box3(),roomCenter=new THREE.Vector3(),roomCorner=new THREE.Vector3(),roomDirection=new THREE.Vector3(0,.17,1).normalize(),roomRight=new THREE.Vector3(1,0,0),roomUp=new THREE.Vector3().crossVectors(roomDirection,roomRight).normalize();
+ function setKitchen(id){
+  leavePhotos();if(id!=='studio'&&!kitchen){kitchen=createF20Kitchen(renderer);scene.add(kitchen.group);}
+  const scheme=kitchen?.apply(id);setting=scheme?id:'studio';scene.background=scheme?new THREE.Color(scheme.bg):null;floor.visible=!scheme;contact.visible=!scheme;rim.intensity=scheme?.10:.65;
+  studio.dataset.setting=setting;studio.querySelectorAll('[data-f20-setting]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.f20Setting===setting)));
+  $('#f20-kitchen-caption').textContent=scheme?scheme.caption:'The F20, in every detail.';
+  $('#f20-kitchen-note').hidden=!scheme;detailView=false;$('#f20-detail-view').setAttribute('aria-pressed','false');setAngle(scheme?-16:-20);requestRender();
+ }
+ studio.querySelectorAll('[data-f20-setting]').forEach(b=>b.addEventListener('click',()=>setKitchen(b.dataset.f20Setting)));
+ $('#f20-stock').addEventListener('click',()=>{leavePhotos();stocked=!stocked;contents.setVisible(stocked);$('#f20-stock').setAttribute('aria-pressed',String(stocked));$('#f20-stock').textContent=stocked?'Hide contents':'Show contents';requestRender();});
  let drag=null,suppressClick=false;
  renderer.domElement.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY,angle,id:e.pointerId,moved:false};});
  window.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(!drag.moved&&Math.abs(dy)>Math.abs(dx)+8){drag=null;return;}if(Math.abs(dx)>5)drag.moved=true;if(drag.moved)setAngle(drag.angle+dx*.28);},{passive:true});
@@ -348,7 +361,7 @@ async function initialize(){
      if(index>=0&&currentDoor>1.9){toggleDrawer(index);return;}
      part=part.parent;
    }
-   setOpen(!open);
+   if(hit)setOpen(!open);
  });
  renderer.domElement.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setOpen(!open);}});
  photo.addEventListener('click',()=>{if(photoMode)setOpen(!open);});
@@ -376,10 +389,13 @@ async function initialize(){
      if(Math.abs(target-data.current)<.0005)data.current=target;
      drawer.position.z=data.baseZ+data.current;
    });
-   model.rotation.y=THREE.MathUtils.degToRad(currentAngle);left.rotation.y=-currentDoor;right.rotation.y=currentDoor;
+   model.rotation.y=THREE.MathUtils.degToRad(currentAngle);if(kitchen)kitchen.group.rotation.y=model.rotation.y;left.rotation.y=-currentDoor;right.rotation.y=currentDoor;
    const hingeExtension=.09*currentDoor/THREE.MathUtils.degToRad(SIZE.doorMax);
    left.position.x=-.447-hingeExtension;right.position.x=.447+hingeExtension;
-   hingeLinks.forEach(link=>{link.scale.x=Math.max(.001,hingeExtension/.09);link.position.x=link.userData.side*(.447+hingeExtension/2);});
+   // Forward clearance in the concealed hinge path keeps open door backs ahead of flush fronts.
+   const hingeForward=.070*(1-Math.exp(-THREE.MathUtils.radToDeg(currentDoor)/8));
+   left.position.z=right.position.z=.2625+hingeForward;
+   hingeLinks.forEach(link=>{link.scale.x=Math.max(.001,hingeExtension/.09);link.position.x=link.userData.side*(.447+hingeExtension/2);link.position.z=.251+hingeForward/2;link.scale.z=1+hingeForward/.037;});
    freezerFace.position.z=currentFreezer;middleRails.position.z=currentFreezer*.5;freezerDrawers.forEach(d=>d.position.z=d.userData.baseZ+currentFreezer*(d.userData.travel/.48));
    interiorLight.intensity=.15+Math.min(1,currentDoor)*.68;
    sideFillLeft.intensity=sideFillRight.intensity=.05+Math.min(1,currentDoor)*.12;
@@ -389,6 +405,13 @@ async function initialize(){
    const detailAmount=detailFocus*(1-freezerFocus);
    camera.position.lerp(new THREE.Vector3(0,2.65,aspect<.9?5.25:3.12),detailAmount);
    camera.lookAt(0,THREE.MathUtils.lerp(targetY,1.34,detailAmount),THREE.MathUtils.lerp(0,.1,detailAmount));
+   if(setting!=='studio'){
+    kitchen.group.updateMatrixWorld(true);
+    roomBounds.set(new THREE.Vector3(-.985,-.04,-.40),new THREE.Vector3(1.36,2.39,.34+currentFreezer)).applyMatrix4(kitchen.group.matrixWorld);
+    roomBounds.getCenter(roomCenter);const tanV=Math.tan(THREE.MathUtils.degToRad(camera.fov/2)),tanH=tanV*camera.aspect;let distance=0;
+    for(const x of [roomBounds.min.x,roomBounds.max.x])for(const y of [roomBounds.min.y,roomBounds.max.y])for(const z of [roomBounds.min.z,roomBounds.max.z]){roomCorner.set(x,y,z).sub(roomCenter);distance=Math.max(distance,Math.abs(roomCorner.dot(roomRight))/tanH+roomCorner.dot(roomDirection),Math.abs(roomCorner.dot(roomUp))/tanV+roomCorner.dot(roomDirection));}
+    const roomPosition=roomCenter.clone().addScaledVector(roomDirection,distance*1.08);camera.position.lerp(roomPosition,1-detailAmount);camera.lookAt(new THREE.Vector3(0,THREE.MathUtils.lerp(targetY,1.34,detailAmount),THREE.MathUtils.lerp(0,.1,detailAmount)).lerp(roomCenter,1-detailAmount));
+   }
    renderer.render(scene,camera);updateOverlays();
    if(Math.abs((detailView?1:0)-detailFocus)>.001||compartments.some(d=>Math.abs((d.userData.open?d.userData.travel:0)-d.userData.current)>.0005)||Math.abs(angle-currentAngle)>.02||Math.abs((open?THREE.MathUtils.degToRad(113):0)-currentDoor)>.001||Math.abs((freezer?.48:0)-currentFreezer)>.001)requestRender();
  }
@@ -400,7 +423,8 @@ async function initialize(){
  studio.classList.add('model-ready');studio.dataset.modelDimensions='894×1910×575';studio.dataset.doorMax='113';
  // Exposed read-only facts make geometry checks independent of pixel screenshots.
  Object.defineProperty(studio,'modelFacts',{value:Object.freeze({...SIZE,shelves:2,bottleRacks:6,freezerDrawers:2,interiorDrawers:3})});
- Object.defineProperty(studio,'modelState',{get:()=>({doorAngle:THREE.MathUtils.radToDeg(currentDoor),hingeExtension:Math.abs(left.position.x)-.447,freezerTravel:currentFreezer,drawers:compartments.map(d=>({name:d.name,open:d.userData.open,travel:d.userData.current}))})});
+ Object.defineProperty(studio,'modelState',{get:()=>({setting,stocked,kitchenBuilt:!!kitchen,doorAngle:THREE.MathUtils.radToDeg(currentDoor),hingeExtension:Math.abs(left.position.x)-.447,hingeForward:left.position.z-.2625,freezerTravel:currentFreezer,drawers:compartments.map(d=>({name:d.name,open:d.userData.open,travel:d.userData.current}))})});
  syncDrawers();
  setAngle(-20);resize();requestRender();
+ const requestedSetting=new URLSearchParams(location.search).get('setting');if(['oak','stone','midnight'].includes(requestedSetting))setKitchen(requestedSetting);
 }
