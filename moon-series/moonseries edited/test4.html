@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FOTILE — Two Halves. One Culinary Universe.</title>
+<meta name="description" content="FOTILE Pakistan — two expressions, one culinary universe. Discover Moon Series and White Series through a cinematic experience of balance, precision and purity.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fotile Pakistan">
+<meta property="og:title" content="FOTILE — Two Halves. One Culinary Universe.">
+<meta property="og:description" content="FOTILE Pakistan — two expressions, one culinary universe. Discover Moon Series and White Series through a cinematic experience of balance, precision and purity.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FOTILE — Two Halves. One Culinary Universe.">
+<meta name="twitter:description" content="FOTILE Pakistan — two expressions, one culinary universe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --black:#050507;
+  --black2:#090a0f;
+  --panel:#101117;
+  --white:#f7f7f4;
+  --paper:#f4f3ef;
+  --ink:#121419;
+  --muted:#8e919b;
+  --muted-light:#777b83;
+  --silver:#c8cbd1;
+  --silver2:#858a94;
+  --line:rgba(255,255,255,.10);
+  --line-light:rgba(18,20,25,.10);
+  --red:#d71936;
+  --red-soft:#ff3150;
+  --font:"Manrope",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{font-family:var(--font);background:var(--black);color:#fff;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{width:min(1320px,calc(100% - 88px));margin:auto}
+::selection{background:var(--red);color:#fff}
+
+/* CONCEPT FLAG — matches every other page on the site */
+.flag{position:fixed;top:0;left:0;right:0;z-index:2000;background:#000;color:#9ea2a8;text-align:center;padding:6px;font-size:11.5px;font-weight:500;letter-spacing:.5px;border-bottom:1px solid var(--line)}
+.flag b{color:var(--red-soft)}
+
+/* NAV */
+.nav{position:fixed;inset:0 0 auto;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:18px 44px;background:rgba(5,5,7,.30);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);transition:.55s cubic-bezier(.16,1,.3,1);margin-top:30px}
+.nav.scrolled{background:rgba(5,5,7,.86);margin-top:0}
+.brand img{height:20px;filter:brightness(0) invert(1)}
+.nlinks{display:flex;gap:30px;font-size:13px;font-weight:500}
+.nlinks a{opacity:.72;position:relative;padding:4px 0;transition:.3s}
+.nlinks a:hover,.nlinks a.active{opacity:1}
+.nlinks a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--red);transition:.35s}
+.nlinks a:hover::after,.nlinks a.active::after{width:100%}
+.nr{display:flex;align-items:center;gap:18px;font-size:13px}
+.npill{padding:9px 18px;border:1px solid rgba(255,255,255,.22);border-radius:3px;font-weight:600;transition:.35s}
+.npill:hover{background:#fff;color:#08090b;border-color:#fff}
+@media(max-width:900px){.nlinks{display:none}.nav{padding:16px 20px}.nr{gap:10px}.npill{padding:8px 12px;font-size:11px}}
+
+/* CINEMATIC HERO */
+.cinematic{height:430vh;position:relative;background:#030406}
+.cinematic-sticky{position:sticky;top:0;height:100svh;min-height:620px;overflow:hidden;isolation:isolate;background:#050507}
+.space{position:absolute;inset:0;overflow:hidden;background:radial-gradient(70% 90% at 50% 50%,#11131a 0%,#06070a 55%,#020204 100%)}
+.space::before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.08),transparent 16%),radial-gradient(circle at 78% 28%,rgba(215,25,54,.06),transparent 19%),radial-gradient(circle at 55% 75%,rgba(255,255,255,.04),transparent 22%);filter:blur(28px)}
+.starfield,.starfield2{position:absolute;inset:0;width:100%;height:100%;opacity:.75}
+.split-world{position:absolute;inset:0;overflow:hidden}
+.half{position:absolute;inset:0;overflow:hidden;will-change:transform}
+.half-moon{background:radial-gradient(70% 60% at 68% 38%,rgba(100,105,125,.16),transparent 55%),linear-gradient(145deg,#020205 0%,#090a0f 52%,#050507 100%)}
+.half-white{background:radial-gradient(60% 55% at 32% 36%,rgba(255,255,255,.82),transparent 52%),linear-gradient(135deg,#fbfaf7,#ecebe7)}
+.half-white::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(20,20,20,.012) 0 1px,transparent 1px 4px);opacity:.65}
+.seam-glow{position:absolute;inset:-5%;z-index:5;pointer-events:none;opacity:.75;filter:blur(10px);background:linear-gradient(90deg,transparent 45%,rgba(255,255,255,.13) 49.7%,rgba(215,25,54,.18) 50%,rgba(255,255,255,.13) 50.3%,transparent 55%);mix-blend-mode:screen}
+.seam-line{position:absolute;left:50%;top:-10%;width:1px;height:120%;background:linear-gradient(transparent,rgba(255,255,255,.65),rgba(215,25,54,.7),rgba(255,255,255,.45),transparent);z-index:7;transform-origin:center;box-shadow:0 0 28px rgba(255,255,255,.2)}
+
+.orbit{position:absolute;z-index:8;left:50%;top:50%;width:min(49vw,650px);height:min(49vw,650px);transform:translate(-50%,-50%);pointer-events:none;will-change:transform,opacity}
+.orbit-ring{position:absolute;inset:-7%;border:1px solid rgba(255,255,255,.10);border-radius:50%;box-shadow:0 0 80px rgba(255,255,255,.05),inset 0 0 60px rgba(255,255,255,.03)}
+.orbit-ring::before,.orbit-ring::after{content:"";position:absolute;border-radius:50%;inset:8%;border:1px solid rgba(255,255,255,.045)}
+.orbit-ring::after{inset:18%;border-style:dashed;animation:spin 30s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.yinyang{position:absolute;inset:0;filter:drop-shadow(0 28px 50px rgba(0,0,0,.5));will-change:transform}
+.yinyang svg{width:100%;height:100%;overflow:visible}
+.yinyang .rim{stroke:rgba(255,255,255,.55)}
+.yinyang .dot-dark{fill:#090a0d}
+.yinyang .dot-light{fill:#f8f7f3}
+.yinyang .micro{fill:none;stroke:rgba(255,255,255,.18);stroke-width:1}
+.hero-copy{position:absolute;z-index:15;left:50%;top:50%;transform:translate(-50%,-50%);width:min(1000px,90vw);text-align:center;pointer-events:none}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:14px;text-transform:uppercase;letter-spacing:4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.78);margin-bottom:24px}
+.eyebrow i{width:38px;height:1px;background:linear-gradient(90deg,transparent,#fff)}
+.eyebrow i:last-child{transform:rotate(180deg)}
+.hero-title{font-size:clamp(48px,7.8vw,118px);line-height:.92;letter-spacing:-.065em;font-weight:200;color:#fff;text-shadow:0 12px 50px rgba(0,0,0,.42)}
+.hero-title strong{font-weight:600;display:inline-block;background:linear-gradient(105deg,#fff 15%,#c7cad0 50%,#fff 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{margin:26px auto 0;font-size:14px;letter-spacing:.06em;color:rgba(255,255,255,.64)}
+.hero-phrase{position:absolute;z-index:14;left:50%;bottom:8%;transform:translateX(-50%);text-align:center;color:rgba(255,255,255,.55);font-size:10px;text-transform:uppercase;letter-spacing:3px;white-space:nowrap}
+.hero-phrase span{display:inline-block;margin:0 9px;color:var(--red)}
+.side-name{position:absolute;z-index:14;top:50%;transform:translateY(-50%);text-transform:uppercase;letter-spacing:3px;font-size:10px;font-weight:700;writing-mode:vertical-rl;opacity:.55}
+.side-name.left{left:30px}.side-name.right{right:30px;transform:translateY(-50%) rotate(180deg);color:#34373e}
+.scroll-cue{position:absolute;z-index:20;left:50%;bottom:28px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;color:rgba(255,255,255,.5);font-size:9px;letter-spacing:3px;text-transform:uppercase}
+.scroll-cue .mouse{width:20px;height:31px;border:1px solid rgba(255,255,255,.35);border-radius:20px;position:relative}.scroll-cue .mouse::after{content:"";position:absolute;left:50%;top:6px;width:2px;height:6px;background:#fff;border-radius:2px;transform:translateX(-50%);animation:wheel 1.7s ease-in-out infinite}
+@keyframes wheel{50%{transform:translate(-50%,7px);opacity:.2}}
+.hero-panel{position:absolute;z-index:12;top:50%;width:min(390px,32vw);opacity:0;pointer-events:none;will-change:transform,opacity}.hero-panel.left{left:7%;transform:translate(-40%,-50%)}.hero-panel.right{right:7%;transform:translate(40%,-50%);color:#16181d}.panel-kicker{font-size:10px;text-transform:uppercase;letter-spacing:3px;font-weight:700;margin-bottom:12px}.panel-kicker::before{content:"";display:inline-block;width:25px;height:1px;background:currentColor;vertical-align:middle;margin-right:10px}.hero-panel h2{font-size:clamp(32px,4vw,62px);line-height:.98;letter-spacing:-.05em;font-weight:300;margin-bottom:17px}.hero-panel p{font-size:13px;line-height:1.8;max-width:360px;opacity:.66}.panel-link{position:relative;z-index:1;display:inline-flex;gap:9px;align-items:center;margin-top:25px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}.panel-link::after{content:"↗";font-size:14px;color:var(--red)}
+.light-halo{position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,247,225,.9),rgba(255,236,190,.25) 55%,transparent 75%);filter:blur(22px);z-index:-1;opacity:0;pointer-events:none}
+
+/* TRANSITION ORBS */
+.moon-orb{position:absolute;z-index:9;left:50%;top:50%;width:min(32vw,430px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale(.25);opacity:0;background:radial-gradient(circle at 32% 27%,#cfd1d6 0 3%,#858993 8%,#343740 24%,#11131a 58%,#050507 74%);box-shadow:0 0 100px rgba(180,185,200,.16),0 0 240px rgba(255,255,255,.06);overflow:hidden}.moon-orb::before{content:"";position:absolute;inset:-10%;background:radial-gradient(circle at 60% 55%,transparent 0 38%,rgba(0,0,0,.42) 62%,rgba(0,0,0,.7) 100%)}.moon-orb::after{content:"";position:absolute;width:160%;height:55%;left:-25%;top:52%;background:radial-gradient(ellipse,rgba(255,255,255,.12),transparent 70%);filter:blur(20px)}
+
+/* UNIVERSAL SECTIONS */
+.section{position:relative;padding:150px 0}.section.dark{background:var(--black)}.section.paper{background:var(--paper);color:var(--ink)}
+.kicker{font-size:10px;text-transform:uppercase;letter-spacing:3.2px;font-weight:800;color:var(--red);margin-bottom:18px}.kicker.light{color:#bfc2c9}.display{font-size:clamp(42px,6vw,84px);line-height:.98;letter-spacing:-.06em;font-weight:200}.display strong{font-weight:600}.lede{font-size:16px;line-height:1.8;color:var(--muted);max-width:670px;margin-top:25px}.reveal{opacity:0;transform:translateY(50px)}
+
+/* MOON INTRO */
+.moon-intro{background:radial-gradient(60% 90% at 75% 30%,rgba(75,80,98,.13),transparent 55%),#050507;overflow:hidden}.moon-intro .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:90px;align-items:end}.intro-right{padding-bottom:7px}.intro-right .micro-line{width:70px;height:1px;background:var(--red);margin-bottom:24px}.intro-right p{font-size:15px;line-height:1.9;color:#8f929a}.intro-stat{display:flex;gap:28px;margin-top:34px}.intro-stat div{padding-left:17px;border-left:1px solid var(--line)}.intro-stat b{font-size:20px;font-weight:500;color:#fff}.intro-stat span{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#6f727b;margin-top:3px}
+
+/* MOON BANNER */
+.moon-banner{position:relative;height:min(78vh,780px);min-height:560px;overflow:hidden;background:#050507}.moon-banner video,.moon-banner .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.moon-banner .poster{background:radial-gradient(circle at 70% 40%,rgba(180,185,195,.22),transparent 25%),linear-gradient(110deg,#030305,#0c0e14 55%,#050507)}.moon-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,2,4,.92),rgba(2,2,4,.28) 55%,rgba(2,2,4,.65)),linear-gradient(0deg,rgba(2,2,4,.55),transparent 40%)}.moon-banner-copy{position:absolute;z-index:3;left:max(44px,calc((100% - 1320px)/2));top:50%;transform:translateY(-50%);max-width:650px}.moon-banner-copy h2{font-size:clamp(50px,7vw,104px);line-height:.88;letter-spacing:-.065em;font-weight:200}.moon-banner-copy h2 strong{font-weight:600}.moon-banner-copy p{max-width:520px;color:#a8abb3;font-size:15px;line-height:1.8;margin-top:26px}.ghost-word{position:absolute;right:-2%;bottom:-5%;font-size:clamp(100px,22vw,340px);line-height:.7;font-weight:800;letter-spacing:-.08em;color:rgba(255,255,255,.025);z-index:2;user-select:none}
+
+/* PRODUCTS */
+.products{background:#07080c;padding:145px 0 165px}.products-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:55px}.products-head .lede{max-width:500px}.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.product-card{position:relative;min-height:485px;background:linear-gradient(145deg,#11131a,#08090d);border:1px solid rgba(255,255,255,.075);overflow:hidden;isolation:isolate;transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .5s}.product-card::before{content:"";position:absolute;inset:-1px;background:linear-gradient(135deg,rgba(255,255,255,.11),transparent 28%,transparent 72%,rgba(215,25,54,.11));opacity:.55;z-index:-1}.product-card:hover{transform:translateY(-10px);border-color:rgba(255,255,255,.17)}.product-image{height:310px;display:flex;align-items:center;justify-content:center;padding:34px;position:relative;overflow:hidden}.product-image::after{content:"";position:absolute;width:65%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.11),transparent 67%);filter:blur(14px)}.product-image img,.product-image video{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;transition:transform .8s cubic-bezier(.16,1,.3,1)}.product-card:hover .product-image img,.product-card:hover .product-image video{transform:scale(1.07)}.product-meta{padding:0 27px 28px}.product-number{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#686b73}.product-meta h3{font-size:20px;font-weight:400;line-height:1.2;letter-spacing:-.035em;margin:9px 0 12px}.price{font-size:13px;color:#9da0a8}.product-arrow{position:absolute;right:25px;bottom:27px;width:35px;height:35px;border:1px solid rgba(255,255,255,.14);border-radius:50%;display:grid;place-items:center;font-size:14px;transition:.35s}.product-card:hover .product-arrow{background:var(--red);border-color:var(--red);transform:rotate(45deg)}
+
+/* CRAFT */
+.craft{background:#0a0b10;padding:160px 0}.craft-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:110px;align-items:center}.craft-copy h2{font-size:clamp(45px,6vw,80px);font-weight:200;line-height:.95;letter-spacing:-.06em}.craft-copy h2 strong{font-weight:600}.craft-copy p{font-size:15px;color:#8e9199;line-height:1.9;margin-top:25px;max-width:520px}.craft-list{margin-top:35px;display:grid;gap:0;border-top:1px solid var(--line)}.craft-list div{padding:18px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:25px;font-size:12px;color:#b5b7bd}.craft-list span{color:#646771}.craft-art{position:relative;min-height:520px;border:1px solid rgba(255,255,255,.08);overflow:hidden;background:radial-gradient(circle at 50% 40%,rgba(180,185,195,.14),transparent 26%),linear-gradient(145deg,#11131a,#050507)}.craft-art::before{content:"";position:absolute;width:65%;aspect-ratio:1;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 28%,#d4d5d9 0 3%,#777b84 14%,#282b34 43%,#08090d 70%);box-shadow:0 0 100px rgba(200,205,215,.12)}.craft-art::after{content:"FOTILE";position:absolute;right:28px;bottom:22px;font-size:10px;letter-spacing:4px;color:rgba(255,255,255,.28)}.orbit-text{position:absolute;left:50%;top:50%;width:78%;height:78%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.08);border-radius:50%;animation:spin 26s linear infinite}.orbit-text span{position:absolute;top:-7px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#8b8e97;background:#0b0c10;padding:0 9px}
+
+/* PERFORMANCE */
+.metrics{background:#f1f0ec;color:#111319;padding:125px 0}.metric-head{text-align:center;max-width:760px;margin:auto}.metric-head .kicker{color:#565961}.metric-head .display{color:#111319}.metric-head .lede{color:#70727a;margin-left:auto;margin-right:auto}.metric-row{display:grid;grid-template-columns:repeat(3,1fr);margin-top:75px;border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light)}.metric{padding:55px 30px;text-align:center;border-right:1px solid var(--line-light)}.metric:last-child{border-right:0}.metric b{font-size:clamp(52px,7vw,92px);font-weight:200;letter-spacing:-.07em;line-height:1}.metric b span{font-size:.3em;font-weight:600;vertical-align:top;position:relative;top:.45em;margin-left:3px}.metric h3{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;margin-top:16px;font-weight:800}.metric p{font-size:12px;color:#777980;margin-top:8px}
+
+/* WHITE TEASER */
+.white-series{background:#f6f5f1;color:#14161b;padding:150px 0;overflow:hidden}.white-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}.white-copy .kicker{color:#4e5159}.white-copy .display{max-width:650px}.white-copy .lede{color:#6f7279}.white-card{height:600px;background:linear-gradient(145deg,#fff,#e8e7e2);position:relative;overflow:hidden;border:1px solid rgba(0,0,0,.07)}.white-card::before{content:"";position:absolute;width:72%;aspect-ratio:1;border-radius:50%;left:55%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 34% 28%,#fff,#dfe0df 25%,#b7b9ba 55%,#fafaf7 75%);filter:drop-shadow(0 25px 45px rgba(0,0,0,.13))}.white-card::after{content:"FIRST LIGHT";position:absolute;bottom:30px;left:30px;font-size:10px;letter-spacing:4px;color:#777980}.white-link{display:inline-flex;margin-top:28px;padding:12px 20px;border:1px solid rgba(20,22,27,.2);font-size:12px;font-weight:700;transition:.35s}.white-link:hover{background:#15171b;color:#fff}
+
+/* FINAL CTA */
+.final-cta{position:relative;padding:170px 0;background:#040406;overflow:hidden;text-align:center}.final-cta::before{content:"";position:absolute;width:650px;height:650px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(215,25,54,.12),transparent 62%);filter:blur(10px)}.final-cta>*{position:relative}.final-cta .display{max-width:950px;margin:auto}.final-cta p{max-width:570px;margin:25px auto 0;color:#777b84;font-size:14px;line-height:1.8}.cta-row{display:flex;justify-content:center;gap:12px;margin-top:35px}.cta{padding:13px 23px;border:1px solid rgba(255,255,255,.18);font-size:12px;font-weight:700;transition:.35s}.cta.primary{background:#fff;color:#07080a;border-color:#fff}.cta:hover{transform:translateY(-3px)}.cta.primary:hover{background:var(--red);border-color:var(--red);color:#fff}
+
+/* FOOTER */
+footer{background:#020203;border-top:1px solid var(--line);padding:55px 0 25px}.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:45px}.footer-brand img{height:20px;filter:brightness(0) invert(1);margin-bottom:18px}.footer-brand p{font-size:12px;color:#676a73;max-width:300px;line-height:1.8}.footer-col h4{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#d2d3d7;margin-bottom:17px}.footer-col a{display:block;font-size:12px;color:#666971;margin:9px 0;transition:.25s}.footer-col a:hover{color:#fff}.copyright{margin-top:55px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:10px;color:#4f525a}
+
+/* RESPONSIVE */
+@media(max-width:980px){.wrap{width:min(100% - 40px,1320px)}.hero-panel{width:280px}.hero-panel.left{left:4%}.hero-panel.right{right:4%}.moon-intro .wrap,.craft-grid,.white-grid{grid-template-columns:1fr;gap:55px}.product-grid{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.moon-banner-copy{left:20px}.side-name{display:none}}
+@media(max-width:650px){.cinematic{height:350vh}.hero-title{font-size:clamp(43px,14vw,76px)}.hero-sub{font-size:12px}.orbit{width:78vw;height:78vw}.hero-panel{width:78vw;text-align:center}.hero-panel.left,.hero-panel.right{left:50%;right:auto;transform:translate(-50%,-50%)}.hero-panel h2{font-size:39px}.hero-panel p{margin:auto}.moon-orb{width:55vw}.hero-phrase{font-size:8px}.products-head{display:block}.product-grid{grid-template-columns:1fr}.product-card{min-height:450px}.metric-row{grid-template-columns:1fr}.metric{border-right:0;border-bottom:1px solid var(--line-light)}.metric:last-child{border-bottom:0}.white-card{height:430px}.footer-grid{grid-template-columns:1fr 1fr}.section{padding:105px 0}.moon-banner{min-height:500px}.moon-banner-copy{left:20px;right:20px}.moon-banner-copy h2{font-size:58px}.craft-art{min-height:390px}.cta-row{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1!important;transform:none!important}}
+</style>
+<link rel="canonical" href="https://fotilepk.com/universe/">
+<script>window.__PBASE="../";</script>
+</head>
+<body>
+
+<div class="flag">CONCEPT <b>·</b> Two Halves — Moon Series &amp; White Series · real Fotile products &amp; imagery · products are clickable (detail pages coming)</div>
+
+<nav class="nav" id="nav">
+  <a href="/home-regular/" class="brand"><img src="../assets/logo.png" alt="FOTILE"></a>
+  <div class="nlinks">
+    <a href="/shop/">Products</a>
+    <a href="/moon-series/" class="active">Moon Series</a>
+    <a href="/white-series/">White Series</a>
+    <a href="/about-us/">About</a>
+    <a href="/our-dealers/">Dealers</a>
+    <a href="/contact-us/">Contact</a>
+  </div>
+  <div class="nr"><a href="/cart/" aria-label="Cart">🛒</a><a href="/contact-us/" class="npill">Request a Quote</a></div>
+</nav>
+
+<!-- =========================================================
+     CINEMATIC YIN-YANG → MOON / WHITE TRANSITION
+========================================================= -->
+<section class="cinematic" id="cinematic">
+  <div class="cinematic-sticky" id="cinematicSticky">
+    <div class="space"></div>
+    <canvas class="starfield" id="starsFar"></canvas>
+    <canvas class="starfield2" id="starsNear"></canvas>
+
+    <div class="split-world" id="splitWorld">
+      <div class="half half-moon" id="moonHalf"></div>
+      <div class="half half-white" id="whiteHalf"></div>
+    </div>
+
+    <div class="seam-glow" id="seamGlow"></div>
+    <div class="seam-line" id="seamLine"></div>
+
+    <div class="orbit" id="orbit">
+      <div class="orbit-ring"></div>
+      <div class="yinyang" id="yinYang">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="yyWhite" cx="35%" cy="28%">
+              <stop offset="0" stop-color="#ffffff"/>
+              <stop offset=".7" stop-color="#e9e9e7"/>
+              <stop offset="1" stop-color="#c7c9cc"/>
+            </radialGradient>
+            <radialGradient id="yyBlack" cx="35%" cy="28%">
+              <stop offset="0" stop-color="#22242a"/>
+              <stop offset=".55" stop-color="#090a0e"/>
+              <stop offset="1" stop-color="#020204"/>
+            </radialGradient>
+            <filter id="yyShadow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+              <feOffset dy="8" result="off"/>
+              <feColorMatrix in="off" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .45 0"/>
+              <feBlend in="SourceGraphic"/>
+            </filter>
+          </defs>
+          <circle cx="200" cy="200" r="198" fill="url(#yyBlack)" filter="url(#yyShadow)"/>
+          <path d="M200 2 A198 198 0 0 1 200 398 A99 99 0 0 1 200 200 A99 99 0 0 0 200 2Z" fill="url(#yyWhite)"/>
+          <circle cx="200" cy="101" r="29" class="dot-dark"/>
+          <circle cx="200" cy="299" r="29" class="dot-light"/>
+          <circle cx="200" cy="200" r="197" fill="none" class="rim" stroke-width="1.2"/>
+          <circle cx="200" cy="200" r="185" class="micro"/>
+          <circle cx="200" cy="200" r="173" class="micro" stroke-dasharray="1 7"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="moon-orb" id="moonOrb"></div>
+
+    <div class="side-name left">Moon Series · Obsidian</div>
+    <div class="side-name right">White Series · First Light</div>
+
+    <div class="hero-copy" id="heroCopy">
+      <div class="eyebrow"><i></i>Two Halves · One Vision<i></i></div>
+      <h1 class="hero-title">Two halves of one<br><strong>culinary universe.</strong></h1>
+      <p class="hero-sub">Where precision meets purity.</p>
+    </div>
+
+    <div class="hero-panel left" id="moonPanel">
+      <div class="panel-kicker">Moon Series</div>
+      <h2>The Obsidian Moon.</h2>
+      <p>Deep, architectural and unmistakably premium. A collection shaped by darkness, precision and the quiet confidence of engineered luxury.</p>
+      <a class="panel-link" href="/moon-series/">Explore Moon Series</a>
+    </div>
+
+    <div class="hero-panel right" id="whitePanel">
+      <span class="light-halo" id="lightHalo" aria-hidden="true"></span>
+      <div class="panel-kicker">White Series</div>
+      <h2>The First Light.</h2>
+      <p>Airy, minimal and pure. A clean expression designed to bring clarity, light and effortless balance into the modern kitchen.</p>
+      <a class="panel-link" href="/white-series/">Explore White Series</a>
+    </div>
+
+    <div class="hero-phrase">Balance <span>•</span> Precision <span>•</span> Purity <span>•</span> Craft</div>
+    <div class="scroll-cue"><div class="mouse"></div><span>Scroll to transform</span></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PHILOSOPHY
+========================================================= -->
+<section class="section moon-intro">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker light">Design Philosophy</div>
+      <h2 class="display">Modern luxury kitchens don't just host appliances — they <strong>balance the energy of the home.</strong></h2>
+    </div>
+    <div class="intro-right reveal">
+      <div class="micro-line"></div>
+      <p>Fire and water. Steam and stillness. Shadow and light. Every FOTILE collection is engineered to hold its half of that balance completely — then bring both halves together as one living kitchen.</p>
+      <div class="intro-stat">
+        <div><b>01</b><span>Moon Series</span></div>
+        <div><b>02</b><span>White Series</span></div>
+        <div><b>∞</b><span>One Vision</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     MOON HERO
+========================================================= -->
+<section class="moon-banner" id="moonCollection">
+  <div class="poster"></div>
+  <video autoplay muted loop playsinline poster="../assets/video/moon-banner-poster.jpg">
+    <source src="../assets/video/moon-banner.mp4" type="video/mp4">
+  </video>
+  <div class="moon-banner-copy reveal">
+    <div class="kicker light">Introducing The Moon Series</div>
+    <h2>A silver lining to your <strong>culinary dreams.</strong></h2>
+    <p>FOTILE's most premium collection — where celestial design meets uncompromising engineering. Redefining what it means to live at home.</p>
+  </div>
+  <div class="ghost-word">MOON</div>
+</section>
+
+<!-- =========================================================
+     MOON PRODUCTS
+========================================================= -->
+<section class="products">
+  <div class="wrap">
+    <div class="products-head reveal">
+      <div>
+        <div class="kicker light">The Collection</div>
+        <h2 class="display">Engineered for the <strong>centre stage.</strong></h2>
+      </div>
+      <p class="lede">Deep obsidian surfaces, intelligent controls and powerful performance — six pieces designed to behave like one complete system.</p>
+    </div>
+
+    <div class="product-grid">
+      <a class="product-card reveal" href="#">
+        <div class="product-image"><img src="../assets/products/premium-hood-amg9054-y.png" alt="FOTILE Premium Range Hood Luna"></div>
+        <div class="product-meta"><span class="product-number">01 · Hood</span><h3>FOTILE Premium Range Hood Luna</h3><div class="price">Rs 392,700</div></div><span class="product-arrow">↗</span>
+      </a>
+      <a class="product-card reveal" href="#">
+        <div class="product-image"><img src="../assets/products/gas-hob-90306-y.png" alt="FOTILE Built-in Gas Hob 90306-Y"></div>
+        <div class="product-meta"><span class="product-number">02 · Hob</span><h3>FOTILE Built-in Gas Hob 90306-Y</h3><div class="price">Rs 247,800</div></div><span class="product-arrow">↗</span>
+      </a>
+      <a class="product-card reveal" href="#">
+        <div class="product-image"><video muted loop playsinline poster="../assets/products/magic-oven-4-in-1-hyzk26-e1.png"><source src="../assets/video/combi-oven.mp4" type="video/mp4"></video></div>
+        <div class="product-meta"><span class="product-number">03 · Oven</span><h3>FOTILE Luna Combo 4-in-1</h3><div class="price">Rs 375,000</div></div><span class="product-arrow">↗</span>
+      </a>
+      <a class="product-card reveal" href="#">
+        <div class="product-image"><img src="../assets/products/dishwasher-bd3bfg3-y.png" alt="FOTILE Luna Dishwasher BD3BG3-Y"></div>
+        <div class="product-meta"><span class="product-number">04 · Dishwasher</span><h3>Luna Dishwasher BD3BG3-Y</h3><div class="price">Rs 475,000</div></div><span class="product-arrow">↗</span>
+      </a>
+      <a class="product-card reveal" href="#">
+        <div class="product-image"><img src="../assets/products/electric-built-in-oven-ksg7003at-y.png" alt="FOTILE Electric Oven KSG7003AT-Y"></div>
+        <div class="product-meta"><span class="product-number">05 · Oven</span><h3>Electric Oven KSG7003AT-Y</h3><div class="price">Rs 355,000</div></div><span class="product-arrow">↗</span>
+      </a>
+      <a class="product-card reveal" href="#">
+        <div class="product-image"><img src="../assets/products/dishwasher-bd2b-g1-y.png" alt="FOTILE Dishwasher BD2B-G1-Y"></div>
+        <div class="product-meta"><span class="product-number">06 · Dishwasher</span><h3>Dishwasher BD2B-G1-Y</h3><div class="price">Rs 475,000</div></div><span class="product-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CRAFT
+========================================================= -->
+<section class="craft">
+  <div class="wrap craft-grid">
+    <div class="craft-copy reveal">
+      <div class="kicker light">The Craft</div>
+      <h2>Engineered like the <strong>night sky.</strong></h2>
+      <p>Every Moon Series piece is finished as an architectural object — quiet when it should be, powerful when it must be, and designed to disappear into the kitchen until the moment you need it.</p>
+      <div class="craft-list">
+        <div><span>01</span>Obsidian glass &amp; refined detailing <span>→</span></div>
+        <div><span>02</span>Intelligent touch-display control <span>→</span></div>
+        <div><span>03</span>Whisper-quiet, high-power performance <span>→</span></div>
+        <div><span>04</span>Seamless built-in integration <span>→</span></div>
+      </div>
+    </div>
+    <div class="craft-art reveal"><div class="orbit-text"><span>FOTILE · MOON SERIES · ENGINEERED LUXURY · </span></div></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PERFORMANCE
+========================================================= -->
+<section class="metrics">
+  <div class="wrap">
+    <div class="metric-head reveal">
+      <div class="kicker">Flagship Performance</div>
+      <h2 class="display">Quiet power. <strong>Measured.</strong></h2>
+      <p class="lede">Performance becomes premium when it is felt rather than heard.</p>
+    </div>
+    <div class="metric-row">
+      <div class="metric reveal"><b>1650<span>m³/h</span></b><h3>Peak Airflow</h3><p>High-output extraction for demanding cooking.</p></div>
+      <div class="metric reveal"><b>1230<span>Pa</span></b><h3>Static Pressure</h3><p>Strong pressure performance for modern installations.</p></div>
+      <div class="metric reveal"><b>49<span>dB</span></b><h3>Whisper Quiet</h3><p>Power that stays calm in the background.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     WHITE SERIES
+========================================================= -->
+<section class="white-series">
+  <div class="wrap white-grid">
+    <div class="white-copy reveal">
+      <div class="kicker">The Other Half</div>
+      <h2 class="display">Then there is <strong>light.</strong></h2>
+      <p class="lede">Porcelain-white clarity. A clean visual language for kitchens that feel open, calm and effortlessly modern.</p>
+      <a href="/white-series/" class="white-link">Explore White Series →</a>
+    </div>
+    <div class="white-card reveal"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+<section class="final-cta">
+  <div class="wrap">
+    <div class="kicker light reveal">One Vision · Two Expressions</div>
+    <h2 class="display reveal">Bring the <strong>culinary universe</strong> home.</h2>
+    <p class="reveal">Discover FOTILE's premium collections and build a kitchen where design, performance and balance belong together.</p>
+    <div class="cta-row reveal"><a href="/moon-series/" class="cta primary">Explore Moon Series</a><a href="/white-series/" class="cta">Explore White Series</a><a href="/contact-us/" class="cta">Request a Quote</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand"><img src="../assets/logo.png" alt="FOTILE"><p>Premium kitchen appliances engineered around balance, precision and the way modern homes live.</p></div>
+      <div class="footer-col"><h4>Collections</h4><a href="/moon-series/">Moon Series</a><a href="/white-series/">White Series</a><a href="/shop/">All Products</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="/about-us/">About FOTILE</a><a href="/our-dealers/">Dealers</a><a href="/contact-us/">Contact</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="/privacy-policy/">Privacy Policy</a><a href="/terms-and-conditions/">Terms &amp; Conditions</a><a href="/contact-us/">After Sales</a></div>
+    </div>
+    <div class="copyright"><span>© 2026 FOTILE Pakistan — All Rights Reserved.</span><span>+92-42-111-131-517</span></div>
+  </div>
+</footer>
+
+<script src="../cart.js"></script>
+<script src="../editor.js"></script>
+<script src="../mobile-nav.js"></script>
+<script>
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30), {passive:true});
+
+  const moonHalf=document.getElementById('moonHalf'), whiteHalf=document.getElementById('whiteHalf'),
+        splitWorld=document.getElementById('splitWorld'),
+        orbit=document.getElementById('orbit'), yin=document.getElementById('yinYang'),
+        orb=document.getElementById('moonOrb'), copy=document.getElementById('heroCopy'),
+        line=document.getElementById('seamLine'), glow=document.getElementById('seamGlow'),
+        moonPanel=document.getElementById('moonPanel'), whitePanel=document.getElementById('whitePanel'),
+        lightHalo=document.getElementById('lightHalo'), cue=document.querySelector('.scroll-cue');
+
+  /* A smooth bezier seam (computed in real pixels, not a jagged polygon()) —
+     the same curve quality as the Moon/White collection pages, kept in sync on resize. */
+  function setSeamClip(){
+    const w=splitWorld.clientWidth, h=splitWorld.clientHeight;
+    const x=w*0.5, amp=Math.min(w*0.045,52);
+    const p0={x,y:0}, p1={x:x+amp,y:h*0.33}, p2={x:x-amp,y:h*0.67}, p3={x,y:h};
+    moonHalf.style.clipPath=`path('M0,0 L${p0.x},${p0.y} C${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y} L0,${h} Z')`;
+    whiteHalf.style.clipPath=`path('M${w},0 L${p0.x},${p0.y} C${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y} L${w},${h} Z')`;
+  }
+  setSeamClip();
+  addEventListener('resize',setSeamClip);
+
+  /* STARFIELD — renders once and holds still under reduced motion, instead of ignoring it */
+  function stars(canvas, count, size, speed){
+    const ctx=canvas.getContext('2d'); let pts=[]; let w=0,h=0;
+    function resize(){w=canvas.width=innerWidth*devicePixelRatio;h=canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);w=innerWidth;h=innerHeight;pts=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*size+.25,a:Math.random()*.65+.12,s:Math.random()*speed+.1}))}
+    function draw(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of pts){
+        if(!reduce){ p.y-=p.s*.035; if(p.y<0)p.y=h; }
+        ctx.globalAlpha=p.a; ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      }
+      if(!reduce) requestAnimationFrame(draw);
+    }
+    addEventListener('resize',resize); resize(); draw();
+  }
+  stars(document.getElementById('starsFar'),170,1.15,.8);
+  stars(document.getElementById('starsNear'),80,1.8,1.5);
+
+  /* These work regardless of GSAP, reduced motion, or a blocked CDN — never gate real content behind a library load. */
+  document.querySelectorAll('.product-card video').forEach(v=>{
+    const card=v.closest('.product-card');
+    card.addEventListener('mouseenter',()=>v.play().catch(()=>{}));
+    card.addEventListener('mouseleave',()=>{v.pause();v.currentTime=0});
+  });
+  if(!reduce){
+    document.querySelectorAll('.product-card').forEach(card=>{
+      card.addEventListener('pointermove',e=>{
+        const r=card.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+        card.style.transform=`translateY(-10px) perspective(900px) rotateY(${x*3}deg) rotateX(${-y*3}deg)`;
+      });
+      card.addEventListener('pointerleave',()=>{ card.style.transform=''; });
+    });
+  }
+
+  // The two panel CTAs must always be visible and clickable — whatever else does or doesn't run.
+  function revealPanelsStatically(){
+    [moonPanel,whitePanel].forEach(p=>{ p.style.opacity='1'; p.style.transform='translate(0,-50%)'; p.style.pointerEvents='auto'; });
+    lightHalo.style.opacity='1';
+  }
+
+  if (reduce) {
+    document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity=1;el.style.transform='none'});
+    copy.style.opacity='1';
+    revealPanelsStatically();
+    return;
+  }
+
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    // CDN blocked or offline — degrade to a static, fully usable page instead of a half-broken one.
+    document.querySelectorAll('.reveal').forEach(el=>{el.style.opacity=1;el.style.transform='none'});
+    revealPanelsStatically();
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Cinematic choreography: the Yin-Yang starts as the hero, rotates immediately, then becomes the Moon / White story. */
+  const tl=gsap.timeline({scrollTrigger:{trigger:'#cinematic',start:'top top',end:'bottom bottom',scrub:1.05}});
+  tl.to(yin,{rotation:180,duration:.18,ease:'power2.inOut'},0)
+    .to(orbit,{scale:.82,duration:.14,ease:'power2.out'},0)
+    .to(copy,{y:-45,opacity:0,duration:.16,ease:'power2.in'},.08)
+    .to(line,{rotation:18,x:15,duration:.16,ease:'power2.inOut'},.10)
+    .to(glow,{opacity:.28,duration:.12},.12)
+    .to(moonHalf,{xPercent:-7,duration:.18,ease:'power3.inOut'},.17)
+    .to(whiteHalf,{xPercent:7,duration:.18,ease:'power3.inOut'},.17)
+    .to(orbit,{scale:.48,rotation:240,opacity:.35,duration:.20,ease:'power3.inOut'},.20)
+    .to(orb,{opacity:1,scale:1,duration:.18,ease:'power3.out'},.28)
+    .to(moonPanel,{opacity:1,x:0,duration:.16,ease:'power3.out',onStart:()=>{moonPanel.style.pointerEvents='auto'}},.34)
+    .to(whitePanel,{opacity:1,x:0,duration:.16,ease:'power3.out',onStart:()=>{whitePanel.style.pointerEvents='auto'}},.36)
+    .to(lightHalo,{opacity:1,duration:.14,ease:'power2.out'},.37)
+    .to(orbit,{opacity:0,scale:.34,duration:.14},.43)
+    .to(moonHalf,{xPercent:-28,duration:.17,ease:'power3.inOut'},.48)
+    .to(whiteHalf,{xPercent:28,duration:.17,ease:'power3.inOut'},.48)
+    .to(orb,{scale:1.7,opacity:.05,duration:.16,ease:'power2.in'},.56)
+    .to(moonPanel,{x:-30,opacity:0,duration:.12,onComplete:()=>{moonPanel.style.pointerEvents='none'}},.60)
+    .to(whitePanel,{x:30,opacity:0,duration:.12,onComplete:()=>{whitePanel.style.pointerEvents='none'}},.60)
+    .to(lightHalo,{opacity:0,duration:.1},.60)
+    .to(glow,{opacity:0,duration:.12},.64)
+    .to(cue,{opacity:0,duration:.08},.66);
+
+  /* reveal animations */
+  gsap.utils.toArray('.reveal').forEach(el=>{
+    gsap.to(el,{opacity:1,y:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%',once:true}})
+  });
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Store",
+  "name":"Fotile Pakistan",
+  "url":"https://fotilepk.com/",
+  "logo":"https://fotilepk.com/assets/logo.png",
+  "telephone":"+92-42-111-131-517",
+  "areaServed":"PK"
+}
+</script>
+</body>
+</html>
