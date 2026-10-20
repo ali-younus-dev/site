@@ -90,9 +90,9 @@
   .nav::before{content:"";position:absolute;left:0;right:0;top:-26px;height:132px;pointer-events:none;z-index:-1;
     background:linear-gradient(180deg,rgba(5,5,7,.62),rgba(5,5,7,.28) 55%,transparent);transition:opacity .4s}
   .nav.solid::before{opacity:0}
-  .nav{position:fixed;top:0;left:0;right:0;z-index:1000;margin-top:26px;display:flex;align-items:center;justify-content:space-between;
+  .nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;
        padding:22px 44px;transition:.5s cubic-bezier(.16,1,.3,1);border-bottom:1px solid transparent}
-  .nav.solid{background:rgba(11,11,13,.82);backdrop-filter:blur(20px) saturate(140%);border-bottom-color:var(--line);padding:16px 44px;margin-top:26px}
+  .nav.solid{background:rgba(11,11,13,.82);backdrop-filter:blur(20px) saturate(140%);border-bottom-color:var(--line);padding:16px 44px}
   .nav .brand img{height:20px;filter:brightness(0) invert(1)}
   .nlinks{display:flex;gap:40px;font-size:13.5px;font-weight:500;color:var(--txt);letter-spacing:.2px}
   .nlinks a{position:relative;opacity:.72;transition:.3s;padding:3px 0}
@@ -816,7 +816,6 @@ section[style*="border-top"]::marker{display:none}
 <div class="grain"></div>
 <div class="progbar" id="progbar"></div>
 
-<div class="flag">CONCEPT <b>·</b> new design direction — dark tech-luxury · real Fotile assets · same URLs, nothing live changed</div>
 
 <!-- NAV (appears solid on scroll; hidden over the cinematic hero which has its own thin bar) -->
 <nav class="nav" id="nav" style="transition:.5s cubic-bezier(.16,1,.3,1)">

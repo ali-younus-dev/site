@@ -1,84 +1,341 @@
-# Fotile Pakistan — clean URLs + legacy 301 redirects
+# =====================================================================
+#  Fotile Pakistan — .htaccess
+#  Clean URLs + complete WordPress -> static 301 migration map.
+#  Everything uses mod_rewrite (not mod_alias Redirect) so rule order is
+#  deterministic: mod_rewrite always runs before mod_alias, and mixing the
+#  two silently changes which rule wins.
+# =====================================================================
+
 Options +FollowSymLinks
 RewriteEngine On
-
-# Serve /path/ -> /path/index.html (most hosts do this automatically)
 DirectoryIndex index.html
-
-# Force https + non-www (adjust to your canonical host at launch)
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-
-# --- legacy WordPress duplicates -> canonical (safe SEO cleanup) ---
-Redirect 301 /home-regular/ /
-Redirect 301 /fotile-shop/ /shop/
-Redirect 301 /my-account-2/ /my-account/
-Redirect 301 /yith-compare/ /compare/
-
-# --- category sub-paths we consolidated -> parent category ---
-Redirect 301 /product-category/hobs/gas-hobs/ /product-category/hobs/
-Redirect 301 /product-category/hobs/electric-hobs/ /product-category/hobs/
-Redirect 301 /product-category/oven/electric-oven/ /product-category/oven/
-Redirect 301 /product-category/oven/steam-oven/ /product-category/oven/
-Redirect 301 /product-category/oven/combi-oven/ /product-category/oven/
-Redirect 301 /product-category/oven/magic-oven/ /product-category/oven/
-Redirect 301 /product-category/sink-dish-washer/ /product-category/dish-washer/
-Redirect 301 /product-category/moonseries/ /moon-series/
-Redirect 301 /product-category/offers-and-discounts/ /shop/
-
-
-# --- legacy flat preview files -> clean URLs (added) ---
-Redirect 301 /about.html /about-us/
-Redirect 301 /contact.html /contact-us/
-Redirect 301 /dealers.html /our-dealers/
-Redirect 301 /moon-series.html /moon-series/
-Redirect 301 /shop.html /shop/
-Redirect 301 /cart.html /cart/
-Redirect 301 /payment.html /checkout/
-Redirect 301 /blog.html /blog/
-Redirect 301 /blog2.html /blog/page/2/
-Redirect 301 /blog3.html /blog/page/3/
-Redirect 301 /blog-post.html /blog/
-Redirect 301 /explore.html /shop/
-Redirect 301 /masterpiece.html /home-regular/
-Redirect 301 /masterpiece-cinematic.html /
-Redirect 301 /privacy-policy.html /privacy-policy/
-Redirect 301 /refund-policy.html /refund_returns/
-Redirect 301 /shipping-policy.html /shipping-policy/
-Redirect 301 /terms.html /terms-and-conditions/
-Redirect 301 /category-hoods.html /product-category/kitchen-hood/
-Redirect 301 /category-hobs.html /product-category/hobs/
-Redirect 301 /category-ovens.html /product-category/oven/
-Redirect 301 /category-microwaves.html /product-category/oven/microwave-oven-prices-in-pakistan/
-Redirect 301 /category-dishwashers.html /product-category/dish-washer/
-Redirect 301 /category-water.html /product-category/water-purifier/
-
-# custom 404
 ErrorDocument 404 /404.html
 
-# legacy flat .html files -> clean URLs
-Redirect 301 /masterpiece-cinematic.html /
-Redirect 301 /masterpiece.html /
-Redirect 301 /shop.html /shop/
-Redirect 301 /about.html /about-us/
-Redirect 301 /contact.html /contact-us/
-Redirect 301 /dealers.html /our-dealers/
-Redirect 301 /moon-series.html /moon-series/
-Redirect 301 /cart.html /cart/
-Redirect 301 /payment.html /checkout/
-Redirect 301 /blog.html /blog/
-Redirect 301 /blog2.html /blog/page/2/
-Redirect 301 /blog3.html /blog/page/3/
-Redirect 301 /terms.html /terms-and-conditions/
-Redirect 301 /privacy-policy.html /privacy-policy/
-Redirect 301 /refund-policy.html /refund_returns/
-Redirect 301 /shipping-policy.html /shipping-policy/
-Redirect 301 /category-hoods.html /product-category/kitchen-hood/
-Redirect 301 /category-hobs.html /product-category/hobs/
-Redirect 301 /category-ovens.html /product-category/oven/
-Redirect 301 /category-microwaves.html /product-category/oven/microwave-oven-prices-in-pakistan/
-Redirect 301 /category-dishwashers.html /product-category/dish-washer/
-Redirect 301 /category-water.html /product-category/water-purifier/
+# ---------------------------------------------------------------------
+# 0. CANONICAL HOST — https + non-www, in ONE hop.
+#    Every canonical tag on the site is https://fotilepk.com (no www),
+#    so anything else must land here or link equity splits four ways.
+#    Combined into a single rule so http://www -> https://non-www is one
+#    redirect, not two.
+# ---------------------------------------------------------------------
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://fotilepk.com/$1 [R=301,L]
 
-# --- discontinued products -> category page (keeps SEO value, no 404s) ---
-Redirect 301 /shop/gas-hob-4-lohas-burners-glass-top-glg60409/ /product-category/hobs/
+# ---------------------------------------------------------------------
+# 1. WORDPRESS SYSTEM PATHS — kill the crawl traps before anything else.
+# ---------------------------------------------------------------------
+# Internal search -> shop
+RewriteCond %{QUERY_STRING} (^|&)s= [NC]
+RewriteRule ^/?$ /shop/? [R=301,L]
+# ?p=123 / ?page_id=123 permalinks -> home
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id|cat|tag|m)= [NC]
+RewriteRule ^/?$ /? [R=301,L]
+# add-to-cart / orderby / filter query junk -> clean the query off
+RewriteCond %{QUERY_STRING} (^|&)(add-to-cart|orderby|filtering|filter_|min_price|max_price|product_count|really_curr_tax|wc-ajax)= [NC]
+RewriteRule ^(.*)$ /$1? [R=301,L]
+# feeds, API, trackbacks, author archive, attachment pages, paged home
+RewriteRule ^feed/?$                      /blog/ [R=301,L]
+RewriteRule ^comments/feed/?$             /blog/ [R=301,L]
+RewriteRule ^(.+)/feed/?$                 /blog/ [R=301,L]
+RewriteRule ^(.+)/trackback/?$            /blog/ [R=301,L]
+RewriteRule ^author/[^/]+/?$              /blog/ [R=301,L]
+RewriteRule ^page/[0-9]+/?$               / [R=301,L]
+RewriteRule ^wp-json(/.*)?$               / [R=301,L]
+RewriteRule ^xmlrpc\.php$                 / [R=301,L]
+RewriteRule ^wp-login\.php$               / [R=301,L]
+RewriteRule ^wp-admin(/.*)?$              / [R=301,L]
+
+# ---------------------------------------------------------------------
+# 2. WORDPRESS PAGES that no longer exist
+# ---------------------------------------------------------------------
+RewriteRule ^home-regular/?$ / [R=301,L]
+RewriteRule ^fotile-shop/?$ /shop/ [R=301,L]
+RewriteRule ^my-account-2/?$ /contact-us/ [R=301,L]
+RewriteRule ^my-account/?$ /contact-us/ [R=301,L]
+RewriteRule ^track-your-order/?$ /service-center/ [R=301,L]
+RewriteRule ^yith-compare/?$ /shop/ [R=301,L]
+RewriteRule ^compare/?$ /shop/ [R=301,L]
+RewriteRule ^wishlist/?$ /shop/ [R=301,L]
+RewriteRule ^mega-sale/?$ /shop/ [R=301,L]
+
+# ---------------------------------------------------------------------
+# 3. BLOG — every WordPress post slug was shortened on the new site.
+#    Without these 68 rules EVERY blog post 404s on migration.
+# ---------------------------------------------------------------------
+RewriteRule ^range-hood-vs-exhaust-fan-the-better-one-to-buy/?$ /range-hood-vs-exhaust-fan/ [R=301,L]
+RewriteRule ^how-to-keep-your-kitchen-clean-16-practical-ideas/?$ /keep-kitchen-clean-16-ideas/ [R=301,L]
+RewriteRule ^adding-a-dishwasher-to-a-small-kitchen-practical-tips-for-placement/?$ /dishwasher-small-kitchen-placement/ [R=301,L]
+RewriteRule ^the-ultimate-guide-to-choosing-the-right-range-hood-for-your-kitchen/?$ /ultimate-guide-right-range-hood/ [R=301,L]
+RewriteRule ^gas-vs-electric-hobs-which-one-is-better-for-pakistani-kitchens/?$ /gas-vs-electric-hobs-pakistani-kitchens/ [R=301,L]
+RewriteRule ^sink-dishwashers-a-time-saving-solution-for-busy-pakistani-homes/?$ /sink-dishwashers-busy-homes/ [R=301,L]
+RewriteRule ^essential-strategies-for-preserving-fotile-appliances-your-ultimate-guide-to-prolonged-durability/?$ /preserving-fotile-appliances/ [R=301,L]
+RewriteRule ^elevate-your-culinary-skills-exploring-smart-kitchen-technology-with-fotile/?$ /smart-kitchen-technology-fotile/ [R=301,L]
+RewriteRule ^mastering-kitchen-efficiency-transforming-spaces-with-fotile-appliances-in-pakistan/?$ /kitchen-efficiency-fotile-appliances/ [R=301,L]
+RewriteRule ^unlocking-culinary-ease-the-marvel-of-4-in-1-ovens-by-fotile/?$ /marvel-4-in-1-ovens-fotile/ [R=301,L]
+RewriteRule ^a-guide-to-finding-your-ideal-microwave-oven-cooking-convenience-with-fotile/?$ /finding-ideal-microwave-oven-fotile/ [R=301,L]
+RewriteRule ^unveiling-the-advantages-of-switching-to-an-electric-oven-your-comprehensive-guide/?$ /advantages-switching-electric-oven/ [R=301,L]
+RewriteRule ^fotile-hob-a-must-have-for-your-modern-kitchen-in-pakistan/?$ /fotile-hob-must-have-modern-kitchen/ [R=301,L]
+RewriteRule ^space-saving-ideas-for-tiny-homes-kitchens/?$ /space-saving-tiny-kitchens/ [R=301,L]
+RewriteRule ^choosing-between-ducted-and-ductless-range-hoods-which-ones-are-the-smallest-and-best-for-your-kitchen-in-pakistan/?$ /ducted-vs-ductless-range-hoods/ [R=301,L]
+RewriteRule ^understanding-sones-rating-for-range-hoods/?$ /understanding-sones-rating-range-hoods/ [R=301,L]
+RewriteRule ^elevate-your-culinary-experience-with-must-have-kitchen-accessories-by-fotile/?$ /must-have-kitchen-accessories-fotile/ [R=301,L]
+RewriteRule ^uncovering-the-kitchen-secrets-are-fotile-kitchen-hoods-worth-it-for-pakistanis/?$ /fotile-kitchen-hoods-worth-it/ [R=301,L]
+RewriteRule ^a-definitive-guide-on-how-to-choose-from-gas-and-electric-hobs/?$ /definitive-guide-gas-electric-hobs/ [R=301,L]
+RewriteRule ^how-to-clean-and-maintain-your-electric-hob-for-peak-performance/?$ /clean-maintain-electric-hob/ [R=301,L]
+RewriteRule ^gas-hobs-vs-electric-hobs-what-is-best-for-your-cooking-style/?$ /gas-hobs-vs-electric-cooking-style/ [R=301,L]
+RewriteRule ^future-of-cooking-innovations-in-electric-ovens/?$ /future-of-cooking-electric-ovens/ [R=301,L]
+RewriteRule ^how-to-cook-healthier-meals-using-a-steam-oven/?$ /cook-healthier-steam-oven/ [R=301,L]
+RewriteRule ^microwave-oven-hacks-fast-and-easy-recipes-for-busy-families/?$ /microwave-oven-hacks-busy-families/ [R=301,L]
+RewriteRule ^exploring-the-versatility-of-a-4-in-1-pakistani-oven/?$ /versatility-4-in-1-oven/ [R=301,L]
+RewriteRule ^energy-saving-cooking-pointers-for-effective-use-of-your-electric-oven/?$ /energy-saving-electric-oven/ [R=301,L]
+RewriteRule ^the-ultimate-guide-to-installing-and-maintaining-a-sink-dishwasher/?$ /guide-installing-maintaining-sink-dishwasher/ [R=301,L]
+RewriteRule ^electric-vs-gas-hobs-which-is-better-for-your-home/?$ /electric-vs-gas-hobs-home/ [R=301,L]
+RewriteRule ^how-to-choose-the-right-microwave-oven-for-your-kitchen/?$ /how-to-choose-microwave-oven/ [R=301,L]
+RewriteRule ^the-benefits-of-steam-ovens-for-healthy-cooking/?$ /benefits-steam-ovens-healthy-cooking/ [R=301,L]
+RewriteRule ^the-ultimate-guide-to-choosing-the-perfect-sink-for-your-kitchen/?$ /ultimate-guide-choosing-sink/ [R=301,L]
+RewriteRule ^top-dishwashers-for-busily-engaged-pakistani-families/?$ /top-dishwashers-busy-families/ [R=301,L]
+RewriteRule ^top-5-benefits-of-rnage-hoods-in-pakistani-kitchens/?$ /top-5-benefits-range-hoods/ [R=301,L]
+RewriteRule ^how-to-choose-the-best-range-hood-for-your-home/?$ /how-to-choose-best-range-hood/ [R=301,L]
+RewriteRule ^5-reasons-why-every-modern-kitchen-needs-a-sink-dishwasher/?$ /5-reasons-sink-dishwasher/ [R=301,L]
+RewriteRule ^the-ultimate-guide-to-choosing-hobs-for-your-pakistani-kitchen/?$ /ultimate-guide-choosing-hobs/ [R=301,L]
+RewriteRule ^gas-vs-electric-hobs-which-is-better-for-your-cooking-needs/?$ /gas-vs-electric-hobs-cooking-needs/ [R=301,L]
+RewriteRule ^electric-hobs-features-to-look-for-in-2024/?$ /electric-hobs-features-2024/ [R=301,L]
+RewriteRule ^how-to-maintain-your-gas-hobs-for-longevity/?$ /maintain-gas-hobs-longevity/ [R=301,L]
+RewriteRule ^top-10-benefits-of-using-electric-hobs-in-your-modern-kitchen/?$ /top-10-benefits-electric-hobs/ [R=301,L]
+RewriteRule ^top-5-gas-hobs-for-efficient-cooking-in-pakistan/?$ /top-5-gas-hobs-pakistan/ [R=301,L]
+RewriteRule ^top-5-range-hoods-for-pakistani-kitchens-in-2024/?$ /top-5-range-hoods-2024/ [R=301,L]
+RewriteRule ^the-number-one-kitchen-appliances-brand-in-pakistan/?$ /number-one-kitchen-brand-pakistan/ [R=301,L]
+RewriteRule ^top-rated-kitchen-appliances-in-pakistan/?$ /top-rated-kitchen-appliances-pakistan/ [R=301,L]
+RewriteRule ^the-top-5-features-to-look-for-in-a-home-oven-a-buyers-guide/?$ /top-5-features-home-oven/ [R=301,L]
+RewriteRule ^essential-features-to-consider-when-buying-a-cooktop/?$ /cooktop-buying-features/ [R=301,L]
+RewriteRule ^signs-its-time-to-replace-your-old-gas-stove/?$ /signs-replace-old-gas-stove/ [R=301,L]
+RewriteRule ^the-best-home-appliances-brands-in-pakistan/?$ /best-home-appliance-brands-pakistan/ [R=301,L]
+RewriteRule ^why-fotile-kitchen-appliances-are-ideal-for-pakistani-cooking/?$ /fotile-complements-pakistani-cooking/ [R=301,L]
+RewriteRule ^fotile-role-in-creating-energy-efficient-modern-kitchens/?$ /fotile-energy-efficient-kitchens/ [R=301,L]
+RewriteRule ^electric-hobs-in-pakistan/?$ /electric-hobs-pakistan-smart-choice/ [R=301,L]
+RewriteRule ^best-built-in-ovens-in-pakistan/?$ /best-built-in-ovens-pakistan-guide/ [R=301,L]
+RewriteRule ^how-fotile-products-add-value-to-your-home-resale/?$ /fotile-home-resale-value/ [R=301,L]
+RewriteRule ^gas-vs-electric-hobs/?$ /gas-vs-electric-hobs-efficiency/ [R=301,L]
+RewriteRule ^2025-kitchen-stove-appliance-stats-usage-market-trends/?$ /kitchen-stove-appliance-stats-2025/ [R=301,L]
+RewriteRule ^2025-dishwasher-efficiency-stats-energy-water-cost-savings/?$ /dishwasher-efficiency-stats-2025/ [R=301,L]
+RewriteRule ^6-range-hood-styles-find-the-perfect-fit-for-your-kitchen/?$ /6-range-hood-styles/ [R=301,L]
+RewriteRule ^why-is-your-range-hood-noisy-on-windy-days-causes-fixes-and-expert-tips-for-pakistani-homes/?$ /range-hood-noisy-windy-days/ [R=301,L]
+RewriteRule ^baking-in-a-gas-oven-vs-electric-oven-which-gives-better-results/?$ /gas-oven-vs-electric-oven-baking/ [R=301,L]
+RewriteRule ^home-kitchen-appliance-lifespan-statistics-in-2025/?$ /appliance-lifespan-statistics-2025/ [R=301,L]
+RewriteRule ^home-cooking-statistics-get-more-out-of-your-food-budget/?$ /home-cooking-statistics-food-budget/ [R=301,L]
+RewriteRule ^air-purifier-for-modern-homes-healthier-living-starts-indoors/?$ /air-purifier-for-modern-homes/ [R=301,L]
+
+# --- 6 retired posts with no replacement yet -> closest topical match ---
+# (Rewrite these 6 articles and point each rule at its own page.)
+RewriteRule ^5-steps-to-enhance-kitchen-ventilation-easily-today/?$ /how-to-choose-best-range-hood/ [R=301,L]
+RewriteRule ^unveiling-the-unseen-exploring-the-pros-and-cons-of-fotile-under-cabinet-range-hoods-in-pakistan/?$ /6-range-hood-styles/ [R=301,L]
+RewriteRule ^transform-your-kitchen-a-step-by-step-guide-to-turning-your-sink-into-a-dishwasher-with-fotile/?$ /guide-installing-maintaining-sink-dishwasher/ [R=301,L]
+RewriteRule ^how-to-clean-a-range-hood-filter-simple-effective/?$ /ultimate-guide-right-range-hood/ [R=301,L]
+RewriteRule ^range-hood-vs-microwave-which-is-better-for-ventilation/?$ /range-hood-vs-exhaust-fan/ [R=301,L]
+RewriteRule ^14-must-have-kitchen-appliances-for-your-home-in-pakistan/?$ /essential-kitchen-accessories/ [R=301,L]
+
+# --- blog category archives ---
+RewriteRule ^category/hobs/?$          /product-category/hobs/ [R=301,L]
+RewriteRule ^category/ovens/?$         /product-category/oven/ [R=301,L]
+RewriteRule ^category/uncategorized/?$ /blog/ [R=301,L]
+RewriteRule ^category/[^/]+/?$         /blog/ [R=301,L]
+RewriteRule ^tag/[^/]+/?$              /blog/ [R=301,L]
+
+# ---------------------------------------------------------------------
+# 4. PRODUCTS whose slug changed
+# ---------------------------------------------------------------------
+RewriteRule ^shop/range-hood-jqg9009/?$ /shop/range-hood-jqg9009-golden-rose/ [R=301,L]
+RewriteRule ^shop/sd2f-p1x-sink-dishwasher/?$ /shop/sd2f-p6l-sink-dishwasher/ [R=301,L]
+RewriteRule ^shop/microwave-oven-hw25800p-c2t-grs/?$ /shop/built-in-microwave-hw25800p-c2t-grs/ [R=301,L]
+RewriteRule ^shop/dish-washer-bd2b-g1-y/?$ /shop/dishwasher-bd2b-g1-y/ [R=301,L]
+RewriteRule ^shop/fotile-luna-dishwasher-bd3bfg3-y/?$ /shop/dishwasher-bd3bfg3-y/ [R=301,L]
+RewriteRule ^shop/fotile-premium-range-hood-luna/?$ /shop/premium-hood-amg9054-y/ [R=301,L]
+RewriteRule ^shop/fotile-built-in-gas-hob-90306-y/?$ /shop/gas-hob-90306-y/ [R=301,L]
+RewriteRule ^shop/built-in-combi-4-in-1-hyzk72-1y/?$ /shop/built-in-combi-oven-4-in-1-hyzk72-h-1y/ [R=301,L]
+RewriteRule ^shop/fotile-microwave-oven-25800k-c2g-grs/?$ /shop/microwave-oven-25800k-c2g/ [R=301,L]
+RewriteRule ^shop/oven-kgs7003a/?$ /shop/built-in-electric-oven-kgs7003a/ [R=301,L]
+RewriteRule ^shop/glass-o-series-scd-42-ct2-grs/?$ /shop/glass-o-series-scd-42-ct2/ [R=301,L]
+RewriteRule ^shop/built-in-electric-oven-kms-7008/?$ /shop/built-in-oven-kms7008/ [R=301,L]
+RewriteRule ^shop/built-in-gas-3-burner-hob-ghg-78312-copy/?$ /shop/built-in-gas-hob-3-burner-ghg78312/ [R=301,L]
+RewriteRule ^shop/gas-hob-3-burner-hob-gh-86328/?$ /shop/built-in-gas-3-burner-hob-ghg-86328/ [R=301,L]
+RewriteRule ^shop/build-inn-combi-oven-hzkw44-g1/?$ /shop/built-in-combi-oven-hzkw44-g1/ [R=301,L]
+RewriteRule ^shop/gas-hob-2-eps-burners-glass-top-gas-71201/?$ /shop/gas-hob-71201/ [R=301,L]
+RewriteRule ^shop/ceramic-hotplate-eeg-30101/?$ /shop/domino-cook-top-electric-ceramic-top-eeg30101/ [R=301,L]
+RewriteRule ^shop/fotile-range-hood-zmg-9039/?$ /shop/fotile-range-hood-zmg9039/ [R=301,L]
+RewriteRule ^shop/kss7002a/?$ /shop/built-in-electric-oven-kss7002a/ [R=301,L]
+RewriteRule ^shop/microwave-oven-hw25800k-03bg-2/?$ /shop/microwave-oven-hw25800k-03bg/ [R=301,L]
+RewriteRule ^shop/microwave-oven-hw25800k-03g-2/?$ /shop/microwave-oven-hw25800k-03g/ [R=301,L]
+RewriteRule ^shop/microwave-oven-hw25800k-01ag-2/?$ /shop/microwave-oven-hw25800k-01ag/ [R=301,L]
+RewriteRule ^shop/electric-oven-7007a/?$ /shop/built-in-electric-oven-7007a/ [R=301,L]
+RewriteRule ^shop/top-gas-90302/?$ /shop/gas-hob-3-eps-burners-ss-top-gas-90302/ [R=301,L]
+RewriteRule ^shop/fotile-induction-hob-%f0%9d%90%84%f0%9d%90%88%f0%9d%90%86-%f0%9d%9f%95%f0%9d%9f%94%f0%9d%9f%90%f0%9d%9f%8e%f0%9d%9f%91/?$ /shop/induction-hob-eig76203/ [R=301,L]
+# same product, slug kept but URL-encoded bold unicode may arrive decoded:
+RewriteRule ^shop/fotile-induction-hob-.*$ /shop/induction-hob-eig76203/ [R=301,L]
+
+# --- discontinued products -> parent category (keeps relevance, no 404) ---
+RewriteRule ^shop/moon-series-product-1/?$ /moon-series/ [R=301,L]
+RewriteRule ^shop/gas-hob-4-lohas-burners-glass-top-glg60409/?$ /product-category/hobs/ [R=301,L]
+
+# ---------------------------------------------------------------------
+# 5. PRODUCT CATEGORIES consolidated
+# ---------------------------------------------------------------------
+RewriteRule ^product-category/hobs/gas-hobs/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-category/hobs/electric-hobs/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-category/oven/electric-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-category/oven/steam-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-category/oven/combi-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-category/oven/magic-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-category/sink-dish-washer/?$ /product-category/dish-washer/ [R=301,L]
+RewriteRule ^product-category/moonseries/?$ /moon-series/ [R=301,L]
+RewriteRule ^product-category/offers-and-discounts/?$ /shop/ [R=301,L]
+
+# ---------------------------------------------------------------------
+# 6. PRODUCT TAGS -> nearest category (68 indexed keyword URLs)
+# ---------------------------------------------------------------------
+RewriteRule ^product-tag/4-in-1-magic-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/air-humidifier/?$ /product-category/water-purifier/ [R=301,L]
+RewriteRule ^product-tag/air-purifier-pakistan/?$ /product-category/water-purifier/ [R=301,L]
+RewriteRule ^product-tag/air-purifier-price-in-pakistan/?$ /product-category/water-purifier/ [R=301,L]
+RewriteRule ^product-tag/baking-potatoes-in-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/best-fotile-range-hood/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/best-gas-hob/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/best-oven-in-pakistan/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/best-range-hood-ems-9026/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/best-range-hood-in-pakistan/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/cooking-range-price-in-pakistan/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/dish-washing-machine/?$ /product-category/dish-washer/ [R=301,L]
+RewriteRule ^product-tag/dishwasher-in-pakistan/?$ /product-category/dish-washer/ [R=301,L]
+RewriteRule ^product-tag/dishwasher-price-in-pakistan/?$ /product-category/dish-washer/ [R=301,L]
+RewriteRule ^product-tag/electric-chula/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/electric-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/electric-oven-price-in-pakistan/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/electric-stove/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/ems-9032/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/fotile-best-microwave-oven/?$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^product-tag/fotile-best-oven-kgs-7003a/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/fotile-built-in-electric-oven-kgs-7003a/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/fotile-gas-burners/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/fotile-gas-chula/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/fotile-gas-stoves/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/fotile-glass-o-series-scd-42-ct2/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/fotile-hob-gas-73201/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/fotile-hob-glg86520/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/fotile-hobs/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/fotile-induction-hob/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/fotile-microwave-oven/?$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^product-tag/fotile-microwave-oven-25800k-c2g-grs/?$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^product-tag/fotile-microwave-oven-hw25800k-03g/?$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^product-tag/fotile-oven-42-ct2/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/fotile-oven-hw25800k-03g/?$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^product-tag/fotile-oven-kgs-7003a/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/fotile-range-hood/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/fotile-range-hood-design/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/fotile-range-hood-ea06/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/fotile-range-hood-ems-9026/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/fotile-range-hood-ems-9032/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/fotile-range-hood-jqg9009/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/fotile-steam-oven-42-ct2/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/gas-burner/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/gas-hob/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/gas-hobs/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/gas-stove/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/gas-stove-price-in-pakistan/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/gas-stoves/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/hot-air-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/humidifier-pakistan/?$ /product-category/water-purifier/ [R=301,L]
+RewriteRule ^product-tag/humidifier-price-in-pakistan/?$ /product-category/water-purifier/ [R=301,L]
+RewriteRule ^product-tag/kitchen-hood/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/kitchen-hood-design/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/kitchen-stove/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/magic-oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/microwave-oven/?$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^product-tag/microwave-oven-price-in-pakistan/?$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^product-tag/oven/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/oven-for-baking/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/oven-price-in-pakistan/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/pizza-oven-at-home/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/pizza-oven-sale/?$ /product-category/oven/ [R=301,L]
+RewriteRule ^product-tag/range-hood-9026/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/range-hood-jqg9009/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/range-island-hood-ea06/?$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^product-tag/stove/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^product-tag/stove-price-in-pakistan/?$ /product-category/hobs/ [R=301,L]
+# anything else under /product-tag/ -> shop
+RewriteRule ^product-tag/.*$ /shop/ [R=301,L]
+
+# ---------------------------------------------------------------------
+# 7. LEGACY FLAT .html PREVIEW FILES -> clean URLs (single hop each)
+# ---------------------------------------------------------------------
+RewriteRule ^about\.html$ /about-us/ [R=301,L]
+RewriteRule ^contact\.html$ /contact-us/ [R=301,L]
+RewriteRule ^dealers\.html$ /our-dealers/ [R=301,L]
+RewriteRule ^moon-series\.html$ /moon-series/ [R=301,L]
+RewriteRule ^shop\.html$ /shop/ [R=301,L]
+RewriteRule ^cart\.html$ /cart/ [R=301,L]
+RewriteRule ^payment\.html$ /cart/ [R=301,L]
+RewriteRule ^blog\.html$ /blog/ [R=301,L]
+RewriteRule ^blog2\.html$ /blog/page/2/ [R=301,L]
+RewriteRule ^blog3\.html$ /blog/page/3/ [R=301,L]
+RewriteRule ^blog-post\.html$ /blog/ [R=301,L]
+RewriteRule ^explore\.html$ /shop/ [R=301,L]
+RewriteRule ^masterpiece\.html$ / [R=301,L]
+RewriteRule ^masterpiece-cinematic\.html$ / [R=301,L]
+RewriteRule ^privacy-policy\.html$ /privacy-policy/ [R=301,L]
+RewriteRule ^refund-policy\.html$ /refund_returns/ [R=301,L]
+RewriteRule ^shipping-policy\.html$ /shipping-policy/ [R=301,L]
+RewriteRule ^terms\.html$ /terms-and-conditions/ [R=301,L]
+RewriteRule ^category-hoods\.html$ /product-category/kitchen-hood/ [R=301,L]
+RewriteRule ^category-hobs\.html$ /product-category/hobs/ [R=301,L]
+RewriteRule ^category-ovens\.html$ /product-category/oven/ [R=301,L]
+RewriteRule ^category-microwaves\.html$ /product-category/oven/microwave-oven-prices-in-pakistan/ [R=301,L]
+RewriteRule ^category-dishwashers\.html$ /product-category/dish-washer/ [R=301,L]
+RewriteRule ^category-water\.html$ /product-category/water-purifier/ [R=301,L]
+RewriteRule ^test\.html$ / [R=301,L]
+RewriteRule ^test2\.html$ /fridge/ [R=301,L]
+RewriteRule ^test3\.html$ /moon-series/ [R=301,L]
+RewriteRule ^test4\.html$ / [R=301,L]
+
+# ---------------------------------------------------------------------
+# 8. INTERNAL TIDY-UPS
+# ---------------------------------------------------------------------
+RewriteRule ^white-series/?$  /opal-series/ [R=301,L]
+RewriteRule ^experience/?$    / [R=301,L]
+RewriteRule ^checkout/?$      /cart/ [R=301,L]
+RewriteRule ^home-regular-old/?$ / [R=301,L]
+# stale local build folders must never resolve in production
+RewriteRule ^fridge/(fridge|tttt)/?.*$ /fridge/ [R=301,L]
+RewriteRule ^moon-series/moonseries.*$ /moon-series/ [R=301,L]
+
+# ---------------------------------------------------------------------
+# 9. BLOCK ADMIN SURFACES (defence in depth — these should not be deployed)
+# ---------------------------------------------------------------------
+<FilesMatch "^(dashboard|dashboard-demo|dashboard-local|admin-api)\.(html|php)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 ^/\.admin-backups
+RedirectMatch 404 ^/\.git
+
+# ---------------------------------------------------------------------
+# 10. PERFORMANCE — Core Web Vitals feed ranking
+# ---------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css            "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/webp          "access plus 1 year"
+  ExpiresByType image/jpeg          "access plus 1 year"
+  ExpiresByType image/png           "access plus 1 year"
+  ExpiresByType image/svg+xml       "access plus 1 year"
+  ExpiresByType font/woff2          "access plus 1 year"
+  ExpiresByType video/mp4           "access plus 1 year"
+  ExpiresByType text/html           "access plus 10 minutes"
+</IfModule>
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+

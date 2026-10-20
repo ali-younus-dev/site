@@ -1,7 +1,28 @@
 User-agent: *
 Allow: /
-Disallow: /dashboard
-Disallow: /checkout/
+
+# Transactional / private — no crawl value
 Disallow: /cart/
+Disallow: /checkout/
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /dashboard-demo.html
+Disallow: /dashboard-local.html
+Disallow: /admin-api.php
+Disallow: /.admin-backups/
+Disallow: /newsletter/
+
+# Local build folders — must never be deployed, blocked as a safety net
+Disallow: /fridge/fridge/
+Disallow: /fridge/tttt/
+Disallow: /home-regular-old/
+Disallow: /moon-series/moonseries*
+
+# Legacy WordPress crawl traps
+Disallow: /*?s=
+Disallow: /*?add-to-cart=
+Disallow: /*?orderby=
+Disallow: /wp-admin/
+Disallow: /wp-json/
 
 Sitemap: https://fotilepk.com/sitemap.xml
