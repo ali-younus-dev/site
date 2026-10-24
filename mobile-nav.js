@@ -178,6 +178,22 @@
      way without becoming one, so sticky sections keep working. Browsers that
      lack `clip` just keep the line above. */
   + '@supports (overflow-x:clip){html,body{overflow-x:clip}}'
+
+  /* ---------------------------------------------------------------------
+     NAV TOP OFFSET — site-wide correction.
+     Every page used to carry a fixed "CONCEPT ... in testing" strip at
+     top:0 (`.flag`), 26px tall, and compensated for it with
+     `.nav{margin-top:26px}`. The strip was removed from the whole site on
+     20 Oct 2026 but that compensation was left behind, so on every page
+     except the homepage the fixed nav sat 26px too low and overlapped the
+     top of the hero — visible as the nav cutting through the Moon Series
+     kicker and the Opal headline.
+     The <=1180px breakpoint below already zeroed it, which is why this only
+     ever showed on desktop. This does the same at every width, and hides the
+     strip itself in case any page still carries one.
+     --------------------------------------------------------------------- */
+  + '.nav,.nav.solid,#nav.nav,#nav.nav.solid{margin-top:0!important}'
+  + '.flag,.cbar{display:none!important}'
   + '*{-webkit-tap-highlight-color:transparent}'
   + '.navtoggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:26px;background:none;border:none;padding:0;cursor:pointer;z-index:1002}'
   + '.navtoggle span{display:block;height:2px;width:26px;background:#fff;border-radius:2px;transition:.32s cubic-bezier(.16,1,.3,1)}'

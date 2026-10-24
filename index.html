@@ -490,12 +490,23 @@
   .csound .wave{display:inline-flex;gap:2px;align-items:flex-end;height:12px}
   .csound .wave i{width:2px;background:var(--red);border-radius:2px;height:3px;transition:.2s}
   .csound.on .wave i{animation:eq .8s ease-in-out infinite}
+  html.sound-on .cine .cglow{animation:cpulse 3.4s ease-in-out infinite}
   .csound.on .wave i:nth-child(2){animation-delay:.15s}.csound.on .wave i:nth-child(3){animation-delay:.3s}.csound.on .wave i:nth-child(4){animation-delay:.45s}
 
   /* ===== HERO HEADLINE (Fotile tagline, animated, maroon accent) ===== */
   /* Placement: vertically CENTERED in the hero, not pinned to the bottom */
+  /* centre scrim: keeps the headline legible over ANY frame of the film.
+     Sits above the video and the maroon glow, below the type. */
+  .cine .cscrim{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+     width:min(1560px,116vw);height:min(820px,82vh);z-index:3;pointer-events:none;
+     background:radial-gradient(ellipse at center,
+       rgba(5,5,7,.66) 0%,rgba(5,5,7,.55) 32%,rgba(5,5,7,.30) 56%,rgba(5,5,7,.08) 74%,rgba(5,5,7,0) 86%)}
+  @media(max-width:760px){.cine .cscrim{width:150vw;height:74vh;
+     background:radial-gradient(ellipse at center,
+       rgba(5,5,7,.70) 0%,rgba(5,5,7,.58) 36%,rgba(5,5,7,.30) 60%,rgba(5,5,7,0) 86%)}}
   .cine .cbig{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:5;text-align:center;
      pointer-events:none;padding:0 20px;--p:1}
+  .cine .cbig h1{text-shadow:0 2px 40px rgba(0,0,0,.55),0 1px 10px rgba(0,0,0,.4)}
   .cine .cbig .clogo-wrap{position:relative;display:inline-block;
      /* SCROLL: gentle fade + drift up as you leave the hero */
      opacity:calc(var(--p));
@@ -698,6 +709,39 @@
      color:#cfd1d6;background:rgba(11,11,15,.5);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);padding:9px 18px;border-radius:50px;transition:.5s}
   .shatter.open .rhint{opacity:0}
   @media(max-width:820px){.shatter .rcapt{max-width:200px}.shatter .rcapt h3{font-size:19px}}
+
+  /* =====================================================================
+     HERO TYPE — anchored bottom-left.
+     A 100px headline centred over a cinematic film competes with it; the
+     eye cannot read the type and the shot at the same time. Moving it to
+     the bottom-left corner leaves the whole centre of frame to the film,
+     which is also why the scrim below no longer covers the middle.
+     ===================================================================== */
+  .cine .cbig{top:auto;bottom:118px;left:0;right:auto;transform:none;
+     text-align:left;padding:0 0 0 46px;max-width:min(660px,66vw)}
+  .cine .cbig .clogo-wrap{display:block;
+     transform:translateY(calc((1 - var(--p)) * -34px))}
+  .cine .cbig .clogo-wrap::before{left:34%;width:150%;height:230%;filter:blur(52px)}
+  .cine .cbig h1{margin:0;max-width:none;
+     font-size:clamp(25px,3.0vw,44px);line-height:1.12;letter-spacing:-.022em;
+     text-shadow:0 2px 24px rgba(0,0,0,.72),0 1px 7px rgba(0,0,0,.55)}
+
+  /* the scrim is now a corner wash, not a centre blob — the film keeps its middle */
+  .cine .cscrim{left:0;top:auto;bottom:0;transform:none;width:100%;height:66%;
+     background:
+       linear-gradient(180deg,rgba(5,5,7,0) 0%,rgba(5,5,7,.14) 34%,rgba(5,5,7,.48) 70%,rgba(5,5,7,.84) 100%),
+       linear-gradient(90deg,rgba(5,5,7,.58) 0%,rgba(5,5,7,.24) 30%,rgba(5,5,7,0) 56%)}
+
+  @media(max-width:900px){
+    .cine .cbig{bottom:124px;padding-left:30px;max-width:78vw}
+    .cine .cbig h1{font-size:clamp(23px,4.6vw,34px)}
+  }
+  @media(max-width:760px){
+    .cine .cbig{bottom:108px;padding-left:22px;max-width:86vw}
+    .cine .cbig h1{font-size:clamp(22px,6vw,30px);line-height:1.15}
+    .cine .cscrim{height:74%;
+       background:linear-gradient(180deg,rgba(5,5,7,0) 0%,rgba(5,5,7,.20) 30%,rgba(5,5,7,.58) 66%,rgba(5,5,7,.88) 100%)}
+  }
 </style>
   <link rel="canonical" href="https://fotilepk.com/">
 <script>window.__PBASE="";</script>
@@ -841,9 +885,12 @@ section[style*="border-top"]::marker{display:none}
     <div class="ckb" style="background-image:url('assets/video/home-banner-poster.jpg')"></div>
     <!-- LAYER 2: Fotile brand video, auto-plays muted over the image. -->
     <video class="cvid" id="herovid" autoplay muted loop playsinline preload="auto" poster="assets/video/home-banner-poster.jpg">
+      <!-- phones get the 1.5 MB cut; desktops the 3.4 MB 1600x900 master -->
+      <source src="assets/video/home-banner-mobile.mp4" type="video/mp4" media="(max-width:760px)">
       <source src="assets/video/home-banner.mp4" type="video/mp4">
     </video>
     <div class="cglow"></div>
+    <div class="cscrim"></div>
   </div>
 
   <!-- the hero uses the site's own navigation (see mobile-nav.js); only the
@@ -1492,37 +1539,44 @@ section[style*="border-top"]::marker{display:none}
     run();
   })();
 
-  /* ===== #9 SOUND-REACTIVE HERO ===== */
+  /* ===== #9 HERO SOUND =====
+     Deliberately NO Web Audio graph here.
+     createMediaElementSource() reroutes the element's audio through the graph,
+     and on a file:// origin (or any media the page can't read cross-origin)
+     the graph is muted by the browser's security model -> the button appears
+     to do nothing. Plain element audio works everywhere, so that is what we
+     use. The "sound on" pulse is done in CSS instead. */
   (function(){
-    const btn=document.getElementById('soundBtn'),v=document.getElementById('herovid'),spot=document.getElementById('spot');
-    if(!btn||!v)return;
-    let audioCtx,analyser,data,on=false,raf;
-    btn.addEventListener('click',()=>{
-      on=!on;
+    var btn=document.getElementById('soundBtn');
+    var v=document.getElementById('herovid');
+    if(!btn||!v) return;
+    function label(on){
+      btn.innerHTML='<span class="wave"><i></i><i></i><i></i><i></i></span> '+(on?'Sound on':'Sound');
+      btn.setAttribute('aria-pressed',on?'true':'false');
+      btn.setAttribute('aria-label',on?"Mute the hero video":"Turn the hero video's sound on");
+    }
+    label(false);
+    btn.addEventListener('click',function(){
+      var on=v.muted;                 // about to turn it ON if currently muted
       if(on){
-        v.muted=false;v.volume=.7;v.play().catch(()=>{});
-        btn.classList.add('on');btn.innerHTML='<span class="wave"><i></i><i></i><i></i><i></i></span> Sound on';
-        // set up audio-reactive glow (best-effort; ignored if blocked)
-        try{
-          audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
-          const src=audioCtx.createMediaElementSource(v);
-          analyser=audioCtx.createAnalyser();analyser.fftSize=64;
-          src.connect(analyser);analyser.connect(audioCtx.destination);
-          data=new Uint8Array(analyser.frequencyBinCount);
-          const tick=()=>{
-            analyser.getByteFrequencyData(data);
-            let sum=0;for(let i=0;i<data.length;i++)sum+=data[i];
-            const level=sum/data.length/255; // 0..1
-            document.documentElement.style.setProperty('--pulse',(1+level*.9).toFixed(3));
-            const au=document.querySelector('.aura');
-            if(au)au.style.opacity=(0.85+level*0.5).toFixed(2);
-            raf=requestAnimationFrame(tick);
-          };tick();
-        }catch(e){}
+        v.muted=false;
+        v.volume=0.75;
+        var pr=v.play();
+        if(pr&&pr.catch) pr.catch(function(){});
+        btn.classList.add('on');
+        document.documentElement.classList.add('sound-on');
       }else{
-        v.muted=true;btn.classList.remove('on');btn.innerHTML='<span class="wave"><i></i><i></i><i></i><i></i></span> Sound off';
-        if(raf)cancelAnimationFrame(raf);const au=document.querySelector('.aura');if(au)au.style.opacity='';
+        v.muted=true;
+        btn.classList.remove('on');
+        document.documentElement.classList.remove('sound-on');
       }
+      label(!v.muted);
+    });
+    // if the browser ever force-mutes it (tab policy, OS), keep the pill honest
+    v.addEventListener('volumechange',function(){
+      btn.classList.toggle('on',!v.muted);
+      document.documentElement.classList.toggle('sound-on',!v.muted);
+      label(!v.muted);
     });
   })();
 
