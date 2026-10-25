@@ -468,8 +468,10 @@
   .cine .cmedia{position:absolute;inset:0;z-index:0;overflow:hidden}
   .cine .ckb{position:absolute;inset:-4%;z-index:0;background-size:cover;background-position:center;
      filter:contrast(1.05) saturate(1.05) brightness(.82);animation:kenburns 24s ease-in-out infinite alternate}
-  .cine video.cvid{position:absolute;top:50%;left:50%;min-width:100%;min-height:100%;width:auto;height:auto;
-     transform:translate(-50%,-50%);object-fit:cover;z-index:1;filter:contrast(1.05) saturate(1.04) brightness(.82);
+  /* true "cover" at any screen size: the film is scaled, never shown at its
+     native pixel size (which cropped laptops and phones by different amounts) */
+  .cine video.cvid{position:absolute;inset:0;width:100%;height:100%;
+     object-fit:cover;object-position:center;z-index:1;filter:contrast(1.05) saturate(1.04) brightness(.82);
      opacity:0;transition:opacity 1.4s}
   /* darkening + vignette so the giant type reads on any frame */
   .cine .cmedia::after{content:"";position:absolute;inset:0;z-index:2;
@@ -847,8 +849,13 @@ section[style*="border-top"]::marker{display:none}
 }
 @media(max-width:900px){.fopt{min-height:148px}}
 @media(max-width:600px){.fopt{min-height:132px;padding:22px 12px}.fopt span{width:54px;height:54px}.tile .cap{padding:24px}.tile .cap h4{font-size:22px}}
+/* hero still: 1080p WebP (49 KB) on desktop, a portrait 720x1080 crop (≈25 KB) on phones */
+.cine .ckb{background-image:url('assets/video/home-banner-poster.webp')}
+@media(max-width:760px){.cine .ckb{background-image:url('assets/video/home-banner-poster-m.webp')}}
 </style>
-
+<!-- the hero still is the LCP image: fetch it first, only the one this screen needs -->
+<link rel="preload" as="image" href="assets/video/home-banner-poster.webp" type="image/webp" media="(min-width:761px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/video/home-banner-poster-m.webp" type="image/webp" media="(max-width:760px)" fetchpriority="high">
 </head>
 <body>
 <script src="world-dots.js"></script>
@@ -882,13 +889,12 @@ section[style*="border-top"]::marker{display:none}
 <header class="cine" id="cine">
   <div class="cmedia">
     <!-- LAYER 1 (always works): cinematic slow-zoom banner. Never blank. -->
-    <div class="ckb" style="background-image:url('assets/video/home-banner-poster.jpg')"></div>
-    <!-- LAYER 2: Fotile brand video, auto-plays muted over the image. -->
-    <video class="cvid" id="herovid" autoplay muted loop playsinline preload="auto" poster="assets/video/home-banner-poster.jpg">
-      <!-- phones get the 1.5 MB cut; desktops the 3.4 MB 1600x900 master -->
-      <source src="assets/video/home-banner-mobile.mp4" type="video/mp4" media="(max-width:760px)">
-      <source src="assets/video/home-banner.mp4" type="video/mp4">
-    </video>
+    <div class="ckb"></div>
+    <!-- LAYER 2: Fotile brand film, full 1080p. No src in the markup on purpose:
+         the script below attaches the best file for this device AFTER the page
+         has finished loading, so the film never competes with text, CSS, fonts
+         or the hero still. Until then the still above is what you see. -->
+    <video class="cvid" id="herovid" muted loop playsinline preload="none" aria-hidden="true"></video>
     <div class="cglow"></div>
     <div class="cscrim"></div>
   </div>
@@ -1361,11 +1367,41 @@ section[style*="border-top"]::marker{display:none}
   // remove the element so the cinematic image stays — NEVER black.
   (function(){
     const v=document.getElementById('herovid'); if(!v) return;
-    let ok=false;
+    const D='assets/video/';
+    // Best codec first. canPlayType() picks the first one this browser can
+    // decode in hardware-friendly form; every list ends in plain H.264.
+    // Phones get a portrait 720x1080 centre crop: it is exactly the slice a
+    // portrait screen shows, at full 1080 height, for a fraction of the bytes.
+    const DESK=[
+      // (AV1 was tested: on this grainy, particle-heavy film it saved <10% at
+      //  equal quality, so one universal hardware-decoded H.264 file wins.)
+      [D+'home-banner-1080.mp4','video/mp4; codecs="avc1.640028, mp4a.40.2"']
+    ];
+    const MOB=[   // H.264 on phones: hardware-decoded on every handset, easy on battery
+      [D+'home-banner-m.mp4','video/mp4; codecs="avc1.640028, mp4a.40.2"']
+    ];
+    let ok=false, started=false;
     v.addEventListener('loadeddata',()=>{ if(v.videoWidth>0){ ok=true; v.style.opacity='1'; } });
     v.addEventListener('playing',()=>{ ok=true; v.style.opacity='1'; });
-    // Only remove if, after 6s, no frame ever loaded (all sources dead).
-    setTimeout(()=>{ if(!ok) v.remove(); },6000);
+    function pick(){
+      const list=matchMedia('(max-width:760px)').matches?MOB:DESK;
+      for(const [src,type] of list){ if(v.canPlayType(type)) return src; }
+      return list[list.length-1][0];
+    }
+    function start(){
+      if(started) return; started=true;
+      v.src=pick(); v.preload='auto';
+      const p=v.play(); if(p&&p.catch) p.catch(()=>{});
+      // all sources dead -> drop the element, the still stays. Never black.
+      setTimeout(()=>{ if(!ok) v.remove(); },15000);
+    }
+    window.__heroStart=start;   // the Sound button calls this too
+    // Data Saver / 2G: keep the still, don't spend the visitor's data.
+    const c=navigator.connection||{};
+    if(c.saveData || /(^|-)2g$/.test(c.effectiveType||'')) return;
+    // after the page has fully loaded, then wait for an idle moment
+    const go=()=>('requestIdleCallback' in window)?requestIdleCallback(start,{timeout:1200}):setTimeout(start,200);
+    if(document.readyState==='complete') go(); else addEventListener('load',go,{once:true});
   })();
   const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal,.showcase').forEach(el=>io.observe(el));
@@ -1559,6 +1595,7 @@ section[style*="border-top"]::marker{display:none}
     btn.addEventListener('click',function(){
       var on=v.muted;                 // about to turn it ON if currently muted
       if(on){
+        if(window.__heroStart) window.__heroStart();   // film not attached yet (Data Saver) -> attach now
         v.muted=false;
         v.volume=0.75;
         var pr=v.play();
