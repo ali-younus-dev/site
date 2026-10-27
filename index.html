@@ -899,6 +899,21 @@ section[style*="border-top"]::marker{display:none}
   .akb .akb-p{font-size:15px;margin-bottom:26px}
 }
 @media(prefers-reduced-motion:reduce){.akb .akb-img,.akb-copy>*{transition:none!important;transform:none!important;opacity:1!important}}
+/* ===== HERO FILM: show the film as it was graded =====
+   The film already carries its own colour grade. Four layers were tinting it:
+   a pulsing maroon aura over the centre, a maroon glow behind the headline,
+   the red cursor spotlight, and a brightness(.82) filter on the video itself.
+   All removed over the film; only a light neutral fade stays where the
+   headline sits, so the type still reads. */
+.cine .cglow,.cine .cbig .clogo-wrap::before{display:none!important}
+.cine video.cvid,.cine .ckb{filter:none!important}
+.cine .cmedia::after{background:radial-gradient(130% 140% at 50% 45%,transparent 48%,rgba(8,8,10,.28) 82%,rgba(8,8,10,.5)),
+   linear-gradient(0deg,var(--bg) 0%,transparent 22%)!important}
+.cine .cscrim{background:
+   linear-gradient(180deg,rgba(5,5,7,0) 0%,rgba(5,5,7,0) 40%,rgba(5,5,7,.34) 72%,rgba(5,5,7,.66) 100%),
+   linear-gradient(90deg,rgba(5,5,7,.42) 0%,rgba(5,5,7,.14) 30%,rgba(5,5,7,0) 52%)!important}
+body:has(#cine:hover) .spot{opacity:0!important}
+@media(max-width:760px){.cine .cscrim{background:linear-gradient(180deg,rgba(5,5,7,0) 0%,rgba(5,5,7,0) 38%,rgba(5,5,7,.45) 68%,rgba(5,5,7,.82) 100%)!important}}
 /* hero still: 1080p WebP (49 KB) on desktop, a portrait 720x1080 crop (≈25 KB) on phones */
 .cine .ckb{background-image:url('assets/video/home-banner-poster.webp')}
 @media(max-width:760px){.cine .ckb{background-image:url('assets/video/home-banner-poster-m.webp')}}
