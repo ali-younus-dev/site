@@ -194,6 +194,15 @@
      --------------------------------------------------------------------- */
   + '.nav,.nav.solid,#nav.nav,#nav.nav.solid{margin-top:0!important}'
   + '.flag,.cbar{display:none!important}'
+  /* MOBILE TAP TARGETS — footer links, breadcrumbs, phone/email links and
+     the logo were 15-22px tall; Google's guideline is >=24px. Padding /
+     an invisible hit-area only, so nothing moves visually. */
+  + '@media(max-width:760px){'
+  +   'footer :not(.fsoc)>a:not([class]),.crumb a{display:inline-block;padding-top:6px;padding-bottom:6px}'
+  +   'a[href^="tel:"]:not([class]),a[href^="mailto:"]:not([class]){display:inline-block;padding-top:4px;padding-bottom:4px}'
+  +   'a[class][href^="tel:"],a[class][href^="mailto:"]{padding-top:4px;padding-bottom:4px}'
+  +   'a.brand{position:relative}a.brand::after{content:"";position:absolute;left:-8px;right:-8px;top:-12px;bottom:-12px}'
+  + '}'
   + '*{-webkit-tap-highlight-color:transparent}'
   + '.navtoggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:26px;background:none;border:none;padding:0;cursor:pointer;z-index:1002}'
   + '.navtoggle span{display:block;height:2px;width:26px;background:#fff;border-radius:2px;transition:.32s cubic-bezier(.16,1,.3,1)}'

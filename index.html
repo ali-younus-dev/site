@@ -856,6 +856,12 @@ section[style*="border-top"]::marker{display:none}
 <!-- the hero still is the LCP image: fetch it first, only the one this screen needs -->
 <link rel="preload" as="image" href="assets/video/home-banner-poster.webp" type="image/webp" media="(min-width:761px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/video/home-banner-poster-m.webp" type="image/webp" media="(max-width:760px)" fetchpriority="high">
+<!-- icons + mobile browser chrome -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#0b0b0e">
 </head>
 <body>
 <script src="world-dots.js"></script>
@@ -1018,7 +1024,7 @@ section[style*="border-top"]::marker{display:none}
       <div class="hs-halo"></div>
       <div class="hs-plinth"></div>
       <div class="hs-imgwrap">
-        <img class="hs-img is-on" id="hsImgA" src="assets/products/range-island-hood-ea06.png" alt="Fotile signature appliance">
+        <img class="hs-img is-on" id="hsImgA" src="assets/products/range-island-hood-ea06.png" alt="Fotile signature appliance" loading="lazy" decoding="async">
         <img class="hs-img" id="hsImgB" src="" alt="">
       </div>
     </div>
@@ -1099,9 +1105,9 @@ section[style*="border-top"]::marker{display:none}
     <h2 class="h2" style="margin-top:20px">See it <b>in motion.</b></h2>
   </div>
   <div class="films">
-    <div class="film reveal" data-v="Gu40tjlntGE"><img src="https://img.youtube.com/vi/Gu40tjlntGE/maxresdefault.jpg" alt=""><div class="pl"><i>▶</i></div><div class="fl">The Fotile Legacy</div></div>
-    <div class="film reveal r2" data-v="AJdb1PxKvYs"><img src="https://img.youtube.com/vi/AJdb1PxKvYs/hqdefault.jpg" alt=""><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">Range Hood JQG9009</div></div>
-    <div class="film reveal r3" data-v="EURxlAK3MMU"><img src="https://img.youtube.com/vi/EURxlAK3MMU/hqdefault.jpg" alt=""><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">3-in-1 Dishwasher</div></div>
+    <div class="film reveal" data-v="Gu40tjlntGE"><img src="https://img.youtube.com/vi/Gu40tjlntGE/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl">The Fotile Legacy</div></div>
+    <div class="film reveal r2" data-v="AJdb1PxKvYs"><img src="https://img.youtube.com/vi/AJdb1PxKvYs/hqdefault.jpg" alt="" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">Range Hood JQG9009</div></div>
+    <div class="film reveal r3" data-v="EURxlAK3MMU"><img src="https://img.youtube.com/vi/EURxlAK3MMU/hqdefault.jpg" alt="" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">3-in-1 Dishwasher</div></div>
   </div>
 </div></section>
 
@@ -1118,7 +1124,7 @@ section[style*="border-top"]::marker{display:none}
     <a href="/about-us/" class="btn-r">Read Our Story →</a>
   </div>
   <div class="evis reveal r2">
-    <img src="assets/products/range-island-hood-ea06.png" alt="Fotile Range Hood clearing smoke">
+    <img src="assets/products/range-island-hood-ea06.png" alt="Fotile Range Hood clearing smoke" loading="lazy" decoding="async">
     <canvas class="smoke" id="smoke"></canvas>
     <div class="tagover"><b>Core Suction Technology</b><span>Engineered for Pakistani kitchens</span></div>
   </div>
@@ -1343,7 +1349,7 @@ section[style*="border-top"]::marker{display:none}
 <footer><div class="wrap">
   <div class="fgrid">
     <div>
-      <img class="fl" src="assets/logo.png" alt="FOTILE">
+      <img class="fl" src="assets/logo.png" alt="FOTILE" loading="lazy" decoding="async">
       <p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
       <div class="fsoc" style="margin-top:24px"><a href="https://www.facebook.com/fotile.pk" target="_blank" rel="noopener">f</a><a href="https://www.instagram.com/fotilepak/" target="_blank" rel="noopener">◎</a><a href="https://www.linkedin.com/company/fotilepk/" target="_blank" rel="noopener">in</a><a href="https://www.youtube.com/results?search_query=fotile+pakistan" target="_blank" rel="noopener">▶</a></div>
     </div>
@@ -1396,9 +1402,18 @@ section[style*="border-top"]::marker{display:none}
       setTimeout(()=>{ if(!ok) v.remove(); },15000);
     }
     window.__heroStart=start;   // the Sound button calls this too
-    // Data Saver / 2G: keep the still, don't spend the visitor's data.
-    const c=navigator.connection||{};
-    if(c.saveData || /(^|-)2g$/.test(c.effectiveType||'')) return;
+    // Scrolled past the hero -> pause (saves battery and CPU); back -> resume.
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(es=>es.forEach(e=>{
+        if(!started) return;
+        if(e.isIntersecting){ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); } else v.pause();
+      }),{threshold:0.05}).observe(v.parentElement);
+    }
+    // Data Saver / 2G — and 3G on phones — keep the still, don't spend the
+    // visitor's mobile data. (Tapping Sound still loads the film on demand.)
+    const c=navigator.connection||{}, et=c.effectiveType||'';
+    const phone=matchMedia('(max-width:760px)').matches;
+    if(c.saveData || /(^|-)2g$/.test(et) || (phone && et==='3g')) return;
     // after the page has fully loaded, then wait for an idle moment
     const go=()=>('requestIdleCallback' in window)?requestIdleCallback(start,{timeout:1200}):setTimeout(start,200);
     if(document.readyState==='complete') go(); else addEventListener('load',go,{once:true});
