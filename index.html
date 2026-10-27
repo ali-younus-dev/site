@@ -849,6 +849,54 @@ section[style*="border-top"]::marker{display:none}
 }
 @media(max-width:900px){.fopt{min-height:148px}}
 @media(max-width:600px){.fopt{min-height:132px;padding:22px 12px}.fopt span{width:54px;height:54px}.tile .cap{padding:24px}.tile .cap h4{font-size:22px}}
+/* ===== CAMPAIGN BANNERS (Ahsan Khan shoot) — graded photos, live text =====
+   The photos arrive already colour-graded: no extra darkening filter, only a
+   local fade behind the copy. Phones get a portrait photo instead of a crop
+   of the wide banner, so nothing is ever upscaled or cut through a face. */
+.akb{position:relative;overflow:hidden;background:#0b0b0d;border-top:1px solid var(--line);
+  min-height:min(84vh,880px);display:flex}
+.akb picture{position:absolute;inset:0}
+.akb .akb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:var(--fx,50%) var(--fy,50%);transform:scale(1.045);transition:transform 2.6s cubic-bezier(.16,1,.3,1)}
+.akb.in .akb-img{transform:scale(1)}
+.akb::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:var(--fade)}
+.akb .akb-in{position:relative;z-index:2;width:100%;max-width:1440px;margin:0 auto;padding:0 6vw;display:flex}
+.akb-copy{max-width:540px}
+.akb-copy>*{opacity:0;transform:translateY(28px);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
+.akb.in .akb-copy>*{opacity:1;transform:none}
+.akb.in .akb-copy>*:nth-child(2){transition-delay:.12s}.akb.in .akb-copy>*:nth-child(3){transition-delay:.24s}
+.akb.in .akb-copy>*:nth-child(4){transition-delay:.36s}.akb.in .akb-copy>*:nth-child(5){transition-delay:.48s}
+.akb-logo{display:block;height:19px;width:auto;filter:brightness(0) invert(1);margin-bottom:26px}
+.akb-eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:3px;text-transform:uppercase;
+  color:#d9cdb6;font-weight:600;margin-bottom:24px}
+.akb-eyebrow img{height:15px;width:auto;filter:brightness(0) invert(1)}
+.akb-eyebrow i{display:block;width:1px;height:15px;background:rgba(255,255,255,.4)}
+.akb h2{font-size:clamp(38px,4.5vw,68px);font-weight:200;line-height:1.03;letter-spacing:-2px;color:#f5f4f2}
+.akb h2 b{font-weight:600}
+.akb .akb-sub{font-size:clamp(17px,1.4vw,20px);font-weight:400;color:#efe9df;margin:20px 0 0;letter-spacing:.1px}
+.akb .akb-p{font-size:15.5px;font-weight:300;color:#c9c6c1;margin:12px 0 32px;max-width:440px;line-height:1.65}
+/* home: man + F20 on the left, copy on the empty wall to the right */
+.akb-home{--fx:31%;--fy:45%;--fade:linear-gradient(270deg,rgba(8,8,10,.5) 0%,rgba(8,8,10,.22) 36%,rgba(8,8,10,0) 60%),linear-gradient(180deg,rgba(8,8,10,.45),transparent 16%,transparent 84%,rgba(8,8,10,.55))}
+.akb-home .akb-in{align-items:center;justify-content:flex-end}
+.akb-home .akb-copy{max-width:500px;margin-right:2vw}
+/* kitchen: copy inside the dark upper-cabinet run, top-left, as in the layout reference */
+.akb-kitchen{--fx:50%;--fy:50%;--fade:radial-gradient(60% 55% at 18% 26%,rgba(8,8,10,.42),rgba(8,8,10,0) 70%),linear-gradient(180deg,rgba(8,8,10,.4),transparent 18%,transparent 82%,rgba(8,8,10,.55))}
+.akb-kitchen .akb-in{flex-direction:column;justify-content:space-between;align-items:flex-start;padding-top:clamp(96px,15vh,180px);padding-bottom:clamp(44px,8vh,90px)}
+/* headline sits in the dark upper cabinets, the paragraph + button in the dark lower run —
+   nothing is set over the lit backsplash */
+.akb-kitchen .akb-bot .akb-p{margin-top:0;color:#d4d0ca}
+.akb-kitchen .akb-bot>*:nth-child(1){transition-delay:.3s}.akb-kitchen .akb-bot>*:nth-child(2){transition-delay:.42s}
+@media(max-width:760px){
+  .akb{min-height:92vh}
+  .akb .akb-in{align-items:flex-end!important;justify-content:flex-start!important;padding:0 22px 9vh!important}
+  .akb-kitchen .akb-in{flex-direction:column;justify-content:flex-end!important;align-items:flex-start!important}
+  .akb-kitchen .akb-bot .akb-p{margin-top:14px}
+  .akb-home,.akb-kitchen{--fx:50%;--fy:30%;--fade:linear-gradient(0deg,rgba(8,8,10,.94) 0%,rgba(8,8,10,.66) 30%,rgba(8,8,10,0) 58%),linear-gradient(180deg,rgba(8,8,10,.5),transparent 16%)}
+  .akb-home .akb-copy{margin-right:0}
+  .akb h2{font-size:clamp(34px,10vw,46px)}
+  .akb .akb-p{font-size:15px;margin-bottom:26px}
+}
+@media(prefers-reduced-motion:reduce){.akb .akb-img,.akb-copy>*{transition:none!important;transform:none!important;opacity:1!important}}
 /* hero still: 1080p WebP (49 KB) on desktop, a portrait 720x1080 crop (≈25 KB) on phones */
 .cine .ckb{background-image:url('assets/video/home-banner-poster.webp')}
 @media(max-width:760px){.cine .ckb{background-image:url('assets/video/home-banner-poster-m.webp')}}
@@ -1009,6 +1057,25 @@ section[style*="border-top"]::marker{display:none}
   </div></div>
 </section>
 
+<!-- ===== CAMPAIGN BANNER · THE KITCHEN, REIMAGINED ===== -->
+<section class="akb akb-kitchen" aria-label="The kitchen, reimagined">
+  <picture>
+    <source media="(max-width:760px)" srcset="assets/ahsan/kitchen-banner-m.webp" type="image/webp">
+    <img class="akb-img" src="assets/ahsan/kitchen-banner.webp" width="1942" height="809" loading="lazy" decoding="async"
+      alt="A dark, modern Fotile kitchen with a built-in gas hob and soft under-cabinet lighting">
+  </picture>
+  <div class="akb-in">
+    <div class="akb-copy">
+      <div class="akb-eyebrow"><img src="assets/logo.svg" width="72" height="15" alt="FOTILE"><i></i>Kitchen Collection</div>
+      <h2>The kitchen.<br><b>Reimagined.</b></h2>
+    </div>
+    <div class="akb-copy akb-bot">
+      <p class="akb-p">Hoods, hobs and built-in ovens designed as one quiet, seamless whole — a kitchen that looks as good as it cooks.</p>
+      <a href="#collection" class="btn-w">Explore the Collection →</a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== SIGNATURE ROW (dense, fills the screen) ===== -->
 <section class="pad heroStage" id="collection"><div class="wrap">
   <div class="hs-top reveal">
@@ -1073,14 +1140,19 @@ section[style*="border-top"]::marker{display:none}
 </div></section>
 
 <!-- FULL-WIDTH BANNER SHOWCASE -->
-<section class="banner-show">
-  <div class="banner-bg" id="bannerBg" style="background-image:url('assets/home-standard.jpg')"></div>
-  <div class="banner-in reveal">
-    <div class="kick" style="justify-content:center"><span class="dot"></span>The Fotile Standard</div>
-    <h2 class="h2" style="margin:18px 0 18px">Designed for the way<br>Pakistan <b>cooks.</b></h2>
-    <p class="dim" style="max-width:520px;margin:0 auto 30px;font-size:16px;color:#cdd0d4">From heavy desi cooking to modern minimalist kitchens — every Fotile appliance is built to perform beautifully in your home.</p>
+<section class="akb akb-home" aria-label="Designed for the way you live">
+  <picture>
+    <source media="(max-width:760px)" srcset="assets/ahsan/home-banner-m.webp" type="image/webp">
+    <img class="akb-img" src="assets/ahsan/home-banner.webp" width="1942" height="809" loading="lazy" decoding="async"
+      alt="Ahsan Khan beside a built-in Fotile F20 refrigerator in a dark, modern kitchen">
+  </picture>
+  <div class="akb-in"><div class="akb-copy">
+    <img class="akb-logo" src="assets/logo.svg" width="92" height="19" alt="FOTILE">
+    <h2>Designed for<br>the way you <b>live.</b></h2>
+    <p class="akb-sub">Beautiful living starts here.</p>
+    <p class="akb-p">From heavy desi cooking to modern minimalist kitchens — every Fotile appliance is built to perform beautifully in your home.</p>
     <a href="#collection" class="btn-r">Explore the Collection →</a>
-  </div>
+  </div></div>
 </section>
 
 <!-- LEGACY -->
@@ -1590,6 +1662,14 @@ section[style*="border-top"]::marker{display:none}
     run();
   })();
 
+
+  /* campaign banners: settle the photo and bring the copy in once on screen */
+  (function(){
+    var els=document.querySelectorAll('.akb'); if(!els.length) return;
+    if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });},{threshold:.22});
+    els.forEach(function(e){io.observe(e)});
+  })();
   /* ===== #9 HERO SOUND =====
      Deliberately NO Web Audio graph here.
      createMediaElementSource() reroutes the element's audio through the graph,
