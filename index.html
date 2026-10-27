@@ -887,11 +887,13 @@ section[style*="border-top"]::marker{display:none}
 .akb-kitchen .akb-bot .akb-p{margin-top:0;color:#d4d0ca}
 .akb-kitchen .akb-bot>*:nth-child(1){transition-delay:.3s}.akb-kitchen .akb-bot>*:nth-child(2){transition-delay:.42s}
 @media(max-width:760px){
-  .akb{min-height:92vh}
-  .akb .akb-in{align-items:flex-end!important;justify-content:flex-start!important;padding:0 22px 9vh!important}
-  .akb-kitchen .akb-in{flex-direction:column;justify-content:flex-end!important;align-items:flex-start!important}
+  .akb{min-height:0;display:block}
+  .akb picture{position:relative;display:block;aspect-ratio:4/5;overflow:hidden}
+  .akb .akb-img{object-position:50% 22%}
+  .akb::after{display:none}
+  .akb picture::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0b0b0d 0%,rgba(11,11,13,0) 26%)}
+  .akb .akb-in{display:block!important;padding:0 22px 64px!important;margin-top:-34px}
   .akb-kitchen .akb-bot .akb-p{margin-top:14px}
-  .akb-home,.akb-kitchen{--fx:50%;--fy:30%;--fade:linear-gradient(0deg,rgba(8,8,10,.94) 0%,rgba(8,8,10,.66) 30%,rgba(8,8,10,0) 58%),linear-gradient(180deg,rgba(8,8,10,.5),transparent 16%)}
   .akb-home .akb-copy{margin-right:0}
   .akb h2{font-size:clamp(34px,10vw,46px)}
   .akb .akb-p{font-size:15px;margin-bottom:26px}
@@ -1001,7 +1003,7 @@ section[style*="border-top"]::marker{display:none}
 <!-- ===== IMMERSIVE CHAPTER 01 · RANGE HOODS ===== -->
 <section class="chapter" id="ch-hoods">
   <div class="chmedia"><div class="chbg" style="background-image:url('assets/moon-frontpage.jpg');filter:brightness(.76) saturate(1.06)"></div></div>
-  <div class="chtime"><b>01</b> <span class="tt">/ 03</span> &nbsp;·&nbsp; RANGE HOODS</div>
+  <div class="chtime"><b>01</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; RANGE HOODS</div>
   <div class="chword">HOODS</div>
   <div class="chin"><div class="cx">
     <div class="chidx"><span class="ln"></span>THE SIGNATURE</div>
@@ -1025,7 +1027,7 @@ section[style*="border-top"]::marker{display:none}
       <source src="assets/video/combi-oven.mp4" type="video/mp4">
     </video>
   </div>
-  <div class="chtime"><b>02</b> <span class="tt">/ 03</span> &nbsp;·&nbsp; MAGIC OVEN 4-in-1</div>
+  <div class="chtime"><b>02</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; MAGIC OVEN 4-in-1</div>
   <div class="chword">OVEN</div>
   <div class="chin"><div class="cx">
     <div class="chidx"><span class="ln"></span>ONE APPLIANCE, EVERY MODE</div>
@@ -1038,21 +1040,6 @@ section[style*="border-top"]::marker{display:none}
     <div class="chcta">
       <a href="/shop/" class="btn-w">Discover the Magic Oven →</a>
       <a href="#" class="btn-l" data-add="Magic Oven 4-in-1 HYZK26|265000|assets/products/magic-oven-4-in-1-hyzk26-e1.png">Add to Cart</a>
-    </div>
-  </div></div>
-</section>
-
-<!-- ===== IMMERSIVE CHAPTER 03 · MOON SERIES ===== -->
-<section class="chapter" id="ch-moon">
-  <div class="chmedia"><div class="chbg" style="background-image:url('assets/moon-scene.jpg');filter:brightness(.95) saturate(1.05)"></div></div>
-  <div class="chtime"><b>03</b> <span class="tt">/ 03</span> &nbsp;·&nbsp; MOON SERIES</div>
-  <div class="chword">MOON</div>
-  <div class="chin"><div class="cx">
-    <div class="chidx"><span class="ln"></span>THE PREMIUM COLLECTION</div>
-    <h3>Our most<br><b>refined</b> series.</h3>
-    <p class="chp">Obsidian glass, rose-gold detailing and a presence that transforms the kitchen into a statement. The Moon Series is Fotile at its most premium.</p>
-    <div class="chcta">
-      <a href="/moon-series/" class="btn-w">Enter the Moon Series →</a>
     </div>
   </div></div>
 </section>
