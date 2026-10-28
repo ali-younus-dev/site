@@ -1,0 +1,3 @@
+playfair-italic-600.woff2  — Playfair Display (Claus Eggers Sørensen), SIL Open Font License 1.1
+josefin-700.woff2          — Josefin Sans (Santiago Orozco), SIL Open Font License 1.1
+Both are free for commercial web use. Latin subsets, self-hosted (no Google Fonts request).

@@ -203,6 +203,9 @@
   +   'a[class][href^="tel:"],a[class][href^="mailto:"]{padding-top:4px;padding-bottom:4px}'
   +   'a.brand{position:relative}a.brand::after{content:"";position:absolute;left:-8px;right:-8px;top:-12px;bottom:-12px}'
   + '}'
+  /* product cards on phones: the '+ Quote' button gets its own row instead of
+     being pushed out of the card (it was clipped on every category page) */
+  + '@media(max-width:600px){.pfoot{flex-wrap:wrap;row-gap:10px}.pfoot .fc-add.mini{flex:1 1 100%;padding:10px 13px}}'
   + '*{-webkit-tap-highlight-color:transparent}'
   + '.navtoggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:30px;height:26px;background:none;border:none;padding:0;cursor:pointer;z-index:1002}'
   + '.navtoggle span{display:block;height:2px;width:26px;background:#fff;border-radius:2px;transition:.32s cubic-bezier(.16,1,.3,1)}'

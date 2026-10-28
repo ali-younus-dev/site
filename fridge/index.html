@@ -783,6 +783,67 @@
   .fr-intro,.cta-photo .wrap{grid-template-columns:1fr}
   .cta-photo .cta-img{order:-1}
 }
+
+/* ===== CAMPAIGN TYPOGRAPHY — matches the Ahsan Khan key visuals =====
+   Live HTML text (indexable), styled after the agency artwork:
+   "The Beauty of SIMPLICITY" in silver, "BEYOND TECHNOLOGY" wide-tracked. */
+@font-face{font-family:"FTL Serif";src:url("../assets/fonts/playfair-italic-600.woff2") format("woff2");font-style:italic;font-weight:600;font-display:swap}
+@font-face{font-family:"FTL Geo";src:url("../assets/fonts/josefin-700.woff2") format("woff2");font-weight:700;font-display:swap}
+.kv-bos{margin:0;font-family:"Manrope",system-ui,sans-serif;line-height:1;letter-spacing:0;color:#e9eaec;
+  background:linear-gradient(176deg,#ffffff 0%,#e4e6e9 38%,#a9adb3 58%,#f1f2f4 78%,#c9ccd0 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.55)) drop-shadow(0 10px 26px rgba(0,0,0,.4))}
+.kv-bos .t1{display:block;font-weight:800;font-size:clamp(34px,3.7vw,60px);letter-spacing:-.025em;padding-left:.95em}
+.kv-bos .t1 em{font-family:"FTL Serif",Georgia,"Times New Roman",serif;font-style:italic;font-weight:600;letter-spacing:-.01em;font-size:1.08em}
+.kv-bos .t2{display:block;font-weight:800;font-style:italic;font-size:clamp(46px,5.3vw,90px);letter-spacing:-.015em;margin-top:.04em;white-space:nowrap}
+.kv-bos .t2 small{font-size:.42em;font-weight:500;letter-spacing:0;margin-right:.08em}
+.kv-line{display:flex;align-items:center;gap:14px;margin:18px 0 0;font-style:italic;font-weight:300;font-size:clamp(15px,1.25vw,20px);
+  letter-spacing:.02em;color:#d9dadd}
+.kv-line::before,.kv-line::after{content:"";width:42px;height:1px;background:rgba(255,255,255,.55)}
+.kv-bt{margin:0;font-family:"FTL Geo","Manrope",system-ui,sans-serif;font-weight:700;text-transform:uppercase;
+  letter-spacing:.34em;line-height:1.18;font-size:clamp(30px,3.9vw,72px);color:#56555b;text-shadow:0 2px 3px rgba(0,0,0,.18)}
+.kv-bt.light{color:#eceae6;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.if-badge{display:flex;gap:4px;align-items:stretch}
+.if-badge img{width:42px;height:42px;display:block}
+.if-badge span{width:42px;height:42px;background:#c4961a;color:#fff;font-family:"Manrope",sans-serif;font-weight:700;
+  font-size:8.5px;line-height:1.12;letter-spacing:.02em;display:flex;align-items:center;justify-content:flex-start;padding-left:5px}
+@media(max-width:760px){.if-badge img,.if-badge span{width:34px;height:34px}.if-badge span{font-size:7px;padding-left:4px}
+  .kv-bos .t1{padding-left:.7em}}
+
+/* F20 hero v3: confirmed key visual, copy on the right where the artwork has its space */
+.fhero-photo .fh-photo{inset:0!important}
+.fhero-photo .fh-photo img{object-position:100% 45%!important;-webkit-mask-image:none!important;mask-image:none!important}
+.fhero-photo::before{background:linear-gradient(270deg,rgba(6,6,8,.55) 0%,rgba(6,6,8,.2) 36%,rgba(6,6,8,0) 55%),
+  linear-gradient(180deg,rgba(8,8,10,.55),transparent 18%,transparent 80%,rgba(8,8,10,.85))!important}
+.fhero-photo .wrap{grid-template-columns:1fr minmax(0,500px)!important;max-width:1440px}
+.fhero-photo .fh-l{grid-column:2}
+.fhero-photo .fh-l h1.kv-bos{opacity:0;animation:fu 1.1s .25s forwards}
+.fhero-photo .fh-l .kv-line{opacity:0;animation:fu 1.1s .38s forwards}
+.fhero-photo .fh-l p:not(.kv-line){margin-top:20px}
+.fhero-photo .fh-l p b{color:#fff;font-weight:600}
+.fh-ifb{position:absolute;z-index:3;top:96px;right:40px}
+/* closing band */
+.cta-kv{position:relative;overflow:hidden;min-height:min(86vh,880px);display:flex;align-items:center;background:#0b0b0d;border-top:1px solid var(--line)}
+.cta-kv picture{position:absolute;inset:0}
+.cta-kv picture img{width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+.cta-kv::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(8,8,10,.5) 0%,rgba(8,8,10,.18) 34%,rgba(8,8,10,0) 52%),linear-gradient(180deg,rgba(8,8,10,.45),transparent 18%,transparent 82%,rgba(8,8,10,.6))}
+.cta-kv-in{position:relative;z-index:2;width:100%;max-width:1400px;margin:0 auto;padding:80px 6vw}
+.cta-kv-in>div{max-width:520px}
+.cta-logo{display:block;height:19px;width:auto;filter:brightness(0) invert(1);margin-bottom:30px}
+.cta-kv .h2{font-size:clamp(28px,3vw,44px)}
+.cta-p{color:#cfcbc5;font-weight:300;max-width:440px;margin:16px 0 30px;line-height:1.7}
+@media(max-width:900px){
+  .fhero-photo .fh-l{grid-column:1}
+  .fhero-photo .fh-photo img{object-position:50% 30%!important}
+  .fh-ifb{top:78px;right:16px}
+  .fhero-photo .kv-bos .t2{font-size:clamp(40px,12vw,60px)}
+  .cta-kv{display:block;min-height:0}
+  .cta-kv picture{position:relative;display:block;aspect-ratio:4/5}
+  .cta-kv::after{display:none}
+  .cta-kv picture::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0b0b0d 0%,rgba(11,11,13,0) 28%)}
+  .cta-kv-in{padding:0 22px 70px;margin-top:-20px}
+  .cta-kv .kv-bt{font-size:clamp(26px,7.6vw,38px);letter-spacing:.2em}
+}
 </style>
 <link rel="stylesheet" href="./f20-premium.css?v=16">
 <noscript><style>.loader{display:none!important}.reveal,.fh-l .kick,.fh-l h1,.fh-l p,.fh-cta,.fh-r{opacity:1!important;transform:none!important}.stmt .w{opacity:1!important}</style></noscript>
@@ -836,9 +897,11 @@
 <header class="fhero fhero-photo" id="fhero">
   <picture class="fh-photo">
     <source media="(max-width:760px)" srcset="../assets/ahsan/f20-hero-m.webp" type="image/webp">
-    <img src="../assets/ahsan/f20-hero.webp" width="1536" height="1024" fetchpriority="high" decoding="async"
-      alt="Ahsan Khan at the open Fotile F20 French-door refrigerator, built into a dark kitchen beside lit glass cabinets">
+    <img src="../assets/ahsan/f20-hero-2560.webp" srcset="../assets/ahsan/f20-hero-1600.webp 1600w, ../assets/ahsan/f20-hero-2560.webp 2560w" sizes="100vw"
+      width="2560" height="1440" fetchpriority="high" decoding="async"
+      alt="Ahsan Khan eating grapes at the open FOTILE F20 built-in refrigerator">
   </picture>
+  <div class="fh-ifb if-badge"><img src="../assets/awards/if-gold.png" width="42" height="42" alt="iF"><span>GOLD<br>AWARD<br>2025</span></div>
   <canvas id="embers" aria-hidden="true"></canvas>
   <div class="px-hero-grid" aria-hidden="true"></div>
   <div class="px-monogram" aria-hidden="true">F20</div>
@@ -847,8 +910,9 @@
   <div class="wrap">
     <div class="fh-l">
       <div class="kick"><span class="dot"></span>The Fotile Refrigerator · F20</div>
-      <h1>The game<br>changer is <span class="r">coming.</span></h1>
-      <p>A high-end, fully-embedded refrigerator — designed in Berlin, engineered to keep food fresher, longer. This is refrigeration, reimagined by Fotile.</p>
+      <h1 class="kv-bos"><span class="t1">The <em>Beauty</em></span><span class="t2"><small>of</small>SIMPLICITY</span></h1>
+      <p class="kv-line">Built-in Refrigerator</p>
+      <p><b>The game changer is coming.</b> A high-end, fully-embedded refrigerator — designed in Berlin, engineered to keep food fresher, longer. This is refrigeration, reimagined by Fotile.</p>
       <div class="fh-cta">
         <a href="/contact-us/?enquire=fotile-f20-refrigerator" class="btn-r">Register your interest <span>&rarr;</span></a>
         <a href="#pto" class="btn-o">Press to open ↓</a>
@@ -988,7 +1052,7 @@
     </div>
     <figure class="fr-photo reveal">
       <img src="../assets/ahsan/f20-fresh.webp" width="1536" height="1024" loading="lazy" decoding="async"
-        alt="Ahsan Khan eating fresh grapes in front of the open Fotile F20 refrigerator">
+        alt="Ahsan Khan picking fresh grapes from the open FOTILE F20 refrigerator">
     </figure>
   </div>
   <div class="prodband reveal">
@@ -1190,18 +1254,21 @@
 </div></section>
 
 <!-- CTA -->
-<section class="pad cta-band cta-photo"><div class="wrap">
-  <figure class="cta-img reveal" aria-hidden="false">
-    <img src="../assets/ahsan/f20-cta.webp" width="1536" height="1024" loading="lazy" decoding="async"
-      alt="Ahsan Khan at the open Fotile F20, its interior lit and stocked with fresh food">
-  </figure>
-  <div class="reveal cta-copy">
-    <div class="kick" style="justify-content:center"><span class="dot"></span>Be Among The First</div>
-    <h2 class="h2" style="margin-top:18px">The F20 is <b>coming to Pakistan.</b></h2>
-    <p>Register your interest and our team will reach out with launch details, pricing and priority access the moment it arrives.</p>
+<section class="cta-kv" aria-label="Beyond technology — the F20 is coming to Pakistan">
+  <picture>
+    <source media="(max-width:760px)" srcset="../assets/ahsan/f20-cta-m.webp" type="image/webp">
+    <img src="../assets/ahsan/f20-cta-2560.webp" srcset="../assets/ahsan/f20-cta-1600.webp 1600w, ../assets/ahsan/f20-cta-2560.webp 2560w" sizes="100vw"
+      width="2560" height="1440" loading="lazy" decoding="async"
+      alt="Ahsan Khan with a coffee mug in front of the closed, built-in FOTILE F20 refrigerator">
+  </picture>
+  <div class="cta-kv-in"><div class="reveal">
+    <img class="cta-logo" src="../assets/logo.svg" width="92" height="19" alt="FOTILE">
+    <p class="kv-bt light">Beyond<br>Technology</p>
+    <h2 class="h2" style="margin-top:26px">The F20 is <b>coming to Pakistan.</b></h2>
+    <p class="cta-p">Register your interest and our team will reach out with launch details, pricing and priority access the moment it arrives.</p>
     <a href="/contact-us/?enquire=fotile-f20-refrigerator" class="btn-r">Register your interest <span>&rarr;</span></a>
-  </div>
-</div></section>
+  </div></div>
+</section>
 
 <footer><div class="wrap">© 2026 Fotile Pakistan — The leading kitchen appliance brand.<div class="fsoc"><a href="https://www.facebook.com/fotile.pk">Facebook</a><a href="https://www.instagram.com/fotilepak/">Instagram</a><a href="https://www.linkedin.com/company/fotilepk/">LinkedIn</a></div></div></footer>
 

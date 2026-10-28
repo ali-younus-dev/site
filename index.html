@@ -914,6 +914,60 @@ section[style*="border-top"]::marker{display:none}
    linear-gradient(90deg,rgba(5,5,7,.42) 0%,rgba(5,5,7,.14) 30%,rgba(5,5,7,0) 52%)!important}
 body:has(#cine:hover) .spot{opacity:0!important}
 @media(max-width:760px){.cine .cscrim{background:linear-gradient(180deg,rgba(5,5,7,0) 0%,rgba(5,5,7,0) 38%,rgba(5,5,7,.45) 68%,rgba(5,5,7,.82) 100%)!important}}
+/* ===== CAMPAIGN TYPOGRAPHY — matches the Ahsan Khan key visuals =====
+   Live HTML text (indexable), styled after the agency artwork:
+   "The Beauty of SIMPLICITY" in silver, "BEYOND TECHNOLOGY" wide-tracked. */
+@font-face{font-family:"FTL Serif";src:url("assets/fonts/playfair-italic-600.woff2") format("woff2");font-style:italic;font-weight:600;font-display:swap}
+@font-face{font-family:"FTL Geo";src:url("assets/fonts/josefin-700.woff2") format("woff2");font-weight:700;font-display:swap}
+.kv-bos{margin:0;font-family:"Manrope",system-ui,sans-serif;line-height:1;letter-spacing:0;color:#e9eaec;
+  background:linear-gradient(176deg,#ffffff 0%,#e4e6e9 38%,#a9adb3 58%,#f1f2f4 78%,#c9ccd0 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 2px rgba(0,0,0,.55)) drop-shadow(0 10px 26px rgba(0,0,0,.4))}
+.kv-bos .t1{display:block;font-weight:800;font-size:clamp(34px,3.7vw,60px);letter-spacing:-.025em;padding-left:.95em}
+.kv-bos .t1 em{font-family:"FTL Serif",Georgia,"Times New Roman",serif;font-style:italic;font-weight:600;letter-spacing:-.01em;font-size:1.08em}
+.kv-bos .t2{display:block;font-weight:800;font-style:italic;font-size:clamp(46px,5.3vw,90px);letter-spacing:-.015em;margin-top:.04em;white-space:nowrap}
+.kv-bos .t2 small{font-size:.42em;font-weight:500;letter-spacing:0;margin-right:.08em}
+.kv-line{display:flex;align-items:center;gap:14px;margin:18px 0 0;font-style:italic;font-weight:300;font-size:clamp(15px,1.25vw,20px);
+  letter-spacing:.02em;color:#d9dadd}
+.kv-line::before,.kv-line::after{content:"";width:42px;height:1px;background:rgba(255,255,255,.55)}
+.kv-bt{margin:0;font-family:"FTL Geo","Manrope",system-ui,sans-serif;font-weight:700;text-transform:uppercase;
+  letter-spacing:.34em;line-height:1.18;font-size:clamp(30px,3.9vw,72px);color:#56555b;text-shadow:0 2px 3px rgba(0,0,0,.18)}
+.kv-bt.light{color:#eceae6;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.if-badge{display:flex;gap:4px;align-items:stretch}
+.if-badge img{width:42px;height:42px;display:block}
+.if-badge span{width:42px;height:42px;background:#c4961a;color:#fff;font-family:"Manrope",sans-serif;font-weight:700;
+  font-size:8.5px;line-height:1.12;letter-spacing:.02em;display:flex;align-items:center;justify-content:flex-start;padding-left:5px}
+@media(max-width:760px){.if-badge img,.if-badge span{width:34px;height:34px}.if-badge span{font-size:7px;padding-left:4px}
+  .kv-bos .t1{padding-left:.7em}}
+
+/* homepage campaign banners, v3 (confirmed artwork) */
+.akb-home{--fx:30%;--fy:50%;--fade:linear-gradient(270deg,rgba(8,8,10,.38) 0%,rgba(8,8,10,.12) 40%,rgba(8,8,10,0) 60%),linear-gradient(180deg,rgba(8,8,10,.4),transparent 16%,transparent 84%,rgba(8,8,10,.5))}
+.akb-home .akb-copy{max-width:560px}
+.akb-home .akb-p{margin-top:20px}
+.akb-badge{position:absolute;top:28px;right:30px;z-index:3}
+.akb-kitchen{--fx:50%;--fy:50%;--fade:linear-gradient(180deg,rgba(8,8,10,.35),transparent 16%,transparent 80%,rgba(8,8,10,.6))}
+.akb-kitchen .akb-in{display:none}
+.kt-logo{position:absolute;top:92px;left:6vw;z-index:3;display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#d9cdb6;font-weight:600}
+.kt-logo img{height:19px;width:auto;filter:brightness(0) invert(1)}
+.kt-logo i{display:block;width:1px;height:15px;background:rgba(255,255,255,.4)}
+.kt-top{position:absolute;z-index:3;left:52.5%;top:52%;right:3vw}
+.kt-bot{position:absolute;z-index:3;left:52.5%;bottom:clamp(26px,5vh,54px);right:4vw;display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.kt-bot .akb-p{margin:0;max-width:430px;font-size:14.5px;color:#e4e1dc}
+.akb.in .kt-top{animation:fu 1.2s .1s both}
+@media(max-width:760px){
+  .akb-badge{top:16px;right:16px}
+  .kt-logo{top:16px;left:18px;font-size:9px;letter-spacing:2px}.kt-logo img{height:15px}
+  .kt-top,.kt-bot{position:relative;left:auto;right:auto;top:auto;bottom:auto;padding:0 22px}
+  .kt-top{margin-top:-30px}.kt-top .kv-bt{color:#eceae6;font-size:clamp(28px,8.6vw,40px);text-shadow:none}
+  .kt-bot{display:block;padding-bottom:64px}.kt-bot .akb-p{margin:16px 0 24px;font-size:15px}
+  .akb-home .akb-copy .kv-bos .t2{font-size:clamp(40px,12vw,58px)}
+}
+.akb .kv-bt{color:#56555b;letter-spacing:.34em;line-height:1.18;font-weight:700;font-size:clamp(30px,3.6vw,64px)}
+.kt-top{top:55%!important}
+.kt-sub{margin:16px 0 0;max-width:470px;font-size:15px;font-weight:500;color:#4a4a50;line-height:1.55}
+.akb-badge{top:92px}
+@media(max-width:760px){.akb .kv-bt{color:#eceae6}.kt-sub{color:#cfcbc5;font-weight:300;margin-bottom:22px}.kt-bot{padding-top:0}.akb-badge{top:16px}
+  .kv-bt{letter-spacing:.2em!important}}
 /* hero still: 1080p WebP (49 KB) on desktop, a portrait 720x1080 crop (≈25 KB) on phones */
 .cine .ckb{background-image:url('assets/video/home-banner-poster.webp')}
 @media(max-width:760px){.cine .ckb{background-image:url('assets/video/home-banner-poster-m.webp')}}
@@ -1060,21 +1114,17 @@ body:has(#cine:hover) .spot{opacity:0!important}
 </section>
 
 <!-- ===== CAMPAIGN BANNER · THE KITCHEN, REIMAGINED ===== -->
-<section class="akb akb-kitchen" aria-label="The kitchen, reimagined">
+<section class="akb akb-kitchen" aria-label="Beyond technology — the Fotile kitchen">
   <picture>
     <source media="(max-width:760px)" srcset="assets/ahsan/kitchen-banner-m.webp" type="image/webp">
-    <img class="akb-img" src="assets/ahsan/kitchen-banner.webp" width="1942" height="809" loading="lazy" decoding="async"
-      alt="A dark, modern Fotile kitchen with a built-in gas hob and soft under-cabinet lighting">
+    <img class="akb-img" src="assets/ahsan/kitchen-banner-2560.webp" srcset="assets/ahsan/kitchen-banner-1600.webp 1600w, assets/ahsan/kitchen-banner-2560.webp 2560w" sizes="100vw"
+      width="2560" height="1440" loading="lazy" decoding="async"
+      alt="Ahsan Khan leaning on a Fotile kitchen counter beside a built-in gas hob and range hood">
   </picture>
-  <div class="akb-in">
-    <div class="akb-copy">
-      <div class="akb-eyebrow"><img src="assets/logo.svg" width="72" height="15" alt="FOTILE"><i></i>Kitchen Collection</div>
-      <h2>The kitchen.<br><b>Reimagined.</b></h2>
-    </div>
-    <div class="akb-copy akb-bot">
-      <p class="akb-p">Hoods, hobs and built-in ovens designed as one quiet, seamless whole — a kitchen that looks as good as it cooks.</p>
-      <a href="#collection" class="btn-w">Explore the Collection →</a>
-    </div>
+  <div class="kt-logo"><img src="assets/logo.svg" width="92" height="19" alt="FOTILE"><i></i><span>Kitchen Collection</span></div>
+  <div class="kt-top"><h2 class="kv-bt">Beyond<br>Technology</h2><p class="kt-sub">Hoods, hobs and built-in ovens, designed as one quiet, seamless whole.</p></div>
+  <div class="kt-bot akb-copy">
+    <a href="#collection" class="btn-w">Explore the Collection →</a>
   </div>
 </section>
 
@@ -1142,18 +1192,19 @@ body:has(#cine:hover) .spot{opacity:0!important}
 </div></section>
 
 <!-- FULL-WIDTH BANNER SHOWCASE -->
-<section class="akb akb-home" aria-label="Designed for the way you live">
+<section class="akb akb-home" aria-label="The Beauty of Simplicity — FOTILE F20 built-in refrigerator">
   <picture>
     <source media="(max-width:760px)" srcset="assets/ahsan/home-banner-m.webp" type="image/webp">
-    <img class="akb-img" src="assets/ahsan/home-banner.webp" width="1942" height="809" loading="lazy" decoding="async"
-      alt="Ahsan Khan beside a built-in Fotile F20 refrigerator in a dark, modern kitchen">
+    <img class="akb-img" src="assets/ahsan/home-banner.webp" width="1920" height="1080" loading="lazy" decoding="async"
+      alt="Ahsan Khan leaning beside the built-in FOTILE F20 refrigerator, holding a coffee mug">
   </picture>
+  <div class="akb-badge if-badge"><img src="assets/awards/if-gold.png" width="42" height="42" alt="iF"><span>GOLD<br>AWARD<br>2025</span></div>
   <div class="akb-in"><div class="akb-copy">
     <img class="akb-logo" src="assets/logo.svg" width="92" height="19" alt="FOTILE">
-    <h2>Designed for<br>the way you <b>live.</b></h2>
-    <p class="akb-sub">Beautiful living starts here.</p>
-    <p class="akb-p">From heavy desi cooking to modern minimalist kitchens — every Fotile appliance is built to perform beautifully in your home.</p>
-    <a href="#collection" class="btn-r">Explore the Collection →</a>
+    <h2 class="kv-bos"><span class="t1">The <em>Beauty</em></span><span class="t2"><small>of</small>SIMPLICITY</span></h2>
+    <p class="kv-line">Built-in Refrigerator</p>
+    <p class="akb-p">The FOTILE F20 — a fully built-in French-door refrigerator with nitrogen fresh-keeping, designed to disappear into your kitchen wall.</p>
+    <a href="/fridge/" class="btn-r">Discover the F20 →</a>
   </div></div>
 </section>
 
