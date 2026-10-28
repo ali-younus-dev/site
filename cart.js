@@ -469,8 +469,14 @@
         if (btn._wired) return; btn._wired = true;
         btn.addEventListener('click', function (e) {
           e.preventDefault();
-          add({ slug: btn.dataset.id || btn.dataset.slug || btn.dataset.name, name: btn.dataset.name,
-                price: btn.dataset.price || '', img: btn.dataset.img || '', cat: btn.dataset.cat || '' });
+          /* F03: catalogue slug first; then the old "Name|price|img" pipe format */
+          var d = btn.dataset, slug = d.slug || d.id;
+          if (slug && addSlug(slug)) return;
+          var raw = d.add || '', parts = raw.indexOf('|') > -1 ? raw.split('|') : [];
+          var nm = d.name || parts[0] || raw;
+          if (!nm) return;
+          add({ slug: slug || String(nm).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
+                name: nm, price: '', img: d.img || parts[2] || '', cat: d.cat || '' });
         });
       })(bs[i]);
     }

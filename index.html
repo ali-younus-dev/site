@@ -124,6 +124,7 @@
   .btn-r:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(224,30,55,.32);background:#c81a30}
   .btn-l{border:1px solid rgba(255,255,255,.25);color:#fff;padding:15px 32px;border-radius:4px;font-weight:500;font-size:14px;transition:.35s}
   .btn-l:hover{background:#fff;color:#000;border-color:#fff}
+  button.btn-l{background:transparent;font-family:inherit;cursor:pointer;line-height:inherit}
   .hmeta{position:absolute;bottom:38px;right:44px;z-index:3;display:flex;gap:44px;text-align:right}
   .hmeta div b{font-size:28px;font-weight:200;display:block;letter-spacing:-1px}
   .hmeta div span{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt-dim)}
@@ -146,7 +147,7 @@
 
   /* trust strip */
   .trust{border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0c0c11,var(--bg));padding:34px 0}
-  .trust-lbl{text-align:center;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint,#5a5c66);font-weight:600;margin-bottom:22px;color:#5a5c66}
+  .trust-lbl{text-align:center;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--faint,#5a5c66);font-weight:600;margin-bottom:22px;color:#9b9ea5}
   .trust-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0}
   .trust-item{text-align:center;padding:0 34px}
   .trust-item b{display:block;font-size:20px;font-weight:600;letter-spacing:-.5px;background:linear-gradient(120deg,#fff,#b7bac2);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -341,7 +342,7 @@
   .fopts.fopts-7{grid-template-columns:repeat(4,1fr);max-width:860px}
   @media(max-width:900px){.fopts.fopts-7{grid-template-columns:repeat(3,1fr)}}
   @media(max-width:600px){.fopts.fopts-7{grid-template-columns:1fr 1fr}}
-  .fopt{position:relative;isolation:isolate;background:linear-gradient(145deg,rgba(22,22,26,.98),rgba(15,15,18,.98));border:1px solid rgba(255,255,255,.075);border-radius:16px;padding:28px 16px;cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s,background .4s,box-shadow .4s;display:flex;flex-direction:column;align-items:center;gap:13px;font-weight:600;font-size:14px;overflow:hidden}
+  .fopt{font:inherit;color:inherit;text-align:center;-webkit-appearance:none;appearance:none;position:relative;isolation:isolate;background:linear-gradient(145deg,rgba(22,22,26,.98),rgba(15,15,18,.98));border:1px solid rgba(255,255,255,.075);border-radius:16px;padding:28px 16px;cursor:pointer;transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s,background .4s,box-shadow .4s;display:flex;flex-direction:column;align-items:center;gap:13px;font-weight:600;font-size:14px;overflow:hidden}
   .fopt::before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:radial-gradient(120px 80px at 50% 0%,rgba(224,30,55,.055),transparent 72%);opacity:.7;pointer-events:none;z-index:-1}
   .fopt::after{content:"";position:absolute;left:18%;right:18%;bottom:-26px;height:34px;border-radius:50%;background:radial-gradient(closest-side,rgba(224,30,55,.10),transparent 72%);filter:blur(15px);opacity:.0;transition:opacity .45s;pointer-events:none}
   .fopt span{width:54px;height:54px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.045),rgba(255,255,255,.012) 58%,transparent 72%);color:#f2f2f3;box-shadow:inset 0 0 0 1px rgba(255,255,255,.02);transition:transform .4s cubic-bezier(.16,1,.3,1),border-color .4s,box-shadow .4s,color .4s}
@@ -739,8 +740,10 @@
     .cine .cbig h1{font-size:clamp(23px,4.6vw,34px)}
   }
   @media(max-width:760px){
-    .cine .cbig{bottom:108px;padding-left:22px;max-width:86vw}
-    .cine .cbig h1{font-size:clamp(22px,6vw,30px);line-height:1.15}
+    /* F19: headline and CTA stack in one left column instead of colliding */
+    .cine .cbig{bottom:152px;padding-left:22px;padding-right:22px;max-width:none;right:0}
+    .cine .cbig h1{font-size:clamp(22px,6.4vw,30px);line-height:1.15}
+    .cine .cexplore{left:22px;right:auto;bottom:96px}
     .cine .cscrim{height:74%;
        background:linear-gradient(180deg,rgba(5,5,7,0) 0%,rgba(5,5,7,.20) 30%,rgba(5,5,7,.58) 66%,rgba(5,5,7,.88) 100%)}
   }
@@ -1033,9 +1036,9 @@ body:has(#cine:hover) .spot{opacity:0!important}
   <!-- slide / timecode counter -->
   <div class="ctime"><b id="ctNow">01</b> <span class="tt">/ 03</span></div>
 
-  <!-- centered animated headline (Fotile's real tagline, maroon accent) -->
+  <!-- animated headline -->
   <div class="cbig"><div class="clogo-wrap">
-    <h1 id="cbigWord"><span class="ln l1">Happiness starts</span><span class="ln l2">in your <span class="accent">kitchen</span>.</span></h1>
+    <h1 id="cbigWord"><span class="ln l1">Beyond technology.</span><span class="ln l2">Made for <span class="accent">Pakistani</span> kitchens.</span></h1>
   </div></div>
 
   <!-- single explore pill + scroll cue -->
@@ -1084,7 +1087,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
     </div>
     <div class="chcta">
       <a href="/product-category/kitchen-hood/" class="btn-w">Explore Range Hoods →</a>
-      <a href="#" class="btn-l" data-add="Range Island Hood EA06|385000|assets/products/range-island-hood-ea06.png">Add to Cart</a>
+      <button type="button" class="btn-l" data-add data-slug="range-island-hood-ea06" data-name="Range Island Hood EA06" data-cat="Range Hoods" data-img="assets/products/range-island-hood-ea06.png">Add to Quote Basket</button>
     </div>
   </div></div>
 </section>
@@ -1108,7 +1111,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
     </div>
     <div class="chcta">
       <a href="/shop/" class="btn-w">Discover the Magic Oven →</a>
-      <a href="#" class="btn-l" data-add="Magic Oven 4-in-1 HYZK26|265000|assets/products/magic-oven-4-in-1-hyzk26-e1.png">Add to Cart</a>
+      <button type="button" class="btn-l" data-add data-slug="magic-oven-4-in-1-hyzk26-e1" data-name="Magic Oven 4-in-1 HYZK26-E1" data-cat="Ovens" data-img="assets/products/magic-oven-4-in-1-hyzk26-e1.png">Add to Quote Basket</button>
     </div>
   </div></div>
 </section>
@@ -1208,21 +1211,6 @@ body:has(#cine:hover) .spot{opacity:0!important}
   </div></div>
 </section>
 
-<!-- LEGACY -->
-<section class="pad glow-t" id="legacy" style="border-top:1px solid var(--line)">
-  <div class="txbg" style="background-image:url('assets/moon-room.jpg')"></div>
-  <div class="wrap reveal center" style="text-align:center">
-  <div class="kick"><span class="dot"></span>A Global Legacy</div>
-  <h2 class="h2" style="margin-top:20px">Award-winning by <b>design.</b></h2>
-  <p class="dim" style="max-width:560px;margin:22px auto 0;font-size:16px">Recognised with 18 international awards for design excellence — including 9 iF Design Awards and 9 Red Dot Awards.</p>
-  <div class="lgrid">
-    <div class="lstat"><b data-c="20" data-suf="+">0</b><span>Years in Pakistan</span></div>
-    <div class="lstat"><b data-c="18" data-suf="">0</b><span>Design Awards</span></div>
-    <div class="lstat"><b data-c="200" data-suf="M+">0</b><span>Customers Worldwide</span></div>
-    <div class="lstat"><b data-c="58" data-suf="">0</b><span>Products in Pakistan</span></div>
-  </div>
-</div></section>
-
 <!-- FILMS -->
 <section class="pad" id="films" style="border-top:1px solid var(--line)"><div class="wrap">
   <div class="reveal" style="max-width:660px;margin-bottom:52px">
@@ -1230,28 +1218,9 @@ body:has(#cine:hover) .spot{opacity:0!important}
     <h2 class="h2" style="margin-top:20px">See it <b>in motion.</b></h2>
   </div>
   <div class="films">
-    <div class="film reveal" data-v="Gu40tjlntGE"><img src="https://img.youtube.com/vi/Gu40tjlntGE/maxresdefault.jpg" alt="" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl">The Fotile Legacy</div></div>
-    <div class="film reveal r2" data-v="AJdb1PxKvYs"><img src="https://img.youtube.com/vi/AJdb1PxKvYs/hqdefault.jpg" alt="" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">Range Hood JQG9009</div></div>
-    <div class="film reveal r3" data-v="EURxlAK3MMU"><img src="https://img.youtube.com/vi/EURxlAK3MMU/hqdefault.jpg" alt="" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">3-in-1 Dishwasher</div></div>
-  </div>
-</div></section>
-
-<!-- HEALTH / EDUCATION -->
-<section class="pad edu"><div class="wrap">
-  <div class="etxt reveal">
-    <div class="kick"><span class="dot"></span>Where Health Meets Innovation</div>
-    <h2 class="h2">Most range hoods move air.<br>Fotile <b>cleans it.</b></h2>
-    <p>Heavy cooking fills your kitchen with smoke, grease and fine particles. Fotile's engineering doesn't just push air around — it captures and clears it, keeping your home's air fresh and your family healthier.</p>
-    <div class="estats">
-      <div><b>96%</b><span>Smoke &amp; grease captured</span></div>
-      <div><b>48dB</b><span>Whisper-quiet operation</span></div>
-    </div>
-    <a href="/about-us/" class="btn-r">Read Our Story →</a>
-  </div>
-  <div class="evis reveal r2">
-    <img src="assets/products/range-island-hood-ea06.png" alt="Fotile Range Hood clearing smoke" loading="lazy" decoding="async">
-    <canvas class="smoke" id="smoke"></canvas>
-    <div class="tagover"><b>Core Suction Technology</b><span>Engineered for Pakistani kitchens</span></div>
+    <div class="film reveal" data-v="Gu40tjlntGE"><img src="https://img.youtube.com/vi/Gu40tjlntGE/maxresdefault.jpg" alt="Fotile 3-in-1 Dishwasher Inverter film" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl">3-in-1 Dishwasher Inverter</div></div>
+    <div class="film reveal r2" data-v="AJdb1PxKvYs"><img src="https://img.youtube.com/vi/AJdb1PxKvYs/hqdefault.jpg" alt="Fotile range hood JQG9009 film" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">Range Hood JQG9009</div></div>
+    <div class="film reveal r3" data-v="EURxlAK3MMU"><img src="https://img.youtube.com/vi/EURxlAK3MMU/hqdefault.jpg" alt="Fotile JQG9009 range hood in action" loading="lazy" decoding="async"><div class="pl"><i>▶</i></div><div class="fl" style="font-size:16px">JQG9009 in Action</div></div>
   </div>
 </div></section>
 
@@ -1264,7 +1233,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
   </div>
 </div></section>
 <div class="baband">
-  <div class="ba" id="ba">
+  <div class="ba" id="ba" role="slider" aria-label="Compare the kitchen before and after Fotile" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% after">
     <div class="layer before" style="background-image:url('assets/kitchen-before.jpg')"></div>
     <div class="layer after" id="baAfter" style="background-image:url('assets/kitchen-after.jpg')"><div class="glow"></div></div>
     <div class="capt l"><div class="k">Before</div><h3>An ordinary,<br>tired kitchen.</h3></div>
@@ -1273,21 +1242,6 @@ body:has(#cine:hover) .spot{opacity:0!important}
     <div class="bahint" id="baHint">Drag to compare</div>
   </div>
 </div>
-
-<!-- AWARD BADGES -->
-<section class="pad" style="border-top:1px solid var(--line)"><div class="wrap">
-  <div class="reveal center" style="text-align:center;max-width:640px;margin:0 auto">
-    <div class="kick" style="justify-content:center"><span class="dot"></span>Award-Winning Innovation</div>
-    <h2 class="h2" style="margin-top:20px">Recognised the world <b>over.</b></h2>
-    <p class="dim" style="margin-top:16px;font-size:16px">A global legacy of design excellence and engineering firsts.</p>
-  </div>
-  <div class="badges">
-    <div class="badge-c reveal"><div class="bi mark"><img src="assets/awards/forbes.png" alt="Forbes" loading="lazy"></div><b>Forbes</b><span>Best Range Hood Brand 2024</span></div>
-    <div class="badge-c reveal r2"><div class="bi mark"><img src="assets/awards/red-dot.png" alt="Red Dot Award Winner" loading="lazy"></div><b>Red Dot</b><span>9× Design Award Winner</span></div>
-    <div class="badge-c reveal r3"><div class="bi mark"><span class="fx-if">iF<i>DESIGN AWARD</i></span></div><b>iF Design</b><span>9× Award Winner</span></div>
-    <div class="badge-c reveal r4"><div class="bi mark"><span class="fx-globe"><b>200</b>M+</span></div><b>200M+ Homes</b><span>Across 50+ countries</span></div>
-  </div>
-</div></section>
 
 <!-- TESTIMONIALS -->
 <section class="pad" style="border-top:1px solid var(--line)"><div class="wrap">
@@ -1333,7 +1287,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
 </div></section>
 
 <!-- FINDER QUIZ -->
-<section class="pad finderband"><div class="fglow"></div><div class="wrap">
+<section class="pad finderband" id="finder" style="scroll-margin-top:80px"><div class="fglow"></div><div class="wrap">
   <div class="reveal" style="text-align:center;max-width:640px;margin:0 auto 46px">
     <div class="kick" style="justify-content:center"><span class="dot"></span>Not Sure Where To Start?</div>
     <h2 class="h2" style="margin-top:18px">Find your <b>perfect appliance.</b></h2>
@@ -1343,41 +1297,41 @@ body:has(#cine:hover) .spot{opacity:0!important}
     <div class="fstepq on" data-step="0">
       <h3>What matters most in your kitchen?</h3>
       <div class="fopts fopts-7">
-        <div class="fopt" data-v="hood"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-1.2 3.2-5.2 5.3-5.2 9.1a5.2 5.2 0 0 0 10.4 0c0-2.4-1.4-4.3-2.7-5.8-.2 2.1-1.3 3.2-2.5 4.1-.2-2.2-1-4.4 0-7.4Z"/><path d="M9.2 16.4a3 3 0 0 0 5.6 0"/></svg></span>Clearing smoke</div>
-        <div class="fopt" data-v="hob"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/><circle cx="15" cy="15" r="1.2"/></svg></span>Everyday cooking</div>
-        <div class="fopt" data-v="oven"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M7.5 8h9M8 12h8v5H8z"/><path d="M10 14.5h4"/></svg></span>Baking &amp; roasting</div>
-        <div class="fopt" data-v="micro"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7"/></svg></span>Quick reheating</div>
-        <div class="fopt" data-v="dish"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M8.5 7.5h7M9 11c1.7 1.3 4.3 1.3 6 0"/><path d="M8 20h8"/></svg></span>Saving time on dishes</div>
-        <div class="fopt" data-v="water"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.8c-2.5 3.1-5 5.9-5 9a5 5 0 0 0 10 0c0-3.1-2.5-5.9-5-9Z"/><path d="M9 14.2c.5 1.2 1.5 1.8 3 1.8"/></svg></span>Cleaner water</div>
-        <div class="fopt" data-v="lux"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></span>A premium kitchen</div>
+        <button type="button" class="fopt" data-v="hood"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-1.2 3.2-5.2 5.3-5.2 9.1a5.2 5.2 0 0 0 10.4 0c0-2.4-1.4-4.3-2.7-5.8-.2 2.1-1.3 3.2-2.5 4.1-.2-2.2-1-4.4 0-7.4Z"/><path d="M9.2 16.4a3 3 0 0 0 5.6 0"/></svg></span>Clearing smoke</button>
+        <button type="button" class="fopt" data-v="hob"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/><circle cx="15" cy="15" r="1.2"/></svg></span>Everyday cooking</button>
+        <button type="button" class="fopt" data-v="oven"><span aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M7.5 8h9M8 12h8v5H8z"/><path d="M10 14.5h4"/></svg></span>Baking &amp; roasting</button>
+        <button type="button" class="fopt" data-v="micro"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7"/></svg></span>Quick reheating</button>
+        <button type="button" class="fopt" data-v="dish"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M8.5 7.5h7M9 11c1.7 1.3 4.3 1.3 6 0"/><path d="M8 20h8"/></svg></span>Saving time on dishes</button>
+        <button type="button" class="fopt" data-v="water"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.8c-2.5 3.1-5 5.9-5 9a5 5 0 0 0 10 0c0-3.1-2.5-5.9-5-9Z"/><path d="M9 14.2c.5 1.2 1.5 1.8 3 1.8"/></svg></span>Cleaner water</button>
+        <button type="button" class="fopt" data-v="lux"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></span>A premium kitchen</button>
       </div>
     </div>
     <div class="fstepq" data-step="1">
       <h3>How big is your kitchen?</h3>
       <div class="fopts">
-        <div class="fopt" data-v="s"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 11.2 8.5-7 8.5 7"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-5h5v5"/></svg></span>Compact</div>
-        <div class="fopt" data-v="m"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 11.2 8.5-7 8.5 7"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 15h6"/><path d="M12 12v6"/></svg></span>Family kitchen</div>
-        <div class="fopt" data-v="l"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V8l4 3V7l4 3V5l4 3v-2l4 3v11"/><path d="M3 20h18"/></svg></span>Large / open</div>
-        <div class="fopt" data-v="lux"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></span>Premium</div>
+        <button type="button" class="fopt" data-v="s"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 11.2 8.5-7 8.5 7"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-5h5v5"/></svg></span>Compact</button>
+        <button type="button" class="fopt" data-v="m"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3.5 11.2 8.5-7 8.5 7"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 15h6"/><path d="M12 12v6"/></svg></span>Family kitchen</button>
+        <button type="button" class="fopt" data-v="l"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V8l4 3V7l4 3V5l4 3v-2l4 3v11"/><path d="M3 20h18"/></svg></span>Large / open</button>
+        <button type="button" class="fopt" data-v="lux"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 15 .7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></span>Premium</button>
       </div>
     </div>
     <div class="fstepq" data-step="2">
       <h3>Your priority?</h3>
       <div class="fopts">
-        <div class="fopt" data-v="value"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.7 8.8c-.7-.6-1.6-.9-2.6-.9-1.6 0-2.7.8-2.7 1.9 0 1.2 1.1 1.7 2.7 2 1.6.3 2.7.8 2.7 2s-1.1 1.9-2.7 1.9c-1 0-2-.3-2.8-1"/><path d="M12 6.7v10.6"/></svg></span>Best value</div>
-        <div class="fopt" data-v="balance"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M6 7h12"/><path d="m6 7-3 6h6L6 7Z"/><path d="m18 7-3 6h6l-3-6Z"/><path d="M8 20h8"/></svg></span>Balanced</div>
-        <div class="fopt" data-v="premium"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 4 4 4-6 4 6 4-4-1.5 10H5.5L4 7Z"/><path d="M6.5 20h11"/></svg></span>Premium quality</div>
-        <div class="fopt" data-v="flag"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 6-7 12L5 9l7-6Z"/><path d="m5 9 7 2 7-2M12 11v10"/></svg></span>The very best</div>
+        <button type="button" class="fopt" data-v="value"><span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.7 8.8c-.7-.6-1.6-.9-2.6-.9-1.6 0-2.7.8-2.7 1.9 0 1.2 1.1 1.7 2.7 2 1.6.3 2.7.8 2.7 2s-1.1 1.9-2.7 1.9c-1 0-2-.3-2.8-1"/><path d="M12 6.7v10.6"/></svg></span>Best value</button>
+        <button type="button" class="fopt" data-v="balance"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v15"/><path d="M6 7h12"/><path d="m6 7-3 6h6L6 7Z"/><path d="m18 7-3 6h6l-3-6Z"/><path d="M8 20h8"/></svg></span>Balanced</button>
+        <button type="button" class="fopt" data-v="premium"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 7 4 4 4-6 4 6 4-4-1.5 10H5.5L4 7Z"/><path d="M6.5 20h11"/></svg></span>Premium quality</button>
+        <button type="button" class="fopt" data-v="flag"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 7 6-7 12L5 9l7-6Z"/><path d="m5 9 7 2 7-2M12 11v10"/></svg></span>The very best</button>
       </div>
     </div>
-    <div class="fres" id="fres">
+    <div class="fres" id="fres" aria-live="polite">
       <div class="rstage"><img id="fresImg" src="assets/products/range-island-hood-ea06.png" alt=""></div>
       <div class="rk" id="fresK">Recommended</div>
       <h3 id="fresName">Range Island Hood EA06</h3>
       <p id="fresDesc">Powerful, whisper-quiet ventilation — perfect for your kitchen.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a href="/shop/" class="btn-r">See Product →</a>
-        <a href="#" class="btn-l" id="fresReset">Start Over</a>
+        <a href="/shop/" class="btn-r" id="fresGo">See Product →</a>
+        <button type="button" class="btn-l" id="fresReset">Start Over</button>
       </div>
     </div>
   </div>
@@ -1438,7 +1392,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
       </div>
   </div>
   <div class="fd-stats reveal">
-    <div><b>49<i>dB</i></b><small>As quiet as a library<span>ordinary ≈ 68 dB</span></small></div>
+    <div><b>48<i>dB</i></b><small>As quiet as a library<span>ordinary ≈ 68 dB</span></small></div>
     <div><b>1650<i>m³/h</i></b><small>Peak airflow<span>surround suction</span></small></div>
     <div><b>20<i>yrs</i></b><small>Kitchen-only R&amp;D<span>Asia's #1 hood brand</span></small></div>
   </div>
@@ -1551,14 +1505,18 @@ body:has(#cine:hover) .spot{opacity:0!important}
   }),{threshold:.6});
   document.querySelectorAll('.lstat b').forEach(el=>cio.observe(el));
   // FAQ accordion
-  document.querySelectorAll('.faqi .q').forEach(q=>q.onclick=()=>q.parentElement.classList.toggle('open'));
+  document.querySelectorAll('.faqi .q').forEach(q=>{
+    q.setAttribute('role','button');q.tabIndex=0;q.setAttribute('aria-expanded','false');
+    const t=()=>{const o=q.parentElement.classList.toggle('open');q.setAttribute('aria-expanded',String(o));};
+    q.onclick=t;q.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();t();}};
+  });
   // Global cursor spotlight is initialized in the final premium interaction block below.
   /* ===== BEFORE/AFTER COMPARE SLIDER (premium) ===== */
   (function(){
     const ba=document.getElementById('ba');if(!ba)return;
     const handle=document.getElementById('baHandle'),after=document.getElementById('baAfter');
     let pos=50, dragging=false, touched=false;
-    function apply(p){pos=Math.max(3,Math.min(97,p));handle.style.left=pos+'%';after.style.clipPath='inset(0 0 0 '+pos+'%)';}
+    function apply(p){pos=Math.max(3,Math.min(97,p));handle.style.left=pos+'%';after.style.clipPath='inset(0 0 0 '+pos+'%)';const v=Math.round(100-pos);ba.setAttribute('aria-valuenow',v);ba.setAttribute('aria-valuetext',v+'% after');}
     function fromEvent(x){const r=ba.getBoundingClientRect();apply(((x-r.left)/r.width)*100);}
     function markTouched(){if(!touched){touched=true;ba.classList.add('touched');}}
     // drag (click anywhere jumps there, then follows the pointer)
@@ -1568,7 +1526,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
     ba.addEventListener('mouseenter',markTouched);
     // keyboard access
     ba.tabIndex=0;
-    ba.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){markTouched();apply(pos-4);}else if(e.key==='ArrowRight'){markTouched();apply(pos+4);}});
+    ba.addEventListener('keydown',e=>{const k=e.key;if(k==='ArrowLeft'||k==='ArrowDown'){e.preventDefault();markTouched();apply(pos-4);}else if(k==='ArrowRight'||k==='ArrowUp'){e.preventDefault();markTouched();apply(pos+4);}else if(k==='Home'){e.preventDefault();apply(3);}else if(k==='End'){e.preventDefault();apply(97);}});
     // one-time auto sweep when it scrolls into view, hinting it's interactive
     apply(50);
     let hinted=false;
@@ -1592,7 +1550,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
        desc:'Bake, steam, dehydrate and air fry from a single appliance — the countertop companion that turns anyone into a master chef.',
        specs:[['4','-in-1','Cooking Modes'],['26','L','Capacity']],
        cta:'Discover the Magic Oven',href:'/shop/',img:'assets/products/magic-oven-4-in-1-hyzk26-e1.png',accent:'#e0a94e'},
-      {tag:'SD2F-P1X · In-Sink',cat:'Cleaning',title:'Sink <b>Dishwasher</b>',
+      {tag:'SD2F-P6L · In-Sink',cat:'Cleaning',title:'Sink <b>Dishwasher</b>',
        desc:'Turns your kitchen sink into a full dishwasher — washing, rinsing and purifying your produce with a fraction of the water.',
        specs:[['3','-in-1','Wash·Rinse·Purify'],['-70','%','Less Water']],
        cta:'Discover Dishwashers',href:'/product-category/dish-washer/',img:'assets/products/sd2f-p6l-sink-dishwasher.png',accent:'#5db2c9'}
@@ -1640,25 +1598,33 @@ body:has(#cine:hover) .spot{opacity:0!important}
   /* ===== FINDER QUIZ (homepage) ===== */
   (function(){
     const MAP={
-      hood:{n:'Range Island Hood EA06',d:'Industry-leading suction that clears the heaviest cooking — whisper-quiet.',img:'assets/products/range-island-hood-ea06.png',k:'Range Hood'},
-      dish:{n:'Sink Dishwasher SD2F-P1X',d:'Turns your sink into a dishwasher — saving time and water every day.',img:'assets/products/sd2f-p6l-sink-dishwasher.png',k:'Sink Dishwasher'},
-      oven:{n:'Magic Oven 4-in-1',d:'Bake, steam, dehydrate and air fry — one appliance does it all.',img:'assets/products/magic-oven-4-in-1-hyzk26-e1.png',k:'4-in-1 Oven'},
-      water:{n:'Fotile Water Purifier',d:'Clean, healthy drinking water for the whole family.',img:'assets/products/water-purifier.png',k:'Water Purifier'},
-      hob:{n:'Fotile Gas Hob GAL90506',d:'Precise, powerful burners built for real Pakistani cooking.',img:'assets/products/gas-hob-gal90506.png',k:'Hobs & Cooktops'},
-      micro:{n:'Built-in Microwave HW25800P',d:'Fast, even reheating that disappears into your cabinetry.',img:'assets/products/built-in-microwave-hw25800p-c2t-grs.png',k:'Microwaves'},
-      lux:{n:'Fotile Premium Range Hood Luna',d:'Our premium Moon Series — obsidian glass and rose-gold detailing.',img:'assets/moon-series-hoobs-hood.png',k:'Moon Series'}
+      hood:{n:'Range Island Hood EA06',d:'Industry-leading suction that clears the heaviest cooking — whisper-quiet.',img:'assets/products/range-island-hood-ea06.png',k:'Range Hood',u:'range-island-hood-ea06'},
+      dish:{n:'Sink Dishwasher SD2F-P6L',d:'Turns your sink into a dishwasher — saving time and water every day.',img:'assets/products/sd2f-p6l-sink-dishwasher.png',k:'Sink Dishwasher',u:'sd2f-p6l-sink-dishwasher'},
+      oven:{n:'Magic Oven 4-in-1',d:'Bake, steam, dehydrate and air fry — one appliance does it all.',img:'assets/products/magic-oven-4-in-1-hyzk26-e1.png',k:'4-in-1 Oven',u:'magic-oven-4-in-1-hyzk26-e1'},
+      water:{n:'Fotile Water Purifier',d:'Clean, healthy drinking water for the whole family.',img:'assets/products/water-purifier.png',k:'Water Purifier',u:'water-purifier'},
+      hob:{n:'Fotile Gas Hob GAL90506',d:'Precise, powerful burners built for real Pakistani cooking.',img:'assets/products/gas-hob-gal90506.png',k:'Hobs & Cooktops',u:'gas-hob-gal90506'},
+      micro:{n:'Built-in Microwave HW25800P',d:'Fast, even reheating that disappears into your cabinetry.',img:'assets/products/built-in-microwave-hw25800p-c2t-grs.png',k:'Microwaves',u:'built-in-microwave-hw25800p-c2t-grs'},
+      lux:{n:'Fotile Premium Range Hood Luna',d:'Our premium Moon Series — obsidian glass and rose-gold detailing.',img:'assets/moon-series-hoobs-hood.png',k:'Moon Series',u:'',href:'/moon-series/'}
+    };
+    /* F18: the appliance picked first stays the answer; "premium" answers upgrade within that category */
+    const PREM={
+      hood:{n:'Premium Range Hood Luna AMG9054-Y',d:'Moon Series ventilation — obsidian glass, whisper-quiet power.',img:'assets/products/premium-hood-amg9054-y.png',k:'Range Hood · Moon Series',u:'premium-hood-amg9054-y'},
+      hob:{n:'Built-in Gas Hob 90306-Y',d:'Moon Series hob — precise flame control in a premium glass finish.',img:'assets/products/gas-hob-90306-y.png',k:'Hob · Moon Series',u:'gas-hob-90306-y'},
+      oven:{n:'Combi Oven 4-in-1 HYZK72',d:'Steam, bake, grill and air fry in one premium built-in.',img:'assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png',k:'4-in-1 Oven · Premium',u:'built-in-combi-oven-4-in-1-hyzk72-h-1y'},
+      dish:{n:'Dishwasher BD3BFG3-Y',d:'Moon Series built-in dishwasher for the busiest family kitchens.',img:'assets/products/dishwasher-bd3bfg3-y.png',k:'Dishwasher · Moon Series',u:'dishwasher-bd3bfg3-y'}
     };
     let i=0,ans=[];
     const dots=document.querySelectorAll('.fdots i');
     function show(){document.querySelectorAll('.fstepq').forEach(s=>s.classList.toggle('on',+s.dataset.step===i));dots.forEach((d,x)=>d.classList.toggle('on',x<=i));}
-    document.querySelectorAll('.fopt').forEach(o=>o.onclick=()=>{ans[i]=o.dataset.v;i++;if(i<3)show();else result();});
+    document.querySelectorAll('.fopt').forEach(o=>o.onclick=()=>{ans[i]=o.dataset.v;i++;if(i<3){show();const f=document.querySelector('.fstepq.on .fopt');if(f)f.focus({preventScroll:true});}else result();});
     function result(){
       document.querySelectorAll('.fstepq').forEach(s=>s.classList.remove('on'));
-      let key=ans[0];if(ans[1]==='lux'||ans[2]==='flag')key='lux';
-      const r=MAP[key]||MAP.hood;
+      const key=ans[0], up=ans[1]==='lux'||ans[2]==='flag'||ans[2]==='premium';
+      const r=(up&&PREM[key])||MAP[key]||MAP.hood;
+      const go=document.getElementById('fresGo'); if(go) go.setAttribute('href', r.href || ('/shop/'+r.u+'/'));
       document.getElementById('fresImg').src=r.img;document.getElementById('fresName').textContent=r.n;
       document.getElementById('fresDesc').textContent=r.d;document.getElementById('fresK').textContent=r.k;
-      document.getElementById('fres').classList.add('on');dots.forEach(d=>d.classList.add('on'));
+      document.getElementById('fres').classList.add('on');dots.forEach(d=>d.classList.add('on'));if(go)go.focus({preventScroll:true});
     }
     const rst=document.getElementById('fresReset');if(rst)rst.onclick=e=>{e.preventDefault();i=0;ans=[];document.getElementById('fres').classList.remove('on');show();};
   })();

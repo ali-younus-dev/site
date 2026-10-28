@@ -1,4 +1,4 @@
-/* Fotile product catalog — 58 products, real transparent PNGs. Prices: Request a Quote (edit `price` to show a number). */
+/* Fotile product catalog — 57 products, real transparent PNGs. Prices: Request a Quote (edit `price` to show a number). */
 window.FOTILE_PRODUCTS = [
   {slug:'premium-hood-amg9054-y',name:'Premium Range Hood',model:'AMG9054-Y',cat:'Range Hoods',tag:'Ventilation',img:'assets/products/premium-hood-amg9054-y.png',price:'',featured:false,sale:'',badge:''},
   {slug:'fotile-range-hood-jqg7501',name:'Range Hood',model:'JQG7501',cat:'Range Hoods',tag:'Ventilation',img:'assets/products/fotile-range-hood-jqg7501.png',price:'',featured:false,sale:'',badge:''},

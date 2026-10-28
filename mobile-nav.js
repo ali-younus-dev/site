@@ -219,8 +219,22 @@
   + '.mobmenu a:active{color:#fff;padding-left:8px}'
   + '.mobmenu .mm-sub{font-size:15px;color:#9aa0a8;padding:11px 2px 11px 16px;border-bottom:1px solid rgba(255,255,255,.05)}'
   + '.mobmenu a.cta{margin-top:26px;border:none;color:#14171b;background:linear-gradient(135deg,#c8ccd2,#eef1f4);border-radius:8px;text-align:center;padding:17px;font-weight:600;font-size:16px;letter-spacing:0}'
-  + '@media(max-width:1180px){#nav .nlinks{display:none!important}.snav-mega{display:none!important}.navtoggle{display:flex}#nav .nr .ic{display:none}#nav .nr .npill{display:none}#nav .nr{gap:14px}.flag{display:none!important}.cbar{display:none!important}#nav.nav{opacity:1!important;pointer-events:auto!important;margin-top:0!important;background:rgba(12,11,10,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}}'
-  + '@media(min-width:861px){.navtoggle{display:none!important}.mobmenu{display:none!important}}';
+  + '@media(max-width:1180px){#nav .nlinks{display:none!important}.snav-mega{display:none!important}.navtoggle{display:flex}#nav .nr .snav-search{display:none}#nav .nr .npill{display:none}#nav .nr a.ic{display:inline-flex;align-items:center;font-size:17px}#nav .nr{gap:14px}.flag{display:none!important}.cbar{display:none!important}#nav.nav{opacity:1!important;pointer-events:auto!important;margin-top:0!important;background:rgba(12,11,10,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08)}}'
+  + '@media(min-width:1181px){.navtoggle{display:none!important}.mobmenu{display:none!important}}'
+  + '.mobmenu{z-index:999!important}'
+  + '.mm-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:grid;place-items:center}'
+  + '.mobmenu a.mm-basket{display:flex;align-items:center;justify-content:space-between;font-size:16px;color:#e8d9b6;border-bottom-color:rgba(230,199,140,.18)}'
+  + '.mobmenu a.mm-basket b{font-size:12px;background:#e01e37;color:#fff;border-radius:20px;min-width:22px;height:22px;display:inline-grid;place-items:center;padding:0 6px}'
+  + '.snav-search{background:none;border:0;color:#c7cace;font-size:18px;cursor:pointer;padding:4px 6px;line-height:1}'
+  + '.snav-search:hover{color:#fff}'
+  + '.snav-sbox{position:fixed;left:0;right:0;top:0;z-index:1003;display:none;justify-content:center;padding:84px 20px 20px;background:rgba(6,6,8,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}'
+  + '.snav-sbox.on{display:flex}'
+  + '.snav-sbox form{width:100%;max-width:640px;display:flex;gap:10px;background:#121317;border:1px solid rgba(255,255,255,.14);border-radius:60px;padding:8px 8px 8px 22px;box-shadow:0 30px 80px rgba(0,0,0,.6)}'
+  + '.snav-sbox input{flex:1;background:none;border:0;outline:none;color:#fff;font:400 16px Manrope,system-ui,sans-serif}'
+  + '.snav-sbox button{border:0;border-radius:40px;background:#e01e37;color:#fff;font:600 14px Manrope,system-ui,sans-serif;padding:12px 22px;cursor:pointer}'
+  + '.snav-sbox .x{background:rgba(255,255,255,.08)}'
+  + '.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}'
+  + 'footer .fbot,footer .fbot span,footer .fbot a{color:#9b9ea5!important}';
   var st=document.createElement('style'); st.textContent=css; document.head.appendChild(st);
 
   function build(){
@@ -274,7 +288,7 @@
              +      '<a href="/our-dealers/">Find a dealer</a>'
              +      '<a href="/service-center/">Service &amp; support</a>'
              +      '<a href="/contact-us/?enquire=private-demo">Book a demo</a>'
-             +      '<a class="snav-all" href="/shop/">Browse all 58 appliances &rarr;</a>'
+             +      '<a class="snav-all" href="/shop/">Browse all '+((window.FOTILE_PRODUCTS&&window.FOTILE_PRODUCTS.length)||57)+' appliances &rarr;</a>'
              +    '</div>'
              +  '</div></div>'
              +  '</span>';
@@ -285,7 +299,7 @@
       nl.innerHTML=html;
     }
 
-    var pill=nav.querySelector('.npill'); if(pill) pill.setAttribute('href','/contact-us/');
+    var pill=nav.querySelector('.npill'); if(pill){ var ph=pill.getAttribute('href')||''; if(ph===''||ph==='#') pill.setAttribute('href','/contact-us/'); }
 
     var prod=nav.querySelector('.snav-prod');
     var mega=prod&&prod.querySelector('.snav-mega');
@@ -301,23 +315,62 @@
     }
 
     var nr=nav.querySelector('.nr')||nav;
+
+    /* F12: the decorative search glyph becomes a real, labelled search */
+    var sg=nr.querySelector('span.ic');
+    if(sg && (sg.textContent||'').trim()==='\u2315'){
+      var sb=document.createElement('button'); sb.type='button'; sb.className='ic snav-search'; sb.setAttribute('aria-label','Search products'); sb.textContent='\u2315';
+      sg.parentNode.replaceChild(sb,sg);
+      var box=document.createElement('div'); box.className='snav-sbox'; box.setAttribute('role','dialog'); box.setAttribute('aria-label','Search products');
+      box.innerHTML='<form action="/shop/" method="get" role="search"><label class="sr-only" for="snavQ">Search products</label>'
+        +'<input id="snavQ" name="q" type="search" placeholder="Search hoods, hobs, ovens, model numbers\u2026" autocomplete="off">'
+        +'<button type="submit">Search</button><button type="button" class="x" aria-label="Close search">\u00d7</button></form>';
+      document.body.appendChild(box);
+      var sOpen=function(){ box.classList.add('on'); setTimeout(function(){ box.querySelector('input').focus(); },30); };
+      var sClose=function(){ box.classList.remove('on'); sb.focus(); };
+      sb.addEventListener('click',sOpen);
+      box.querySelector('.x').addEventListener('click',sClose);
+      box.addEventListener('click',function(e){ if(e.target===box) sClose(); });
+      document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&box.classList.contains('on')) sClose(); });
+    }
+
     var btn=document.createElement('button');
-    btn.className='navtoggle'; btn.setAttribute('aria-label','Open menu');
+    btn.className='navtoggle'; btn.type='button';
+    btn.setAttribute('aria-label','Open menu'); btn.setAttribute('aria-expanded','false'); btn.setAttribute('aria-controls','snavMenu');
     btn.innerHTML='<span></span><span></span><span></span>';
     nr.appendChild(btn);
-    var menu=document.createElement('div'); menu.className='mobmenu';
-    var mh='';
+    var menu=document.createElement('div'); menu.className='mobmenu'; menu.id='snavMenu';
+    menu.setAttribute('role','dialog'); menu.setAttribute('aria-modal','true'); menu.setAttribute('aria-label','Site menu');
+    var mh='<button type="button" class="mm-close" aria-label="Close menu">\u00d7</button>';
     liveLinks().forEach(function(l){
       var act=(l.key===akey)?'active':'';
       mh+='<a class="'+act+'" href="'+l.href+'">'+l.label+'</a>';
       if(l.mega){ CATS.forEach(function(c){ mh+='<a class="mm-sub" href="'+c.href+'">'+c.name+'</a>'; }); }
     });
+    mh+='<a class="mm-basket" href="/cart/">Quote basket <b data-cart-count>0</b></a>';
     mh+='<a class="cta" href="/contact-us/">Request a Quote</a>';
     menu.innerHTML=mh; document.body.appendChild(menu);
-    function toggle(open){btn.classList.toggle('open',open);menu.classList.toggle('open',open);document.documentElement.style.overflow=open?'hidden':'';}
+    try{ var cnt=(JSON.parse(localStorage.getItem('fotile_basket_v1')||'[]')||[]).reduce(function(n,i){return n+(+i.qty||1);},0); menu.querySelector('.mm-basket b').textContent=cnt; }catch(e){}
+    function toggle(open){
+      btn.classList.toggle('open',open); menu.classList.toggle('open',open);
+      btn.setAttribute('aria-expanded',open?'true':'false'); btn.setAttribute('aria-label',open?'Close menu':'Open menu');
+      document.documentElement.style.overflow=open?'hidden':'';
+      if(open){ setTimeout(function(){ var f=menu.querySelector('a'); if(f) f.focus(); },60); } else if(document.activeElement && menu.contains(document.activeElement)) btn.focus();
+    }
     btn.addEventListener('click',function(){toggle(!menu.classList.contains('open'));});
+    menu.querySelector('.mm-close').addEventListener('click',function(){toggle(false);});
     menu.addEventListener('click',function(e){if(e.target.tagName==='A')toggle(false);});
-    addEventListener('resize',function(){if(innerWidth>860)toggle(false);});
+    document.addEventListener('keydown',function(e){
+      if(!menu.classList.contains('open')) return;
+      if(e.key==='Escape'){ toggle(false); return; }
+      if(e.key==='Tab'){ /* keep focus inside the open panel */
+        var f=[].slice.call(menu.querySelectorAll('a,button')); if(!f.length) return;
+        var a=f[0], z=f[f.length-1];
+        if(e.shiftKey && document.activeElement===a){ e.preventDefault(); z.focus(); }
+        else if(!e.shiftKey && document.activeElement===z){ e.preventDefault(); a.focus(); }
+      }
+    });
+    addEventListener('resize',function(){if(innerWidth>1180)toggle(false);});
 
     /* ---- newsletter subscribe boxes -> real send (FormSubmit) ---- */
     document.querySelectorAll('form').forEach(function(f){
@@ -325,11 +378,19 @@
       var em=f.querySelector('input[type=email]'); if(!em) return;
       if(f.querySelector('textarea')) return;           // that's the contact form, skip
       f.__news=1; f.removeAttribute('onsubmit');
+      var msg=document.createElement('p'); msg.className='nl-msg'; msg.setAttribute('role','status'); msg.setAttribute('aria-live','polite');
+      msg.style.cssText='margin:10px 0 0;font-size:13px;min-height:1em;color:#c9ccd1';
+      f.appendChild(msg);
       f.addEventListener('submit',function(e){
-        e.preventDefault(); var val=(em.value||'').trim(); if(!val) return;
-        var btn=f.querySelector('button');
-        try{fetch('https://formsubmit.co/ajax/raahimsohail6@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({Reason:'Newsletter Signup',Email:val,_subject:'Fotile Website — Newsletter Signup',_cc:'sarfrazahmed@fotile.pk'})}).catch(function(){});}catch(x){}
-        em.value='Subscribed ✓'; if(btn) btn.disabled=true;
+        e.preventDefault(); var val=(em.value||'').trim();
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)){ msg.style.color='#ff8b9b'; msg.textContent='Please enter a valid email address.'; em.focus(); return; }
+        var btn=f.querySelector('button'); if(btn) btn.disabled=true;
+        msg.style.color='#c9ccd1'; msg.textContent='Subscribing\u2026';
+        fetch('https://formsubmit.co/ajax/raahimsohail6@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body:JSON.stringify({Reason:'Newsletter Signup',Email:val,_subject:'Fotile Website \u2014 Newsletter Signup',_cc:'sarfrazahmed@fotile.pk'})})
+        .then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ if(!r.ok||String(j.success)!=='true') throw new Error('rejected'); }); })
+        .then(function(){ msg.style.color='#6fe0ac'; msg.textContent='You\u2019re subscribed \u2014 thank you.'; em.value=''; })
+        .catch(function(){ msg.style.color='#ff8b9b'; msg.textContent='That didn\u2019t go through. Please check your connection and try again.'; if(btn) btn.disabled=false; });
       });
     });
 
@@ -338,15 +399,25 @@
     if(ft){
       var socUrls=['https://www.facebook.com/fotile.pk','https://www.instagram.com/fotilepak/','https://www.linkedin.com/company/fotilepk/','https://www.youtube.com/results?search_query=fotile+pakistan'];
       ft.querySelectorAll('.fsoc a').forEach(function(a,i){ if(socUrls[i]){a.setAttribute('href',socUrls[i]);a.setAttribute('target','_blank');a.setAttribute('rel','noopener');} });
-      var FMAP={'Range Hoods':'/product-category/kitchen-hood/','Ovens':'/product-category/oven/','Hobs':'/product-category/hobs/','Dishwashers':'/product-category/dish-washer/','Purifiers':'/product-category/water-purifier/','Blog':'/blog/','FAQ':'/faq/','Schedule Service':'/service-center/','Track Order':'/contact-us/','Warranty':'/service-center/'};
+      var FMAP={'Range Hoods':'/product-category/kitchen-hood/','Ovens':'/product-category/oven/','Hobs':'/product-category/hobs/','Dishwashers':'/product-category/dish-washer/','Purifiers':'/product-category/water-purifier/','Blog':'/blog/','FAQ':'/faq/','Schedule Service':'/service-center/','Track Order':'/contact-us/?enquire=order-status','Warranty':'/service-center/#warranty'};
       ft.querySelectorAll('a').forEach(function(a){
         var t=(a.textContent||'').trim();
-        if(a.getAttribute('href')==='#'&&FMAP[t]) a.setAttribute('href',FMAP[t]);
+        var fh=a.getAttribute('href')||''; if(FMAP[t]&&(fh==='#'||fh===''||/\/shop\/?$/.test(fh))) a.setAttribute('href',FMAP[t]);
         if(t.indexOf('042-')>-1) a.setAttribute('href','tel:+924211131517');
       });
     }
   }
-  function ready(){ build(); augmentSchema(); }
+  /* F22: div-based accordions on older templates become keyboard operable with announced state */
+  function a11yAccordions(){
+    var qs=document.querySelectorAll('.faqi .q:not([role])');
+    for(var i=0;i<qs.length;i++){(function(q){
+      q.setAttribute('role','button'); q.tabIndex=0; var it=q.parentElement;
+      q.setAttribute('aria-expanded', it.classList.contains('open')?'true':'false');
+      q.addEventListener('click',function(){ setTimeout(function(){ q.setAttribute('aria-expanded', it.classList.contains('open')?'true':'false'); },0); });
+      q.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); q.click(); } });
+    })(qs[i]);}
+  }
+  function ready(){ build(); augmentSchema(); a11yAccordions(); }
   if(document.readyState!=='loading') ready();
   else document.addEventListener('DOMContentLoaded',ready);
 

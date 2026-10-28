@@ -227,6 +227,14 @@
     .frow{grid-template-columns:1fr}
   }
 
+
+  .q-err{min-height:1em;margin:4px 0 10px;font-size:13px;color:#ff8b9b}
+  .field.bad input{border-color:rgba(255,95,115,.7)}
+  .wa-confirm{margin:12px 0 4px;padding:14px 16px;border:1px solid rgba(62,201,138,.35);background:rgba(62,201,138,.07);border-radius:10px;font-size:13.5px;color:#d7f3e6;line-height:1.5}
+  .wa-confirm p{margin:0 0 10px}
+  .wa-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .wa-row button{background:#3ec98a;color:#06130d;border:0;border-radius:8px;padding:10px 16px;font:600 13.5px inherit;cursor:pointer}
+  .wa-row a{color:#bff0d9;font-size:13px}
 </style>
   <link rel="canonical" href="https://fotilepk.com/cart/">
 <script>window.__PBASE="../";</script>
@@ -249,7 +257,7 @@
   <div class="nr">
     <span class="ic">⌕</span>
     <a href="/cart/" class="cartic">🛒<b data-cart-count>0</b></a>
-    <a href="#" class="npill">Request a Quote</a>
+    <a href="/cart/" class="npill">Request a Quote</a>
   </div>
 </nav>
 
@@ -273,16 +281,21 @@
         <h3>Request a quote</h3>
         <div class="rsub">No payment, no obligation. A Fotile advisor gets back to you with the best current price.</div>
         <div id="sumBox"></div>
-        <div class="field"><label>Full name *</label><input id="q_name" placeholder="Your name" autocomplete="name"></div>
+        <div class="field"><label for="q_name">Full name *</label><input id="q_name" placeholder="Your name" autocomplete="name" required aria-describedby="q_err"></div>
         <div class="frow">
-          <div class="field"><label>Phone *</label><input id="q_phone" placeholder="03xx-xxxxxxx" autocomplete="tel" inputmode="tel"></div>
-          <div class="field"><label>City</label>
+          <div class="field"><label for="q_phone">Phone *</label><input id="q_phone" type="tel" placeholder="03xx-xxxxxxx" autocomplete="tel" inputmode="tel" required aria-describedby="q_err"></div>
+          <div class="field"><label for="q_city">City</label>
             <select id="q_city"><option>Karachi</option><option>Lahore</option><option>Islamabad</option><option>Rawalpindi</option><option>Faisalabad</option><option>Multan</option><option>Peshawar</option><option>Sialkot</option><option>Other</option></select>
           </div>
         </div>
-        <div class="field"><label>Email (optional)</label><input id="q_email" type="email" placeholder="you@email.com" autocomplete="email"></div>
-        <div class="field"><label>Notes (optional)</label><textarea id="q_note" placeholder="Kitchen size, installation date, anything else"></textarea></div>
+        <div class="field"><label for="q_email">Email (optional)</label><input id="q_email" type="email" placeholder="you@email.com" autocomplete="email"></div>
+        <div class="field"><label for="q_note">Notes (optional)</label><textarea id="q_note" placeholder="Kitchen size, installation date, anything else"></textarea></div>
+        <p id="q_err" class="q-err" role="alert" aria-live="assertive"></p>
         <button class="btn-wa" id="btnWa">Send on WhatsApp &rarr;</button>
+        <div class="wa-confirm" id="waConfirm" hidden>
+          <p><b>WhatsApp should now be open with your list.</b> Your basket is kept until you confirm it was sent.</p>
+          <div class="wa-row"><button type="button" id="waSent">Yes, I sent it</button><a id="waAgain" href="#" target="_blank" rel="noopener">Open WhatsApp again</a></div>
+        </div>
         <button class="btn-ml" id="btnMail">Email this enquiry instead</button>
         <div class="trust">
           <div><span class="ti">&#10003;</span> Official Fotile Pakistan distributor</div>
@@ -379,46 +392,65 @@
   /* ---------- form ---------- */
   function val(id){ return (document.getElementById(id).value||'').trim(); }
   function who(){ return {name:val('q_name'),phone:val('q_phone'),city:val('q_city'),email:val('q_email'),note:val('q_note')}; }
+  /* F30: tolerant but real validation — local mobiles, +92, landlines, spaces/dashes */
+  function normPhone(v){ return String(v||'').replace(/[\s\-().]/g,''); }
+  function phoneOk(v){ var d=normPhone(v); return /^(\+92|0092|92|0)\d{9,10}$/.test(d); }
+  function emailOk(v){ return !v || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+  function setBad(id,bad){ var el=document.getElementById(id); el.parentNode.classList.toggle('bad',bad); el.setAttribute('aria-invalid',bad?'true':'false'); }
   function check(){
-    var ok=true;
-    [['q_name',1],['q_phone',1]].forEach(function(f){
-      var el=document.getElementById(f[0]);
-      var bad=!el.value.trim();
-      el.parentNode.classList.toggle('bad',bad);
-      if(bad) ok=false;
-    });
-    if(!ok) B.toast('Please add your name and phone number');
-    return ok;
+    var err=document.getElementById('q_err'), msgs=[];
+    var n=val('q_name'), p=val('q_phone'), e=val('q_email');
+    setBad('q_name',!n); if(!n) msgs.push('your name');
+    setBad('q_phone',!phoneOk(p)); if(!phoneOk(p)) msgs.push(p?'a valid phone number (e.g. 0300-1234567 or +92 300 1234567)':'your phone number');
+    setBad('q_email',!emailOk(e)); if(!emailOk(e)) msgs.push('a valid email, or leave it blank');
+    err.textContent = msgs.length ? 'Please add '+msgs.join(', ')+'.' : '';
+    if(msgs.length){ var f=document.querySelector('.field.bad input'); if(f) f.focus(); }
+    return !msgs.length;
   }
-  function ref(){ return 'FT-'+String(Date.now()).slice(-6); }
+  /* the reference travels inside the enquiry itself, so it is recorded wherever the enquiry lands */
+  var REF=null;
+  function newRef(){ REF='FT-'+String(Date.now()).slice(-6)+Math.floor(Math.random()*90+10); return REF; }
   function done(){
-    document.getElementById('refId').textContent=ref();
+    document.getElementById('refId').textContent=REF||newRef();
     vCart.style.display='none'; vDone.style.display='block';
     B.clear();
     scrollTo({top:0,behavior:'smooth'});
   }
+  function whoWithRef(){ var w=who(); w.note=(w.note?w.note+' \u2014 ':'')+'Ref '+REF; return w; }
 
+  /* F06: opening WhatsApp is a hand-off, not a confirmed send — keep the basket until the visitor confirms */
   document.getElementById('btnWa').addEventListener('click',function(){
     if(!B.count()) return;
     if(!check()) return;
-    window.open(B.waLink(who()),'_blank','noopener');   /* opened synchronously */
-    setTimeout(done,600);
+    newRef();
+    var url=B.waLink(whoWithRef());
+    var win=window.open(url,'_blank','noopener');
+    var box=document.getElementById('waConfirm'), again=document.getElementById('waAgain');
+    again.setAttribute('href',url);
+    box.hidden=false;
+    if(!win){ box.querySelector('p').innerHTML='<b>Your browser blocked the WhatsApp window.</b> Tap \u201cOpen WhatsApp again\u201d \u2014 your basket is kept.'; }
   });
+  document.getElementById('waSent').addEventListener('click',done);
 
+  /* F07: only an accepted submission counts as sent */
   document.getElementById('btnMail').addEventListener('click',function(){
     if(!B.count()) return;
     if(!check()) return;
     var btn=this; btn.disabled=true; btn.textContent='Sending\u2026';
-    var w=who();
+    var w=who(); newRef();
     fetch(MAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({
-        _subject:'Quote request from '+w.name+' ('+B.count()+' items)',
-        Name:w.name, Phone:w.phone, City:w.city, Email:w.email||'(not given)',
+        _subject:'Quote request '+REF+' from '+w.name+' ('+B.count()+' items)',
+        Reference:REF, Name:w.name, Phone:normPhone(w.phone), City:w.city, Email:w.email||'(not given)',
         Notes:w.note||'(none)', Products:B.waText()
       })})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){
+        if(!r.ok || String(j.success)!=='true') throw new Error('rejected '+r.status); }); })
       .then(function(){ done(); })
-      .catch(function(){ B.toast('Could not send \u2014 please use WhatsApp'); })
-      .then(function(){ btn.disabled=false; btn.textContent='Email this enquiry instead'; });
+      .catch(function(){
+        document.getElementById('q_err').textContent='We couldn\u2019t send the email just now \u2014 your basket and details are kept. Please try again, or send it on WhatsApp.';
+        btn.disabled=false; btn.textContent='Try sending the email again';
+      });
   });
 
   B.onChange(render);

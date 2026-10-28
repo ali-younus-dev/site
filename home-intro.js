@@ -87,7 +87,7 @@
   el.innerHTML = '<canvas></canvas><div class="wi-vig"></div>'
     + '<div class="wi-top">Since 1996 · From Ningbo<b>One kitchen, <i>around the world.</i></b></div>'
     + '<div class="wi-pk"><b>PAKISTAN</b><span>Fotile Pakistan · Lahore · Karachi · Islamabad</span></div>'
-    + '<div class="wi-logo"><img src="' + base + 'assets/logo.png" alt=""><i></i><em>Happiness starts in your kitchen</em></div>'
+    + '<div class="wi-logo"><img src="' + base + 'assets/logo.png" alt=""><i></i><em>Beyond technology</em></div>'
     + '<button class="wi-snd" type="button" aria-label="Turn on sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>Sound on</button>'
     + '<div class="wi-skip">Tap to skip</div>';
   document.body.insertBefore(el, document.body.firstChild);

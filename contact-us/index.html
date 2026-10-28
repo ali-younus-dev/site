@@ -198,7 +198,7 @@
   </div>
   <div class="nr">
     <span class="ic">⌕</span><a href="/cart/" class="ic" style="position:relative;text-decoration:none">🛒<b data-cart-count style="position:absolute;top:-8px;right:-9px;background:var(--red,#e01e37);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a>
-    <a href="#" class="npill">Request a Quote</a>
+    <a href="/cart/" class="npill">Request a Quote</a>
   </div>
 </nav>
 
@@ -211,7 +211,7 @@
       <h1>Let's talk <b>kitchens.</b></h1>
       <p>Got questions? Our team is here 9am–6pm to help you choose the perfect Fotile appliances for your home.</p>
       <div class="quicklinks">
-        <a class="ql" href="tel:04211113151517"><span class="qic">📞</span><span class="qt"><small>UAN — Call Us</small><b>042-111-131-517</b></span></a>
+        <a class="ql" href="tel:+924211131517"><span class="qic">📞</span><span class="qt"><small>UAN — Call Us</small><b>042-111-131-517</b></span></a>
         <a class="ql" href="mailto:info@fotilepk.com"><span class="qic">✉</span><span class="qt"><small>Email</small><b>info@fotilepk.com</b></span></a>
         <div class="ql"><span class="qic">🕘</span><span class="qt"><small>Working Hours</small><b>9:00 AM – 6:00 PM</b></span></div>
       </div>
@@ -222,21 +222,24 @@
         <h2>Send us a message</h2>
         <p class="sub">We'll get back to you within one working day.</p>
         <div class="field" style="position:absolute;left:-9999px" aria-hidden="true"><input type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
-        <div class="field"><label>How can we help?</label>
+        <div class="field"><label for="cReason">How can we help?</label>
           <select name="Reason" id="cReason">
             <option>General Enquiry</option>
             <option>Request a Quote</option>
             <option>Schedule a Service</option>
             <option>Complaint</option>
+            <option>Order Status</option>
+            <option>Dealer Partnership</option>
+            <option>Book a Private Demo</option>
           </select>
         </div>
         <div class="frow">
-          <div class="field"><label>Full Name</label><input required name="Name" type="text" placeholder="Your name"></div>
-          <div class="field"><label>Phone</label><input required name="Phone" type="tel" placeholder="03xx-xxxxxxx"></div>
+          <div class="field"><label for="cName">Full Name</label><input required id="cName" autocomplete="name" name="Name" type="text" placeholder="Your name"></div>
+          <div class="field"><label for="cPhone">Phone</label><input required id="cPhone" autocomplete="tel" inputmode="tel" pattern="[+0-9 ()\-]{10,17}" title="e.g. 0300-1234567 or +92 300 1234567" name="Phone" type="tel" placeholder="03xx-xxxxxxx"></div>
         </div>
-        <div class="field"><label>Email</label><input name="Email" type="email" placeholder="you@email.com"></div>
-        <div class="field"><label>Product of Interest</label>
-          <select name="Product">
+        <div class="field"><label for="cEmail">Email</label><input id="cEmail" autocomplete="email" name="Email" type="email" placeholder="you@email.com"></div>
+        <div class="field"><label for="cProduct">Product of Interest</label>
+          <select name="Product" id="cProduct">
             <option value="">Select a product…</option>
             <option>Range Hood</option><option>Hob (Gas / Electric)</option>
             <option>Oven</option><option>Magic Oven 4-in-1</option>
@@ -244,7 +247,7 @@
             <option>Air Purifier</option><option>Premium Series</option><option>Other</option>
           </select>
         </div>
-        <div class="field"><label>Message</label><textarea name="Message" id="cMessage" placeholder="How can we help you?"></textarea></div>
+        <div class="field"><label for="cMessage">Message</label><textarea name="Message" id="cMessage" placeholder="How can we help you?"></textarea></div>
         <button class="fbtn" type="submit">Send Message →</button>
         <p class="fnote">By sending, you agree to be contacted by the Fotile team.</p>
         <p id="ferr" style="display:none;color:#ff6b6b;font-size:13px;margin-top:10px">Couldn't send just now — please try again, or email <b>sarfrazahmed@fotile.pk</b>.</p>
@@ -296,7 +299,7 @@
       <div class="kick" style="margin-bottom:14px"><span class="dot"></span>Need Service?</div>
       <h3 style="font-size:22px;font-weight:300;margin-bottom:10px;letter-spacing:-.5px">Service centers in<br>every major city</h3>
       <p style="color:var(--txt-dim);font-size:14px;font-weight:300;margin-bottom:20px">Karachi · Lahore · Islamabad · Multan</p>
-      <a href="#" class="npill" style="border-color:var(--red);color:#fff">Schedule a Service →</a>
+      <a href="/service-center/" class="npill" style="border-color:var(--red);color:#fff">Schedule a Service →</a>
     </div>
   </div>
 </div></section>
@@ -332,11 +335,11 @@
     <div>
       <img class="fl" src="../assets/logo.png" alt="FOTILE" loading="lazy" decoding="async">
       <p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
-      <div class="fsoc" style="margin-top:24px"><a href="#">f</a><a href="#">◎</a><a href="#">in</a><a href="#">▶</a></div>
+      <div class="fsoc" style="margin-top:24px"><a href="https://www.facebook.com/fotile.pk" target="_blank" rel="noopener" aria-label="Fotile Pakistan on Facebook">f</a><a href="https://www.instagram.com/fotilepak/" target="_blank" rel="noopener" aria-label="Fotile Pakistan on Instagram">◎</a><a href="https://www.linkedin.com/company/fotilepk/" target="_blank" rel="noopener" aria-label="Fotile Pakistan on LinkedIn">in</a><a href="https://www.youtube.com/results?search_query=fotile+pakistan" target="_blank" rel="noopener" aria-label="Fotile videos on YouTube">▶</a></div>
     </div>
-    <div><h5>Collection</h5><a class="fli" href="#">Range Hoods</a><a class="fli" href="#">Ovens</a><a class="fli" href="#">Hobs</a><a class="fli" href="#">Dishwashers</a><a class="fli" href="#">Purifiers</a></div>
-    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="#">Blog</a><a class="fli" href="#">FAQ</a><a class="fli" href="/contact-us/">Contact</a></div>
-    <div><h5>Support</h5><a class="fli" href="#">Track Order</a><a class="fli" href="#">Schedule Service</a><a class="fli" href="#">Warranty</a><a class="fli" href="tel:04211113151517">042-111-131-517</a></div>
+    <div><h5>Collection</h5><a class="fli" href="/product-category/kitchen-hood/">Range Hoods</a><a class="fli" href="/product-category/oven/">Ovens</a><a class="fli" href="/product-category/hobs/">Hobs</a><a class="fli" href="/product-category/dish-washer/">Dishwashers</a><a class="fli" href="/product-category/water-purifier/">Purifiers</a></div>
+    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="/blog/">Blog</a><a class="fli" href="/faq/">FAQ</a><a class="fli" href="/contact-us/">Contact</a></div>
+    <div><h5>Support</h5><a class="fli" href="/contact-us/?enquire=order-status">Track Order</a><a class="fli" href="/service-center/">Schedule Service</a><a class="fli" href="/service-center/#warranty">Warranty</a><a class="fli" href="tel:+924211131517">042-111-131-517</a></div>
   </div>
   <div class="fbot">
     <span>© 2026 Fotile Pakistan — All Rights Reserved.</span>
@@ -344,7 +347,7 @@
   </div>
 </div></footer>
 
-<a class="wa" href="#">💬</a>
+<a class="wa" href="https://wa.me/924211131517" target="_blank" rel="noopener" aria-label="Chat with Fotile Pakistan on WhatsApp">💬</a>
 
 <script>
   const nav=document.getElementById('nav');
@@ -368,7 +371,8 @@
         method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
         body:JSON.stringify(data)
       });
-      if(!r.ok) throw new Error('bad');
+      var j={}; try{ j=await r.json(); }catch(_){}
+      if(!r.ok || String(j.success)!=='true') throw new Error('bad');
       f.style.display='none';
       document.getElementById('fok').style.display='block';
     }catch(ex){
@@ -376,12 +380,25 @@
     }
     return false;
   }
-  /* prefill when arriving from a product "Request a Quote" button (?enquire=slug) */
+  /* prefill from links elsewhere on the site: ?enquire=<intent or product slug>&appliance=&issue= */
   (function(){
-    var q=new URLSearchParams(location.search).get('enquire'); if(!q) return;
-    var pretty=q.replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
-    var r=document.getElementById('cReason'); if(r) r.value='Request a Quote';
-    var m=document.getElementById('cMessage'); if(m) m.value="I'd like a quote for: "+pretty;
+    var P=new URLSearchParams(location.search), q=P.get('enquire'); if(!q) return;
+    var r=document.getElementById('cReason'), m=document.getElementById('cMessage'), pr=document.getElementById('cProduct');
+    var app=P.get('appliance')||'', iss=P.get('issue')||'';
+    var I={
+      'order-status':['Order Status',"I'd like an update on my order. Order / invoice number: "],
+      'service':['Schedule a Service',"I need a technician visit"+(app?" for my "+app:"")+(iss?" — issue: "+iss:"")+". Preferred day/time: "],
+      'dealer-partnership':['Dealer Partnership',"I'm interested in becoming a Fotile dealer. Business name & city: "],
+      'private-demo':['Book a Private Demo',"I'd like to book a private demo at a Fotile showroom. Preferred city & date: "],
+      'warranty':['Schedule a Service',"I have a warranty question. Product model & invoice date: "]
+    };
+    var it=I[q];
+    if(it){ if(r) r.value=it[0]; if(m) m.value=it[1]; }
+    else {
+      var pretty=q.replace(/-/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});
+      if(r) r.value='Request a Quote'; if(m) m.value="I'd like a quote for: "+pretty;
+    }
+    if(app&&pr){ for(var i=0;i<pr.options.length;i++){ if(pr.options[i].text.toLowerCase().indexOf(app.toLowerCase().split(' ')[0])===0){ pr.selectedIndex=i; break; } } }
   })();
 
   // ALL Fotile locations nationwide (outlets + full partner network)

@@ -216,6 +216,7 @@
     .mbar{display:flex}
     body{padding-bottom:70px}
   }
+  .bw-alt{margin-top:14px;font-size:13.5px;color:var(--dim)}.bw-alt a{color:#fff;text-decoration:underline}
 </style>
 </head><body>
 
@@ -265,12 +266,12 @@
   </div>
   <div class="bookw reveal">
     <div class="bw-lbl">1 · Which appliance?</div>
-    <div class="chips" id="chipApp">
-      <button class="chp" type="button">Range Hood</button><button class="chp" type="button">Hob</button><button class="chp" type="button">Oven</button><button class="chp" type="button">Microwave</button><button class="chp" type="button">Dishwasher</button><button class="chp" type="button">Water Purifier</button>
+    <div class="chips" id="chipApp" role="group" aria-label="Appliance">
+      <button class="chp" type="button" aria-pressed="false">Range Hood</button><button class="chp" type="button" aria-pressed="false">Hob</button><button class="chp" type="button" aria-pressed="false">Oven</button><button class="chp" type="button" aria-pressed="false">Microwave</button><button class="chp" type="button" aria-pressed="false">Dishwasher</button><button class="chp" type="button" aria-pressed="false">Water Purifier</button>
     </div>
     <div class="bw-lbl">2 · What's the issue?</div>
-    <div class="chips" id="chipIss">
-      <button class="chp" type="button">Won't turn on</button><button class="chp" type="button">Weak suction</button><button class="chp" type="button">Gas / flame issue</button><button class="chp" type="button">Unusual noise</button><button class="chp" type="button">Water leakage</button><button class="chp" type="button">Display error</button><button class="chp" type="button">New installation</button><button class="chp" type="button">Something else</button>
+    <div class="chips" id="chipIss" role="group" aria-label="Issue">
+      <button class="chp" type="button" aria-pressed="false">Won't turn on</button><button class="chp" type="button" aria-pressed="false">Weak suction</button><button class="chp" type="button" aria-pressed="false">Gas / flame issue</button><button class="chp" type="button" aria-pressed="false">Unusual noise</button><button class="chp" type="button" aria-pressed="false">Water leakage</button><button class="chp" type="button" aria-pressed="false">Display error</button><button class="chp" type="button" aria-pressed="false">New installation</button><button class="chp" type="button" aria-pressed="false">Something else</button>
     </div>
     <div class="bw-sum">
       <div class="txt" id="bwSum">Select an appliance and an issue to begin.</div>
@@ -278,6 +279,7 @@
         <a class="btn-r" id="bwGo" href="https://fotileservicecenter.com/" target="_blank" rel="noopener">Continue online <span>→</span></a>
         <a class="btn-o" href="tel:+924211131517">Call instead</a>
       </div>
+      <p class="bw-alt" id="bwAlt" hidden>Prefer to upload photos and pin your location? <a href="https://fotileservicecenter.com/" target="_blank" rel="noopener">Book on the Service Center portal →</a></p>
     </div>
   </div>
 </div></section>
@@ -365,6 +367,19 @@
 </div></section>
 
 <!-- FAQ -->
+<section class="pad" id="warranty" style="border-top:1px solid var(--line);scroll-margin-top:90px"><div class="wrap">
+  <div class="px reveal" style="max-width:720px">
+    <div class="kick"><span class="dot"></span>Warranty</div>
+    <h2 class="h2" style="margin-top:16px">Covered from <b>day one.</b></h2>
+    <p class="lede" style="margin-top:18px">Every Fotile appliance bought from Fotile Pakistan or an authorised dealer carries the manufacturer’s warranty. Coverage depends on the product and is stated on your warranty card and invoice — keep both safe.</p>
+    <ul class="feats" style="margin-top:22px">
+      <li><b>To claim warranty</b> — book a visit on the Service Center or call 042-111-131-517 with your model number and invoice.</li>
+      <li><b>Installation matters</b> — use a Fotile-authorised installer so your coverage stays valid.</li>
+      <li><b>Not sure if you’re covered?</b> <a href="/contact-us/?enquire=warranty" style="color:#fff;text-decoration:underline">Ask us</a> and we’ll check for you.</li>
+    </ul>
+  </div>
+</div></section>
+
 <section class="pad" style="border-top:1px solid var(--line)"><div class="wrap">
   <div class="reveal">
     <div class="kick"><span class="dot"></span>Quick Answers</div>
@@ -461,10 +476,17 @@
       box.addEventListener('click',function(e){
         var b=e.target.closest('.chp'); if(!b)return;
         box.querySelectorAll('.chp').forEach(function(c){c.classList.remove('on');});
-        b.classList.add('on'); set(b.textContent); paint();
+        box.querySelectorAll('.chp').forEach(function(c){c.setAttribute('aria-pressed','false');}); b.classList.add('on'); b.setAttribute('aria-pressed','true'); set(b.textContent); paint();
       });
     }
+    var go=document.getElementById('bwGo'), alt=document.getElementById('bwAlt');
     function paint(){
+      /* F16: the two taps travel with the visitor instead of being lost */
+      if(app||iss){
+        go.setAttribute('href','/contact-us/?enquire=service'+(app?'&appliance='+encodeURIComponent(app):'')+(iss?'&issue='+encodeURIComponent(iss):''));
+        go.removeAttribute('target'); go.innerHTML='Send these details <span>→</span>';
+        if(alt) alt.hidden=false;
+      }
       if(app&&iss) sum.innerHTML='<b>'+app+'</b> · <b>'+iss+'</b> — ready to book. We’ll take it from here.';
       else if(app) sum.innerHTML='<b>'+app+'</b> selected — now tap the issue.';
       else if(iss) sum.innerHTML='<b>'+iss+'</b> — which appliance is it?';
