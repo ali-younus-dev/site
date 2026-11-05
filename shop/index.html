@@ -306,7 +306,7 @@
   <div class="cathead reveal">
     <div class="kick" style="justify-content:center"><span class="dot"></span>The Complete Lineup</div>
     <h2 class="h2" style="margin-top:18px">Every <b>Fotile appliance.</b></h2>
-    <p class="dim" style="margin-top:14px;font-size:15.5px">All <span id="pcount">57</span> models, in one place. Filter by category or search by name and model.</p>
+    <p class="dim" style="margin-top:14px;font-size:15.5px">All <span id="pcount">62</span> models, in one place. Filter by category or search by name and model.</p>
   </div>
   <div class="ptools reveal">
     <div class="psearch">
@@ -368,12 +368,12 @@
     const P=window.FOTILE_PRODUCTS||[];
     const grid=document.getElementById('pgrid'), fbar=document.getElementById('pfilter'), search=document.getElementById('psearch');
     if(!grid) return;
-    const ORDER=['Range Hoods','Hobs & Cooktops','Ovens','Microwaves','Dishwashers','Water Purifier'];
+    const ORDER=['Range Hoods','Hobs & Cooktops','Ovens','Microwaves','Dishwashers','Refrigerators','Water Purifier'];
     // build filter chips
-    const cats=['All'].concat(ORDER.filter(c=>P.some(p=>p.cat===c)));
+    const cats=['All'].concat(P.some(p=>p.badge==='New')?['New Arrivals']:[]).concat(ORDER.filter(c=>P.some(p=>p.cat===c)));
     let active='All', q='';
     fbar.innerHTML=cats.map(c=>{
-      const n=c==='All'?P.length:P.filter(p=>p.cat===c).length;
+      const n=c==='All'?P.length:c==='New Arrivals'?P.filter(p=>p.badge==='New').length:P.filter(p=>p.cat===c).length;
       return '<button class="pf'+(c==='All'?' active':'')+'" data-f="'+c+'">'+c+' <i>'+n+'</i></button>';
     }).join('');
     function card(p){
@@ -391,7 +391,7 @@
     }
     function render(){
       const ql=q.trim().toLowerCase();
-      const list=P.filter(p=>(active==='All'||p.cat===active)
+      const list=P.filter(p=>(active==='All'||p.cat===active||(active==='New Arrivals'&&p.badge==='New'))
         && (!ql || (p.name+' '+p.model+' '+p.cat).toLowerCase().includes(ql)));
       grid.innerHTML = list.length ? list.map(card).join('')
         : '<div class="pempty">No products match “'+String(q).replace(/[&<>"']/g,function(c){return '&#'+c.charCodeAt(0)+';';})+'”. Try another term.</div>';

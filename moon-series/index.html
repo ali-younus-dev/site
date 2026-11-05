@@ -236,7 +236,22 @@
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="../site.webmanifest">
 <meta name="theme-color" content="#0b0b0e">
-</head>
+<style>
+.nw-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.nw-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#0e0e16,#0a0a11);transition:.4s}
+.nw-card:hover{border-color:rgba(216,180,106,.45);transform:translateY(-4px)}
+.nw-img{position:relative;aspect-ratio:16/10;overflow:hidden}
+.nw-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .8s cubic-bezier(.16,1,.3,1),transform 1.2s cubic-bezier(.16,1,.3,1)}
+.nw-img .nw-alt{opacity:0}
+.nw-card:hover .nw-img .nw-alt,.nw-card:focus-visible .nw-img .nw-alt{opacity:1}
+.nw-card:hover .nw-img img{transform:scale(1.03)}
+.nw-body{padding:26px 26px 30px}
+.nw-tag{display:inline-block;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:#04120b;background:#3ec98a;border-radius:50px;padding:5px 12px;margin-bottom:14px}
+.nw-body h3{font-size:clamp(20px,2.2vw,26px);font-weight:300;letter-spacing:-.4px;margin-bottom:10px}.nw-body h3 b{font-weight:600}
+.nw-body p{color:#aeb0b8;font-size:14.5px;line-height:1.65;font-weight:300}
+.nw-go{display:inline-block;margin-top:16px;font-size:13.5px;color:var(--gold-lt,#e6c78c)}
+@media(max-width:820px){.nw-grid{grid-template-columns:minmax(0,1fr)}}
+</style></head>
 <body>
 
 <!-- ============ THE OPENING · TOTALITY ============ -->
@@ -429,12 +444,37 @@
   <p class="big">Fotile Pakistan <b>redefines what it means to live at home</b> — a premium selection of kitchen appliances combining <span class="gd">innovation, utility and aesthetics</span> into one seamless expression of design.</p>
 </div></section>
 
+<!-- NEW IN THE MOON SERIES -->
+<section class="pad mnew" id="new" style="border-top:1px solid var(--line)"><div class="wrap">
+  <div class="col-h reveal">
+    <div>
+      <div class="kick"><span class="dot"></span>New in the Moon Series</div>
+      <h2 class="h2" style="margin-top:18px">Two new ways to <b>disappear.</b></h2>
+    </div>
+    <p class="dim" style="max-width:380px;font-size:15px">A hood that folds away into your cabinet, and a refrigerator built in with zero gaps — the newest Moon Series pieces.</p>
+  </div>
+  <div class="nw-grid">
+    <a class="nw-card reveal" href="../shop/maxfold-folding-range-hood-big9069-g/">
+      <div class="nw-img"><img src="../assets/products/new/mf-open.jpg" alt="Fotile MaxFold BIG9069-G folding range hood unfolded over a hob" loading="lazy" decoding="async"><img class="nw-alt" src="../assets/products/new/mf-hidden.jpg" alt="" aria-hidden="true" loading="lazy" decoding="async"></div>
+      <div class="nw-body"><span class="nw-tag">New · Featured</span><h3>MaxFold Folding Range Hood <b>BIG9069-G</b></h3>
+        <p>Hidden in the cabinet when you're not cooking; unfolds on an aviation-grade arm when you are. 1700 m³/h · 1450 Pa · as quiet as 38 dB.</p>
+        <span class="nw-go">Discover MaxFold →</span></div>
+    </a>
+    <a class="nw-card reveal r2" href="../shop/fotile-f20-refrigerator/">
+      <div class="nw-img"><img src="../assets/f20/built-in.webp" alt="Fotile F20 built-in refrigerator in a kitchen" loading="lazy" decoding="async"><img class="nw-alt" src="../assets/f20/f20-render-open.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" style="object-fit:contain;background:#0b0b10"></div>
+      <div class="nw-body"><span class="nw-tag">New · Featured</span><h3>F20 Built-in Refrigerator</h3>
+        <p>Designed in Berlin. Fully built-in, handle-free and press-to-open, with 85% nitrogen fresh-keeping and 508 L of space.</p>
+        <span class="nw-go">Discover the F20 →</span></div>
+    </a>
+  </div>
+</div></section>
+
 <!-- COLLECTION -->
 <section class="pad" id="collection" style="border-top:1px solid var(--line)"><div class="wrap">
   <div class="col-h reveal">
     <div>
       <div class="kick"><span class="dot"></span>The Collection</div>
-      <h2 class="h2" style="margin-top:18px">Six masterpieces,<br>one <b>vision.</b></h2>
+      <h2 class="h2" style="margin-top:18px">The full collection,<br>one <b>vision.</b></h2>
     </div>
     <p class="dim" style="max-width:360px;font-size:15px">Each Moon Series appliance is crafted for those who see the kitchen as art. Click any piece to explore.</p>
   </div>

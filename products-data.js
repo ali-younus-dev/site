@@ -1,5 +1,10 @@
-/* Fotile product catalog — 57 products, real transparent PNGs. Prices: Request a Quote (edit `price` to show a number). */
+/* Fotile product catalog — 62 products, real transparent PNGs. Prices: Request a Quote (edit `price` to show a number). */
 window.FOTILE_PRODUCTS = [
+  {slug:'maxfold-folding-range-hood-big9069-g',name:'MaxFold Folding Range Hood',model:'BIG9069-G',cat:'Range Hoods',tag:'Ventilation',img:'assets/products/new/maxfold-big9069-g.png',price:'',featured:true,sale:'',badge:'New'},
+  {slug:'fotile-f20-refrigerator',name:'F20 Built-in Refrigerator',model:'F20',cat:'Refrigerators',tag:'Cooling',img:'assets/f20/f20-front.webp',price:'',featured:true,sale:'',badge:'New'},
+  {slug:'opal-range-hood-jqg9067',name:'Opal Range Hood',model:'JQG9067',cat:'Range Hoods',tag:'Ventilation',img:'assets/white/p6.webp',price:'',featured:true,sale:'',badge:'New'},
+  {slug:'opal-gas-hob-ghg88330-w',name:'Opal Gas Hob',model:'GHG88330-W',cat:'Hobs & Cooktops',tag:'Cooking',img:'assets/white/p1.webp',price:'',featured:true,sale:'',badge:'New'},
+  {slug:'opal-combi-steam-oven',name:'Opal Combi Steam Oven',model:'',cat:'Ovens',tag:'Cooking',img:'assets/white/p3.webp',price:'',featured:true,sale:'',badge:'New'},
   {slug:'premium-hood-amg9054-y',name:'Premium Range Hood',model:'AMG9054-Y',cat:'Range Hoods',tag:'Ventilation',img:'assets/products/premium-hood-amg9054-y.png',price:'',featured:false,sale:'',badge:''},
   {slug:'fotile-range-hood-jqg7501',name:'Range Hood',model:'JQG7501',cat:'Range Hoods',tag:'Ventilation',img:'assets/products/fotile-range-hood-jqg7501.png',price:'',featured:false,sale:'',badge:''},
   {slug:'fotile-range-hood-jqg9051',name:'Range Hood',model:'JQG9051',cat:'Range Hoods',tag:'Ventilation',img:'assets/products/fotile-range-hood-jqg9051.png',price:'',featured:false,sale:'',badge:''},
@@ -35,7 +40,7 @@ window.FOTILE_PRODUCTS = [
   {slug:'glass-o-series-scd-42-ct2',name:'O-Series Steam Oven',model:'SCD42-CT2',cat:'Ovens',tag:'Cooking',img:'assets/products/glass-o-series-scd-42-ct2.png',price:'',featured:false,sale:'',badge:''},
   {slug:'glass-o-series-scd-42-f1',name:'O-Series Steam Oven',model:'SCD42-F1',cat:'Ovens',tag:'Cooking',img:'assets/products/glass-o-series-scd-42-f1.png',price:'',featured:false,sale:'',badge:''},
   {slug:'built-in-combi-oven-hzkw44-g1',name:'Built-in Combi Oven',model:'HZKW44-G1',cat:'Ovens',tag:'Cooking',img:'assets/products/built-in-combi-oven-hzkw44-g1.png',price:'',featured:false,sale:'',badge:''},
-  {slug:'built-in-combi-oven-4-in-1-hyzk72-h-1y',name:'Built-in Combi Oven 4-in-1',model:'HYZK72H-1Y',cat:'Ovens',tag:'Cooking',img:'assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png',price:'',featured:false,sale:'',badge:''},
+  {slug:'built-in-combi-oven-4-in-1-hyzk72-h-1y',name:'Wi-Fi Combi Steam Oven 4-in-1',model:'HYZK72H-1Y',cat:'Ovens',tag:'Cooking',img:'assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png',price:'',featured:true,sale:'',badge:'New'},
   {slug:'built-in-electric-oven-7007a',name:'Built-in Electric Oven',model:'KSG7007A',cat:'Ovens',tag:'Cooking',img:'assets/products/built-in-electric-oven-7007a.png',price:'',featured:false,sale:'',badge:''},
   {slug:'built-in-electric-oven-kgs7003a',name:'Built-in Electric Oven',model:'KGS7003A',cat:'Ovens',tag:'Cooking',img:'assets/products/built-in-electric-oven-kgs7003a.png',price:'',featured:false,sale:'',badge:''},
   {slug:'built-in-electric-oven-kss7002a',name:'Built-in Electric Oven',model:'KSS7002A',cat:'Ovens',tag:'Cooking',img:'assets/products/built-in-electric-oven-kss7002a.png',price:'',featured:false,sale:'',badge:''},
@@ -109,15 +114,21 @@ window.FOTILE_PRODUCTS = [
     var sale={}, badge={};
     (window.FOTILE_PRODUCTS||[]).forEach(function(p){
       var s=parseInt(p.sale,10); if(s>0) sale[p.slug]=s;
-      var b=(p.badge||'').trim(); if(!b && p.featured) b='Featured';
-      if(b && STYLE[b]) badge[p.slug]=b;
+      var b=(p.badge||'').trim(), L=[];
+      if(b && STYLE[b]) L.push(b);
+      if(p.featured && b!=='Featured') L.push('Featured');   /* New + Featured show together */
+      if(L.length) badge[p.slug]=L;
     });
     return {sale:sale, badge:badge};
   }
-  function paint(el,label,big){
+  function paint(el,labels,big){
+    (Array.isArray(labels)?labels:[labels]).forEach(function(label,i){ paint1(el,label,big,i); });
+  }
+  function paint1(el,label,big,i){
     var c=STYLE[label]; if(!c) return;
     var b=document.createElement('span');
     b.className='prod-badge'+(big?' lg':'');
+    if(i) b.style.top=((big?16:12)+i*(big?36:28))+'px';
     b.textContent=label;
     b.style.background=c[0]; b.style.color=c[1];
     b.style.boxShadow='0 8px 22px '+c[2];
@@ -154,9 +165,9 @@ window.FOTILE_PRODUCTS = [
         price.setAttribute('data-sale',s2||0);
         var wrap=document.createElement('div');
         if(s2){var t=document.createElement('span');t.className='sale-tag';t.innerHTML='&#9733; On Sale &middot; '+s2+'% OFF';wrap.appendChild(t);}
-        if(bg2){var c2=STYLE[bg2];var t2=document.createElement('span');t2.className='prod-tag';t2.textContent=bg2;
+        if(bg2){(Array.isArray(bg2)?bg2:[bg2]).forEach(function(lb,i){var c2=STYLE[lb];if(!c2)return;var t2=document.createElement('span');t2.className='prod-tag';t2.textContent=lb;
           t2.style.background='rgba(255,255,255,.06)';t2.style.border='1px solid '+c2[2];t2.style.color=c2[0];
-          if(!s2) t2.style.marginLeft='0';wrap.appendChild(t2);}
+          if(!s2&&!i) t2.style.marginLeft='0';wrap.appendChild(t2);});}
         price.parentNode.insertBefore(wrap,price);
       }
     }

@@ -984,7 +984,29 @@ body:has(#cine:hover) .spot{opacity:0!important}
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#0b0b0e">
-</head>
+<style>
+.mfb{position:relative;min-height:86vh;display:flex;align-items:flex-end;overflow:hidden;background:#0b0b0d;isolation:isolate}
+.mfb-media,.mfb-media img{position:absolute;inset:0;width:100%;height:100%}
+.mfb-media img{object-fit:cover;object-position:60% 50%;transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 6s ease}
+.mfb-media .mfb-b{opacity:0}
+.mfb.open .mfb-media .mfb-b{opacity:1}
+.mfb.open .mfb-media img{transform:scale(1.03)}
+.mfb-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.74) 38%,rgba(8,8,10,.2) 62%,rgba(8,8,10,0) 76%),linear-gradient(0deg,rgba(8,8,10,.75),rgba(8,8,10,0) 42%)}
+.mfb-in{position:relative;z-index:2;padding-bottom:9vh;max-width:1320px}
+.mfb-kick{display:flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:2.4px;text-transform:uppercase;color:#e6c78c;font-weight:600}
+.mfb-new{background:#3ec98a;color:#04120b;border-radius:50px;padding:5px 11px;letter-spacing:1.6px;font-weight:800}
+.mfb h2{font-size:clamp(34px,5.2vw,72px);font-weight:200;letter-spacing:-.03em;line-height:1.05;margin:18px 0 16px;color:#fff;max-width:760px}
+.mfb h2 b{font-weight:500;display:block}
+.mfb p{max-width:520px;color:#d6d8dc;font-weight:300;font-size:clamp(15px,1.4vw,17.5px);line-height:1.7}
+.mfb-stats{list-style:none;display:flex;gap:34px;margin:28px 0 0;padding:0;flex-wrap:wrap}
+.mfb-stats b{display:block;font-size:clamp(26px,3vw,38px);font-weight:200;color:#fff;line-height:1}
+.mfb-stats span{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#a8abb2}
+.mfb-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;align-items:center}
+.mfb-toggle{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:4px;padding:15px 26px;font:inherit;font-size:14px;font-weight:500;cursor:pointer}
+.mfb-toggle:hover{background:#fff;color:#000}
+@media(max-width:760px){.mfb{min-height:92vh}.mfb-media img{object-position:56% 50%}.mfb-shade{background:linear-gradient(0deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.6) 46%,rgba(8,8,10,.1) 75%)}.mfb-in{padding-bottom:56px}.mfb-stats{gap:22px}}
+@media(prefers-reduced-motion:reduce){.mfb-media img{transition:none}}
+</style></head>
 <body>
 <script src="world-dots.js"></script>
 <script src="home-intro.js"></script>
@@ -1117,6 +1139,25 @@ body:has(#cine:hover) .spot{opacity:0!important}
 </section>
 
 <!-- ===== CAMPAIGN BANNER · THE KITCHEN, REIMAGINED ===== -->
+<!-- NEW · MAXFOLD BANNER -->
+<section class="mfb" id="maxfold" aria-label="New: Fotile MaxFold folding range hood">
+  <div class="mfb-media" id="mfbMedia">
+    <picture><source media="(max-width:760px)" srcset="assets/products/new/mf-hidden.jpg"><img class="mfb-a" src="assets/products/new/mf-hidden.jpg" alt="Fotile MaxFold folded away inside a wall cabinet" loading="lazy" decoding="async"></picture>
+    <img class="mfb-b" src="assets/products/new/mf-open.jpg" alt="Fotile MaxFold unfolded over a gas hob while cooking" loading="lazy" decoding="async">
+  </div>
+  <div class="mfb-shade"></div>
+  <div class="wrap mfb-in">
+    <div class="mfb-kick"><span class="mfb-new">New</span> Moon Series · BIG9069-G</div>
+    <h2>MaxFold.<br><b>Folded away. Unfolded power.</b></h2>
+    <p>Fotile’s first fully built-in range hood hides inside your cabinet — and unfolds on an aviation-grade arm the moment you cook.</p>
+    <ul class="mfb-stats"><li><b>1700</b><span>m³/h airflow</span></li><li><b>1450</b><span>Pa static pressure</span></li><li><b>38</b><span>dB whisper-quiet</span></li></ul>
+    <div class="mfb-cta">
+      <a class="btn-r" href="/shop/maxfold-folding-range-hood-big9069-g/">Discover MaxFold <span>→</span></a>
+      <button type="button" class="mfb-toggle" id="mfbToggle" aria-pressed="false">Unfold it</button>
+    </div>
+  </div>
+</section>
+
 <section class="akb akb-kitchen" aria-label="Beyond technology — the Fotile kitchen">
   <picture>
     <source media="(max-width:760px)" srcset="assets/ahsan/kitchen-banner-m.webp" type="image/webp">
@@ -1857,5 +1898,17 @@ body:has(#cine:hover) .spot{opacity:0!important}
 })();
 </script>
 
-</body>
+<script>(function(){
+  var sec=document.getElementById('maxfold'),btn=document.getElementById('mfbToggle'); if(!sec||!btn) return;
+  var auto=null, user=false;
+  function set(open){ sec.classList.toggle('open',open); btn.setAttribute('aria-pressed',String(open)); btn.textContent=open?'Fold it away':'Unfold it'; }
+  btn.addEventListener('click',function(){ user=true; clearInterval(auto); set(!sec.classList.contains('open')); if(window.FotileTrack) FotileTrack('maxfold_toggle',{state:sec.classList.contains('open')?'open':'folded'}); });
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if(e.isIntersecting && !user && !reduce){ setTimeout(function(){ if(!user) set(true); },900); clearInterval(auto); auto=setInterval(function(){ if(!user) set(!sec.classList.contains('open')); },4200); }
+      else { clearInterval(auto); }
+    }); },{threshold:.45}).observe(sec);
+  }
+})();</script></body>
 </html>
