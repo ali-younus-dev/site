@@ -13,7 +13,16 @@
      Loads on any real web host; skipped on local file:// previews so your
      testing doesn't pollute the data. Fires a PageView on every page.
      --------------------------------------------------------------------------- */
-  if(location.protocol!=='file:' && !window.__fotileAnalytics){
+  /* staging copies (GitHub Pages etc.) must not be indexed or counted */
+  (function(){
+    var h=location.hostname;
+    if(h && !/(^|\.)fotilepk\.com$/.test(h) && h!=='localhost' && h!=='127.0.0.1'){
+      var m=document.querySelector('meta[name="robots"]');
+      if(!m){ m=document.createElement('meta'); m.setAttribute('name','robots'); document.head.appendChild(m); }
+      m.setAttribute('content','noindex,nofollow');
+    }
+  })();
+  if(/(^|\.)fotilepk\.com$/.test(location.hostname) && !window.__fotileAnalytics){
     window.__fotileAnalytics=1;
     var GA_ID='G-53Z27BS2HX', FB_ID='1268862064078491';
     try{
@@ -30,6 +39,88 @@
       window.fbq('init',FB_ID);window.fbq('track','PageView');
     }catch(e){}
   }
+
+  /* ---------------------------------------------------------------------------
+     MEASUREMENT — one call sends the same moment to GA4 and the Meta Pixel.
+       FotileTrack(ga4Name, params, metaName, metaParams)
+     The quote-basket funnel (GA4 recommended names, so funnels, audiences and
+     Google Ads remarketing work out of the box):
+       view_item → add_to_cart → view_cart → begin_checkout → generate_lead
+     Plus whatsapp_click, phone_click, sign_up, search, finder_complete.
+     Other scripts may queue events before this file loads (window.__ftQ).
+     Debug: add ?ftdebug=1 to any URL to log every event to the console.
+     --------------------------------------------------------------------------- */
+  (function(){
+    var STD={ViewContent:1,AddToCart:1,InitiateCheckout:1,Lead:1,Contact:1,Search:1,CompleteRegistration:1,Schedule:1,FindLocation:1};
+    var DEBUG=/[?&]ftdebug=1/.test(location.search);
+    try{ if(DEBUG) sessionStorage.setItem('ftdebug','1'); DEBUG=DEBUG||sessionStorage.getItem('ftdebug')==='1'; }catch(e){}
+    window.__ftEvents=window.__ftEvents||[];
+    function send(name,params,fb,fbp){
+      params=params||{};
+      window.__ftEvents.push([name,params,fb||null]);
+      if(DEBUG && window.console) console.log('[FotileTrack]',name,params,fb||'',fbp||'');
+      try{ if(window.gtag) window.gtag('event',name,params); }catch(e){}
+      try{ if(window.fbq && fb){ if(STD[fb]) window.fbq('track',fb,fbp||{}); else window.fbq('trackCustom',fb,fbp||{}); } }catch(e){}
+    }
+    var T=function(n,p,f,fp){ send(n,p,f,fp); };
+    T.flush=function(){ var q=window.__ftQ||[]; window.__ftQ=[]; q.forEach(function(a){ send.apply(null,a); }); };
+    T.item=function(p){ return {item_id:p.slug||p.item_id||'',item_name:((p.name||'')+(p.model?' '+p.model:'')).trim(),item_brand:'Fotile',item_category:p.cat||'',quantity:p.qty||1}; };
+    window.FotileTrack=T; T.flush();
+
+    /* remember the first landing page + campaign tags for the lead record */
+    try{
+      if(!sessionStorage.getItem('ft_landing')) sessionStorage.setItem('ft_landing',(location.pathname+location.search).slice(0,300)+(document.referrer?' ← '+document.referrer.slice(0,120):''));
+    }catch(e){}
+
+    function where(el){
+      if(el.closest('footer')) return 'footer';
+      if(el.classList.contains('wa')) return 'floating_button';
+      if(el.closest('#nav,.mobmenu')) return 'header';
+      if(el.closest('.pdp')) return 'product_page';
+      if(el.closest('.fc-draw,.fc-drawer')) return 'basket_drawer';
+      return 'page';
+    }
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a[href]'); if(!a) return;
+      var h=a.getAttribute('href')||'';
+      if(/wa\.me\/|api\.whatsapp\.com|whatsapp:\/\//i.test(h) && !a.hasAttribute('data-ft-skip')){
+        T('whatsapp_click',{link_location:where(a),page_path:location.pathname},'Contact',{method:'whatsapp'});
+      } else if(/^tel:/i.test(h)){
+        T('phone_click',{link_location:where(a),page_path:location.pathname},'Contact',{method:'phone'});
+      } else if(/\/our-dealers\/?$/.test(h)){
+        T('find_dealer_click',{link_location:where(a)},'FindLocation',{});
+      }
+    },true);
+
+    function pageView(){
+      var p=location.pathname;
+      var m=p.match(/\/shop\/([^\/]+)\/?$/);
+      if(m && document.querySelector('.pdp')){
+        var h1=document.querySelector('.pdp h1'), cr=document.querySelectorAll('.crumb a');
+        var it={slug:m[1],name:h1?h1.textContent.replace(/\s+/g,' ').trim():m[1],cat:cr.length>2?cr[2].textContent.trim():''};
+        T('view_item',{items:[T.item(it)]},'ViewContent',{content_ids:[it.slug],content_type:'product',content_name:it.name,content_category:it.cat});
+      } else if(/\/product-category\//.test(p) || /\/(moon-series|opal-series|two-halves|fridge)\/?$/.test(p)){
+        var h=document.querySelector('h1');
+        T('view_item_list',{item_list_name:h?h.textContent.replace(/\s+/g,' ').trim():p},'ViewCategory',{content_category:h?h.textContent.trim():p});
+      } else if(/\/shop\/?$/.test(p)){
+        var q=''; try{ q=new URLSearchParams(location.search).get('q')||''; }catch(e){}
+        if(q) T('search',{search_term:q.slice(0,60)},'Search',{search_string:q.slice(0,60)});
+      }
+    }
+    if(document.readyState!=='loading') pageView(); else document.addEventListener('DOMContentLoaded',pageView);
+  })();
+
+  /* POST a copy of an enquiry to the server-side lead store (leads-api.php).
+     Fire-and-forget: if the host has no PHP (preview copies) nothing breaks. */
+  window.FotileLead=function(data){
+    try{
+      if(!/(^|\.)fotilepk\.com$/.test(location.hostname) && !window.__FT_LEADS_ANYWHERE) return;
+      var land=''; try{ land=sessionStorage.getItem('ft_landing')||''; }catch(e){}
+      data.page=location.pathname; data.landing=land;
+      var base=(window.__PBASE||'');
+      fetch(base+'leads-api.php?action=submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),keepalive:true,credentials:'omit'}).catch(function(){});
+    }catch(e){}
+  };
 
   /* ---- SEO: add Instagram + LinkedIn to Organization/Store sameAs (from Yoast) ---- */
   function augmentSchema(){
@@ -389,7 +480,7 @@
         fetch('https://formsubmit.co/ajax/raahimsohail6@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
           body:JSON.stringify({Reason:'Newsletter Signup',Email:val,_subject:'Fotile Website \u2014 Newsletter Signup',_cc:'sarfrazahmed@fotile.pk'})})
         .then(function(r){ return r.json().catch(function(){return {};}).then(function(j){ if(!r.ok||String(j.success)!=='true') throw new Error('rejected'); }); })
-        .then(function(){ msg.style.color='#6fe0ac'; msg.textContent='You\u2019re subscribed \u2014 thank you.'; em.value=''; })
+        .then(function(){ msg.style.color='#6fe0ac'; msg.textContent='You\u2019re subscribed \u2014 thank you.'; em.value=''; if(window.FotileTrack) FotileTrack('sign_up',{method:'newsletter'},'CompleteRegistration',{content_name:'newsletter'}); })
         .catch(function(){ msg.style.color='#ff8b9b'; msg.textContent='That didn\u2019t go through. Please check your connection and try again.'; if(btn) btn.disabled=false; });
       });
     });

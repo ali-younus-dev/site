@@ -23,6 +23,14 @@ RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^(.*)$ https://fotilepk.com/$1 [R=301,L]
 
 # ---------------------------------------------------------------------
+# 0b. PRIVATE DATA — lead store, backups and the cron script are never
+#     served over the web (the cron also refuses to run outside the CLI).
+# ---------------------------------------------------------------------
+RewriteRule (^|/)\.(leads|admin-backups)(/|$) - [F,L]
+RewriteRule ^leads-cron\.php$ - [F,L]
+RewriteRule (^|/)fotile-leads(/|$) - [F,L]
+
+# ---------------------------------------------------------------------
 # 1. WORDPRESS SYSTEM PATHS — kill the crawl traps before anything else.
 # ---------------------------------------------------------------------
 # Internal search -> shop
@@ -176,6 +184,7 @@ RewriteRule ^shop/fotile-induction-hob-.*$ /shop/induction-hob-eig76203/ [R=301,
 # --- discontinued products -> parent category (keeps relevance, no 404) ---
 RewriteRule ^shop/moon-series-product-1/?$ /moon-series/ [R=301,L]
 RewriteRule ^shop/gas-hob-4-lohas-burners-glass-top-glg60409/?$ /product-category/hobs/ [R=301,L]
+RewriteRule ^shop/top-glg60409/?$ /product-category/hobs/ [R=301,L]
 
 # ---------------------------------------------------------------------
 # 5. PRODUCT CATEGORIES consolidated

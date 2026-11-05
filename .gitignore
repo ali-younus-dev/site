@@ -11,6 +11,10 @@ dashboard-demo.html
 dashboard-local.html
 .admin-backups/
 
+# Customer leads (names + phone numbers) — never commit
+.leads/
+fotile-leads/
+
 # Local 3D / layout experiments — duplicates of live pages.
 # Kept on disk so you can keep working on them; never deployed.
 fridge/fridge/

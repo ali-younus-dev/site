@@ -29,7 +29,7 @@
   'use strict';
 
   var KEY  = 'fotile_basket_v1';
-  var WA   = '924211131517';                 /* Fotile Pakistan WhatsApp  */
+  var WA   = '923008463129';                 /* Fotile Pakistan WhatsApp  */
   var BAD  = '920000000000';                 /* placeholder to repair     */
 
   /* ---------------------------------------------------------------- */
@@ -111,6 +111,11 @@
     for (var i = 0; i < listeners.length; i++) { try { listeners[i](items); } catch (e) {} }
   }
 
+  /* measurement: queue until mobile-nav.js (FotileTrack) has loaded */
+  function T() { var a = [].slice.call(arguments); if (window.FotileTrack) window.FotileTrack.apply(null, a); else (window.__ftQ = window.__ftQ || []).push(a); }
+  function gaItem(p, q) { return { item_id: p.slug, item_name: ((p.name || '') + (p.model ? ' ' + p.model : '')).trim(), item_brand: 'Fotile', item_category: p.cat || '', quantity: q || p.qty || 1 }; }
+  function allGaItems() { return items.map(function (i) { return gaItem(i); }); }
+
   function add(p, qty) {
     if (!p || !p.slug) return;
     qty = Math.max(1, parseInt(qty, 10) || 1);
@@ -129,6 +134,7 @@
       });
     }
     notify();
+    T('add_to_cart', { items: [gaItem(p, qty)] }, 'AddToCart', { content_ids: [p.slug], content_type: 'product', content_name: p.name || p.slug, contents: [{ id: p.slug, quantity: qty }] });
     open();
     return true;
   }
@@ -361,6 +367,7 @@
     buildDrawer();
     if (!draw) return;
     scrim.classList.add('on'); draw.classList.add('on');
+    if (items.length) T('view_cart', { items: allGaItems(), basket_location: 'drawer' }, 'ViewQuoteBasket', { content_ids: items.map(function (i) { return i.slug; }), num_items: count() });
     document.documentElement.style.overflow = 'hidden';
   }
   function close() {

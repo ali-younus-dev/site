@@ -13,7 +13,11 @@
   var seen = false;
   try{ seen = sessionStorage.getItem('fotile_intro_seen') === '1'; }catch(e){}
   if(/[?&]intro=1/.test(location.search)) seen = false;
-  if(!WD || reduce || seen || /[?&]nointro/.test(location.search)) return;
+  /* slow or metered connections go straight to the page */
+  var cn = navigator.connection || {}, et = cn.effectiveType || '';
+  var slow = cn.saveData || /(^|-)2g$/.test(et) || (et === '3g' && matchMedia('(max-width:760px)').matches);
+  if(/[?&]intro=1/.test(location.search)) slow = false;
+  if(!WD || reduce || seen || slow || /[?&]nointro/.test(location.search)) return;
 
   window.__WI_ACTIVE = true;
   try{ sessionStorage.setItem('fotile_intro_seen','1'); }catch(e){}

@@ -296,6 +296,7 @@
       <div class="ph"><a href="tel:0616222063"><span class="ic">📞</span>061-6222063</a><a href="tel:03328177763"><span class="ic">📞</span>0332-8177763</a></div>
     </div>
     <div class="outlet reveal r3" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:radial-gradient(120% 100% at 30% 20%,#1a0509,var(--panel))">
+<p class="citylinks" style="margin:0 0 18px;font-size:14px;color:#c9ccd1">Fotile outlets: <a href="/kitchen-appliances-karachi/" style="color:#fff;text-decoration:underline">Karachi</a> · <a href="/kitchen-appliances-lahore/" style="color:#fff;text-decoration:underline">Lahore</a> · <a href="/kitchen-appliances-islamabad/" style="color:#fff;text-decoration:underline">Islamabad &amp; Rawalpindi</a> · <a href="/kitchen-appliances-multan/" style="color:#fff;text-decoration:underline">Multan</a></p>
       <div class="kick" style="margin-bottom:14px"><span class="dot"></span>Need Service?</div>
       <h3 style="font-size:22px;font-weight:300;margin-bottom:10px;letter-spacing:-.5px">Service centers in<br>every major city</h3>
       <p style="color:var(--txt-dim);font-size:14px;font-weight:300;margin-bottom:20px">Karachi · Lahore · Islamabad · Multan</p>
@@ -347,7 +348,7 @@
   </div>
 </div></footer>
 
-<a class="wa" href="https://wa.me/924211131517" target="_blank" rel="noopener" aria-label="Chat with Fotile Pakistan on WhatsApp">💬</a>
+<a class="wa" href="https://wa.me/923008463129" target="_blank" rel="noopener" aria-label="Chat with Fotile Pakistan on WhatsApp">💬</a>
 
 <script>
   const nav=document.getElementById('nav');
@@ -373,6 +374,9 @@
       });
       var j={}; try{ j=await r.json(); }catch(_){}
       if(!r.ok || String(j.success)!=='true') throw new Error('bad');
+      var rs=f.Reason.value, src=/Service/.test(rs)?'service':(/Demo/.test(rs)?'demo':'contact');
+      if(window.FotileLead) window.FotileLead({source:src,reason:rs,name:f.Name.value,phone:f.Phone.value,email:f.Email.value,city:'',note:(f.Product.value?f.Product.value+' — ':'')+f.Message.value,items:[]});
+      if(window.FotileTrack) FotileTrack('generate_lead',{method:'contact_form',form_reason:rs},'Lead',{content_name:'contact_form',content_category:rs});
       f.style.display='none';
       document.getElementById('fok').style.display='block';
     }catch(ex){

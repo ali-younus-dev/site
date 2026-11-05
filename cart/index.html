@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quote Basket | Fotile Pakistan</title>
 <meta name="description" content="Review the Fotile appliances you’re interested in and send us one enquiry. We reply with pricing, availability and installation across Pakistan.">
-<meta name="robots" content="index,follow">
+<meta name="robots" content="noindex,follow">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Fotile Pakistan">
 <meta property="og:title" content="Quote Basket | Fotile Pakistan">
@@ -290,7 +290,9 @@
         </div>
         <div class="field"><label for="q_email">Email (optional)</label><input id="q_email" type="email" placeholder="you@email.com" autocomplete="email"></div>
         <div class="field"><label for="q_note">Notes (optional)</label><textarea id="q_note" placeholder="Kitchen size, installation date, anything else"></textarea></div>
+        <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
         <p id="q_err" class="q-err" role="alert" aria-live="assertive"></p>
+        <p class="q-consent" style="font-size:12px;color:#8f939b;margin:0 0 12px;line-height:1.5">We use your details only to answer this quote — by WhatsApp, phone or email, with one reminder a few days later. <a href="/privacy-policy/" style="color:inherit;text-decoration:underline">Privacy</a></p>
         <button class="btn-wa" id="btnWa">Send on WhatsApp &rarr;</button>
         <div class="wa-confirm" id="waConfirm" hidden>
           <p><b>WhatsApp should now be open with your list.</b> Your basket is kept until you confirm it was sent.</p>
@@ -418,26 +420,45 @@
   }
   function whoWithRef(){ var w=who(); w.note=(w.note?w.note+' \u2014 ':'')+'Ref '+REF; return w; }
 
+  /* ---- measurement + lead capture ---- */
+  function T(){ var a=[].slice.call(arguments); if(window.FotileTrack) window.FotileTrack.apply(null,a); else (window.__ftQ=window.__ftQ||[]).push(a); }
+  function gaItems(){ return B.all().map(function(i){ return {item_id:i.slug,item_name:((i.name||'')+(i.model?' '+i.model:'')).trim(),item_brand:'Fotile',item_category:i.cat||'',quantity:i.qty}; }); }
+  function ids(){ return B.all().map(function(i){ return i.slug; }); }
+  function capture(source){
+    var w=who();
+    if(window.FotileLead) window.FotileLead({source:source,ref:REF,name:w.name,phone:normPhone(w.phone),city:w.city,email:w.email,note:w.note,
+      items:B.all().map(function(i){ return {slug:i.slug,name:((i.name||'')+(i.model?' '+i.model:'')).trim(),qty:i.qty}; }),website:(document.querySelector('[name=website]')||{}).value||''});
+  }
+  if(B.count()) T('view_cart',{items:gaItems(),basket_location:'cart_page'},'ViewQuoteBasket',{content_ids:ids(),num_items:B.count()});
+  var begun=false;
+  document.querySelectorAll('#q_name,#q_phone,#q_city,#q_email,#q_note').forEach(function(f){
+    f.addEventListener('focus',function(){ if(begun||!B.count()) return; begun=true;
+      T('begin_checkout',{items:gaItems()},'InitiateCheckout',{content_ids:ids(),num_items:B.count()}); });
+  });
+
   /* F06: opening WhatsApp is a hand-off, not a confirmed send — keep the basket until the visitor confirms */
   document.getElementById('btnWa').addEventListener('click',function(){
     if(!B.count()) return;
     if(!check()) return;
-    newRef();
+    if(!REF) newRef();
     var url=B.waLink(whoWithRef());
+    capture('quote_whatsapp');
+    T('generate_lead',{method:'whatsapp',lead_ref:REF,items:gaItems()},'Lead',{content_name:'quote_whatsapp',content_ids:ids(),num_items:B.count()});
     var win=window.open(url,'_blank','noopener');
     var box=document.getElementById('waConfirm'), again=document.getElementById('waAgain');
     again.setAttribute('href',url);
     box.hidden=false;
     if(!win){ box.querySelector('p').innerHTML='<b>Your browser blocked the WhatsApp window.</b> Tap \u201cOpen WhatsApp again\u201d \u2014 your basket is kept.'; }
   });
-  document.getElementById('waSent').addEventListener('click',done);
+  document.getElementById('waSent').addEventListener('click',function(){ T('quote_confirmed',{method:'whatsapp',lead_ref:REF}); done(); });
 
   /* F07: only an accepted submission counts as sent */
   document.getElementById('btnMail').addEventListener('click',function(){
     if(!B.count()) return;
     if(!check()) return;
     var btn=this; btn.disabled=true; btn.textContent='Sending\u2026';
-    var w=who(); newRef();
+    var w=who(); if(!REF) newRef();
+    capture('quote_email');
     fetch(MAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({
         _subject:'Quote request '+REF+' from '+w.name+' ('+B.count()+' items)',
@@ -446,10 +467,11 @@
       })})
       .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){
         if(!r.ok || String(j.success)!=='true') throw new Error('rejected '+r.status); }); })
-      .then(function(){ done(); })
+      .then(function(){ T('generate_lead',{method:'email',lead_ref:REF,items:gaItems()},'Lead',{content_name:'quote_email',content_ids:ids(),num_items:B.count()}); done(); })
       .catch(function(){
         document.getElementById('q_err').textContent='We couldn\u2019t send the email just now \u2014 your basket and details are kept. Please try again, or send it on WhatsApp.';
         btn.disabled=false; btn.textContent='Try sending the email again';
+        T('quote_email_failed',{lead_ref:REF});
       });
   });
 
