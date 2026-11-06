@@ -106,6 +106,11 @@ window.FOTILE_PRODUCTS = [
     +'font-size:10px;letter-spacing:1.1px;padding:6px 11px;border-radius:50px;text-transform:uppercase;pointer-events:none;'
     +'animation:saleIn .5s .06s cubic-bezier(.16,1,.3,1) both}'
     +'.prod-badge.lg{top:16px;right:16px;font-size:12px;padding:8px 15px;letter-spacing:1.4px}'
+    +'.prod-badges{position:absolute;top:12px;right:12px;z-index:7;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}'
+    +'.prod-badges .prod-badge{position:static;top:auto;right:auto}'
+    +'.prod-badges.lg{top:18px;right:18px;flex-direction:row;gap:10px}'
+    +'.pdp .prod-tag{margin-top:18px}'
+    +'@media(max-width:600px){.prod-badges:not(.lg){top:auto;bottom:10px;right:10px;flex-direction:row;gap:5px}.prod-badges:not(.lg) .prod-badge{font-size:8.5px;padding:5px 8px;letter-spacing:.8px}}'
     +'.prod-tag{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:11.5px;letter-spacing:1.2px;'
     +'text-transform:uppercase;padding:7px 13px;border-radius:7px;margin:0 0 14px 8px}';
   var st=document.createElement('style');st.textContent=CSS;document.head.appendChild(st);
@@ -122,13 +127,14 @@ window.FOTILE_PRODUCTS = [
     return {sale:sale, badge:badge};
   }
   function paint(el,labels,big){
-    (Array.isArray(labels)?labels:[labels]).forEach(function(label,i){ paint1(el,label,big,i); });
+    var box=document.createElement('span'); box.className='prod-badges'+(big?' lg':'');
+    (Array.isArray(labels)?labels:[labels]).forEach(function(label){ paint1(box,label,big,0); });
+    if(box.children.length) el.appendChild(box);
   }
   function paint1(el,label,big,i){
     var c=STYLE[label]; if(!c) return;
     var b=document.createElement('span');
     b.className='prod-badge'+(big?' lg':'');
-    if(i) b.style.top=((big?16:12)+i*(big?36:28))+'px';
     b.textContent=label;
     b.style.background=c[0]; b.style.color=c[1];
     b.style.boxShadow='0 8px 22px '+c[2];

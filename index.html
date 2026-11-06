@@ -797,6 +797,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;bac
 .tile .go{letter-spacing:.15px}
 .tile.contain .ti{background-position:center 38%}
 .purifier-tile .ti{background-size:contain !important;background-position:center center !important;transform:none !important;filter:brightness(.94) contrast(1.02) !important;inset:2% 3% 24% 3% !important}
+.tile-hob .ti{inset:8% 7% 34% 7% !important;background-position:center center !important}
+.tile-oven .ti{inset:5% 4% 30% 4% !important;background-position:center center !important}
+.t-xl{grid-column:span 12;grid-row:span 2}
+.t-xl .ti{background-position:center 55%}
+@media(max-width:1000px){.t-xl{grid-row:span 1}}
 .purifier-tile::after{background:linear-gradient(180deg,transparent 44%,rgba(11,11,13,.90) 100%)}
 .purifier-tile::before{content:"";position:absolute;inset:12% 16% 27%;background:radial-gradient(closest-side,rgba(255,255,255,.035),transparent 72%);filter:blur(14px);pointer-events:none;z-index:0}
 
@@ -985,27 +990,11 @@ body:has(#cine:hover) .spot{opacity:0!important}
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#0b0b0e">
 <style>
-.mfb{position:relative;min-height:86vh;display:flex;align-items:flex-end;overflow:hidden;background:#0b0b0d;isolation:isolate}
-.mfb-media,.mfb-media img{position:absolute;inset:0;width:100%;height:100%}
-.mfb-media img{object-fit:cover;object-position:60% 50%;transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 6s ease}
-.mfb-media .mfb-b{opacity:0}
-.mfb.open .mfb-media .mfb-b{opacity:1}
-.mfb.open .mfb-media img{transform:scale(1.03)}
-.mfb-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.74) 38%,rgba(8,8,10,.2) 62%,rgba(8,8,10,0) 76%),linear-gradient(0deg,rgba(8,8,10,.75),rgba(8,8,10,0) 42%)}
-.mfb-in{position:relative;z-index:2;padding-bottom:9vh;max-width:1320px}
-.mfb-kick{display:flex;align-items:center;gap:12px;font-size:11.5px;letter-spacing:2.4px;text-transform:uppercase;color:#e6c78c;font-weight:600}
-.mfb-new{background:#3ec98a;color:#04120b;border-radius:50px;padding:5px 11px;letter-spacing:1.6px;font-weight:800}
-.mfb h2{font-size:clamp(34px,5.2vw,72px);font-weight:200;letter-spacing:-.03em;line-height:1.05;margin:18px 0 16px;color:#fff;max-width:760px}
-.mfb h2 b{font-weight:500;display:block}
-.mfb p{max-width:520px;color:#d6d8dc;font-weight:300;font-size:clamp(15px,1.4vw,17.5px);line-height:1.7}
-.mfb-stats{list-style:none;display:flex;gap:34px;margin:28px 0 0;padding:0;flex-wrap:wrap}
-.mfb-stats b{display:block;font-size:clamp(26px,3vw,38px);font-weight:200;color:#fff;line-height:1}
-.mfb-stats span{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#a8abb2}
-.mfb-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px;align-items:center}
-.mfb-toggle{background:transparent;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:4px;padding:15px 26px;font:inherit;font-size:14px;font-weight:500;cursor:pointer}
-.mfb-toggle:hover{background:#fff;color:#000}
-@media(max-width:760px){.mfb{min-height:92vh}.mfb-media img{object-position:56% 50%}.mfb-shade{background:linear-gradient(0deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.6) 46%,rgba(8,8,10,.1) 75%)}.mfb-in{padding-bottom:56px}.mfb-stats{gap:22px}}
-@media(prefers-reduced-motion:reduce){.mfb-media img{transition:none}}
+.chapter .chmedia .chbg.ch-alt{animation:chFold 10s ease-in-out infinite}
+@keyframes chFold{0%,38%{opacity:0}50%,88%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.chapter .chmedia .chbg.ch-alt{animation:none;opacity:1}}
+@media(max-width:760px){#ch-oven .chbg{filter:brightness(.5)}}
+.chnew{display:inline-block;background:#3ec98a;color:#04120b;border-radius:50px;padding:4px 10px;letter-spacing:1.6px;font-weight:800;margin-right:10px;font-size:10.5px}
 </style></head>
 <body>
 <script src="world-dots.js"></script>
@@ -1094,70 +1083,49 @@ body:has(#cine:hover) .spot{opacity:0!important}
   <p class="big">Fotile has quickly risen to prominence as a leader in both <b>culinary innovation</b> and <span class="rd">improving lifestyles</span>. Our products have grown from small beginnings to a <b>global presence</b> — and are now an essential component of kitchens everywhere.</p>
 </div></section>
 
-<!-- ===== IMMERSIVE CHAPTER 01 · RANGE HOODS ===== -->
+<!-- ===== IMMERSIVE CHAPTER 01 · MAXFOLD RANGE HOOD (new) ===== -->
 <section class="chapter" id="ch-hoods">
-  <div class="chmedia"><div class="chbg" style="background-image:url('assets/moon-frontpage.jpg');filter:brightness(.76) saturate(1.06)"></div></div>
-  <div class="chtime"><b>01</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; RANGE HOODS</div>
+  <div class="chmedia"><div class="chbg" style="background-image:url('assets/products/new/mf-hidden.jpg');background-position:62% 50%;filter:brightness(.72) saturate(1.04)"></div><div class="chbg ch-alt" style="background-image:url('assets/products/new/mf-open.jpg');background-position:62% 50%;filter:brightness(.72) saturate(1.04)"></div></div>
+  <div class="chtime"><b>01</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; MAXFOLD RANGE HOOD</div>
   <div class="chword">HOODS</div>
   <div class="chin"><div class="cx">
-    <div class="chidx"><span class="ln"></span>THE SIGNATURE</div>
+    <div class="chidx"><span class="ln"></span><span class="chnew">NEW</span>MOON SERIES · BIG9069-G</div>
     <h3>Air that feels<br><b>clean.</b></h3>
-    <p class="chp">Industry-leading suction that clears the heaviest desi cooking — capturing smoke and grease before it ever touches your home. Powerful, yet whisper-quiet.</p>
+    <p class="chp">Meet MaxFold — Fotile’s first fully built-in range hood. It hides inside your cabinet and unfolds on an aviation-grade arm the moment you cook, clearing the heaviest desi cooking at a whisper.</p>
     <div class="chspecs">
-      <div><b>96<span style="font-size:15px">%</span></b><span>Smoke Capture</span></div>
-      <div><b>48<span style="font-size:15px">dB</span></b><span>Whisper Quiet</span></div>
+      <div><b>1700<span style="font-size:15px">m³/h</span></b><span>Airflow</span></div>
+      <div><b>1450<span style="font-size:15px">Pa</span></b><span>Static Pressure</span></div>
+      <div><b>38<span style="font-size:15px">dB</span></b><span>Whisper Quiet</span></div>
     </div>
     <div class="chcta">
-      <a href="/product-category/kitchen-hood/" class="btn-w">Explore Range Hoods →</a>
-      <button type="button" class="btn-l" data-add data-slug="range-island-hood-ea06" data-name="Range Island Hood EA06" data-cat="Range Hoods" data-img="assets/products/range-island-hood-ea06.png">Add to Quote Basket</button>
+      <a href="/shop/maxfold-folding-range-hood-big9069-g/" class="btn-w">Discover MaxFold →</a>
+      <button type="button" class="btn-l" data-add data-slug="maxfold-folding-range-hood-big9069-g" data-name="MaxFold Folding Range Hood BIG9069-G" data-cat="Range Hoods" data-img="assets/products/new/maxfold-big9069-g.png">Add to Quote Basket</button>
     </div>
   </div></div>
 </section>
 
-<!-- ===== IMMERSIVE CHAPTER 02 · MAGIC OVEN (video) ===== -->
+<!-- ===== IMMERSIVE CHAPTER 02 · WI-FI COMBI STEAM OVEN (banner) ===== -->
 <section class="chapter" id="ch-oven">
-  <div class="chmedia">
-    <video class="chvid" muted loop playsinline preload="none" poster="assets/products/magic-oven-4-in-1-hyzk26-e1.png">
-      <source src="assets/video/combi-oven.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="chtime"><b>02</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; MAGIC OVEN 4-in-1</div>
+  <div class="chmedia"><div class="chbg" style="background-image:url('assets/home/wifi-oven-banner.jpg');background-position:70% 50%"></div></div>
+  <div class="chtime"><b>02</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; WI-FI COMBI STEAM OVEN</div>
   <div class="chword">OVEN</div>
   <div class="chin"><div class="cx">
-    <div class="chidx"><span class="ln"></span>ONE APPLIANCE, EVERY MODE</div>
-    <h3>Bake. Steam.<br>Dehydrate. <b>Air Fry.</b></h3>
-    <p class="chp">The all-new Magic Oven 4-in-1 makes you the star of the kitchen — and a master chef. Four appliances, engineered into one beautiful body.</p>
+    <div class="chidx"><span class="ln"></span><span class="chnew">NEW</span>HYZK72H-1Y · FOTILE i KITCHEN</div>
+    <h3>Steam. Bake.<br>Control it <b>from anywhere.</b></h3>
+    <p class="chp">A 72-litre combi steam oven with Wi-Fi built in. Start dinner on your way home, schedule breakfast before bed, and check on it from your phone with the FOTILE i kitchen app.</p>
     <div class="chspecs">
-      <div><b>4-in-1</b><span>Cooking Modes</span></div>
-      <div><b>26<span style="font-size:15px">L</span></b><span>Capacity</span></div>
+      <div><b>72<span style="font-size:15px">L</span></b><span>Capacity</span></div>
+      <div><b>4-in-1</b><span>Steam · Bake · Combi</span></div>
+      <div><b>Wi-Fi</b><span>App Control</span></div>
     </div>
     <div class="chcta">
-      <a href="/shop/" class="btn-w">Discover the Magic Oven →</a>
-      <button type="button" class="btn-l" data-add data-slug="magic-oven-4-in-1-hyzk26-e1" data-name="Magic Oven 4-in-1 HYZK26-E1" data-cat="Ovens" data-img="assets/products/magic-oven-4-in-1-hyzk26-e1.png">Add to Quote Basket</button>
+      <a href="/shop/built-in-combi-oven-4-in-1-hyzk72-h-1y/" class="btn-w">Discover the Wi-Fi Oven →</a>
+      <button type="button" class="btn-l" data-add data-slug="built-in-combi-oven-4-in-1-hyzk72-h-1y" data-name="Wi-Fi Combi Steam Oven 4-in-1 HYZK72H-1Y" data-cat="Ovens" data-img="assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png">Add to Quote Basket</button>
     </div>
   </div></div>
 </section>
 
 <!-- ===== CAMPAIGN BANNER · THE KITCHEN, REIMAGINED ===== -->
-<!-- NEW · MAXFOLD BANNER -->
-<section class="mfb" id="maxfold" aria-label="New: Fotile MaxFold folding range hood">
-  <div class="mfb-media" id="mfbMedia">
-    <picture><source media="(max-width:760px)" srcset="assets/products/new/mf-hidden.jpg"><img class="mfb-a" src="assets/products/new/mf-hidden.jpg" alt="Fotile MaxFold folded away inside a wall cabinet" loading="lazy" decoding="async"></picture>
-    <img class="mfb-b" src="assets/products/new/mf-open.jpg" alt="Fotile MaxFold unfolded over a gas hob while cooking" loading="lazy" decoding="async">
-  </div>
-  <div class="mfb-shade"></div>
-  <div class="wrap mfb-in">
-    <div class="mfb-kick"><span class="mfb-new">New</span> Moon Series · BIG9069-G</div>
-    <h2>MaxFold.<br><b>Folded away. Unfolded power.</b></h2>
-    <p>Fotile’s first fully built-in range hood hides inside your cabinet — and unfolds on an aviation-grade arm the moment you cook.</p>
-    <ul class="mfb-stats"><li><b>1700</b><span>m³/h airflow</span></li><li><b>1450</b><span>Pa static pressure</span></li><li><b>38</b><span>dB whisper-quiet</span></li></ul>
-    <div class="mfb-cta">
-      <a class="btn-r" href="/shop/maxfold-folding-range-hood-big9069-g/">Discover MaxFold <span>→</span></a>
-      <button type="button" class="mfb-toggle" id="mfbToggle" aria-pressed="false">Unfold it</button>
-    </div>
-  </div>
-</section>
-
 <section class="akb akb-kitchen" aria-label="Beyond technology — the Fotile kitchen">
   <picture>
     <source media="(max-width:760px)" srcset="assets/ahsan/kitchen-banner-m.webp" type="image/webp">
@@ -1227,11 +1195,12 @@ body:has(#cine:hover) .spot{opacity:0!important}
     <h2 class="h2" style="margin-top:20px">Every appliance,<br>a <b>considered object.</b></h2>
   </div>
   <div class="coll">
-    <a href="/shop/" class="tile t-lg reveal"><div class="ti" style="background-image:url('assets/hero-banner.jpg')"></div><div class="cap"><small>Signature</small><h4>Premium living, perfected</h4><div class="go">Explore the flagship →</div></div></a>
-    <a href="/product-category/hobs/" class="tile t-sm contain reveal r2"><div class="ti" style="background-image:url('assets/products/gas-hob-gal90506.png')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></a>
+    <a href="/fridge/" class="tile t-lg reveal"><div class="ti" style="background-image:url('assets/f20/built-in.webp');background-position:center 28%"></div><div class="cap"><small>Signature · New</small><h4>Premium living, perfected</h4><div class="go">Discover the F20 refrigerator →</div></div></a>
+    <a href="/product-category/hobs/" class="tile t-sm contain tile-hob reveal r2"><div class="ti" style="background-image:url('assets/white/p2.webp')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></a>
     <a href="/moon-series/" class="tile t-sm contain reveal r3"><div class="ti" style="background-image:url('assets/moon-new-home-img.jpg')"></div><div class="cap"><small>Premium</small><h4>Moon Series</h4><div class="go">Explore premium →</div></div></a>
-    <a href="/product-category/oven/" class="tile t-md contain reveal"><div class="ti" style="background-image:url('assets/products/built-in-oven-kms7008.png')"></div><div class="cap"><small>Ovens</small><h4>Built-in Ovens</h4><div class="go">Shop ovens →</div></div></a>
+    <a href="/product-category/oven/" class="tile t-md contain tile-oven reveal"><div class="ti" style="background-image:url('assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png')"></div><div class="cap"><small>Ovens · New Wi-Fi</small><h4>Built-in Ovens</h4><div class="go">Shop ovens →</div></div></a>
     <a href="/product-category/water-purifier/" class="tile t-md contain reveal r2 purifier-tile luxury-tile"><div class="ti" style="background-image:url('assets/products/water-purifier.png')"></div><div class="cap"><small>Purity</small><h4>Water Purifiers</h4><div class="go">Shop purifiers →</div></div></a>
+    <a href="/two-halves/" class="tile t-xl reveal"><div class="ti" style="background-image:url('assets/home/two-halves-tile.jpg')"></div><div class="cap"><small>Moon &amp; Opal</small><h4>Two Halves, One Kitchen</h4><div class="go">See both sides →</div></div></a>
   </div>
 </div></section>
 
@@ -1898,17 +1867,5 @@ body:has(#cine:hover) .spot{opacity:0!important}
 })();
 </script>
 
-<script>(function(){
-  var sec=document.getElementById('maxfold'),btn=document.getElementById('mfbToggle'); if(!sec||!btn) return;
-  var auto=null, user=false;
-  function set(open){ sec.classList.toggle('open',open); btn.setAttribute('aria-pressed',String(open)); btn.textContent=open?'Fold it away':'Unfold it'; }
-  btn.addEventListener('click',function(){ user=true; clearInterval(auto); set(!sec.classList.contains('open')); if(window.FotileTrack) FotileTrack('maxfold_toggle',{state:sec.classList.contains('open')?'open':'folded'}); });
-  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(es){ es.forEach(function(e){
-      if(e.isIntersecting && !user && !reduce){ setTimeout(function(){ if(!user) set(true); },900); clearInterval(auto); auto=setInterval(function(){ if(!user) set(!sec.classList.contains('open')); },4200); }
-      else { clearInterval(auto); }
-    }); },{threshold:.45}).observe(sec);
-  }
-})();</script></body>
+</body>
 </html>

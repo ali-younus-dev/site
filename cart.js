@@ -211,6 +211,8 @@
   + '.fc-cw>.fc-add.mini{position:absolute;right:14px;bottom:14px;z-index:3;'
   + 'background:rgba(16,17,20,.86);backdrop-filter:blur(8px)}'
   + '.pfoot .fc-add.mini{flex:0 0 auto}'
+  + '.fc-cw .pcard .foot .arrow{display:none}'
+  + '.fc-cw .pfoot{padding-right:100px;justify-content:flex-start;gap:12px}.fc-cw .pfoot .pbtn{margin-left:auto}'
   /* drawer */
   + '.fc-scrim{position:fixed;inset:0;z-index:99990;background:rgba(4,4,6,.62);backdrop-filter:blur(4px);'
   + 'opacity:0;pointer-events:none;transition:.4s cubic-bezier(.16,1,.3,1)}'
@@ -265,7 +267,7 @@
   + 'transition:.35s cubic-bezier(.16,1,.3,1);box-shadow:0 14px 34px rgba(0,0,0,.45);display:flex;align-items:center;gap:9px}'
   + '.fc-toast.on{opacity:1;transform:translate(-50%,0)}'
   + '@media(max-width:600px){.fc-draw{width:100%;max-width:100%}'
-  + '.fc-cw>.fc-add.mini{right:10px;bottom:10px}}';
+  + '.fc-cw>.fc-add.mini{right:10px;bottom:10px}.fc-cw .pfoot{padding-right:92px}.fc-cw .pfoot .pbtn{display:none}}';
 
   function injectCSS() {
     if (document.getElementById('fc-css')) return;
