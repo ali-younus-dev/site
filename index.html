@@ -809,6 +809,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;bac
 .chapter .chmedia img,.chapter .chmedia .chbg{filter:brightness(.57) saturate(.96) contrast(1.04)}
 .chapter:hover .chmedia img,.chapter:hover .chmedia .chbg{transform:scale(1.115)}
 .chapter .chin{filter:drop-shadow(0 10px 30px rgba(0,0,0,.25))}
+.chapter{height:auto;min-height:100vh}
+.chapter .chin{padding-top:150px}
+.chapter .chtime{top:96px}
+.chapter .chidx{flex-wrap:wrap;row-gap:8px}
+@media(max-width:760px){.chapter .chin{padding-top:130px}.chapter .chtime{top:84px}}
 
 /* finder section: more breathing room and hairline framing */
 .finderband{background:linear-gradient(180deg,rgba(255,255,255,.008),transparent 20%,rgba(122,15,30,.025) 100%)}
@@ -993,7 +998,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
 .chapter .chmedia .chbg.ch-alt{animation:chFold 10s ease-in-out infinite}
 @keyframes chFold{0%,38%{opacity:0}50%,88%{opacity:1}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.chapter .chmedia .chbg.ch-alt{animation:none;opacity:1}}
-@media(max-width:760px){#ch-oven .chbg{filter:brightness(.5)}}
+@media(max-width:760px){#ch-oven .chbg{filter:brightness(.6)!important}}
 .chnew{display:inline-block;background:#3ec98a;color:#04120b;border-radius:50px;padding:4px 10px;letter-spacing:1.6px;font-weight:800;margin-right:10px;font-size:10.5px}
 </style></head>
 <body>
@@ -1104,23 +1109,23 @@ body:has(#cine:hover) .spot{opacity:0!important}
   </div></div>
 </section>
 
-<!-- ===== IMMERSIVE CHAPTER 02 · WI-FI COMBI STEAM OVEN (banner) ===== -->
+<!-- ===== IMMERSIVE CHAPTER 02 · MOON SERIES (banner) ===== -->
 <section class="chapter" id="ch-oven">
-  <div class="chmedia"><div class="chbg" style="background-image:url('assets/home/wifi-oven-banner.jpg');background-position:70% 50%"></div></div>
-  <div class="chtime"><b>02</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; WI-FI COMBI STEAM OVEN</div>
-  <div class="chword">OVEN</div>
+  <div class="chmedia"><div class="chbg" style="background-image:url('assets/moon-scene.jpg');background-position:68% 50%;filter:brightness(.82) saturate(1.05)"></div></div>
+  <div class="chtime"><b>02</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; MOON SERIES</div>
+  <div class="chword">MOON</div>
   <div class="chin"><div class="cx">
-    <div class="chidx"><span class="ln"></span><span class="chnew">NEW</span>HYZK72H-1Y · FOTILE i KITCHEN</div>
-    <h3>Steam. Bake.<br>Control it <b>from anywhere.</b></h3>
-    <p class="chp">A 72-litre combi steam oven with Wi-Fi built in. Start dinner on your way home, schedule breakfast before bed, and check on it from your phone with the FOTILE i kitchen app.</p>
+    <div class="chidx"><span class="ln"></span>THE PREMIUM LINE</div>
+    <h3>The kitchen,<br>after <b>dark.</b></h3>
+    <p class="chp">Obsidian glass, rose-gold detailing and flagship power. Hoods, hobs, ovens and dishwashers — now with the MaxFold hood and the F20 refrigerator — designed as one collection.</p>
     <div class="chspecs">
-      <div><b>72<span style="font-size:15px">L</span></b><span>Capacity</span></div>
-      <div><b>4-in-1</b><span>Steam · Bake · Combi</span></div>
-      <div><b>Wi-Fi</b><span>App Control</span></div>
+      <div><b>8</b><span>Pieces</span></div>
+      <div><b>1700<span style="font-size:15px">m³/h</span></b><span>Peak Airflow</span></div>
+      <div><b>Obsidian</b><span>Glass Finish</span></div>
     </div>
     <div class="chcta">
-      <a href="/shop/built-in-combi-oven-4-in-1-hyzk72-h-1y/" class="btn-w">Discover the Wi-Fi Oven →</a>
-      <button type="button" class="btn-l" data-add data-slug="built-in-combi-oven-4-in-1-hyzk72-h-1y" data-name="Wi-Fi Combi Steam Oven 4-in-1 HYZK72H-1Y" data-cat="Ovens" data-img="assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png">Add to Quote Basket</button>
+      <a href="/moon-series/" class="btn-w">Explore the Moon Series →</a>
+      <a href="/moon-series/#collection" class="btn-l">View the Collection</a>
     </div>
   </div></div>
 </section>
@@ -1196,11 +1201,10 @@ body:has(#cine:hover) .spot{opacity:0!important}
   </div>
   <div class="coll">
     <a href="/fridge/" class="tile t-lg reveal"><div class="ti" style="background-image:url('assets/f20/built-in.webp');background-position:center 28%"></div><div class="cap"><small>Signature · New</small><h4>Premium living, perfected</h4><div class="go">Discover the F20 refrigerator →</div></div></a>
-    <a href="/product-category/hobs/" class="tile t-sm contain tile-hob reveal r2"><div class="ti" style="background-image:url('assets/white/p2.webp')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></a>
+    <a href="/product-category/hobs/" class="tile t-sm contain tile-hob reveal r2"><div class="ti" style="background-image:url('assets/products/gas-hob-90306-y.png')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></a>
     <a href="/moon-series/" class="tile t-sm contain reveal r3"><div class="ti" style="background-image:url('assets/moon-new-home-img.jpg')"></div><div class="cap"><small>Premium</small><h4>Moon Series</h4><div class="go">Explore premium →</div></div></a>
     <a href="/product-category/oven/" class="tile t-md contain tile-oven reveal"><div class="ti" style="background-image:url('assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png')"></div><div class="cap"><small>Ovens · New Wi-Fi</small><h4>Built-in Ovens</h4><div class="go">Shop ovens →</div></div></a>
     <a href="/product-category/water-purifier/" class="tile t-md contain reveal r2 purifier-tile luxury-tile"><div class="ti" style="background-image:url('assets/products/water-purifier.png')"></div><div class="cap"><small>Purity</small><h4>Water Purifiers</h4><div class="go">Shop purifiers →</div></div></a>
-    <a href="/two-halves/" class="tile t-xl reveal"><div class="ti" style="background-image:url('assets/home/two-halves-tile.jpg')"></div><div class="cap"><small>Moon &amp; Opal</small><h4>Two Halves, One Kitchen</h4><div class="go">See both sides →</div></div></a>
   </div>
 </div></section>
 
