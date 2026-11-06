@@ -1,0 +1,92 @@
+/* F20 page — phone readability pass (2026-11). Loaded last so it wins.
+   Nothing below changes desktop: everything sits inside max-width:760px. */
+@media (max-width:760px){
+  /* rhythm: less dead space between chapters */
+  html body .pad{padding-top:58px;padding-bottom:58px}
+  html body .stmt{padding-top:64px;padding-bottom:64px}
+
+  /* small labels that had shrunk to 7–9px */
+  html body .kick{font-size:11px;letter-spacing:2px}
+  html body .fh-ifb span{font-size:8px}
+  html body .aw span{font-size:11px;line-height:1.45}
+  html body .mq-in span,html body .mq-in b,html body .mq-in em{font-size:11px}
+  html body .pmeta .pm span{font-size:11px}
+  html body .px-feature-detail>span{font-size:11px}
+
+  /* product explorer: readable text, real tap targets */
+  html body .f20-studio-head{flex-wrap:wrap;row-gap:12px}
+  html body .f20-studio-head>span{font-size:10px;letter-spacing:1.4px}
+  html body .f20-studio button{font-size:12.5px;min-height:40px;padding:10px 14px;border-radius:8px}
+  html body .f20-studio-head button{font-size:12px;min-height:38px;padding:9px 13px}
+  html body .f20-kitchen-settings>div>span{font-size:10px;letter-spacing:1.4px}
+  html body .f20-kitchen-settings>div>p{font-size:12.5px}
+  html body .f20-kitchen-settings>div:last-child{display:flex;flex-wrap:wrap;gap:8px}
+  html body .f20-presets{display:flex;flex-wrap:wrap;gap:8px}
+  html body .f20-presets button{flex:1 1 auto;font-size:12.5px;padding:10px 12px}
+  html body .f20-angle-label,html body .f20-angle-label label,html body .f20-angle-label output{font-size:11px;letter-spacing:1.4px}
+  html body .f20-model-label{font-size:9.5px;letter-spacing:1.2px}
+  html body .f20-dimension-overlay>span{font-size:12px;padding:6px 9px}
+  html body .f20-dimension-overlay small{font-size:10px}
+  html body .f20-drawer-controls header{flex-wrap:wrap;row-gap:10px}
+  html body .f20-drawer-controls header>span,html body .f20-drawer-controls>span{font-size:10.5px;letter-spacing:1.4px}
+  html body .f20-drawer-controls>div{display:flex;flex-wrap:wrap;gap:8px}
+  html body .f20-drawer-controls button{font-size:12.5px;padding:10px 12px}
+  html body .f20-drawer-controls p{font-size:12px!important;line-height:1.6!important}
+  html body .f20-interior-options{display:flex;flex-wrap:wrap;gap:8px}
+  html body .f20-model-note,html body .f20-model-note a{font-size:11.5px!important;line-height:1.7!important}
+  html body .f20-hotspots button{width:32px;height:32px;font-size:13px}
+  html body .f20-detail-body>span{font-size:10px}
+  html body .f20-inline-detail p{font-size:13px}
+  html body .f20-render-views button{font-size:11px;padding:8px 10px}
+
+  /* render cards */
+  html body .f20-render-card figcaption span{font-size:10.5px;letter-spacing:1.6px}
+  html body .f20-render-card figcaption p{font-size:13.5px;line-height:1.6}
+
+  /* Berlin / Kyoto switch */
+  html body .w-tag button{font-size:12px;min-height:38px;padding:9px 15px}
+
+  /* freshness illustration + stats */
+  html body .prodcap span{font-size:11px}
+  html body .fstat .funit{font-size:11px}
+  html body .fstat>span{font-size:12.5px}
+  html body .fstat>span small{font-size:10.5px}
+  html body .ch-food-slice span{font-size:8.5px;letter-spacing:1px}
+  html body .ch-seal span{font-size:9.5px}
+  html body .ch-seal span small{font-size:7.5px}
+  html body .chread span{font-size:9.5px}
+  html body .px-chamber-caption{font-size:8.5px}
+  html body .chkey em{font-size:11px}
+  html body .px-chamber-control label{font-size:12px;line-height:1.5}
+  html body .px-chamber-control label span,html body .px-chamber-control div span{font-size:11px}
+  html body .px-chamber-control p{font-size:11.5px;line-height:1.6}
+  html body .f20-source-note,html body .f20-source-note a{font-size:11.5px;line-height:1.75}
+
+  /* freeze / thaw */
+  html body .vcard figcaption span{font-size:12px}
+  html body .tcard .tzh{font-size:10.5px}
+  html body .cmpr .lb{font-size:9.5px;padding:6px 10px}
+  html body .thr span{font-size:12.5px}
+  html body .cmpr-note{font-size:12px}
+
+  /* footer links: comfortable taps */
+  html body footer .fsoc a{display:inline-block;padding:10px 6px}
+
+  /* rules that out-rank the block above */
+  html body.f20-premium .fh-l .kick{font-size:11px!important;letter-spacing:2.4px}
+  html body.f20-premium .w-tag button{font-size:11.5px!important;min-height:40px;padding:10px 16px}
+  html body.f20-premium .fstat .funit{font-size:11px!important}
+  html body.f20-premium .chread>span{font-size:9.5px!important;letter-spacing:1.4px}
+  html body.f20-premium .ch-seal span{font-size:9.5px!important}
+  html body.f20-premium .ch-seal span small{font-size:7.5px!important}
+  html body.f20-premium .chkey em{font-size:11px!important}
+  html body.f20-premium .cmpr .lb{font-size:9.5px!important}
+  html body.f20-premium .fh-ifb span{font-size:8px!important}
+  /* the three thaw results were hidden until the slider was touched — on a phone that left a blank gap */
+  html body .thr span{opacity:1!important;transform:none!important}
+}
+
+@media (max-width:380px){
+  html body .f20-studio button{font-size:12px;padding:9px 10px}
+  html body .f20-presets button{padding:9px 9px}
+}
