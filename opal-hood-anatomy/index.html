@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opal Range Hood JQG9067 — Inside Fotile's Moon-Ring Hood | Fotile Pakistan</title>
+<meta name="description" content="Explore the Fotile Opal JQG9067 from the inside: the moon-ring display, a 100,000 rpm DC inverter motor, 1500 m³/h airflow, 1120 Pa and library-level 39 dB quiet.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://fotilepk.com/opal-hood-anatomy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fotile Pakistan">
+<meta property="og:title" content="Opal Range Hood JQG9067 — Inside Fotile's Moon-Ring Hood">
+<meta property="og:description" content="The moon-ring display, 100,000 rpm DC inverter motor, 1500 m³/h and 39 dB — the engineering inside the Fotile Opal range hood.">
+<meta property="og:url" content="https://fotilepk.com/opal-hood-anatomy/">
+<meta property="og:image" content="https://fotilepk.com/assets/engineering/op-scene-wall.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Opal Range Hood JQG9067 — Inside Fotile's Moon-Ring Hood">
+<meta name="twitter:description" content="The engineering behind the Fotile Opal JQG9067 range hood.">
+<meta name="twitter:image" content="https://fotilepk.com/assets/engineering/op-scene-wall.webp">
+<link rel="stylesheet" href="../assets/engineering/eng.css">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#0b0b0e">
+<script>window.__PBASE="../";</script>
+<style>
+.proof{overflow:hidden}
+.proof .bg{position:absolute;inset:0;background:url(../assets/engineering/mf-awards.webp) center/cover;filter:brightness(.38)}
+.proof::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg),rgba(11,11,13,.2) 30%,rgba(11,11,13,.6) 80%,var(--bg))}
+.proof .wrap{position:relative;z-index:2}
+.proof .tiles{background:rgba(9,9,11,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;margin-top:40px}
+.proof .tiles.t3{grid-template-columns:repeat(3,1fr)}
+.proof .tile{border-bottom:0}
+.proofline{display:grid;gap:10px;margin-top:26px;font-size:14px;color:#c3c5c9;font-weight:300}
+.proofline b{color:#fff;font-weight:500}
+.moonwrap{display:grid;grid-template-columns:1.35fr .65fr;gap:30px;align-items:center}
+.moonstage{background:radial-gradient(80% 80% at 50% 30%,#1c1d22,#0a0a0c)}
+#person{transition:transform .2s linear}
+.moonctl input[type=range]{width:100%;accent-color:#9fd6ff;height:34px}
+.moonread{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
+.moonread b{font-size:clamp(30px,4vw,48px);font-weight:200;letter-spacing:-1.5px}
+.moonread span{font-size:12px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ice);font-weight:600}
+.anawrap{display:grid;grid-template-columns:1.25fr .75fr;gap:26px;align-items:start}
+.anaList{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0}
+.anaList button{width:100%;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--panel);font-size:13px;color:#cfd1d5;transition:.3s}
+.anaList button span{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700}
+.anaList button.on{border-color:var(--gold);color:#fff;background:rgba(217,187,134,.08)}
+.anaList button.on span{background:var(--gold);color:#0b0b0d}
+.anainfo .xv-info{margin-top:14px;min-height:150px;border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--panel)}
+.xv-info h4{font-size:19px;font-weight:500;letter-spacing:-.4px}.xv-info p{font-size:14px;color:#b5b8bd;font-weight:300;margin-top:8px}
+.ap{transition:opacity .4s,filter .4s;opacity:.45}
+.ap.on{opacity:1;filter:drop-shadow(0 0 7px var(--gold))}
+#anaSvg.sel .ap:not(.on){opacity:.18}
+#anaSvg .mk circle{fill:#0b0b0d;stroke:var(--gold);stroke-width:1.6;cursor:pointer;transition:.3s}
+#anaSvg .mk text{fill:var(--gold);font-size:12px;font-weight:700;text-anchor:middle;pointer-events:none}
+#anaSvg .mk.on circle{fill:var(--gold)}#anaSvg .mk.on text{fill:#0b0b0d}
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.qcard{padding:26px 26px 22px}
+.qh{display:flex;align-items:baseline;gap:10px}.qh b{font-size:clamp(40px,5vw,66px);font-weight:200;letter-spacing:-2.5px;line-height:1}.qh i{font-style:normal;color:var(--gold);font-size:14px;letter-spacing:1.8px;font-weight:600;text-transform:uppercase}
+.qcard p{color:var(--dim);font-size:14px;font-weight:300;margin:10px 0 16px;max-width:380px}
+.qcard svg{max-height:150px}
+.tl{position:relative}
+.tlbar{height:3px;background:var(--line);border-radius:3px;overflow:hidden;margin:6px 0 26px}.tlbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--ice));transition:width .5s linear}
+.tlsteps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.st{border:1px solid var(--line);border-radius:12px;padding:18px 16px;background:var(--panel);opacity:.4;transition:.5s}
+.st.on{opacity:1;border-color:var(--gold);background:rgba(217,187,134,.07)}
+.st span{display:flex;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-bottom:12px}
+.st.on span{background:var(--gold);color:#0b0b0d}.st b{display:block;font-size:15px;font-weight:500}.st p{font-size:13px;color:var(--dim);font-weight:300;margin-top:6px}
+.st em{display:block;font-style:normal;margin-top:8px;font-size:26px;font-weight:200;color:var(--gold);letter-spacing:-1px}
+.cleanwrap{display:grid;grid-template-columns:1fr 1fr .7fr;gap:16px;align-items:stretch}
+.studio{position:relative;border-radius:12px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;aspect-ratio:3/2}
+.studio.tall{aspect-ratio:auto}.studio img{width:100%;height:auto;object-fit:contain;transition:transform 1.2s var(--ease)}.studio:hover img{transform:scale(1.04)}
+.studio span{position:absolute;left:14px;bottom:10px;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#5b6068;font-weight:600}
+.trio{display:grid;gap:10px;margin-top:28px}
+.trio a{display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:16px 20px;background:var(--panel);transition:.3s}
+.trio a:hover{border-color:var(--gold);transform:translateX(4px)}.trio b{font-weight:500;font-size:16px}.trio span{color:var(--dim);font-size:13px}.trio em{font-style:normal;color:var(--gold)}
+@media(max-width:1100px){.moonwrap,.anawrap,.quad{grid-template-columns:1fr}.tlsteps{grid-template-columns:1fr 1fr}.cleanwrap{grid-template-columns:1fr 1fr}.studio.tall{grid-column:span 2;max-height:520px}.proof .tiles.t3{grid-template-columns:1fr}}
+@media(max-width:600px){.anaList{grid-template-columns:1fr}.tlsteps,.cleanwrap{grid-template-columns:1fr}.studio.tall{grid-column:auto}}
+</style>
+</head>
+<body>
+<!-- OVERTURE -->
+<div class="ov" id="ov" aria-hidden="true"><div class="half top"></div><div class="half bot"></div><div class="seam"></div><div class="tag">Moon ring · wakes as you arrive</div></div>
+
+<nav class="nav" id="nav">
+  <a href="/" class="brand"><img src="../assets/logo.png" alt="FOTILE"></a>
+  <div class="nlinks">
+    <a href="/shop/">Products</a>
+    <a href="/moon-series/">Moon Series</a>
+    <a href="/opal-series/">Opal Series</a>
+    <a href="/about-us/">About</a>
+    <a href="/blog/">Journal</a>
+    <a href="/our-dealers/">Dealers</a>
+    <a href="/contact-us/">Contact</a>
+  </div>
+  <div class="nr">
+    <span class="ic">⌕</span><a href="/cart/" class="ic" style="position:relative;text-decoration:none">🛒<b data-cart-count style="position:absolute;top:-8px;right:-9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a>
+    <a href="/cart/" class="npill">Request a Quote</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="bg" style="background-image:url('../assets/engineering/op-scene-wall.webp');filter:brightness(.5) contrast(1.05) saturate(.9)"></div>
+  <div class="wrap in">
+    <div class="ey"><span class="dot"></span>Fotile Opal · JQG9067</div>
+    <h1>Light as a moon.<b>Strong as a storm.</b></h1>
+    <p class="sub">A pure-white slant hood with a glowing moon-ring display — and a 100,000&nbsp;rpm inverter heart that moves 1500&nbsp;m³ of air an hour at library-level quiet. Here is how.</p>
+    <div class="ctas"><a href="#numbers" class="btn-r">See the four numbers ↓</a><a href="/shop/opal-range-hood-jqg9067/" class="btn-l">See the product</a></div>
+  </div>
+  <div class="scrollcue">Scroll</div>
+  <div class="hud"><div class="wrap">
+    <div class="hs"><b data-count="1500" data-suf="m³/h">1,500<i>m³/h</i></b><span>Max airflow</span></div>
+    <div class="hs"><b data-count="1120" data-suf="Pa">1,120<i>Pa</i></b><span>Static pressure</span></div>
+    <div class="hs"><b data-count="39" data-suf="dB">39<i>dB</i></b><span>As quiet as</span></div>
+    <div class="hs"><b data-count="555" data-suf="mm">555<i>mm</i></b><span>Headroom under the hood</span></div>
+  </div></div>
+</header>
+
+<!-- 01 MOON RING -->
+<section class="pad" id="moon"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>01 — The moon ring</div>
+    <h2 class="h2">It lights up<br><b>when you arrive.</b></h2>
+    <p class="lead">The smart moon-ring display wakes as you step toward the hood — and wave-control with dual infrared sensors lets you switch it on or off without touching a greasy panel.</p>
+  </div>
+  <div class="moonwrap reveal">
+    <div class="dia moonstage">
+      <svg id="moonSvg" viewBox="0 0 900 460" role="img" aria-label="Illustration: the moon ring on the hood lights up as a person approaches">
+        <defs><radialGradient id="mg"><stop offset="0" stop-color="#cfe9ff" stop-opacity=".9"/><stop offset="1" stop-color="#cfe9ff" stop-opacity="0"/></radialGradient>
+        <linearGradient id="hoodg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f3f5"/><stop offset="1" stop-color="#c8ccd2"/></linearGradient></defs>
+        <rect x="320" y="14" width="260" height="130" rx="6" fill="#e6e8eb" stroke="#9aa0a8"/>
+        <path d="M150 150 H750 L706 270 H194 Z" fill="url(#hoodg)" stroke="#9aa0a8"/>
+        <path d="M194 270 H706 V286 Q450 296 194 286 Z" fill="#aeb3ba" stroke="#8b9199"/>
+        <circle id="halo" cx="450" cy="212" r="120" fill="url(#mg)" opacity="0"/>
+        <rect x="396" y="186" width="108" height="52" rx="8" fill="#0d0e12"/>
+        <circle cx="450" cy="212" r="19" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="3"/>
+        <circle id="ring" cx="450" cy="212" r="19" fill="none" stroke="#bfe4ff" stroke-width="3" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="119.4" transform="rotate(-90 450 212)"/>
+        <circle cx="262" cy="215" r="4" fill="#4a4f57"/><circle cx="638" cy="215" r="4" fill="#4a4f57"/>
+        <g id="sense" fill="none" stroke="#9fd6ff" stroke-width="1.2" opacity="0"><path d="M262 222 q-14 18 0 36"/><path d="M262 230 q-24 24 0 52" opacity=".6"/><path d="M638 222 q14 18 0 36"/><path d="M638 230 q24 24 0 52" opacity=".6"/></g>
+        <g id="person" transform="translate(450 420)"><circle cy="-70" r="14" fill="#555b64"/><path d="M-22 0 v-42 q0-16 22-16 q22 0 22 16 v42 z" fill="#555b64"/></g>
+        <line x1="60" y1="440" x2="840" y2="440" stroke="#2a2c31" stroke-dasharray="4 6"/>
+        <text class="sm" x="60" y="430">Far</text><text class="sm" x="800" y="430" text-anchor="end">Near</text>
+      </svg>
+    </div>
+    <div class="moonctl">
+      <label for="moonRange" class="kick" style="margin-bottom:10px"><span class="dot"></span>Step toward the hood</label>
+      <input type="range" id="moonRange" min="0" max="100" value="0" aria-label="Distance from the hood">
+      <div class="moonread"><b id="moonD">3.0 m</b><span id="moonS">Asleep</span></div>
+      <div class="chips" style="margin-top:22px"><span class="chip">Moon-ring display</span><span class="chip">Wave on / off</span><span class="chip">Dual infrared sensors</span></div>
+      <p class="note" style="margin-top:18px">Illustration. Ring behaviour: lights when a person approaches (Fotile product brochure).</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 02 ANATOMY -->
+<section class="pad" id="anatomy" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>02 — The anatomy</div>
+    <h2 class="h2">Eight things<br><b>that make it work.</b></h2>
+    <p class="lead">A simplified cutaway of the JQG9067. Tap a number to see what it does.</p>
+  </div>
+  <div class="anawrap reveal">
+    <div class="dia">
+      <svg id="anaSvg" viewBox="0 0 900 520" role="img" aria-label="Simplified side cutaway of the Opal hood with eight numbered parts">
+        <line class="ln2" x1="840" y1="20" x2="840" y2="500"/>
+        <g stroke="#555a61"><line x1="840" y1="50" x2="858" y2="32"/><line x1="840" y1="110" x2="858" y2="92"/><line x1="840" y1="170" x2="858" y2="152"/><line x1="840" y1="230" x2="858" y2="212"/><line x1="840" y1="290" x2="858" y2="272"/><line x1="840" y1="350" x2="858" y2="332"/><line x1="840" y1="410" x2="858" y2="392"/><line x1="840" y1="470" x2="858" y2="452"/></g>
+        <rect class="fl" x="560" y="30" width="280" height="220"/>
+        <path class="fl" d="M300 250 H840 V360 H170 Z"/>
+        <!-- opening panel (front face) -->
+        <path id="a8" class="ap" d="M300 250 L170 360" fill="none" stroke="#e9e5dc" stroke-width="4" stroke-linecap="round"/>
+        <!-- smoke screen -->
+        <path id="a3" class="ap" d="M170 360 H430" fill="none" stroke="var(--gold)" stroke-width="5" stroke-linecap="round"/>
+        <!-- oil cup -->
+        <path id="a5" class="ap" d="M172 366 h58 l-6 18 h-46 z" fill="rgba(255,255,255,.07)" stroke="#e9e5dc"/>
+        <!-- light -->
+        <ellipse id="a4" class="ap" cx="330" cy="356" rx="46" ry="6" fill="#ffe2a8" opacity=".75"/>
+        <path d="M300 360 L260 470 M360 360 L400 470" stroke="#ffe2a8" stroke-opacity=".18" fill="none"/>
+        <!-- display + sensors -->
+        <circle id="a1" class="ap" cx="236" cy="305" r="12" fill="#0d0e12" stroke="#bfe4ff" stroke-width="2.5"/>
+        <circle id="a2" class="ap" cx="272" cy="278" r="5" fill="#9fd6ff"/><circle class="ap a2b" cx="198" cy="332" r="5" fill="#9fd6ff"/>
+        <!-- motor -->
+        <g id="a6" class="ap"><circle cx="640" cy="305" r="40" fill="rgba(255,107,127,.08)" stroke="#ff6b7f" stroke-width="1.6"/><g id="rotor" transform="translate(640 305)"></g></g>
+        <!-- controller -->
+        <rect id="a7" class="ap" x="480" y="285" width="70" height="40" rx="3" fill="rgba(217,187,134,.1)" stroke="var(--gold)"/>
+        <path d="M490 295 h20 M490 305 h40 M490 315 h28" stroke="var(--gold)" stroke-width="1.2" fill="none" opacity=".7"/>
+        <!-- flow -->
+        <path id="flow" d="M360 372 C 420 330, 520 310, 590 305" fill="none" stroke="#9fd6ff" stroke-width="1.6" stroke-dasharray="6 7" opacity=".8"/>
+        <path d="M690 290 C 740 260, 700 150, 700 60" fill="none" stroke="#9fd6ff" stroke-width="1.6" stroke-dasharray="6 7" opacity=".8"/>
+        <g id="marks"></g>
+        <text class="sm" x="30" y="505">Simplified illustration · not an engineering drawing</text>
+      </svg>
+    </div>
+    <div class="anainfo">
+      <ol class="anaList" id="anaList"></ol>
+      <div class="xv-info" id="anaInfo"></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 03 NUMBERS -->
+<section class="pad" id="numbers"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>03 — The four numbers</div>
+    <h2 class="h2">Power without<br><b>the noise.</b></h2>
+    <p class="lead">A new-generation DC inverter motor and a new noise-suppression algorithm: more airflow, no more sound.</p>
+  </div>
+  <div class="quad">
+    <div class="dia qcard reveal">
+      <div class="qh"><b data-count="1500">1,500</b><i>m³/h</i></div><p>Max airflow — enough to refresh the kitchen air in about a minute.</p>
+      <svg viewBox="0 0 440 150"><rect class="fl" x="20" y="20" width="400" height="110" rx="4"/><g fill="none" stroke="#9fd6ff" stroke-width="1.3" stroke-dasharray="7 8"><path d="M40 100 C 120 100, 120 50, 210 50 S 330 60, 400 40"><animate attributeName="stroke-dashoffset" values="0;-30" dur="1.1s" repeatCount="indefinite"/></path><path d="M40 78 C 130 80, 150 40, 230 36 S 340 40, 400 30" opacity=".6"><animate attributeName="stroke-dashoffset" values="0;-30" dur="1.5s" repeatCount="indefinite"/></path></g><rect x="320" y="20" width="80" height="14" rx="2" fill="#e9e5dc"/></svg>
+    </div>
+    <div class="dia qcard reveal r2">
+      <div class="qh"><b data-count="1120">1,120</b><i>Pa</i></div><p>Static pressure — pushes smoke through long, bending ducts.</p>
+      <svg viewBox="0 0 440 150"><path d="M20 120 H150 V40 H290 V110 H420" fill="none" stroke="#e9e5dc" stroke-width="22" stroke-linejoin="round" opacity=".12"/><path d="M20 120 H150 V40 H290 V110 H420" fill="none" stroke="#e9e5dc" stroke-width="1.5" stroke-linejoin="round" transform="translate(0 -11)"/><path d="M20 120 H150 V40 H290 V110 H420" fill="none" stroke="#e9e5dc" stroke-width="1.5" stroke-linejoin="round" transform="translate(0 11)"/><path d="M20 120 H150 V40 H290 V110 H420" fill="none" stroke="#9fd6ff" stroke-width="2" stroke-dasharray="6 9" stroke-linejoin="round"><animate attributeName="stroke-dashoffset" values="0;-30" dur=".9s" repeatCount="indefinite"/></path></svg>
+    </div>
+    <div class="dia qcard reveal">
+      <div class="qh"><b data-count="100000">100,000</b><i>rpm</i></div><p>Core speed of the new-generation DC inverter motor.</p>
+      <svg viewBox="0 0 440 150"><g transform="translate(220 75)"><circle r="56" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="2"/><g id="rot2"></g><circle r="9" fill="#0b0b0d" stroke="var(--gold)" stroke-width="1.6"/></g></svg>
+    </div>
+    <div class="dia qcard reveal r2">
+      <div class="qh"><b data-count="39">39</b><i>dB</i></div><p>As quiet as — library-level, thanks to the noise-suppression algorithm.</p>
+      <div class="noise" id="noise" style="margin-top:6px">
+        <div class="nrow ref" style="--w:30%"><div class="lb">Whisper<small>reference</small></div><div class="tr"><i></i></div><div class="v">~30<em>dB</em></div></div>
+        <div class="nrow hot" style="--w:39%"><div class="lb">Opal<small>lowest</small></div><div class="tr"><i></i></div><div class="v">39<em>dB</em></div></div>
+        <div class="nrow ref" style="--w:40%"><div class="lb">Library<small>reference</small></div><div class="tr"><i></i></div><div class="v">~40<em>dB</em></div></div>
+        <div class="nrow ref" style="--w:60%"><div class="lb">Talking<small>reference</small></div><div class="tr"><i></i></div><div class="v">~60<em>dB</em></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="note">Figures from Fotile's JQG9067 brochure. Reference sounds are typical approximations.</p>
+</div></section>
+
+<!-- 04 LINK + TIMELINE -->
+<section class="pad" id="link" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>04 — The link</div>
+    <h2 class="h2">Flame on, hood on.<br><b>Never forget again.</b></h2>
+    <p class="lead">Pair the hood with a compatible Fotile hob and the two work as one. When you finish, the hood keeps running for two minutes to clear the last smoke, then switches itself off.</p>
+  </div>
+  <div class="tl reveal" id="tl">
+    <div class="tlbar"><i id="tlFill"></i></div>
+    <div class="tlsteps" id="tlSteps">
+      <div class="st"><span>1</span><b>Light the burner</b><p>The hood starts on its own.</p></div>
+      <div class="st"><span>2</span><b>Cook</b><p>Wave to adjust. No greasy buttons.</p></div>
+      <div class="st"><span>3</span><b>Flame off</b><p>Hood keeps going.</p></div>
+      <div class="st"><span>4</span><b>2-minute delay</b><p>Clears the last smoke.<em id="tlClock">2:00</em></p></div>
+      <div class="st"><span>5</span><b>Switches off</b><p>Quietly, by itself.</p></div>
+    </div>
+    <button class="tbtn" id="tlReplay" type="button" style="margin-top:22px">Replay</button>
+  </div>
+  <div class="split" style="margin-top:46px">
+    <div class="photo reveal" style="aspect-ratio:16/10"><img src="../assets/engineering/op-scene-island.webp" alt="White Opal kitchen with island, hob, oven and hood" loading="lazy"><div class="cap">One calm, white kitchen</div></div>
+    <div class="reveal r2">
+      <div class="cards c2" style="grid-template-columns:1fr 1fr">
+        <div class="card"><div class="no">HOOD–HOB</div><h4>One lights, both work</h4><p>Smart linkage means you never forget to switch the hood on — or off.</p></div>
+        <div class="card"><div class="no">SOFT LIGHT</div><h4>True colour</h4><p>A soft, grease-resistant big light shows food as it really looks.</p></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 05 CLEAN -->
+<section class="pad" id="clean"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>05 — The clean</div>
+    <h2 class="h2">Opens wide.<br><b>Wipes clean.</b></h2>
+    <p class="lead">An auto wide-angle cleaning mode swings the smoke screen open for easy wiping, and a long, large-capacity oil cup means less emptying. The opening panel is tested for durability.</p>
+  </div>
+  <div class="cleanwrap reveal">
+    <div class="studio"><img src="../assets/engineering/op-closed.webp" alt="Fotile Opal JQG9067 range hood, closed" loading="lazy"><span>Closed</span></div>
+    <div class="studio"><img src="../assets/engineering/op-open.webp" alt="Opal hood with the smoke screen opened for cleaning" loading="lazy"><span>Wide-angle cleaning mode</span></div>
+    <div class="studio tall"><img src="../assets/engineering/op-open-tall.webp" alt="Opal hood open, side view" loading="lazy"><span>Open</span></div>
+  </div>
+  <div class="chips reveal" style="margin-top:28px"><span class="chip">Auto wide-angle cleaning mode</span><span class="chip">Long large-capacity oil cup</span><span class="chip">Super-durable opening panel</span><span class="chip">555 mm headroom</span></div>
+</div></section>
+
+<!-- 06 TRIO -->
+<section class="pad" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="split" style="align-items:center">
+    <div class="photo reveal" style="aspect-ratio:1/1"><img src="../assets/engineering/op-scene-calm.webp" alt="White Opal kitchen with hood, hob and oven" loading="lazy"><div class="cap">Hood · hob · oven</div></div>
+    <div class="reveal r2">
+      <div class="kick"><span class="dot"></span>06 — The set</div>
+      <h2 class="h2" style="margin:18px 0 18px">White on white.<br><b>Three pieces, one calm.</b></h2>
+      <p class="lead">Finished in pure white to disappear into white and light cabinetry. The hood forms the Opal set with the matching white hob and combi steam oven.</p>
+      <div class="trio">
+        <a href="/shop/opal-range-hood-jqg9067/"><b>Opal Range Hood</b><span>JQG9067</span><em>→</em></a>
+        <a href="/shop/opal-gas-hob-ghg88330-w/"><b>Opal Gas Hob</b><span>GHG88330-W</span><em>→</em></a>
+        <a href="/shop/opal-combi-steam-oven/"><b>Opal Combi Steam Oven</b><span>Combi steam</span><em>→</em></a>
+      </div>
+    </div>
+  </div>
+  <table class="spec" style="margin-top:70px;max-width:760px">
+    <tr><td>Model</td><td>JQG9067</td></tr><tr><td>Colour</td><td>White</td></tr><tr><td>Max airflow</td><td>1500 m³/h</td></tr><tr><td>Max static pressure</td><td>1120 Pa</td></tr>
+    <tr><td>Noise</td><td>As quiet as 39 dB</td></tr><tr><td>Motor</td><td>New-generation DC inverter · 100,000 rpm core</td></tr>
+    <tr><td>Controls</td><td>Moon-ring display · wave on/off · hood–hob link</td></tr><tr><td>Delayed shutdown</td><td>2 minutes</td></tr><tr><td>Headroom under hood</td><td>555 mm</td></tr>
+  </table>
+</div></section>
+
+<!-- PROOF -->
+<section class="pad proof"><div class="bg"></div><div class="wrap">
+  <div class="sechead reveal" style="margin-bottom:0">
+    <div class="kick"><span class="dot"></span>Why it works</div>
+    <h2 class="h2">So how good<br>is <b>Fotile?</b></h2>
+    <p class="lead">The engineering above isn't a one-off. It comes from a company that spends its whole life on the kitchen.</p>
+  </div>
+  <div class="tiles reveal">
+    <div class="tile"><b data-count="4000" data-suf="+">4,000<i>+</i></b><span>Invention patents</span></div>
+    <div class="tile"><b data-count="16000" data-suf="+">16,000<i>+</i></b><span>Granted patents</span></div>
+    <div class="tile"><b data-count="110" data-suf="+">110<i>+</i></b><span>Red Dot / iF design awards</span></div>
+    <div class="tile"><b data-count="3">3</b><span>Global R&amp;D centres — Düsseldorf, Osaka, Ningbo</span></div>
+  </div>
+  <div class="proofline reveal"><span><b>IEC standard</b> — Fotile led the revision of the international safety standard for range hoods (IEC 60335-2-31).</span><span><b>#1</b> in China's high-end range hood &amp; cooktop sales for 10 consecutive years.</span><span><b>KBIS</b> — first brand in 60 years to win in the range-hood category.</span></div>
+  <p class="note" style="margin-top:22px">Company data from Fotile's brochure, as of October 2025.</p>
+</div></section>
+
+
+
+<section class="pad cta">
+  <div class="bg" style="background-image:url('../assets/engineering/op-scene-calm.webp');filter:brightness(.35)"></div>
+  <div class="wrap"><div class="in reveal">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>Opal Range Hood JQG9067</div>
+    <h2 class="h2" style="margin:20px 0 22px">Quiet power.<br><b>In white.</b></h2>
+    <p class="lead" style="margin:0 auto 34px;color:#c4c6ca">Add it to your quote basket and a Fotile specialist will confirm the best price and installation for your kitchen.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="/shop/opal-range-hood-jqg9067/" class="btn-r" data-basket="opal-range-hood-jqg9067">Add to Quote Basket →</a>
+      <a href="/shop/opal-range-hood-jqg9067/" class="btn-l">View product page</a>
+      <a href="/our-dealers/" class="btn-l">Find a showroom</a>
+    </div>
+  </div></div>
+</section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><img class="fl" src="../assets/logo.png" alt="FOTILE" loading="lazy" decoding="async"><p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
+      <div class="fsoc" style="margin-top:24px"><a href="https://www.facebook.com/fotile.pk" target="_blank" rel="noopener" aria-label="Fotile Pakistan on Facebook">f</a><a href="https://www.instagram.com/fotilepak/" target="_blank" rel="noopener" aria-label="Fotile Pakistan on Instagram">◎</a><a href="https://www.linkedin.com/company/fotilepk/" target="_blank" rel="noopener" aria-label="Fotile Pakistan on LinkedIn">in</a></div></div>
+    <div><h5>Collection</h5><a class="fli" href="/product-category/kitchen-hood/">Range Hoods</a><a class="fli" href="/product-category/oven/">Ovens</a><a class="fli" href="/product-category/hobs/">Hobs</a><a class="fli" href="/product-category/dish-washer/">Dishwashers</a><a class="fli" href="/product-category/water-purifier/">Purifiers</a></div>
+    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="/blog/">Blog</a><a class="fli" href="/faq/">FAQ</a><a class="fli" href="/contact-us/">Contact</a></div>
+    <div><h5>Support</h5><a class="fli" href="/service-center/">Schedule Service</a><a class="fli" href="/service-center/#warranty">Warranty</a><a class="fli" href="tel:+924211131517">042-111-131-517</a></div>
+  </div>
+  <div class="fbot"><span>© 2026 Fotile Pakistan — All Rights Reserved.</span><span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/refund_returns/">Refunds</a><a href="/shipping-policy/">Shipping</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms-and-conditions/">Terms &amp; Conditions</a></span></div>
+</div></footer>
+<a class="wa" href="https://wa.me/923008463129" target="_blank" rel="noopener" aria-label="Chat with Fotile Pakistan on WhatsApp">💬</a>
+
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+  /* moon ring */
+  var rg=document.getElementById('moonRange');
+  if(rg){
+    var ring=document.getElementById('ring'),halo=document.getElementById('halo'),sense=document.getElementById('sense'),person=document.getElementById('person'),dd=document.getElementById('moonD'),ss=document.getElementById('moonS');
+    function mr(v){v=+v;var p=Math.max(0,(v-35)/65);ring.setAttribute('stroke-dashoffset',(119.4*(1-p)).toFixed(1));halo.setAttribute('opacity',(p*.9).toFixed(2));sense.setAttribute('opacity',v>60?(.4+.6*((v-60)/40)).toFixed(2):0);
+      person.setAttribute('transform','translate('+(60+v*7.8)+' 420)');
+      dd.textContent=(3-v*.025).toFixed(1)+' m';ss.textContent=v<35?'Asleep':v<75?'Waking':'Glowing'}
+    rg.addEventListener('input',function(){mr(rg.value);stopAuto()});mr(0);
+    var auto=null;function stopAuto(){if(auto){clearInterval(auto);auto=null}}
+    if('IntersectionObserver' in window){var o=new IntersectionObserver(function(es){if(es[0].isIntersecting){o.disconnect();var v=0,dir=1;auto=setInterval(function(){v+=dir*1.2;if(v>=100){dir=-1}if(v<=0&&dir<0){stopAuto();return}rg.value=v;mr(v)},30)}},{threshold:.5});o.observe(document.getElementById('moonSvg'))}
+  }
+  /* rotors */
+  function rotor(g,n,r0,r1,col){for(var i=0;i<n;i++){var a=i*360/n;el('path',{d:'M0 0 Q '+(r1*.4)+' '+(-r1*.35)+' '+r1+' '+(-r1*.12),fill:'none',stroke:col||'#e9e5dc','stroke-width':1.3,transform:'rotate('+a+')'},g)}}
+  var r1=document.getElementById('rotor');if(r1){rotor(r1,12,0,30,'#ff9aa8');var an=el('animateTransform',{attributeName:'transform',type:'rotate',from:'0',to:'360',dur:'1.2s',repeatCount:'indefinite',additive:'sum'},r1)}
+  var r2=document.getElementById('rot2');if(r2){rotor(r2,14,0,52,'#e9e5dc');el('animateTransform',{attributeName:'transform',type:'rotate',from:'0',to:'360',dur:'.55s',repeatCount:'indefinite'},r2)}
+  /* anatomy */
+  var P=[
+   {id:'a1',x:236,y:305,n:'Moon-ring display',t:'Lights an elegant ring when you approach, setting the cooking mood and showing status.'},
+   {id:'a2',x:272,y:278,n:'Dual infrared sensors',t:'Wave your hand to switch on or off — no need to touch the panel with greasy fingers.',also:'.a2b'},
+   {id:'a3',x:430,y:360,n:'Smoke screen',t:'Opens fully in the auto wide-angle cleaning mode so you can wipe it easily.'},
+   {id:'a4',x:330,y:356,n:'Soft anti-grease light',t:'A large, soft, grease-resistant light that shows food in its true colour.'},
+   {id:'a5',x:200,y:384,n:'Long oil cup',t:'Long, large-capacity cup means you empty it less often.'},
+   {id:'a6',x:640,y:305,n:'DC inverter motor',t:'New-generation DC inverter heart — 100,000 rpm core, 1500 m³/h and 1120 Pa, with less noise.'},
+   {id:'a7',x:515,y:305,n:'Noise-suppression control',t:'A new algorithm that adds airflow without adding noise — down to 39 dB.'},
+   {id:'a8',x:235,y:305,n:'Opening panel',t:'Super-durable opening panel, tested for reliable, stable operation.',dx:-52,dy:-24}
+  ];
+  var svg=document.getElementById('anaSvg'),marks=document.getElementById('marks'),list=document.getElementById('anaList'),info=document.getElementById('anaInfo');
+  if(svg){
+    P.forEach(function(p,i){
+      var g=el('g',{'class':'mk','data-i':i},marks);var cx=p.x+(p.dx||0),cy=p.y-(p.dy?-p.dy:34);
+      if(i==7){cx=150;cy=290}
+      el('line',{x1:p.x,y1:p.y,x2:cx,y2:cy,stroke:'rgba(217,187,134,.45)'},g);el('circle',{cx:cx,cy:cy,r:12},g);var t=el('text',{x:cx,y:cy+4},g);t.textContent=i+1;
+      var li=document.createElement('li');li.innerHTML='<button type="button" data-i="'+i+'"><span>'+(i+1)+'</span>'+p.n+'</button>';list.appendChild(li);
+      g.addEventListener('click',function(){sel(i)});
+    });
+    list.addEventListener('click',function(e){var b=e.target.closest('button');if(b)sel(+b.dataset.i)});
+    function sel(i){svg.classList.add('sel');svg.querySelectorAll('.ap').forEach(function(e){e.classList.remove('on')});
+      var p=P[i];var e=document.getElementById(p.id);e.classList.add('on');if(p.also)svg.querySelectorAll(p.also).forEach(function(x){x.classList.add('on')});
+      svg.querySelectorAll('.mk').forEach(function(m,j){m.classList.toggle('on',j==i)});list.querySelectorAll('button').forEach(function(b,j){b.classList.toggle('on',j==i)});
+      info.innerHTML='<h4>'+(i+1)+' · '+p.n+'</h4><p>'+p.t+'</p>'}
+    info.innerHTML='<h4>Eight parts</h4><p>Pick a number on the drawing or in the list.</p>';
+    var auto2=null,k=0;if('IntersectionObserver' in window){var o2=new IntersectionObserver(function(es){if(es[0].isIntersecting){o2.disconnect();auto2=setInterval(function(){sel(k%8);k++;if(k>8){clearInterval(auto2)}},2600)}},{threshold:.4});o2.observe(svg);
+      [list,svg].forEach(function(x){x.addEventListener('click',function(){if(auto2){clearInterval(auto2);auto2=null}})})}
+  }
+  /* timeline */
+  var tl=document.getElementById('tl');
+  if(tl){
+    var steps=[].slice.call(document.querySelectorAll('#tlSteps .st')),fill=document.getElementById('tlFill'),clock=document.getElementById('tlClock'),timer=null;
+    function run(){clearInterval(timer);var i=0,sec=120;function show(n){steps.forEach(function(s,j){s.classList.toggle('on',j<=n)});fill.style.width=((n+1)/steps.length*100)+'%'}
+      show(0);clock.textContent='2:00';var t=0;timer=setInterval(function(){t++;
+        if(t==3)show(1);if(t==6)show(2);if(t==8)show(3);
+        if(t>=8&&t<8+12){var left=Math.max(0,120-Math.round((t-8)/12*120));clock.textContent=Math.floor(left/60)+':'+('0'+left%60).slice(-2)}
+        if(t==20){clock.textContent='0:00';show(4)}if(t==26){clearInterval(timer)}},600)}
+    document.getElementById('tlReplay').addEventListener('click',run);
+    if('IntersectionObserver' in window){var o3=new IntersectionObserver(function(es){if(es[0].isIntersecting){o3.disconnect();run()}},{threshold:.5});o3.observe(tl)}else run();
+  }
+})();
+</script>
+<script src="../cart.js"></script>
+<script src="../editor.js"></script>
+<script src="../mobile-nav.js"></script>
+<script src="../assets/engineering/eng.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Opal Range Hood JQG9067 — Inside Fotile's Moon-Ring Hood","url":"https://fotilepk.com/opal-hood-anatomy/","description":"The engineering behind the Fotile Opal JQG9067 range hood.","isPartOf":{"@type":"WebSite","name":"Fotile Pakistan","url":"https://fotilepk.com/"},"about":{"@type":"Product","name":"Fotile Opal Range Hood JQG9067","sku":"JQG9067","brand":{"@type":"Brand","name":"Fotile"},"image":"https://fotilepk.com/assets/engineering/op-front.webp","url":"https://fotilepk.com/shop/opal-range-hood-jqg9067/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fotilepk.com/"},{"@type":"ListItem","position":2,"name":"Range Hoods","item":"https://fotilepk.com/product-category/kitchen-hood/"},{"@type":"ListItem","position":3,"name":"Opal Range Hood JQG9067","item":"https://fotilepk.com/shop/opal-range-hood-jqg9067/"},{"@type":"ListItem","position":4,"name":"Engineering","item":"https://fotilepk.com/opal-hood-anatomy/"}]}]}</script>
+</body>
+</html>

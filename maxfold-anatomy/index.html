@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaxFold BIG9069-G — Inside Fotile's Folding Range Hood | Fotile Pakistan</title>
+<meta name="description" content="Explore the Fotile MaxFold BIG9069-G from the inside: an interactive exploded view of every part, the folding-lift mechanism, 1700 m³/h airflow, 1450 Pa and bionic noise reduction.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://fotilepk.com/maxfold-anatomy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fotile Pakistan">
+<meta property="og:title" content="MaxFold BIG9069-G — Inside Fotile's Folding Range Hood">
+<meta property="og:description" content="Interactive exploded view, folding-lift mechanism, 1700 m³/h and 1450 Pa — the engineering inside Fotile's first fully-integrated range hood.">
+<meta property="og:url" content="https://fotilepk.com/maxfold-anatomy/">
+<meta property="og:image" content="https://fotilepk.com/assets/engineering/mf-hidden.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MaxFold BIG9069-G — Inside Fotile's Folding Range Hood">
+<meta name="twitter:description" content="Interactive exploded view and the engineering behind Fotile's MaxFold range hood.">
+<meta name="twitter:image" content="https://fotilepk.com/assets/engineering/mf-hidden.webp">
+<link rel="stylesheet" href="../assets/engineering/eng.css">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#0b0b0e">
+<script>window.__PBASE="../";</script>
+<style>
+/* ===== page-specific ===== */
+.seam-note{font-size:12px;color:#6d7076}
+/* fold diagram */
+.foldwrap{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:stretch}
+.foldfacts{display:grid;gap:14px;align-content:center}
+.ffact{border-left:2px solid var(--gold);padding:4px 0 4px 18px}
+.ffact b{display:block;font-size:clamp(26px,3vw,40px);font-weight:200;letter-spacing:-1.4px;line-height:1.05}
+.ffact b i{font-style:normal;font-size:.45em;color:var(--gold);margin-left:5px;font-weight:500}
+.ffact span{display:block;font-size:14px;color:var(--dim);font-weight:300;margin-top:6px}
+#foldSvg .lab{opacity:0;transition:opacity .7s .2s}
+#foldSvg.open .lab.o{opacity:1}
+#foldSvg:not(.open) .lab.c{opacity:1}
+#foldSvg .lab.c{opacity:0;transition:opacity .7s}
+#foldSvg .plume circle{opacity:0}
+#foldSvg.open .plume circle{animation:plume 3.4s linear infinite}
+@keyframes plume{0%{opacity:0;transform:translate(0,0) scale(.5)}15%{opacity:.8}100%{opacity:0;transform:translate(var(--dx,-40px),-250px) scale(1.7)}}
+/* capture compare */
+.capgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.capcard{position:relative;padding-top:70px}
+.capcard h4{position:absolute;left:18px;top:16px;z-index:2;font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);font-weight:600}
+.capcard .big{position:absolute;right:18px;top:12px;z-index:2;text-align:right;font-size:clamp(28px,3.2vw,44px);font-weight:200;letter-spacing:-1.5px;line-height:1}
+.capcard .big small{display:block;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);font-weight:600;margin-top:4px}
+.capcard.win{border-color:rgba(217,187,134,.45)}
+.capcard.win .big{color:var(--gold)}
+/* power */
+.powerwrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.gauges{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.gauge{position:relative;text-align:center;padding:26px 14px 22px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.gauge svg{width:min(190px,100%);margin:0 auto}
+.gauge .ring{fill:none;stroke:rgba(255,255,255,.08);stroke-width:7}
+.gauge .arc{fill:none;stroke:var(--gold);stroke-width:7;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);transition:stroke-dashoffset 2.2s var(--ease)}
+.gauge.on .arc{stroke-dashoffset:calc(var(--len)*.07)}
+.gauge .num{position:absolute;left:0;right:0;top:76px;font-size:clamp(28px,3.3vw,40px);font-weight:200;letter-spacing:-1.6px;line-height:1}
+.gauge .num i{display:block;font-style:normal;font-size:11px;letter-spacing:1.6px;color:var(--gold);margin-top:6px;font-weight:600;text-transform:uppercase}
+.gauge p{margin-top:8px;font-size:13px;color:var(--dim);font-weight:300}
+#impeller{animation:spin 6s linear infinite;transform-origin:50% 50%}
+@keyframes spin{to{transform:rotate(360deg)}}
+.motorcard{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);min-height:420px;background:#050506 url(../assets/engineering/mf-motor.webp) center/cover}
+.motorcard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,5,6,.92),rgba(5,5,6,.1) 60%)}
+.motorcard .t{position:absolute;left:24px;right:24px;bottom:22px;z-index:2}
+.motorcard .t b{display:block;font-size:20px;font-weight:500;letter-spacing:-.4px}
+.motorcard .t span{font-size:14px;color:#b4b7bc;font-weight:300}
+.mini3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.mini3 div{font-size:13px;color:var(--dim);border-top:1px solid var(--line);padding-top:12px;font-weight:300}
+.mini3 b{display:block;color:#fff;font-weight:500;font-size:14.5px;margin-bottom:3px}
+/* exploded view */
+.xv{background:linear-gradient(180deg,var(--bg),#08080a 14%,#08080a 86%,var(--bg))}
+.xv-grid{display:grid;grid-template-columns:370px 1fr;gap:26px;align-items:start}
+.xv-tabs{display:grid;gap:8px}
+.xv-tab{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:12px;text-align:left;padding:13px 16px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:.35s}
+.xv-tab:hover{border-color:var(--line2)}
+.xv-tab .n{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--c);color:var(--c);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.xv-tab b{display:block;font-size:15px;font-weight:500;letter-spacing:-.2px}
+.xv-tab small{display:block;font-size:11.5px;color:var(--dim);font-weight:300;line-height:1.3}
+.xv-tab em{font-style:normal;font-size:11px;color:var(--dim);letter-spacing:1px}
+.xv-tab.on{border-color:var(--c);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 14%,transparent),var(--panel))}
+.xv-tab.on .n{background:var(--c);color:#0b0b0d}
+.xv-info{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:20px 20px 18px;background:var(--panel);min-height:230px}
+.xv-info h4{font-size:19px;font-weight:500;letter-spacing:-.4px}
+.xv-info p{font-size:14px;color:#b5b8bd;font-weight:300;margin:8px 0 14px}
+.xv-parts{display:flex;flex-wrap:wrap;gap:7px}
+.xv-parts button{font-size:12.5px;padding:6px 11px;border-radius:30px;border:1px solid var(--line2);color:#cfd1d5;transition:.25s}
+.xv-parts button:hover,.xv-parts button.sel{border-color:var(--c);color:#fff;background:color-mix(in srgb,var(--c) 18%,transparent)}
+.xv-stage{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:radial-gradient(90% 70% at 50% 40%,#16161a,#09090b 70%);aspect-ratio:2700/2390;touch-action:pan-y}
+.xv-stage::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;opacity:.22;pointer-events:none}
+.xv-pan{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0;transition:transform 1.1s var(--ease)}
+.xv-pan img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 1px rgba(255,255,255,.25));transition:opacity .6s}
+.xv-stage.focus .xv-pan img{opacity:.5}
+.hp{position:absolute;width:22px;height:22px;transform:translate(-50%,-50%) scale(var(--inv,1));border-radius:50%;border:0;padding:0}
+.hp::after{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--c);opacity:.55;transition:.3s}
+.hp::before{content:"";position:absolute;inset:-26px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--c) 55%,transparent) 0%,transparent 68%);opacity:0;transition:opacity .5s;pointer-events:none}
+.xv-stage.focus .hp:not(.act){opacity:.14;pointer-events:none}
+.hp.act::before{opacity:1;animation:halo 2.4s ease-in-out infinite}
+.hp.act::after{opacity:1;box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 40%,transparent)}
+.hp.hl::after{inset:3px;box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 60%,transparent),0 0 22px var(--c);opacity:1}
+.hp.hl::before{opacity:1}
+@keyframes halo{0%,100%{transform:scale(.85)}50%{transform:scale(1.15)}}
+.xv-tip{position:absolute;z-index:5;max-width:250px;transform:translate(-50%,calc(-100% - 22px));pointer-events:none;opacity:0;transition:opacity .25s;background:rgba(10,10,12,.92);border:1px solid var(--c,var(--line2));border-radius:9px;padding:10px 13px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.xv-tip.show{opacity:1}
+.xv-tip b{display:block;font-size:13.5px;font-weight:600;letter-spacing:-.1px}
+.xv-tip span{display:block;font-size:12.5px;color:#b5b8bd;font-weight:300;margin-top:3px;line-height:1.45}
+.xv-reset{position:absolute;right:14px;top:14px;z-index:6}
+.xv-hint{position:absolute;left:16px;top:16px;z-index:4;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#6d7076}
+.xv-all{margin-top:26px;border:1px solid var(--line);border-radius:12px;padding:16px 20px;background:var(--panel)}
+.xv-all summary{cursor:pointer;font-size:14px;font-weight:500;color:#cfd1d5}
+.xv-all .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 30px;margin-top:16px}
+.xv-all h5{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.xv-all li{list-style:none;font-size:13px;color:var(--dim);font-weight:300;line-height:1.75}
+/* bionic */
+.bio svg{height:130px}
+.bio .jump{display:inline-block;margin-top:14px;font-size:12.5px;color:var(--gold);border-bottom:1px solid rgba(217,187,134,.4);padding-bottom:1px;transition:.3s}
+.bio .jump:hover{color:#fff;border-color:#fff}
+/* smart */
+.smart .card{padding-bottom:24px}
+.smart .card svg{height:130px}
+/* install */
+.inst{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.reqs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.reqs div{border:1px solid var(--line);border-radius:10px;padding:16px 16px;background:var(--panel)}
+.reqs b{display:block;font-size:26px;font-weight:200;letter-spacing:-1px}
+.reqs span{display:block;font-size:12.5px;color:var(--dim);font-weight:300;margin-top:3px;line-height:1.4}
+/* gallery */
+.gal{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:14px}
+.gal .g{position:relative;border-radius:12px;overflow:hidden;background:radial-gradient(90% 90% at 50% 40%,#1a1a1e,#0b0b0d);border:1px solid var(--line);aspect-ratio:1/1.05;display:flex;align-items:center;justify-content:center}
+.gal .g img{max-width:88%;max-height:84%;object-fit:contain;transition:transform 1.2s var(--ease)}
+.gal .g:hover img{transform:scale(1.06)}
+.gal .g.ph img{max-width:none;max-height:none;width:100%;height:100%;object-fit:cover}
+.gal .g span{position:absolute;left:14px;bottom:12px;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.65);text-shadow:0 1px 8px #000}
+/* proof */
+.proof{overflow:hidden}
+.proof .bg{position:absolute;inset:0;background:url(../assets/engineering/mf-awards.webp) center/cover;filter:brightness(.38)}
+.proof::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg),rgba(11,11,13,.2) 30%,rgba(11,11,13,.6) 80%,var(--bg))}
+.proof .wrap{position:relative;z-index:2}
+.proof .tiles{background:rgba(9,9,11,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;margin-top:40px}
+.proof .tiles.t3{grid-template-columns:repeat(3,1fr)}
+.proof .tile{border-bottom:0}
+.proofline{display:grid;gap:10px;margin-top:26px;font-size:14px;color:#c3c5c9;font-weight:300}
+.proofline b{color:#fff;font-weight:500}
+@media(max-width:1100px){.xv-grid{grid-template-columns:1fr}.xv-tabs{grid-template-columns:repeat(2,1fr)}.foldwrap,.powerwrap,.capgrid,.inst{grid-template-columns:1fr}.gal{grid-template-columns:1fr 1fr}.reqs{grid-template-columns:repeat(2,1fr)}.proof .tiles.t3{grid-template-columns:1fr}.xv-all .cols{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.xv-tabs{grid-template-columns:1fr}.gal{grid-template-columns:1fr}.gauges{grid-template-columns:1fr}.mini3{grid-template-columns:1fr}.xv-all .cols{grid-template-columns:1fr}.capcard .big{position:static;text-align:left;padding:14px 18px 0}.capcard h4{position:static;display:block;padding:14px 18px 0}}
+</style>
+</head>
+<body>
+
+<!-- OVERTURE: a seam of light — the "0-gap" opens -->
+<div class="ov" id="ov" aria-hidden="true"><div class="half top"></div><div class="half bot"></div><div class="seam"></div><div class="tag">Folded away · Unfolded power</div></div>
+
+<nav class="nav" id="nav">
+  <a href="/" class="brand"><img src="../assets/logo.png" alt="FOTILE"></a>
+  <div class="nlinks">
+    <a href="/shop/">Products</a>
+    <a href="/moon-series/">Moon Series</a>
+    <a href="/opal-series/">Opal Series</a>
+    <a href="/about-us/">About</a>
+    <a href="/blog/">Journal</a>
+    <a href="/our-dealers/">Dealers</a>
+    <a href="/contact-us/">Contact</a>
+  </div>
+  <div class="nr">
+    <span class="ic">⌕</span><a href="/cart/" class="ic" style="position:relative;text-decoration:none">🛒<b data-cart-count style="position:absolute;top:-8px;right:-9px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px">0</b></a>
+    <a href="/cart/" class="npill">Request a Quote</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bg" style="background-image:url('../assets/engineering/mf-hidden.webp')"></div>
+  <div class="wrap in">
+    <div class="ey"><span class="dot"></span>Fotile MaxFold · BIG9069-G</div>
+    <h1>Invisible by design.<b>Visible in clean air.</b></h1>
+    <p class="sub">Fotile's first fully-integrated range hood. A 330&nbsp;mm body that disappears into your cabinet — and unfolds into 1700&nbsp;m³/h of extraction power. This is what is inside.</p>
+    <div class="ctas"><a href="#exploded" class="btn-r">Explore the exploded view ↓</a><a href="/shop/maxfold-folding-range-hood-big9069-g/" class="btn-l">See the product</a></div>
+  </div>
+  <div class="scrollcue">Scroll</div>
+  <div class="hud"><div class="wrap">
+    <div class="hs"><b data-count="1700" data-suf="m³/h">1,700<i>m³/h</i></b><span>Peak airflow</span></div>
+    <div class="hs"><b data-count="1450" data-suf="Pa">1,450<i>Pa</i></b><span>Max static pressure</span></div>
+    <div class="hs"><b data-count="0" data-suf="gap">0<i>gap</i></b><span>Flush, fully concealed</span></div>
+    <div class="hs"><b data-count="50000">50,000</b><span>Lift cycles tested</span></div>
+  </div></div>
+</header>
+
+<!-- 01 THE FOLD -->
+<section class="pad" id="fold"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>01 — The fold</div>
+    <h2 class="h2">Hidden when idle.<br><b>Lowered when it matters.</b></h2>
+    <p class="lead">Most "hidden" hoods hide so well they forget to extract. MaxFold keeps its 330&nbsp;mm body fixed inside the cabinet and folds only the intake down — closer to the fumes, then back into a seamless flat line.</p>
+  </div>
+  <div class="foldwrap">
+    <div class="dia reveal" id="foldDia">
+      <div class="tools"><button class="tbtn on" id="fBtn" type="button">Unfold</button></div>
+      <svg id="foldSvg" viewBox="0 0 900 540" role="img" aria-label="Schematic side view: the MaxFold intake folds out of the cabinet and lowers 10 centimetres, then the fume screen opens to 135 degrees.">
+        <!-- wall + cabinet -->
+        <line class="ln2" x1="840" y1="20" x2="840" y2="520"/>
+        <g stroke="#555a61" stroke-width="1">
+          <line x1="840" y1="40" x2="858" y2="22"/><line x1="840" y1="90" x2="858" y2="72"/><line x1="840" y1="140" x2="858" y2="122"/><line x1="840" y1="190" x2="858" y2="172"/><line x1="840" y1="240" x2="858" y2="222"/><line x1="840" y1="290" x2="858" y2="272"/><line x1="840" y1="340" x2="858" y2="322"/><line x1="840" y1="390" x2="858" y2="372"/><line x1="840" y1="440" x2="858" y2="422"/><line x1="840" y1="490" x2="858" y2="472"/>
+        </g>
+        <path class="fl" d="M300 70 H840 V216 H300 Z" style="fill:rgba(255,255,255,.025)"/>
+        <line class="ln" x1="300" y1="70" x2="300" y2="216"/>
+        <text class="sm" x="312" y="62">Wall cabinet</text>
+        <!-- fixed body -->
+        <rect class="fl" x="331" y="118" width="509" height="88" rx="2"/>
+        <text class="sm" x="352" y="140">Fixed 330 mm body · motor + fan</text>
+        <circle class="ln" cx="720" cy="166" r="30"/><circle class="ln" cx="720" cy="166" r="9"/>
+        <g class="ln" stroke-width="1"><line x1="720" y1="136" x2="720" y2="196"/><line x1="690" y1="166" x2="750" y2="166"/></g>
+        <!-- intake group (moves) -->
+        <g id="intake">
+          <rect class="fl" id="panel" x="331" y="206" width="480" height="10" rx="2" style="fill:rgba(217,187,134,.1);stroke:var(--gold)"/>
+          <g id="baffleG"><rect x="0" y="-3" width="150" height="6" rx="2" style="fill:rgba(224,30,55,.25);stroke:#ff6b7f;stroke-width:1.3"/></g>
+          <circle id="hinge" r="4" fill="#ff6b7f"/>
+          <!-- led strip -->
+          <rect id="ledStrip" x="360" y="217" width="180" height="3" rx="1.5" fill="#ffe2a8" opacity="0"/>
+        </g>
+        <!-- scissor links (drawn by JS) -->
+        <g id="links" class="ln" stroke="#e9e5dc"></g>
+        <!-- hob -->
+        <rect class="fl" x="360" y="500" width="300" height="10" rx="2"/>
+        <ellipse cx="450" cy="494" rx="62" ry="4" fill="none" stroke="#e9e5dc"/>
+        <path class="ln" d="M406 494 v-26 q0-6 6-6 h76 q6 0 6 6 v26"/>
+        <line class="ln" x1="402" y1="462" x2="498" y2="462"/>
+        <g fill="#7fc4ff" opacity=".9"><path d="M545 494 q-6-10 0-18 q2 8 8 10 q4-5 2-12 q10 8 6 20 z"/></g>
+        <!-- fume plume -->
+        <g class="plume" fill="#cfd3d9">
+          <circle cx="450" cy="455" r="9" style="--dx:-26px;animation-delay:0s"/><circle cx="462" cy="455" r="7" style="--dx:-18px;animation-delay:.7s"/><circle cx="440" cy="455" r="10" style="--dx:-34px;animation-delay:1.4s"/><circle cx="455" cy="455" r="6" style="--dx:-12px;animation-delay:2.1s"/><circle cx="470" cy="455" r="8" style="--dx:-22px;animation-delay:2.8s"/>
+        </g>
+        <!-- labels: closed -->
+        <g class="lab c">
+          <path class="dm" d="M300 236 H331 M300 230 v12 M331 230 v12"/><text class="r" x="262" y="262">0-gap · flush with cabinet</text>
+          <text class="g" x="150" y="318" style="font-size:13px">Closed: the hood is a seamless</text><text class="g" x="150" y="338" style="font-size:13px">flat line under the cabinet.</text>
+        </g>
+        <!-- labels: open -->
+        <g class="lab o">
+          <path class="dm" d="M880 118 H868 M880 206 H868 M874 118 V206"/>
+          <path class="dm" d="M236 216 V300 M228 216 H244 M228 300 H244" id="dropDim"/><text class="g" x="30" y="262" style="font-size:15px">Intake ↓ 10 cm</text><text x="30" y="282">closer to the fumes</text>
+          <path class="gl" d="M331 300 A 78 78 0 0 0 276 356" style="stroke-dasharray:3 4"/><text class="r" x="40" y="440" style="font-size:15px">135° fume screen</text><text x="40" y="460">wider capture, auto-opens</text>
+        </g>
+        <text class="sm" x="30" y="520">Schematic · not to scale</text>
+      </svg>
+    </div>
+    <div class="foldfacts">
+      <div class="ffact reveal"><b>330<i>mm</i></b><span>Body depth — 40% slimmer than European-style hoods; fits a 350&nbsp;mm cabinet.</span></div>
+      <div class="ffact reveal r2"><b>10<i>cm</i></b><span>The intake drops 10&nbsp;cm; with the oil cup the lowest point sits 14&nbsp;cm below the body.</span></div>
+      <div class="ffact reveal r3"><b>135<i>°</i></b><span>Auto fume-screen opens wide to catch more of the plume.</span></div>
+      <div class="ffact reveal r4"><b>15<i>years</i></b><span>Aviation-grade folding structure, passed 50,000-cycle life testing.</span></div>
+    </div>
+  </div>
+  <p class="note">Inspired by aircraft landing-gear structure. Dimensions from Fotile's MaxFold brochure and training material.</p>
+</div></section>
+
+<!-- photo band -->
+<section style="padding:0">
+  <div class="photo" style="border-radius:0;border-left:0;border-right:0;height:min(70vh,640px)"><img src="../assets/engineering/mf-lift-open.webp" alt="Reaching up to open the MaxFold hood in a dark kitchen" loading="lazy" style="object-position:center 40%"><div class="cap">Flat when closed · one touch to open</div></div>
+</section>
+
+<!-- 02 CAPTURE -->
+<section class="pad"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>02 — The catch</div>
+    <h2 class="h2">Reach further.<br><b>Lose less smoke.</b></h2>
+    <p class="lead">Fume escapes from the front and the edges of a pan. MaxFold lowers its intake, opens a 135° screen and pulls air straight through a rear intake — so the capture zone reaches 413&nbsp;mm out from the wall instead of the typical 280&nbsp;mm.</p>
+  </div>
+  <div class="capgrid reveal">
+    <div class="dia capcard"><h4>Typical fully-integrated hood</h4><div class="big">280<small>mm capture depth</small></div>
+      <svg viewBox="0 0 440 330" role="img" aria-label="Typical hood: some fumes escape past the intake"><line class="ln2" x1="400" y1="10" x2="400" y2="270"/><rect class="fl" x="130" y="258" width="210" height="9" rx="2"/><path class="ln" d="M160 258 v-24 q0-5 5-5 h58 q5 0 5 5 v24"/><line class="ln" x1="156" y1="229" x2="232" y2="229"/><text class="sm" x="16" y="322">Side view · wall at right</text>
+        <rect x="246" y="38" width="154" height="10" class="fl"/><path d="M246 48 V92" class="ln"/>
+        <path d="M400 92 H246" class="dm"/>
+        <path d="M246 70 H400" stroke="#ff6b7f" stroke-width="1.2" stroke-dasharray="3 4" fill="none" opacity="0"/>
+        <rect x="246" y="48" width="154" height="170" fill="rgba(255,255,255,.035)" stroke="#555a61" stroke-dasharray="4 5"/>
+        <path class="dm" d="M246 292 H400 M246 286 v12 M400 286 v12"/><text class="r" x="296" y="314">280 mm</text>
+        <g><circle r="5" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin="0s" path="M190 250 C 190 190, 192 120, 200 22"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin="0s"/></circle>
+        <circle r="4" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin="1.1s" path="M176 250 C 176 190, 176 120, 182 22"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin="1.1s"/></circle>
+        <circle r="5" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin="2.1s" path="M200 250 C 204 190, 206 120, 214 22"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin="2.1s"/></circle>
+        <circle r="4" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin=".5s" path="M290 250 C 290 200, 290 130, 292 56"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin=".5s"/></circle></g>
+        <text class="r" x="70" y="108" style="font-size:12.5px">fumes escape</text><text x="70" y="124">past the intake</text>
+      </svg></div>
+    <div class="dia capcard win"><h4>MaxFold BIG9069-G</h4><div class="big">413<small>mm · +47.5% reach</small></div>
+      <svg viewBox="0 0 440 330" role="img" aria-label="MaxFold: the wider capture zone catches the whole plume"><line class="ln2" x1="400" y1="10" x2="400" y2="270"/><rect class="fl" x="130" y="258" width="210" height="9" rx="2"/><path class="ln" d="M160 258 v-24 q0-5 5-5 h58 q5 0 5 5 v24"/><line class="ln" x1="156" y1="229" x2="232" y2="229"/><text class="sm" x="16" y="322">Side view · wall at right</text>
+        <rect x="173" y="38" width="227" height="10" class="fl" style="stroke:var(--gold);fill:rgba(217,187,134,.1)"/>
+        <rect x="173" y="48" width="227" height="170" fill="rgba(217,187,134,.07)" stroke="var(--gold)" stroke-dasharray="4 5"/>
+        <path class="dm" d="M173 292 H400 M173 286 v12 M400 286 v12"/><text class="g" x="262" y="314">413 mm</text>
+        <path d="M173 48 L128 118" stroke="#ff6b7f" stroke-width="1.5" fill="none"/>
+        <g><circle r="5" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin="0s" path="M190 250 C 190 190, 194 120, 232 56"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin="0s"/></circle>
+        <circle r="4" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin="1.1s" path="M176 250 C 176 190, 180 120, 214 56"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin="1.1s"/></circle>
+        <circle r="5" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin="2.1s" path="M200 250 C 204 190, 208 120, 246 56"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin="2.1s"/></circle>
+        <circle r="4" fill="#cfd3d9"><animateMotion dur="3.2s" repeatCount="indefinite" begin=".5s" path="M290 250 C 290 200, 290 130, 292 56"/><animate attributeName="opacity" values="0;.9;.9;0" dur="3.2s" repeatCount="indefinite" begin=".5s"/></circle></g>
+        <text class="g" x="24" y="170" style="font-size:12.5px">135° screen</text><text x="24" y="186">catches the plume</text>
+      </svg></div>
+  </div>
+    <div class="split" style="margin-top:46px">
+    <div class="photo reveal" style="aspect-ratio:16/10"><img src="../assets/engineering/mf-capture.webp" alt="Cooking under MaxFold with the capture zone highlighted" loading="lazy"><div class="cap">Capture zone · from Fotile's brochure</div></div>
+    <div class="reveal r2">
+      <div class="cards c2" style="grid-template-columns:1fr 1fr">
+        <div class="card"><div class="no">REAR INTAKE</div><h4>Straight through</h4><p>The motor is reversed so fumes go in and out without a turn — the power isn't lost on corners.</p></div>
+        <div class="card"><div class="no">5000&nbsp;HZ</div><h4>Reacts to the duct</h4><p>The controller re-computes thousands of times a second, raising power as duct resistance rises.</p></div>
+      </div>
+      <p class="note" style="margin-top:18px">413 mm vs 280 mm: Fotile's comparison against a typical fully-integrated hood. 135° screen: capture area +25% (training material).</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 03 POWER -->
+<section class="pad" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>03 — The engine</div>
+    <h2 class="h2">The strongest hood<br><b>Fotile currently makes.</b></h2>
+    <p class="lead">The "Yunteng" V12.0 smart-drive engine pairs a new-generation DC motor with cruise-boost: the more resistance in the duct, the harder it pushes. Long, bending ducts stop being a problem.</p>
+  </div>
+  <div class="powerwrap">
+    <div>
+      <div class="gauges io" id="gauges">
+        <div class="gauge reveal"><svg viewBox="0 0 200 200"><circle class="ring" cx="100" cy="100" r="82"/><circle class="arc" cx="100" cy="100" r="82" style="--len:515" transform="rotate(-90 100 100)"/></svg><div class="num"><span data-count="1700">1,700</span><i>m³/h</i></div><p>Peak airflow</p></div>
+        <div class="gauge reveal r2"><svg viewBox="0 0 200 200"><circle class="ring" cx="100" cy="100" r="82"/><circle class="arc" cx="100" cy="100" r="82" style="--len:515" transform="rotate(-90 100 100)"/></svg><div class="num"><span data-count="1450">1,450</span><i>Pa</i></div><p>Max static pressure</p></div>
+      </div>
+      <div class="mini3">
+        <div><b>Cruise boost</b>Auto mode — more resistance, more power.</div>
+        <div><b>Reverse motor</b>Rear intake draws fumes straight out.</div>
+        <div><b>V12.0</b>"Yunteng" smart-drive engine.</div>
+      </div>
+    </div>
+    <div class="motorcard reveal r2"><div class="t"><b>New-generation DC motor</b><span>Spun by a PMSM inverter drive and tuned in software — peak performance without peak noise.</span></div></div>
+  </div>
+</div></section>
+
+<!-- 04 SILENCE -->
+<section class="pad"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>04 — The silence</div>
+    <h2 class="h2">Library-quiet.<br><b>Borrowed from nature.</b></h2>
+    <p class="lead">Fotile pioneered bionic noise reduction: feather-inspired blades, a nautilus-shaped volute and honeycomb silencing structures cut airflow noise at the source — so a family can talk while a wok is on full heat.</p>
+  </div>
+  <div class="split">
+    <div class="reveal">
+      <div class="noise" id="noise">
+        <div class="nrow" style="--w:38%"><div class="lb">Lowest<small>bionic noise reduction</small></div><div class="tr"><i></i></div><div class="v">38<em>dB</em></div></div>
+        <div class="nrow" style="--w:45%"><div class="lb">Auto mode<small>spec table</small></div><div class="tr"><i></i></div><div class="v">45<em>dB</em></div></div>
+        <div class="nrow hot" style="--w:52%"><div class="lb">Maximum speed<small>training data</small></div><div class="tr"><i></i></div><div class="v">52<em>dB</em></div></div>
+        <div class="nrow ref" style="--w:30%"><div class="lb">Whispering<small>reference</small></div><div class="tr"><i></i></div><div class="v">~30<em>dB</em></div></div>
+        <div class="nrow ref" style="--w:40%"><div class="lb">Library<small>reference</small></div><div class="tr"><i></i></div><div class="v">~40<em>dB</em></div></div>
+        <div class="nrow ref" style="--w:60%"><div class="lb">Conversation<small>reference</small></div><div class="tr"><i></i></div><div class="v">~60<em>dB</em></div></div>
+      </div>
+      <p class="note">Hood noise figures are from Fotile's brochure, spec table and training deck — measured in different modes. Reference sounds are typical approximations.</p>
+    </div>
+    <div class="photo reveal r2" style="aspect-ratio:16/10"><img src="../assets/engineering/mf-quiet.webp" alt="Quiet cooking with a MaxFold hood" loading="lazy"><div class="cap">Talk freely, even at full heat</div></div>
+  </div>
+  <div class="cards c3 bio" style="margin-top:34px">
+    <div class="card reveal"><div class="no">01 — IMPELLER</div><svg id="icoFeather" viewBox="0 0 200 130"></svg><h4>Feather blades</h4><p>Biomimetic feather-style blades cut wind resistance, so the air slides instead of slaps.</p><a class="jump" href="#exploded" data-sys="power">See the impeller →</a></div>
+    <div class="card reveal r2"><div class="no">02 — VOLUTE</div><svg id="icoNautilus" viewBox="0 0 200 130"></svg><h4>Nautilus volute</h4><p>A spiral silencing volute guides the airflow smoothly out of the fan.</p><a class="jump" href="#exploded" data-sys="power">See the volute →</a></div>
+    <div class="card reveal r3"><div class="no">03 — ACOUSTIC BOXES</div><svg id="icoHoney" viewBox="0 0 200 130"></svg><h4>Honeycomb silence</h4><p>Millions of honeycomb silencing structures absorb noise inside the acoustic boxes.</p><a class="jump" href="#exploded" data-sys="silence">See the acoustic stack →</a></div>
+  </div>
+</div></section>
+
+<!-- 05 EXPLODED VIEW -->
+<section class="pad xv" id="exploded"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>05 — The exploded view</div>
+    <h2 class="h2">Every part.<br><b>Laid bare.</b></h2>
+    <p class="lead">This is Fotile's own engineering drawing of the BIG9069-G, taken apart into 58 named components. Pick a system to zoom in — or tap any glowing dot.</p>
+  </div>
+  <div class="xv-grid reveal">
+    <div class="xv-side">
+      <div class="xv-tabs" id="xvTabs" role="tablist"></div>
+      <div class="xv-info" id="xvInfo"></div>
+    </div>
+    <div class="xv-stage" id="xvStage">
+      <div class="xv-pan" id="xvPan">
+        <img src="../assets/engineering/mf-exploded.webp" alt="Exploded view of the Fotile BIG9069-G range hood showing all components" width="2700" height="2390" loading="lazy">
+      </div>
+      <div class="xv-tip" id="xvTip"><b></b><span></span></div>
+      <button class="tbtn xv-reset" id="xvReset" type="button" style="display:none">Show all</button>
+      <div class="xv-hint">BIG9069-G · exploded view</div>
+    </div>
+  </div>
+  <details class="xv-all"><summary>All 58 components, listed</summary><div class="cols" id="xvAll"><div><h5>Power core</h5><ul style="padding:0"><li>Air outlet cover</li><li>Fan cover plate</li><li>Volute assembly</li><li>Motor bracket assembly</li><li>Right-hand lock nut</li><li>Fan bracket</li><li>Impeller</li><li>Motor</li></ul></div><div><h5>Silence stack</h5><ul style="padding:0"><li>Front volute acoustic box assembly</li><li>Volute sealing gasket</li><li>Acoustic foam</li><li>Acoustic box assembly</li><li>Rear acoustic box assembly</li><li>Lower ring-wall acoustic box assembly</li></ul></div><div><h5>Brain & light</h5><ul style="padding:0"><li>Power cord</li><li>Reactor</li><li>Power board assembly</li><li>Electrical box</li><li>LED light retaining plate</li><li>LED light assembly</li><li>Switch retaining plate</li><li>Switch assembly</li></ul></div><div><h5>The fold</h5><ul style="padding:0"><li>Unit hanging hook</li><li>Push rod assembly</li><li>Slider assembly</li><li>Right hinge assembly</li><li>Catch claw</li><li>Left hinge assembly</li><li>Catch</li></ul></div><div><h5>Capture & clean</h5><ul style="padding:0"><li>Right air deflector</li><li>Inner oil filter</li><li>Left air deflector</li><li>Smoke baffle assembly</li><li>Right oil-cup hook assembly</li><li>Left oil-cup hook assembly</li><li>Oil cup</li><li>Oil filter bracket</li><li>Grille</li></ul></div><div><h5>Shell & glass</h5><ul style="padding:0"><li>Cover plate</li><li>Rear decorative panel</li><li>Upper rear panel</li><li>Foot pad</li><li>Right reinforcement plate</li><li>Right top plate</li><li>Upper glass panel assembly</li><li>Left reinforcement plate</li><li>Left top plate</li><li>Upper top plate</li><li>Side panel foot pad</li><li>Rear sealing strip</li><li>Frame assembly</li><li>Right upper side plate</li><li>Left upper side plate</li><li>Lower wire cover</li><li>Left wire cover</li><li>Lower rear panel assembly</li><li>Left lower side plate</li><li>Right lower side plate</li></ul></div></div></details>
+  <p class="note">Source: Fotile BIG9069-G Exploded View. Component descriptions are simplified from Fotile's product material.</p>
+</div></section>
+
+<!-- 06 SMART -->
+<section class="pad smart" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <div class="sechead reveal center">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>06 — The senses</div>
+    <h2 class="h2">It notices.<br><b>So you don't have to.</b></h2>
+  </div>
+  <div class="cards">
+    <div class="card reveal"><div class="no">WAVE CONTROL</div>
+      <svg viewBox="0 0 200 130"><rect class="fl" x="30" y="30" width="140" height="16" rx="3"/><circle cx="42" cy="38" r="3" fill="#ff6b7f"/><circle cx="158" cy="38" r="3" fill="#ff6b7f"/><g fill="none" stroke="#ff6b7f" stroke-width="1.2"><path d="M42 48 q-10 14 0 28" opacity=".7"><animate attributeName="opacity" values=".1;.9;.1" dur="1.8s" repeatCount="indefinite"/></path><path d="M158 48 q10 14 0 28" opacity=".7"><animate attributeName="opacity" values=".1;.9;.1" dur="1.8s" begin=".9s" repeatCount="indefinite"/></path></g><g><path class="ln" d="M80 118 v-18 q-2-10 4-12 q4 0 5 6 v-14 q0-6 5-6 t5 6 v10 q0-6 5-5 t4 6 v-3 q0-5 5-4 t4 6 v22 z"><animateTransform attributeName="transform" type="translate" values="-34 0;34 0;-34 0" dur="2.6s" repeatCount="indefinite"/></path></g></svg>
+      <h4>Wave, it wakes</h4><p>Wave past the sensing windows: the fume screen opens, the fan runs on Auto and the light comes on. No touching a greasy panel.</p></div>
+    <div class="card reveal r2"><div class="no">SMART ODOR SENSING</div>
+      <svg viewBox="0 0 200 130"><rect class="fl" x="62" y="14" width="76" height="14" rx="3"/><circle cx="100" cy="21" r="2.4" fill="var(--mint)"><animate attributeName="r" values="2;4.5;2" dur="1.6s" repeatCount="indefinite"/></circle><g fill="#b4b9c0"><circle r="3"><animateMotion dur="3.4s" repeatCount="indefinite" path="M30 118 C 60 90, 80 60, 98 30"/></circle><circle r="2.4"><animateMotion dur="3.4s" begin=".8s" repeatCount="indefinite" path="M170 112 C 150 90, 120 60, 104 30"/></circle><circle r="3.4"><animateMotion dur="3.4s" begin="1.6s" repeatCount="indefinite" path="M100 124 C 96 90, 100 60, 100 32"/></circle><circle r="2.4"><animateMotion dur="3.4s" begin="2.4s" repeatCount="indefinite" path="M60 122 C 70 90, 90 60, 98 30"/></circle></g></svg>
+      <h4>It smells the air</h4><p>A 7×24-hour sensor watches for formaldehyde, ammonia, CO, benzene, smoke and more — and clears the air within 60 seconds.</p></div>
+    <div class="card reveal r3"><div class="no">HOOD–HOB LINK</div>
+      <svg viewBox="0 0 200 130"><rect class="fl" x="52" y="18" width="96" height="14" rx="3"/><rect class="fl" x="62" y="106" width="76" height="8" rx="2"/><g><path d="M86 104 q-6-12 0-22 q3 9 10 11 q5-6 2-14 q12 9 8 25 z" fill="#7fc4ff"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.12;.55;.7;1" dur="4s" repeatCount="indefinite"/></path></g><g stroke="var(--gold)" fill="none" stroke-width="1.2"><path d="M100 80 V38" stroke-dasharray="3 4"><animate attributeName="stroke-dashoffset" values="0;-14" dur=".8s" repeatCount="indefinite"/></path></g><circle cx="100" cy="25" r="2.6" fill="var(--gold)"><animate attributeName="opacity" values=".15;1;1;.15;.15" keyTimes="0;.14;.6;.74;1" dur="4s" repeatCount="indefinite"/></circle></svg>
+      <h4>Flame on, hood on</h4><p>Pair the hood with a compatible Fotile hob: the hood starts when you light the burner and clears the air when you switch it off.</p></div>
+    <div class="card reveal r4"><div class="no">2-MINUTE DELAY</div>
+      <svg viewBox="0 0 200 130"><circle cx="100" cy="65" r="44" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="6"/><circle cx="100" cy="65" r="44" fill="none" stroke="var(--gold)" stroke-width="6" stroke-linecap="round" stroke-dasharray="276" transform="rotate(-90 100 65)"><animate attributeName="stroke-dashoffset" values="0;276" dur="5s" repeatCount="indefinite"/></circle><text x="100" y="72" text-anchor="middle" class="big" style="font-size:22px">2:00</text></svg>
+      <h4>Cleans up after itself</h4><p>When you finish cooking it keeps running for two more minutes to pull the last of the smoke, then switches itself off.</p></div>
+  </div>
+  <div class="split" style="margin-top:30px">
+    <div class="photo reveal" style="aspect-ratio:16/10"><img src="../assets/engineering/mf-air.webp" alt="Air flowing into the MaxFold hood with odour sensing" loading="lazy"><div class="cap">24-hour air monitoring</div></div>
+    <div class="photo reveal r2" style="aspect-ratio:16/10"><img src="../assets/engineering/mf-wave.webp" alt="Wave control over the hob" loading="lazy"><div class="cap">Wave control + hood–hob link</div></div>
+  </div>
+</div></section>
+
+<!-- 07 INSTALL -->
+<section class="pad"><div class="wrap">
+  <div class="sechead reveal">
+    <div class="kick"><span class="dot"></span>07 — The fit</div>
+    <h2 class="h2">Disappears into<br><b>almost any kitchen.</b></h2>
+    <p class="lead">Two installation forms — fully recessed or flush with the cabinet door — and a 30&nbsp;mm hinge-avoiding design that doesn't steal your side-cabinet storage.</p>
+  </div>
+  <div class="inst reveal">
+    <div class="dia"><svg viewBox="0 0 440 280" role="img" aria-label="Full-recessed installation in a 350 millimetre cabinet">
+      <path class="fl" d="M60 40 H400 V190 H60 Z" style="fill:rgba(255,255,255,.025)"/><line class="ln" x1="60" y1="40" x2="60" y2="190"/>
+      <rect class="fl" x="86" y="120" width="314" height="70" style="fill:rgba(217,187,134,.1);stroke:var(--gold)"/>
+      <rect class="fl" x="86" y="190" width="314" height="7" style="stroke:var(--gold)"/>
+      <path class="ln" d="M60 190 h12"/>
+      <path class="dm" d="M60 232 H400 M60 226 v12 M400 226 v12"/><text class="r" x="190" y="256" style="font-size:14px">cabinet ≥ 350 mm</text>
+      <text class="sm" x="76" y="28">Full-recessed</text><text class="g" x="150" y="160">hood hides inside the door line</text>
+    </svg><div class="legend">Full-recessed</div></div>
+    <div class="dia"><svg viewBox="0 0 440 280" role="img" aria-label="Flush installation in a 330 millimetre cabinet">
+      <path class="fl" d="M80 40 H400 V190 H80 Z" style="fill:rgba(255,255,255,.025)"/><line class="ln" x1="80" y1="40" x2="80" y2="190"/>
+      <rect class="fl" x="80" y="120" width="320" height="70" style="fill:rgba(217,187,134,.1);stroke:var(--gold)"/>
+      <rect class="fl" x="80" y="190" width="320" height="7" style="stroke:var(--gold)"/>
+      <path class="dm" d="M80 232 H400 M80 226 v12 M400 226 v12"/><text class="r" x="190" y="256" style="font-size:14px">cabinet ≥ 330 mm</text>
+      <text class="sm" x="96" y="28">Flush</text><text class="g" x="150" y="160">hood face level with the door</text>
+    </svg><div class="legend">Flush</div></div>
+  </div>
+  <div class="reqs reveal">
+    <div><b>897×330×650</b><span>Product size, mm (L × W × H)</span></div>
+    <div><b>≥ 900<i style="font-style:normal;font-size:.5em"> mm</i></b><span>Cabinet interior width</span></div>
+    <div><b>≥ 650<i style="font-style:normal;font-size:.5em"> mm</i></b><span>Hob surface to the hood's lowest part, and minimum cabinet height</span></div>
+    <div><b>30<i style="font-style:normal;font-size:.5em"> mm</i></b><span>Hinge-avoiding design — no cabinet changes</span></div>
+  </div>
+  <p class="note">Confirm site requirements with a Fotile technician before installation.</p>
+</div></section>
+
+<!-- GALLERY + SPEC -->
+<section class="pad" style="background:var(--bg2);border-top:1px solid var(--line)"><div class="wrap">
+  <div class="gal reveal">
+    <div class="g"><img src="../assets/engineering/mf-angle.webp" alt="Fotile MaxFold BIG9069-G, angled view" loading="lazy"><span>Starlight Grey</span></div>
+    <div class="g"><img src="../assets/engineering/mf-front.webp" alt="Fotile MaxFold BIG9069-G, front view" loading="lazy"><span>Front</span></div>
+    <div class="g ph"><img src="../assets/engineering/mf-filter.webp" alt="Removing the grease filter from the MaxFold hood" loading="lazy"><span>Two-section filter · easy clean</span></div>
+  </div>
+  <div class="split" style="margin-top:80px;align-items:start">
+    <div class="reveal">
+      <div class="kick"><span class="dot"></span>08 — The numbers</div>
+      <h2 class="h2" style="margin:18px 0 18px">Full specification.</h2>
+      <p class="lead">Straight from Fotile's product manual.</p>
+      <div class="chips"><span class="chip">Anti-fingerprint glass</span><span class="chip">Easy-remove oil cup</span><span class="chip">Two-section grease filter</span><span class="chip">Colour-film touchscreen</span><span class="chip">5.5 W tracking light strip</span></div>
+    </div>
+    <div class="reveal r2"><table class="spec">
+      <tr><td>Model</td><td>BIG9069-G</td></tr><tr><td>Colour</td><td>Starlight Grey</td></tr>
+      <tr><td>Air flow (auto mode)</td><td>1700 m³/h</td></tr><tr><td>Max static pressure</td><td>1450 Pa</td></tr>
+      <tr><td>Noise (auto mode)</td><td>45 dB</td></tr><tr><td>Product size (L×W×H)</td><td>897 × 330 × 650 mm</td></tr>
+      <tr><td>LED light power</td><td>5.5 W</td></tr><tr><td>Voltage / frequency</td><td>220–240 V / 50 Hz</td></tr>
+      <tr><td>Input power</td><td>430 W</td></tr>
+    </table></div>
+  </div>
+</div></section>
+
+<!-- PROOF -->
+<section class="pad proof"><div class="bg"></div><div class="wrap">
+  <div class="sechead reveal" style="margin-bottom:0">
+    <div class="kick"><span class="dot"></span>Why it works</div>
+    <h2 class="h2">So how good<br>is <b>Fotile?</b></h2>
+    <p class="lead">The engineering above isn't a one-off. It comes from a company that spends its whole life on the kitchen.</p>
+  </div>
+  <div class="tiles reveal">
+    <div class="tile"><b data-count="4000" data-suf="+">4,000<i>+</i></b><span>Invention patents</span></div>
+    <div class="tile"><b data-count="16000" data-suf="+">16,000<i>+</i></b><span>Granted patents</span></div>
+    <div class="tile"><b data-count="110" data-suf="+">110<i>+</i></b><span>Red Dot / iF design awards</span></div>
+    <div class="tile"><b data-count="3">3</b><span>Global R&amp;D centres — Düsseldorf, Osaka, Ningbo</span></div>
+  </div>
+  <div class="proofline reveal"><span><b>IEC standard</b> — Fotile led the revision of the international safety standard for range hoods (IEC 60335-2-31).</span><span><b>#1</b> in China's high-end range hood &amp; cooktop sales for 10 consecutive years.</span><span><b>KBIS</b> — first brand in 60 years to win in the range-hood category.</span></div>
+  <p class="note" style="margin-top:22px">Company data from Fotile's brochure, as of October 2025.</p>
+</div></section>
+
+<!-- CTA -->
+<section class="pad cta">
+  <div class="bg" style="background-image:url('../assets/engineering/mf-cabinet.webp')"></div>
+  <div class="wrap"><div class="in reveal">
+    <div class="kick" style="justify-content:center"><span class="dot"></span>MaxFold BIG9069-G</div>
+    <h2 class="h2" style="margin:20px 0 22px">Fold it away.<br><b>Unfold the power.</b></h2>
+    <p class="lead" style="margin:0 auto 34px;color:#c4c6ca">Add it to your quote basket and a Fotile specialist will confirm fit, price and installation for your kitchen.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="/shop/maxfold-folding-range-hood-big9069-g/" class="btn-r" data-basket="maxfold-folding-range-hood-big9069-g">Add to Quote Basket →</a>
+      <a href="/shop/maxfold-folding-range-hood-big9069-g/" class="btn-l">View product page</a>
+      <a href="/our-dealers/" class="btn-l">Find a showroom</a>
+    </div>
+  </div></div>
+</section>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><img class="fl" src="../assets/logo.png" alt="FOTILE" loading="lazy" decoding="async"><p class="fdesc">The leading kitchen appliances brand in Pakistan — on a mission to make kitchens more efficient and enjoyable spaces.</p>
+      <div class="fsoc" style="margin-top:24px"><a href="https://www.facebook.com/fotile.pk" target="_blank" rel="noopener" aria-label="Fotile Pakistan on Facebook">f</a><a href="https://www.instagram.com/fotilepak/" target="_blank" rel="noopener" aria-label="Fotile Pakistan on Instagram">◎</a><a href="https://www.linkedin.com/company/fotilepk/" target="_blank" rel="noopener" aria-label="Fotile Pakistan on LinkedIn">in</a></div></div>
+    <div><h5>Collection</h5><a class="fli" href="/product-category/kitchen-hood/">Range Hoods</a><a class="fli" href="/product-category/oven/">Ovens</a><a class="fli" href="/product-category/hobs/">Hobs</a><a class="fli" href="/product-category/dish-washer/">Dishwashers</a><a class="fli" href="/product-category/water-purifier/">Purifiers</a></div>
+    <div><h5>Company</h5><a class="fli" href="/about-us/">About Us</a><a class="fli" href="/our-dealers/">Dealers</a><a class="fli" href="/blog/">Blog</a><a class="fli" href="/faq/">FAQ</a><a class="fli" href="/contact-us/">Contact</a></div>
+    <div><h5>Support</h5><a class="fli" href="/service-center/">Schedule Service</a><a class="fli" href="/service-center/#warranty">Warranty</a><a class="fli" href="tel:+924211131517">042-111-131-517</a></div>
+  </div>
+  <div class="fbot"><span>© 2026 Fotile Pakistan — All Rights Reserved.</span><span style="display:flex;gap:16px;flex-wrap:wrap"><a href="/refund_returns/">Refunds</a><a href="/shipping-policy/">Shipping</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms-and-conditions/">Terms &amp; Conditions</a></span></div>
+</div></footer>
+<a class="wa" href="https://wa.me/923008463129" target="_blank" rel="noopener" aria-label="Chat with Fotile Pakistan on WhatsApp">💬</a>
+
+<script>window.MF={"systems":[{"id":"power","name":"Power core","sub":"Motor · impeller · volute","color":"#ff6b7f","story":"Where 1700 m³/h is made. A new-generation DC motor spins a feather-bladed impeller inside a nautilus-shaped volute; brackets and a lock nut keep it balanced at speed."},{"id":"silence","name":"Silence stack","sub":"Acoustic boxes · foam · gaskets","color":"#9fd6ff","story":"Layers of acoustic boxes, foam and sealing gaskets wrap the fan so airflow noise is absorbed before it reaches your kitchen."},{"id":"brain","name":"Brain & light","sub":"Electronics · switch · LED","color":"#d9bb86","story":"The power board, reactor and switch assembly run the smart modes; the LED assembly lights the hob from the lowered intake."},{"id":"fold","name":"The fold","sub":"Push rod · hinges · slider","color":"#b9a2ff","story":"The aviation-inspired mechanism: a push rod, left/right hinges and slider lower the intake 10 cm and fold it away again, 50,000 times over."},{"id":"capture","name":"Capture & clean","sub":"Baffle · filter · oil cup","color":"#7be0b0","story":"The smoke baffle opens to 135°, the inner oil filter catches grease, and the oil cup collects it — all removable for cleaning."},{"id":"shell","name":"Shell & glass","sub":"Panels · glass · frame","color":"#ffb36b","story":"The upper glass panel, frame and sheet-metal plates form the clean flat face and the rigid body that sits inside your cabinet."}],"parts":[{"n":"Power cord","sys":"brain","x":1.92,"y":4.28,"t":"Mains supply, 220–240 V / 50 Hz."},{"n":"Reactor","sys":"brain","x":12.08,"y":8.76,"t":"Smooths the electrical supply to the motor drive."},{"n":"Power board assembly","sys":"brain","x":15.86,"y":9.18,"t":"Main control board running the smart modes."},{"n":"Electrical box","sys":"brain","x":19.0,"y":1.67,"t":"Protective housing for the electronics."},{"n":"Air outlet cover","sys":"power","x":26.1,"y":8.55,"t":"Directs exhaust out through the duct."},{"n":"Front volute acoustic box assembly","sys":"silence","x":44.97,"y":4.61,"t":"Acoustic enclosure around the front of the volute."},{"n":"Volute sealing gasket","sys":"silence","x":55.73,"y":11.99,"t":"Seals the volute so air and noise do not leak."},{"n":"Acoustic foam","sys":"silence","x":64.31,"y":15.64,"t":"Sound-absorbing foam lining."},{"n":"Acoustic box assembly","sys":"silence","x":88.89,"y":15.33,"t":"Additional acoustic enclosure that absorbs fan noise."},{"n":"Fan cover plate","sys":"power","x":95.93,"y":13.34,"t":"Closes the fan chamber."},{"n":"Volute assembly","sys":"power","x":59.05,"y":15.75,"t":"Nautilus-shaped volute guiding air smoothly out of the fan."},{"n":"Motor bracket assembly","sys":"power","x":74.03,"y":16.48,"t":"Mounts the motor and absorbs vibration."},{"n":"Right-hand lock nut","sys":"power","x":36.58,"y":22.83,"t":"Secures the impeller to the motor shaft."},{"n":"Unit hanging hook","sys":"fold","x":13.1,"y":17.39,"t":"Hangs the unit securely inside the cabinet."},{"n":"Rear acoustic box assembly","sys":"silence","x":11.71,"y":20.99,"t":"Rear acoustic enclosure with honeycomb silencing."},{"n":"Rear acoustic box assembly","sys":"silence","x":15.66,"y":20.29,"t":"Rear acoustic enclosure with honeycomb silencing."},{"n":"Fan bracket","sys":"power","x":33.45,"y":25.21,"t":"Holds the impeller assembly rigidly in place."},{"n":"Impeller","sys":"power","x":42.58,"y":28.11,"t":"Feather-blade impeller that moves air with less resistance and noise."},{"n":"Push rod assembly","sys":"fold","x":24.24,"y":34.83,"t":"Drives the lowering and raising motion."},{"n":"Lower ring-wall acoustic box assembly","sys":"silence","x":60.62,"y":37.47,"t":"Lower acoustic box that wraps the fan ring wall."},{"n":"Cover plate","sys":"shell","x":30.15,"y":41.32,"t":"Cover plate."},{"n":"Rear decorative panel","sys":"shell","x":17.6,"y":42.02,"t":"Rear decorative panel."},{"n":"Upper rear panel","sys":"shell","x":24.1,"y":46.09,"t":"Rear panel, upper."},{"n":"Foot pad","sys":"shell","x":10.12,"y":43.82,"t":"Protective foot pad."},{"n":"Foot pad","sys":"shell","x":13.72,"y":43.35,"t":"Protective foot pad."},{"n":"Right reinforcement plate","sys":"shell","x":32.96,"y":45.78,"t":"Stiffens the right side."},{"n":"LED light retaining plate","sys":"brain","x":76.21,"y":40.91,"t":"Holds the LED strip in place."},{"n":"LED light assembly","sys":"brain","x":75.75,"y":43.58,"t":"5.5 W tracking light strip over the hob."},{"n":"Right top plate","sys":"shell","x":41.89,"y":44.53,"t":"Right top plate."},{"n":"Upper glass panel assembly","sys":"shell","x":88.31,"y":44.83,"t":"Anti-fingerprint glass front panel."},{"n":"Left reinforcement plate","sys":"shell","x":18.15,"y":47.5,"t":"Stiffens the left side."},{"n":"Left top plate","sys":"shell","x":7.28,"y":50.86,"t":"Left top plate."},{"n":"Upper top plate","sys":"shell","x":51.28,"y":51.41,"t":"Top sheet-metal plate."},{"n":"Upper top plate","sys":"shell","x":54.76,"y":51.0,"t":"Top sheet-metal plate."},{"n":"Upper top plate","sys":"shell","x":49.36,"y":48.54,"t":"Top sheet-metal plate."},{"n":"Upper top plate","sys":"shell","x":52.93,"y":49.01,"t":"Top sheet-metal plate."},{"n":"Upper top plate","sys":"shell","x":29.85,"y":49.85,"t":"Top sheet-metal plate."},{"n":"Slider assembly","sys":"fold","x":26.87,"y":52.11,"t":"Guides the intake smoothly as it travels."},{"n":"Right air deflector","sys":"capture","x":38.15,"y":57.35,"t":"Guides air toward the intake (right)."},{"n":"Side panel foot pad","sys":"shell","x":7.7,"y":55.63,"t":"Protective foot pad for the side panels."},{"n":"Side panel foot pad","sys":"shell","x":11.41,"y":54.69,"t":"Protective foot pad for the side panels."},{"n":"Side panel foot pad","sys":"shell","x":14.94,"y":54.61,"t":"Protective foot pad for the side panels."},{"n":"Side panel foot pad","sys":"shell","x":18.64,"y":54.15,"t":"Protective foot pad for the side panels."},{"n":"Rear sealing strip","sys":"shell","x":21.75,"y":55.55,"t":"Seals the rear against the cabinet."},{"n":"Rear sealing strip","sys":"shell","x":29.5,"y":55.16,"t":"Seals the rear against the cabinet."},{"n":"Frame assembly","sys":"shell","x":76.53,"y":49.7,"t":"Structural frame of the body."},{"n":"Inner oil filter","sys":"capture","x":56.05,"y":50.73,"t":"Catches grease before it reaches the fan."},{"n":"Right upper side plate","sys":"shell","x":40.48,"y":61.0,"t":"Right side plate, upper."},{"n":"Left air deflector","sys":"capture","x":20.5,"y":59.69,"t":"Guides air toward the intake (left)."},{"n":"Left upper side plate","sys":"shell","x":22.1,"y":64.31,"t":"Left side plate, upper."},{"n":"Lower wire cover","sys":"shell","x":45.35,"y":64.86,"t":"Hides the wiring (lower)."},{"n":"Switch retaining plate","sys":"brain","x":51.09,"y":65.17,"t":"Holds the switch assembly in position."},{"n":"Switch assembly","sys":"brain","x":56.05,"y":64.8,"t":"Touch controls and smart sensing."},{"n":"Smoke baffle assembly","sys":"capture","x":70.17,"y":64.56,"t":"Opens to 135° to widen the capture zone."},{"n":"Left wire cover","sys":"shell","x":14.55,"y":69.94,"t":"Hides the wiring (left)."},{"n":"Right hinge assembly","sys":"fold","x":42.03,"y":73.33,"t":"Right pivot of the folding structure."},{"n":"Right oil-cup hook assembly","sys":"capture","x":35.59,"y":78.31,"t":"Holds the oil cup (right)."},{"n":"Catch claw","sys":"fold","x":46.83,"y":81.98,"t":"Engages the catch for a flush, gap-free close."},{"n":"Catch claw","sys":"fold","x":51.62,"y":81.85,"t":"Engages the catch for a flush, gap-free close."},{"n":"Left hinge assembly","sys":"fold","x":23.27,"y":75.8,"t":"Left pivot of the folding structure."},{"n":"Left oil-cup hook assembly","sys":"capture","x":23.0,"y":79.63,"t":"Holds the oil cup (left)."},{"n":"Lower rear panel assembly","sys":"shell","x":10.47,"y":89.02,"t":"Rear panel, lower."},{"n":"Left lower side plate","sys":"shell","x":19.54,"y":86.98,"t":"Left side plate, lower."},{"n":"Oil cup","sys":"capture","x":28.17,"y":93.21,"t":"Collects grease; slides out for emptying."},{"n":"Oil filter bracket","sys":"capture","x":32.1,"y":85.39,"t":"Holds the filter securely."},{"n":"Right lower side plate","sys":"shell","x":39.7,"y":85.74,"t":"Right side plate, lower."},{"n":"Grille","sys":"capture","x":58.68,"y":87.95,"t":"Visible intake grille."},{"n":"Grille","sys":"capture","x":54.21,"y":88.42,"t":"Visible intake grille."},{"n":"Motor","sys":"power","x":48.39,"y":25.37,"t":"New-generation DC motor — the heart of the 1700 m³/h engine."},{"n":"Catch","sys":"fold","x":27.53,"y":74.66,"t":"Locks the intake in the closed position."},{"n":"Catch","sys":"fold","x":30.3,"y":79.83,"t":"Locks the intake in the closed position."},{"n":"Catch","sys":"fold","x":27.81,"y":80.02,"t":"Locks the intake in the closed position."}],"intro":"Fotile's engineering drawing of the BIG9069-G, taken apart into 58 named components across six systems."};</script>
+<script>
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+
+  /* ---------- FOLD diagram ---------- */
+  var svg=document.getElementById('foldSvg'),btn=document.getElementById('fBtn');
+  if(svg){
+    var intake=document.getElementById('intake'),baffle=document.getElementById('baffleG'),hinge=document.getElementById('hinge'),
+        links=document.getElementById('links'),led=document.getElementById('ledStrip'),dropDim=document.getElementById('dropDim');
+    var DROP=96,L=64,t=0,target=0,raf=null;
+    function draw(){
+      var d=DROP*t;
+      intake.setAttribute('transform','translate(0,'+d+')');
+      hinge.setAttribute('cx',331);hinge.setAttribute('cy',211);
+      var b=Math.max(0,(t-.55)/.45); b=1-Math.pow(1-b,3);
+      baffle.setAttribute('transform','translate(331,'+(211)+') rotate('+(135*b)+')');
+      led.setAttribute('opacity',(.25+.75*t).toFixed(2));
+      // scissor links at two x positions
+      links.innerHTML='';
+      [430,640].forEach(function(x){
+        var top=206,bot=206+d,half=(bot-top)/2,off=Math.sqrt(Math.max(0,L*L-half*half));
+        if(d<2){off=0}
+        var mid=top+half;
+        el('path',{d:'M'+x+' '+top+' L'+(x-off)+' '+mid+' L'+x+' '+bot,fill:'none'},links);
+        el('circle',{cx:x-off,cy:mid,r:3,fill:'#0b0b0d',stroke:'#e9e5dc'},links);
+        el('circle',{cx:x,cy:top,r:2.6,fill:'#e9e5dc'},links);el('circle',{cx:x,cy:bot,r:2.6,fill:'#e9e5dc'},links);
+      });
+      var dd=216+d; dropDim.setAttribute('d','M236 216 V'+dd+' M228 216 H244 M228 '+dd+' H244');
+      svg.classList.toggle('open',t>.5);
+    }
+    function tick(){
+      var s=(target-t); if(Math.abs(s)<.002){t=target;draw();raf=null;return}
+      t+=s*.075;draw();raf=requestAnimationFrame(tick);
+    }
+    function go(v){target=v;btn.textContent=v?'Fold':'Unfold';btn.classList.toggle('on',!v);if(!raf)raf=requestAnimationFrame(tick)}
+    draw();
+    btn.addEventListener('click',function(){go(target?0:1)});
+    if('IntersectionObserver' in window){
+      var fio=new IntersectionObserver(function(es){if(es[0].isIntersecting){setTimeout(function(){go(1)},700);fio.disconnect()}},{threshold:.45});
+      fio.observe(document.getElementById('foldDia'));
+    }else go(1);
+  }
+
+  /* ---------- impeller + bionic icons ---------- */
+  var imp=document.getElementById('impeller');
+  if(imp){
+    el('circle',{cx:100,cy:100,r:36,fill:'none',stroke:'#e9e5dc','stroke-width':1},imp);
+    for(var i=0;i<18;i++){var a=i*20*Math.PI/180,x1=100+Math.cos(a)*14,y1=100+Math.sin(a)*14,x2=100+Math.cos(a+.5)*36,y2=100+Math.sin(a+.5)*36;
+      el('path',{d:'M'+x1+' '+y1+' Q '+(100+Math.cos(a+.1)*30)+' '+(100+Math.sin(a+.1)*30)+' '+x2+' '+y2,fill:'none',stroke:'#e9e5dc','stroke-width':1.2},imp)}
+    el('circle',{cx:100,cy:100,r:10,fill:'#0b0b0d',stroke:'var(--gold)','stroke-width':1.5},imp);
+  }
+  var f=document.getElementById('icoFeather');
+  if(f){
+    el('path',{d:'M100 14 C 150 40, 150 92, 100 118 C 50 92, 50 40, 100 14 Z',fill:'rgba(217,187,134,.08)',stroke:'var(--gold)','stroke-width':1.4},f);
+    el('path',{d:'M100 14 V118',stroke:'#e9e5dc','stroke-width':1.3,fill:'none'},f);
+    for(var k=1;k<8;k++){var y=14+k*13;el('path',{d:'M100 '+y+' Q '+(100+30-k*2)+' '+(y-8)+' '+(100+44-k*3)+' '+(y-18),fill:'none',stroke:'#e9e5dc','stroke-width':.9,opacity:.7},f);el('path',{d:'M100 '+y+' Q '+(100-30+k*2)+' '+(y-8)+' '+(100-44+k*3)+' '+(y-18),fill:'none',stroke:'#e9e5dc','stroke-width':.9,opacity:.7},f)}
+    var air=el('g',{},f);[30,60,90].forEach(function(y,i){var p=el('path',{d:'M8 '+y+' h60',stroke:'#7fc4ff','stroke-width':1.2,'stroke-dasharray':'6 6',fill:'none',opacity:.7},air);var an=el('animate',{attributeName:'stroke-dashoffset',values:'0;-24',dur:(1.2+i*.2)+'s',repeatCount:'indefinite'},p)});
+  }
+  var n=document.getElementById('icoNautilus');
+  if(n){
+    var pts=[],cx=100,cy=65;for(var th=0;th<=4.4*Math.PI;th+=.1){var r=3*Math.exp(.22*th);pts.push((cx+Math.cos(th)*r*.9).toFixed(1)+','+(cy+Math.sin(th)*r*.9).toFixed(1))}
+    var sp=el('polyline',{points:pts.join(' '),fill:'none',stroke:'var(--gold)','stroke-width':1.6,'stroke-linecap':'round'},n);
+    for(var q=1;q<5;q++){var th2=q*0.9*Math.PI,r2=3*Math.exp(.22*th2);el('path',{d:'M'+(cx+Math.cos(th2)*r2*.9)+' '+(cy+Math.sin(th2)*r2*.9)+' L'+(cx+Math.cos(th2)*r2*.9*.82)+' '+(cy+Math.sin(th2)*r2*.9*.82),stroke:'#e9e5dc','stroke-width':.9,opacity:.6},n)}
+    var pp=el('circle',{r:3.4,fill:'#7fc4ff'},n);el('animateMotion',{dur:'3.2s',repeatCount:'indefinite',path:'M'+pts.slice().reverse().map(function(s,i){return (i?'L':'')+s.replace(',',' ')}).join(' ')},pp);
+  }
+  var h=document.getElementById('icoHoney');
+  if(h){
+    var R=15,dx=R*1.74,dy=R*1.5,idx=0;
+    for(var row=0;row<5;row++)for(var col=0;col<7;col++){var x=18+col*dx+(row%2?dx/2:0),y=16+row*dy,pts2=[];for(var s=0;s<6;s++){var aa=Math.PI/3*s+Math.PI/6;pts2.push((x+Math.cos(aa)*R*.92).toFixed(1)+','+(y+Math.sin(aa)*R*.92).toFixed(1))}
+      var hx=el('polygon',{points:pts2.join(' '),fill:'rgba(217,187,134,.05)',stroke:'var(--gold)','stroke-width':1,opacity:.8},h);
+      el('animate',{attributeName:'fill-opacity',values:'.05;.55;.05',dur:'3s',begin:((idx++)%9*.28)+'s',repeatCount:'indefinite'},hx)}
+  }
+
+  /* ---------- EXPLODED VIEW ---------- */
+  var D=window.MF; if(!D)return;
+  var stage=document.getElementById('xvStage'),pan=document.getElementById('xvPan'),tabs=document.getElementById('xvTabs'),info=document.getElementById('xvInfo'),
+      tip=document.getElementById('xvTip'),reset=document.getElementById('xvReset');
+  var sysById={};D.systems.forEach(function(s){sysById[s.id]=s});
+  var hotEls=[];
+  D.parts.forEach(function(p,i){
+    var b=document.createElement('button');b.className='hp';b.type='button';b.style.left=p.x+'%';b.style.top=p.y+'%';b.style.setProperty('--c',sysById[p.sys].color);
+    b.setAttribute('aria-label',p.n);b.dataset.i=i;pan.appendChild(b);hotEls.push(b);
+  });
+  D.systems.forEach(function(s,i){
+    var cnt=D.parts.filter(function(p){return p.sys===s.id}).length;
+    var t=document.createElement('button');t.type='button';t.className='xv-tab';t.dataset.sys=s.id;t.style.setProperty('--c',s.color);t.setAttribute('role','tab');
+    t.innerHTML='<span class="n">'+(i+1)+'</span><span><b>'+s.name+'</b><small>'+s.sub+'</small></span><em>'+cnt+'</em>';tabs.appendChild(t);
+  });
+  var cur=null,sel=-1,userTouched=false,demo=null;
+  function place(i){ // position tooltip over hotspot i using current pan transform
+    var p=D.parts[i],s=pan._s||1,tx=pan._tx||0,ty=pan._ty||0;
+    tip.style.left=(tx+p.x*s)+'%';tip.style.top=(ty+p.y*s)+'%';
+  }
+  function showTip(i){
+    var p=D.parts[i],sy=sysById[p.sys];tip.style.setProperty('--c',sy.color);
+    tip.querySelector('b').textContent=p.n;tip.querySelector('span').textContent=p.t||sy.name;
+    place(i);tip.classList.add('show');
+  }
+  function hideTip(){tip.classList.remove('show')}
+  function setView(sysId){
+    cur=sysId;
+    tabs.querySelectorAll('.xv-tab').forEach(function(t){var on=t.dataset.sys===sysId;t.classList.toggle('on',on);t.setAttribute('aria-selected',on)});
+    var list=D.parts.map(function(p,i){return i}).filter(function(i){return !sysId||D.parts[i].sys===sysId});
+    stage.classList.toggle('focus',!!sysId);reset.style.display=sysId?'':'none';
+    hotEls.forEach(function(b,i){b.classList.toggle('act',!!sysId&&D.parts[i].sys===sysId);b.classList.remove('hl')});
+    var s=1,tx=0,ty=0;
+    if(sysId&&list.length){
+      var xs=list.map(function(i){return D.parts[i].x}),ys=list.map(function(i){return D.parts[i].y});
+      var x0=Math.min.apply(0,xs),x1=Math.max.apply(0,xs),y0=Math.min.apply(0,ys),y1=Math.max.apply(0,ys);
+      var w=Math.max(x1-x0,14)+16,hh=Math.max(y1-y0,14)+16; s=Math.max(1,Math.min(2.4,100/Math.max(w,hh)));
+      var cx=(x0+x1)/2,cy=(y0+y1)/2;tx=50-cx*s;ty=50-cy*s;
+      tx=Math.min(0,Math.max(100-100*s,tx));ty=Math.min(0,Math.max(100-100*s,ty));
+    }
+    pan._s=s;pan._tx=tx;pan._ty=ty;pan.style.transform='translate('+tx+'%,'+ty+'%) scale('+s+')';pan.style.setProperty('--inv',(1/s).toFixed(3));
+    hideTip();sel=-1;renderInfo();
+  }
+  function renderInfo(){
+    var s=cur?sysById[cur]:null;
+    if(!s){info.style.removeProperty('--c');info.innerHTML='<h4>All systems</h4><p>'+D.intro+'</p><div class="xv-parts"><span class="note" style="margin:0">Select a system on the left, or tap a dot on the drawing.</span></div>';return}
+    info.style.setProperty('--c',s.color);
+    var parts=D.parts.map(function(p,i){return {p:p,i:i}}).filter(function(o){return o.p.sys===cur});
+    var seen={},out='';parts.forEach(function(o){if(seen[o.p.n])return;seen[o.p.n]=1;out+='<button type="button" data-i="'+o.i+'">'+o.p.n+'</button>'});
+    info.innerHTML='<h4>'+s.name+'</h4><p>'+s.story+'</p><div class="xv-parts">'+out+'</div>';
+  }
+  function select(i){
+    var p=D.parts[i];if(cur!==p.sys)setView(p.sys);
+    sel=i;hotEls.forEach(function(b){b.classList.remove('hl')});
+    D.parts.forEach(function(q,j){if(q.n===p.n)hotEls[j].classList.add('hl')});
+    info.querySelectorAll('.xv-parts button').forEach(function(b){b.classList.toggle('sel',D.parts[+b.dataset.i].n===p.n)});
+    setTimeout(function(){showTip(i)},cur===p.sys?0:350);
+  }
+  function stopDemo(){userTouched=true;if(demo){clearInterval(demo);demo=null}}
+  tabs.addEventListener('click',function(e){var t=e.target.closest('.xv-tab');if(!t)return;stopDemo();setView(cur===t.dataset.sys?null:t.dataset.sys)});
+  reset.addEventListener('click',function(){stopDemo();setView(null)});
+  pan.addEventListener('click',function(e){var b=e.target.closest('.hp');if(!b)return;stopDemo();select(+b.dataset.i)});
+  pan.addEventListener('mouseover',function(e){var b=e.target.closest('.hp');if(b&&!stage.classList.contains('focus')||b&&b.classList.contains('act'))showTip(+b.dataset.i)});
+  pan.addEventListener('mouseout',function(e){if(e.target.closest('.hp')&&sel<0)hideTip()});
+  info.addEventListener('click',function(e){var b=e.target.closest('.xv-parts button');if(!b)return;stopDemo();select(+b.dataset.i)});
+  info.addEventListener('mouseover',function(e){var b=e.target.closest('.xv-parts button');if(!b)return;var i=+b.dataset.i;D.parts.forEach(function(q,j){hotEls[j].classList.toggle('hl',q.n===D.parts[i].n)});showTip(i)});
+  info.addEventListener('mouseout',function(e){if(!e.target.closest('.xv-parts button'))return;hotEls.forEach(function(b){b.classList.remove('hl')});if(sel>=0){D.parts.forEach(function(q,j){if(q.n===D.parts[sel].n)hotEls[j].classList.add('hl')});showTip(sel)}else hideTip()});
+  document.addEventListener('click',function(e){var a=e.target.closest('a[data-sys]');if(!a)return;var id=a.getAttribute('data-sys');setTimeout(function(){stopDemo();setView(id)},500)});
+  setView(null);
+  /* gentle auto-tour the first time the section scrolls into view; any interaction stops it */
+  if('IntersectionObserver' in window){
+    var tio=new IntersectionObserver(function(es){if(es[0].isIntersecting){tio.disconnect();var k=0;
+      setTimeout(function(){if(userTouched)return;setView(D.systems[0].id);demo=setInterval(function(){if(userTouched){clearInterval(demo);return}k++;if(k>=D.systems.length){clearInterval(demo);demo=null;setView(null);return}setView(D.systems[k].id)},3600)},900)}},{threshold:.4});
+    tio.observe(stage);
+  }
+})();
+</script>
+<script src="../cart.js"></script>
+<script src="../editor.js"></script>
+<script src="../mobile-nav.js"></script>
+<script src="../assets/engineering/eng.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"MaxFold BIG9069-G — Inside Fotile's Folding Range Hood","url":"https://fotilepk.com/maxfold-anatomy/","description":"Interactive exploded view and engineering of the Fotile MaxFold BIG9069-G fully-integrated range hood.","isPartOf":{"@type":"WebSite","name":"Fotile Pakistan","url":"https://fotilepk.com/"},"about":{"@type":"Product","name":"Fotile MaxFold Folding Range Hood BIG9069-G","sku":"BIG9069-G","brand":{"@type":"Brand","name":"Fotile"},"image":"https://fotilepk.com/assets/engineering/mf-angle.webp","url":"https://fotilepk.com/shop/maxfold-folding-range-hood-big9069-g/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fotilepk.com/"},{"@type":"ListItem","position":2,"name":"Range Hoods","item":"https://fotilepk.com/product-category/kitchen-hood/"},{"@type":"ListItem","position":3,"name":"MaxFold Folding Range Hood BIG9069-G","item":"https://fotilepk.com/shop/maxfold-folding-range-hood-big9069-g/"},{"@type":"ListItem","position":4,"name":"Engineering","item":"https://fotilepk.com/maxfold-anatomy/"}]}]}</script>
+</body>
+</html>
