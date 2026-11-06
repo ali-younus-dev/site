@@ -802,6 +802,11 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;bac
 .tile-moon::after{background:linear-gradient(180deg,transparent 72%,rgba(0,0,0,.55))!important}
 .tile-moon .cap small,.tile-moon .cap h4{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .tile-moon .cap{padding:18px 22px}
+.tile-wifi{background:#0a0a0c}
+.tile-wifi .ti{background-size:contain!important;background-repeat:no-repeat;background-position:center!important;filter:none!important}
+.tile-wifi::after{background:linear-gradient(180deg,transparent 75%,rgba(0,0,0,.5))!important}
+.tile-wifi .cap small,.tile-wifi .cap h4{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tile-wifi .cap{padding:16px 20px}.tile-wifi .cap .go{background:rgba(10,10,12,.8);display:inline-block;padding:7px 12px;border-radius:50px}
 .tile-oven .ti{inset:5% 4% 30% 4% !important;background-position:center center !important}
 .t-xl{grid-column:span 12;grid-row:span 2}
 .t-xl .ti{background-position:center 55%}
@@ -1251,7 +1256,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
     <a href="/fridge/" class="tile t-lg reveal"><div class="ti" style="background-image:url('assets/f20/built-in.webp');background-position:center 28%"></div><div class="cap"><small>Signature · New</small><h4>Premium living, perfected</h4><div class="go">Discover the F20 refrigerator →</div></div></a>
     <a href="/product-category/hobs/" class="tile t-sm contain tile-hob reveal r2"><div class="ti" style="background-image:url('assets/products/gas-hob-90306-y.png')"></div><div class="cap"><small>Hobs</small><h4>Gas &amp; Electric</h4><div class="go">Shop hobs →</div></div></a>
     <a href="/moon-series/" class="tile t-sm tile-moon reveal r3" aria-label="Moon Series — explore the premium collection"><div class="ti" style="background-image:url('assets/home/moon-tile.jpg');background-position:center"></div><div class="cap"><small>Premium</small><h4>Moon Series</h4><div class="go">Explore premium →</div></div></a>
-    <a href="/product-category/oven/" class="tile t-md contain tile-oven reveal"><div class="ti" style="background-image:url('assets/products/built-in-combi-oven-4-in-1-hyzk72-h-1y.png')"></div><div class="cap"><small>Ovens · New Wi-Fi</small><h4>Built-in Ovens</h4><div class="go">Shop ovens →</div></div></a>
+    <a href="/shop/built-in-combi-oven-4-in-1-hyzk72-h-1y/" class="tile t-md tile-wifi reveal" aria-label="Wi-Fi Combi Steam Oven — control your oven from your phone with FOTILE i kitchen"><div class="ti" style="background-image:url('assets/home/wifi-tile.jpg')"></div><div class="cap"><small>Ovens · New Wi-Fi</small><h4>Wi-Fi Combi Steam Oven</h4><div class="go">Discover the Wi-Fi oven →</div></div></a>
     <a href="/product-category/water-purifier/" class="tile t-md contain reveal r2 purifier-tile luxury-tile"><div class="ti" style="background-image:url('assets/products/water-purifier.png')"></div><div class="cap"><small>Purity</small><h4>Water Purifiers</h4><div class="go">Shop purifiers →</div></div></a>
   </div>
 </div></section>
