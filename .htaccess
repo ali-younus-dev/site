@@ -31,6 +31,29 @@ RewriteRule ^leads-cron\.php$ - [F,L]
 RewriteRule (^|/)fotile-leads(/|$) - [F,L]
 
 # ---------------------------------------------------------------------
+# 0c. MAINTENANCE MODE  —  OFF unless a file called  maintenance.on  sits
+#     in the site root (next to index.html).
+#       ON : upload an empty file named  maintenance.on
+#       OFF: delete it
+#     Everyone (and Google) then gets the countdown page with HTTP 503
+#     "temporarily unavailable" — the correct signal that keeps rankings.
+#     Team preview while it is ON: open  https://fotilepk.com/?team=fotile2026
+#     once; that browser sees the real site for 12 hours (cookie).
+#     The dashboard, lead pages, favicon and the page's own assets stay reachable.
+# ---------------------------------------------------------------------
+RewriteCond %{QUERY_STRING} (^|&)team=fotile2026(&|$)
+RewriteRule ^ - [CO=fotile_team:1:fotilepk.com:720:/,E=FTEAM:1]
+RewriteCond %{DOCUMENT_ROOT}/maintenance.on -f
+RewriteCond %{ENV:FTEAM} !=1
+RewriteCond %{HTTP_COOKIE} !(^|;\s*)fotile_team=1
+RewriteCond %{REQUEST_URI} !^/maintenance\.html$
+RewriteCond %{REQUEST_URI} !^/assets/maintenance/
+RewriteCond %{REQUEST_URI} !^/(favicon\.svg|favicon\.ico|apple-touch-icon\.png|robots\.txt|site\.webmanifest)$
+RewriteCond %{REQUEST_URI} !^/(dashboard|leads|admin-api|leads-api)\.php
+RewriteRule ^ - [R=503,L]
+ErrorDocument 503 /maintenance.html
+
+# ---------------------------------------------------------------------
 # 1. WORDPRESS SYSTEM PATHS — kill the crawl traps before anything else.
 # ---------------------------------------------------------------------
 # Internal search -> shop
