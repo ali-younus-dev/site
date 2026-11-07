@@ -12,7 +12,7 @@
      dashboard's "Launch Curtain" switch is used instead.
    ===================================================================== */
 (function () {
-  var ON = true;
+  var ON = false;
   var LAUNCH = Date.parse('2026-11-15T00:00:00+05:00');
 
   try {
