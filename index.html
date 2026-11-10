@@ -1567,6 +1567,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
     const go=()=>('requestIdleCallback' in window)?requestIdleCallback(start,{timeout:1200}):setTimeout(start,200);
     // HERO_AUTOPLAY=false: the Ahsan Khan still stays as the hero; the film only plays when the visitor taps Sound.
     // Set to true to bring back the autoplaying film over the still.
+    // (redeploy nudge 2026-11-10)
     const HERO_AUTOPLAY=false;
     if(HERO_AUTOPLAY){ if(document.readyState==='complete') go(); else addEventListener('load',go,{once:true}); }
   })();
