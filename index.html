@@ -937,6 +937,8 @@ section[style*="border-top"]::marker{display:none}
    linear-gradient(90deg,rgba(5,5,7,.42) 0%,rgba(5,5,7,.14) 30%,rgba(5,5,7,0) 52%)!important}
 body:has(#cine:hover) .spot{opacity:0!important}
 @media(max-width:760px){.cine .cscrim{background:linear-gradient(180deg,rgba(5,5,7,0) 0%,rgba(5,5,7,0) 38%,rgba(5,5,7,.45) 68%,rgba(5,5,7,.82) 100%)!important}}
+/* soft top edge: the left-hand wash used to end in a hard horizontal line across the hero */
+.cine .cscrim{-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 40%);mask-image:linear-gradient(180deg,transparent 0%,#000 40%)}
 /* ===== CAMPAIGN TYPOGRAPHY — matches the Ahsan Khan key visuals =====
    Live HTML text (indexable), styled after the agency artwork:
    "The Beauty of SIMPLICITY" in silver, "BEYOND TECHNOLOGY" wide-tracked. */
@@ -992,12 +994,12 @@ body:has(#cine:hover) .spot{opacity:0!important}
 @media(max-width:760px){.akb .kv-bt{color:#eceae6}.kt-sub{color:#cfcbc5;font-weight:300;margin-bottom:22px}.kt-bot{padding-top:0}.akb-badge{top:16px}
   .kv-bt{letter-spacing:.2em!important}}
 /* hero still: 1080p WebP (49 KB) on desktop, a portrait 720x1080 crop (≈25 KB) on phones */
-.cine .ckb{background-image:url('assets/video/home-banner-poster.webp')}
-@media(max-width:760px){.cine .ckb{background-image:url('assets/video/home-banner-poster-m.webp')}}
+.cine .ckb{background-image:url('assets/ahsan/hero-hood-1920.webp')}
+@media(max-width:760px){.cine .ckb{background-image:url('assets/ahsan/hero-hood-m.webp')}}
 </style>
 <!-- the hero still is the LCP image: fetch it first, only the one this screen needs -->
-<link rel="preload" as="image" href="assets/video/home-banner-poster.webp" type="image/webp" media="(min-width:761px)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/video/home-banner-poster-m.webp" type="image/webp" media="(max-width:760px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/ahsan/hero-hood-1920.webp" type="image/webp" media="(min-width:761px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/ahsan/hero-hood-m.webp" type="image/webp" media="(max-width:760px)" fetchpriority="high">
 <!-- icons + mobile browser chrome -->
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -1563,7 +1565,10 @@ body:has(#cine:hover) .spot{opacity:0!important}
     if(c.saveData || /(^|-)2g$/.test(et) || (phone && et==='3g')) return;
     // after the page has fully loaded, then wait for an idle moment
     const go=()=>('requestIdleCallback' in window)?requestIdleCallback(start,{timeout:1200}):setTimeout(start,200);
-    if(document.readyState==='complete') go(); else addEventListener('load',go,{once:true});
+    // HERO_AUTOPLAY=false: the Ahsan Khan still stays as the hero; the film only plays when the visitor taps Sound.
+    // Set to true to bring back the autoplaying film over the still.
+    const HERO_AUTOPLAY=false;
+    if(HERO_AUTOPLAY){ if(document.readyState==='complete') go(); else addEventListener('load',go,{once:true}); }
   })();
   const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal,.showcase').forEach(el=>io.observe(el));
