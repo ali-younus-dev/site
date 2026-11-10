@@ -529,27 +529,24 @@
   }
 
   /* ===== SHAHID AFRIDI x OPAL SERIES ===== */
-  .sa-top{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;margin-top:54px}
-  .sa-ph{position:relative;overflow:hidden;border-radius:14px;background:#efece6;box-shadow:0 24px 60px rgba(20,22,28,.10)}
-  .sa-ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
-  .sa-ph:hover img{transform:scale(1.035)}
-  .sa-top .sa-ph{aspect-ratio:auto;min-height:420px}
-  .sa-top .sa-ph.tall img{object-position:62% 30%}
-  .sa-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
-  .sa-card{display:block;position:relative;overflow:hidden;border-radius:14px;background:#fff;border:1px solid var(--line);transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s}
-  .sa-card:hover{transform:translateY(-6px);box-shadow:0 26px 60px rgba(20,22,28,.13)}
-  .sa-card .sa-ph{border-radius:0;box-shadow:none;aspect-ratio:4/3}
-  .sa-card:hover .sa-ph img{transform:scale(1.04)}
-  .sa-cap{padding:20px 22px 22px;display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
-  .sa-cap small{display:block;font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px}
-  .sa-cap h3{font-size:19px;font-weight:500;letter-spacing:-.4px;line-height:1.25}
-  .sa-cap i{font-style:normal;flex:none;width:38px;height:38px;border-radius:50%;border:1px solid rgba(20,22,28,.18);display:flex;align-items:center;justify-content:center;transition:.4s}
-  .sa-card:hover .sa-cap i{background:var(--ink);color:#fff;border-color:var(--ink)}
-  @media(max-width:900px){
-    .sa-top{grid-template-columns:1fr;margin-top:36px}
-    .sa-top .sa-ph{min-height:0;aspect-ratio:4/3}
-    .sa-top .sa-ph.tall{display:none}
-    .sa-row{grid-template-columns:1fr}
+  .sa-one{margin:0}
+  .sa-one img{width:100%;height:auto;border-radius:14px;box-shadow:0 24px 60px rgba(20,22,28,.10)}
+  .sa-one figcaption{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:22px}
+  .sa-line{font-size:clamp(18px,1.6vw,22px);font-weight:300;color:var(--ink-soft);letter-spacing:-.3px}
+  /* hero: Afridi sits on the right of the photo; keep him in frame and keep the headline clean */
+  .mhero .photo img{object-position:78% center!important}
+  .mhero .hbadge{display:none!important}
+  @media(min-width:761px){
+    .mhero::after{background:linear-gradient(90deg,rgba(250,249,246,.97) 4%,rgba(250,249,246,.92) 36%,rgba(250,249,246,.5) 52%,rgba(250,249,246,0) 68%)!important}
+  }
+  /* phones: photo on top, clean; words underneath */
+  @media(max-width:760px){
+    .mhero{display:block!important;min-height:0!important;padding-top:62px}
+    .mhero .photo{position:relative!important;inset:auto!important;aspect-ratio:4/5}
+    .mhero .photo img{object-position:center!important;transform:none!important}
+    .mhero .photo::before,.mhero::after,.mhero::before{display:none!important}
+    .mhero .in{padding:30px 0 54px}
+    .mhero .hscroll,.mhero .hero-fade{display:none!important}
   }
 </style>
   <link rel="canonical" href="https://fotilepk.com/opal-series/">
@@ -598,7 +595,10 @@
 <!-- HERO -->
 <header class="mhero">
   <div class="photo">
-    <img id="opalSrc" src="../assets/white/scene-b.jpg" alt="Fotile Opal Series appliances in a bright, sunlit kitchen">
+    <picture>
+      <source media="(max-width:760px)" srcset="../assets/shahidafridi/afridi-opal-hero-m.webp" type="image/webp">
+      <img id="opalSrc" src="../assets/shahidafridi/afridi-opal-hero.webp" width="1920" height="1080" fetchpriority="high" alt="Shahid Afridi in a white Fotile Opal Series kitchen, presenting the Opal range hood and gas hob">
+    </picture>
   </div>
   <div class="in"><div class="wrap">
     <div class="m-ey"><span class="ln"></span>Introducing The Opal Series</div>
@@ -698,33 +698,12 @@
 </section>
 
 <!-- COLLECTION -->
-<!-- SHAHID AFRIDI x OPAL SERIES -->
+<!-- SHAHID AFRIDI x OPAL SERIES (one photo, kept light) -->
 <section class="pad" id="afridi" style="border-top:1px solid var(--line)"><div class="wrap">
-  <div class="col-h reveal">
-    <div>
-      <div class="kick"><span class="dot"></span>Shahid Afridi · Opal Series</div>
-      <h2 class="h2" style="margin-top:18px">Shahid Afridi,<br>at home in <b>white.</b></h2>
-    </div>
-    <p class="dim" style="max-width:380px;font-size:15px">Pakistan's cricket legend in an Opal Series kitchen — hood, hob and oven, finished as one calm white surface.</p>
-  </div>
-  <div class="sa-top">
-    <div class="sa-ph reveal"><img src="../assets/shahidafridi/afridi-opal-kitchen.webp" width="1200" height="896" alt="Shahid Afridi standing in a white Fotile Opal Series kitchen with the range hood, gas hob and built-in oven" loading="lazy" decoding="async"></div>
-    <div class="sa-ph tall reveal r2"><img src="../assets/shahidafridi/afridi-opal-portrait.webp" width="840" height="852" alt="Shahid Afridi beside the Fotile Opal range hood and gas hob" loading="lazy" decoding="async"></div>
-  </div>
-  <div class="sa-row">
-    <a class="sa-card reveal" href="../shop/opal-range-hood-jqg9067/">
-      <div class="sa-ph"><img src="../assets/shahidafridi/afridi-opal-hood.webp" width="900" height="672" alt="Shahid Afridi touching the control panel of the Fotile Opal Range Hood JQG9067" loading="lazy" decoding="async"></div>
-      <div class="sa-cap"><div><small>Range Hood</small><h3>One touch. The air clears.</h3></div><i>→</i></div>
-    </a>
-    <a class="sa-card reveal r2" href="../shop/opal-gas-hob-ghg88330-w/">
-      <div class="sa-ph"><img src="../assets/shahidafridi/afridi-opal-hob.webp" width="900" height="672" alt="Shahid Afridi lighting the Fotile Opal Gas Hob GHG88330-W" loading="lazy" decoding="async"></div>
-      <div class="sa-cap"><div><small>Gas Hob</small><h3>Flame on white glass.</h3></div><i>→</i></div>
-    </a>
-    <a class="sa-card reveal r3" href="../shop/opal-combi-steam-oven/">
-      <div class="sa-ph"><img src="../assets/shahidafridi/afridi-opal-oven.webp" width="1200" height="800" alt="Shahid Afridi opening the Fotile Opal Combi Steam Oven" loading="lazy" decoding="async"></div>
-      <div class="sa-cap"><div><small>Combi Steam Oven</small><h3>Steam and bake, one door.</h3></div><i>→</i></div>
-    </a>
-  </div>
+  <figure class="sa-one reveal">
+    <img src="../assets/shahidafridi/afridi-opal-kitchen-wide.webp" width="1200" height="675" alt="Shahid Afridi standing in a white Fotile Opal Series kitchen with the range hood, gas hob and built-in oven" loading="lazy" decoding="async">
+    <figcaption><span class="kick"><span class="dot"></span>Shahid Afridi · Opal Series</span><span class="sa-line">One kitchen. One calm white surface.</span></figcaption>
+  </figure>
 </div></section>
 
 <section class="pad" id="collection" style="border-top:1px solid var(--line)"><div class="wrap">
