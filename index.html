@@ -1015,10 +1015,12 @@ body:has(#cine:hover) .spot{opacity:0!important}
   .akb-home .akb-copy .kv-bos .t2{font-size:clamp(40px,12vw,58px)}
 }
 .akb .kv-bt{color:#56555b;letter-spacing:.34em;line-height:1.18;font-weight:700;font-size:clamp(30px,3.6vw,64px)}
-.kt-top{top:55%!important}
+.kt-top{top:auto!important;bottom:clamp(30px,5.5vh,60px)}
+.kt-btn{display:inline-flex;margin-top:22px}
+.akb-kitchen .kv-bt{font-size:clamp(28px,3.2vw,58px)}
 .kt-sub{margin:16px 0 0;max-width:470px;font-size:15px;font-weight:500;color:#4a4a50;line-height:1.55}
 .akb-badge{top:92px}
-@media(max-width:760px){.akb .kv-bt{color:#eceae6}.kt-sub{color:#cfcbc5;font-weight:300;margin-bottom:22px}.kt-bot{padding-top:0}.akb-badge{top:16px}
+@media(max-width:760px){.akb .kv-bt{color:#eceae6}.kt-sub{color:#cfcbc5;font-weight:300;margin-bottom:0}.kt-top{bottom:auto!important;padding-bottom:60px!important}.akb-badge{top:16px}
   .kv-bt{letter-spacing:.2em!important}}
 /* hero still: 1080p WebP (49 KB) on desktop, a portrait 720x1080 crop (≈25 KB) on phones */
 .cine .ckb{background-image:url('assets/ahsan/hero-hood-1920.webp')}
@@ -1037,7 +1039,6 @@ body:has(#cine:hover) .spot{opacity:0!important}
 .chapter .chmedia .chbg.ch-alt{animation:chFold 10s ease-in-out infinite}
 @keyframes chFold{0%,38%{opacity:0}50%,88%{opacity:1}100%{opacity:0}}
 @media(prefers-reduced-motion:reduce){.chapter .chmedia .chbg.ch-alt{animation:none;opacity:1}}
-@media(max-width:760px){#ch-oven .chbg{filter:brightness(.6)!important}}
 .chnew{display:inline-block;background:#3ec98a;color:#04120b;border-radius:50px;padding:4px 10px;letter-spacing:1.6px;font-weight:800;margin-right:10px;font-size:10.5px}
 /* Magic Oven long poster */
 .mob{position:relative;min-height:640px;display:flex;align-items:center;overflow:hidden;background:#0b0b0d;isolation:isolate;border-top:1px solid var(--line)}
@@ -1152,7 +1153,7 @@ body:has(#cine:hover) .spot{opacity:0!important}
 <!-- ===== IMMERSIVE CHAPTER 01 · MAXFOLD RANGE HOOD (new) ===== -->
 <section class="chapter" id="ch-hoods">
   <div class="chmedia"><div class="chbg" style="background-image:url('assets/products/new/mf-hidden.jpg');background-position:62% 50%;filter:brightness(.72) saturate(1.04)"></div><div class="chbg ch-alt" style="background-image:url('assets/products/new/mf-open.jpg');background-position:62% 50%;filter:brightness(.72) saturate(1.04)"></div></div>
-  <div class="chtime"><b>01</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; MAXFOLD RANGE HOOD</div>
+  <div class="chtime"><b>NEW</b> &nbsp;·&nbsp; MAXFOLD RANGE HOOD</div>
   <div class="chword">HOODS</div>
   <div class="chin"><div class="cx">
     <div class="chidx"><span class="ln"></span><span class="chnew">NEW</span>MOON SERIES · BIG9069-G</div>
@@ -1170,26 +1171,6 @@ body:has(#cine:hover) .spot{opacity:0!important}
   </div></div>
 </section>
 
-<!-- ===== IMMERSIVE CHAPTER 02 · MOON SERIES (banner) ===== -->
-<section class="chapter" id="ch-oven">
-  <div class="chmedia"><div class="chbg" style="background-image:url('assets/moon-scene.jpg');background-position:68% 50%;filter:brightness(.82) saturate(1.05)"></div></div>
-  <div class="chtime"><b>02</b> <span class="tt">/ 02</span> &nbsp;·&nbsp; MOON SERIES</div>
-  <div class="chword">MOON</div>
-  <div class="chin"><div class="cx">
-    <div class="chidx"><span class="ln"></span>THE PREMIUM LINE</div>
-    <h3>The kitchen,<br>after <b>dark.</b></h3>
-    <p class="chp">Obsidian glass, rose-gold detailing and flagship power. Hoods, hobs, ovens and dishwashers — now with the MaxFold hood and the F20 refrigerator — designed as one collection.</p>
-    <div class="chspecs">
-      <div><b>8</b><span>Pieces</span></div>
-      <div><b>1700<span style="font-size:15px">m³/h</span></b><span>Peak Airflow</span></div>
-      <div><b>Obsidian</b><span>Glass Finish</span></div>
-    </div>
-    <div class="chcta">
-      <a href="/moon-series/" class="btn-w">Explore the Moon Series →</a>
-      <a href="/moon-series/#collection" class="btn-l">View the Collection</a>
-    </div>
-  </div></div>
-</section>
 
 <!-- ===== CAMPAIGN BANNER · THE KITCHEN, REIMAGINED ===== -->
 <section class="akb akb-kitchen" aria-label="Beyond technology — the Fotile kitchen">
@@ -1200,10 +1181,8 @@ body:has(#cine:hover) .spot{opacity:0!important}
       alt="Ahsan Khan leaning on a Fotile kitchen counter beside a built-in gas hob and range hood">
   </picture>
   <div class="kt-logo"><img src="assets/logo.svg" width="92" height="19" alt="FOTILE"><i></i><span>Kitchen Collection</span></div>
-  <div class="kt-top"><h2 class="kv-bt">Beyond<br>Technology</h2><p class="kt-sub">Hoods, hobs and built-in ovens, designed as one quiet, seamless whole.</p></div>
-  <div class="kt-bot akb-copy">
-    <a href="#collection" class="btn-w">Explore the Collection →</a>
-  </div>
+  <div class="kt-top"><h2 class="kv-bt">Beyond<br>Technology</h2><p class="kt-sub">Hoods, hobs and built-in ovens, designed as one quiet, seamless whole.</p>
+    <a href="/moon-series/" class="btn-w kt-btn">Explore the Moon Series →</a></div>
 </section>
 
 <!-- ===== SHAHID AFRIDI x OPAL SERIES ===== -->
