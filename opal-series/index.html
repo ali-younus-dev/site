@@ -529,10 +529,13 @@
   }
 
   /* ===== SHAHID AFRIDI x OPAL SERIES ===== */
-  .sa-one{margin:0}
-  .sa-one img{width:100%;height:auto;border-radius:14px;box-shadow:0 24px 60px rgba(20,22,28,.10)}
-  .sa-one figcaption{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-top:22px}
-  .sa-line{font-size:clamp(18px,1.6vw,22px);font-weight:300;color:var(--ink-soft);letter-spacing:-.3px}
+  /* "morning" band: the original Opal hero photograph, full width, kept bright */
+  .midbanner{background-image:url("../assets/white/opal-morning.webp"),linear-gradient(160deg,#efe7d8,#f6efe2)!important;background-position:center 46%,center!important;min-height:86vh!important;align-items:flex-end!important;justify-content:flex-start!important}
+  .midbanner .mb-overlay{background:linear-gradient(180deg,rgba(21,23,28,0) 38%,rgba(21,23,28,.34) 68%,rgba(21,23,28,.72) 100%)!important}
+  .midbanner .mb-in{text-align:left!important;max-width:1320px!important;width:100%;margin:0 auto;padding:0 44px clamp(44px,8vh,84px)!important}
+  .midbanner .mb-in .kick{justify-content:flex-start!important}
+  .midbanner .mb-in p{max-width:520px}
+  @media(max-width:700px){.midbanner{min-height:70vh!important;background-position:62% center,center!important}.midbanner .mb-in{padding:0 28px 40px!important}}
   /* hero: Afridi sits on the right of the photo; keep him in frame and keep the headline clean */
   .mhero .photo img{object-position:78% center!important}
   .mhero .hbadge{display:none!important}
@@ -674,7 +677,7 @@
 
     <div class="hr-stage reveal" id="hrStage">
       <div class="hr-frame" id="hrFrame">
-        <img id="hrImg" src="../assets/Charcoal_kitchen_with_white_appl…_2K_20260917105139.jpeg" alt="A Fotile Opal Series kitchen, shown at different hours of the day" loading="lazy" decoding="async">
+        <img id="hrImg" src="../assets/Charcoal_kitchen_with_white_appl…_2K_20260917105139.jpeg.webp" width="2048" height="1143" alt="A Fotile Opal Series kitchen, shown at different hours of the day" loading="lazy" decoding="async">
         <canvas id="hrCanvas" aria-hidden="true"></canvas>
         <div class="hr-grade"></div>
         <div class="hr-cast"></div>
@@ -696,14 +699,6 @@
     </div>
   </div>
 </section>
-
-<!-- SHAHID AFRIDI x OPAL SERIES (one photo, kept light) -->
-<section class="pad" id="afridi" style="border-top:1px solid var(--line)"><div class="wrap">
-  <figure class="sa-one reveal">
-    <img src="../assets/shahidafridi/afridi-opal-kitchen-wide.webp" width="1200" height="675" alt="Shahid Afridi standing in a white Fotile Opal Series kitchen with the range hood, gas hob and built-in oven" loading="lazy" decoding="async">
-    <figcaption><span class="kick"><span class="dot"></span>Shahid Afridi · Opal Series</span><span class="sa-line">One kitchen. One calm white surface.</span></figcaption>
-  </figure>
-</div></section>
 
 <!-- COLLECTION -->
 <section class="pad" id="collection" style="border-top:1px solid var(--line)"><div class="wrap">
@@ -1401,7 +1396,8 @@ window.mountCaustics = function(hero, img, cv, opt){
   }
 
   /* the same light field as the hero, tinted by the hour */
-  if(window.mountCaustics){
+  /* wave light field switched off here: it drew wavy lines across the kitchen photo */
+  if(false && window.mountCaustics){
     caustics = window.mountCaustics(frame,
       document.getElementById('hrImg'),
       document.getElementById('hrCanvas'), {posY:0.54, amount:0.85});
