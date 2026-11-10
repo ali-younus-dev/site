@@ -1565,11 +1565,10 @@ body:has(#cine:hover) .spot{opacity:0!important}
     if(c.saveData || /(^|-)2g$/.test(et) || (phone && et==='3g')) return;
     // after the page has fully loaded, then wait for an idle moment
     const go=()=>('requestIdleCallback' in window)?requestIdleCallback(start,{timeout:1200}):setTimeout(start,200);
-    // HERO_AUTOPLAY=false: the Ahsan Khan still stays as the hero; the film only plays when the visitor taps Sound.
-    // Set to true to bring back the autoplaying film over the still.
-    // (redeploy nudge 2026-11-10)
-    const HERO_AUTOPLAY=false;
-    if(HERO_AUTOPLAY){ if(document.readyState==='complete') go(); else addEventListener('load',go,{once:true}); }
+    // Hero: the Ahsan Khan still shows instantly, the film starts right away and fades in over it.
+    // Set HERO_AUTOPLAY=false to keep only the still (film then plays only when Sound is tapped).
+    const HERO_AUTOPLAY=true;
+    if(HERO_AUTOPLAY) start();
   })();
   const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal,.showcase').forEach(el=>io.observe(el));
