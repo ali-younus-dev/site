@@ -621,8 +621,8 @@
     var as=document.querySelectorAll('a[href*="our-dealers"]');
     for(var i=0;i<as.length;i++){
       var a=as[i], h=a.getAttribute('href')||'';
-      if(!/(^|\/)our-dealers\/?(#.*)?$/.test(h)) continue;
-      a.setAttribute('href','/showrooms/');
+      if(h.indexOf('our-dealers')<0 || /^https?:/i.test(h)) continue;
+      a.setAttribute('href',h.replace('our-dealers','showrooms'));
       var t=(a.textContent||'').trim();
       if(/^dealers$/i.test(t)) a.textContent='Showrooms';
       else if(/^find an? (authorised |authorized )?dealer$/i.test(t)) a.textContent='Find a showroom';
