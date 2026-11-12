@@ -87,7 +87,7 @@
         T('whatsapp_click',{link_location:where(a),page_path:location.pathname},'Contact',{method:'whatsapp'});
       } else if(/^tel:/i.test(h)){
         T('phone_click',{link_location:where(a),page_path:location.pathname},'Contact',{method:'phone'});
-      } else if(/\/our-dealers\/?$/.test(h)){
+      } else if(/\/(our-dealers|showrooms)\/?$/.test(h)){
         T('find_dealer_click',{link_location:where(a)},'FindLocation',{});
       }
     },true);
@@ -150,7 +150,7 @@
     {label:'Journal',     href:'/blog/',         key:'journal'},
     /* Pulse is a DRAFT — flip PULSE_LIVE to true to put it back in the menu */
     {label:'Pulse',       href:'/newsletter/',   key:'pulse', draft:true},
-    {label:'Dealers',     href:'/our-dealers/',  key:'dealers'},
+    {label:'Showrooms',   href:'/showrooms/',    key:'dealers'},
     {label:'Service',     href:'/service-center/', key:'service'},
     {label:'Contact',     href:'/contact-us/',   key:'contact'}
   ];
@@ -174,7 +174,7 @@
     if(p.indexOf('/shop')>-1 || p.indexOf('/product-category')>-1) return 'products';
     if(p.indexOf('/moon-series')>-1) return 'moon';
     if(p.indexOf('/about-us')>-1) return 'about';
-    if(p.indexOf('/our-dealers')>-1) return 'dealers';
+    if(p.indexOf('/our-dealers')>-1 || p.indexOf('/showrooms')>-1) return 'dealers';
     if(p.indexOf('/contact-us')>-1) return 'contact';
     if(p.indexOf('/blog')>-1 || typeof window.__FORCE_SLUG!=='undefined') return 'journal';
     return '';
@@ -376,9 +376,8 @@
              +      '</a>'
              +    '</div>'
              +    '<div class="snav-foot">'
-             +      '<a href="/our-dealers/">Find a dealer</a>'
+             +      '<a href="/showrooms/">Find a showroom</a>'
              +      '<a href="/service-center/">Service &amp; support</a>'
-             +      '<a href="/contact-us/?enquire=private-demo">Book a demo</a>'
              +      '<a class="snav-all" href="/shop/">Browse all '+((window.FOTILE_PRODUCTS&&window.FOTILE_PRODUCTS.length)||57)+' appliances &rarr;</a>'
              +    '</div>'
              +  '</div></div>'
@@ -609,4 +608,27 @@
   }
   if(document.readyState!=='loading') load();
   else document.addEventListener('DOMContentLoaded',load);
+})();
+
+/* ============================================================================
+   SHOWROOMS — the dealers page is paused, so every link that pointed to
+   /our-dealers/ now goes to /showrooms/. To bring the dealers page back,
+   delete this block and restore our-dealers/index.html.
+   ========================================================================== */
+(function(){
+  function fix(){
+    var as=document.querySelectorAll('a[href*="our-dealers"]');
+    for(var i=0;i<as.length;i++){
+      var a=as[i], h=a.getAttribute('href')||'';
+      if(!/(^|\/)our-dealers\/?(#.*)?$/.test(h)) continue;
+      a.setAttribute('href','/showrooms/');
+      var t=(a.textContent||'').trim();
+      if(/^dealers$/i.test(t)) a.textContent='Showrooms';
+      else if(/^find an? (authorised |authorized )?dealer$/i.test(t)) a.textContent='Find a showroom';
+      else if(/^all dealers$/i.test(t)) a.textContent='All showrooms';
+    }
+  }
+  if(document.readyState!=='loading') fix();
+  else document.addEventListener('DOMContentLoaded',fix);
+  window.addEventListener('load',fix);
 })();

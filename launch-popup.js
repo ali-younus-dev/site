@@ -38,7 +38,7 @@
     var ov=document.createElement('div'); ov.className='lp-ov';
     ov.innerHTML=''
       +'<div class="lp" role="dialog" aria-label="Fotile F20 refrigerator launch">'
-      +  '<div class="lp-img" style="background-image:url(\''+B+'assets/f20/f20-shut.jpg\');background-position:center 38%"></div>'
+      +  '<div class="lp-img" style="background-image:url(\''+B+'assets/f20/built-in.webp\');background-position:center 42%"></div>'
       +  '<button class="lp-x" aria-label="Close">&#10005;</button>'
       +  '<div class="lp-b">'
       +    '<div class="lp-k"><span class="d"></span>New Launch &middot; Coming Soon</div>'
