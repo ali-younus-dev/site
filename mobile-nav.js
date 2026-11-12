@@ -378,6 +378,7 @@
              +    '<div class="snav-foot">'
              +      '<a href="/showrooms/">Find a showroom</a>'
              +      '<a href="/service-center/">Service &amp; support</a>'
+             +      '<a href="/contact-us/?enquire=private-demo">Book a demo</a>'
              +      '<a class="snav-all" href="/shop/">Browse all '+((window.FOTILE_PRODUCTS&&window.FOTILE_PRODUCTS.length)||57)+' appliances &rarr;</a>'
              +    '</div>'
              +  '</div></div>'
