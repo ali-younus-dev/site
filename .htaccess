@@ -54,6 +54,17 @@ RewriteRule ^ - [R=503,L]
 ErrorDocument 503 /maintenance.html
 
 # ---------------------------------------------------------------------
+# 0d. HACKED-SITE SPAM — the old WordPress site was injected with ~14,700
+#     junk pages shaped  /<spanish product title>/es/item-xxxxx/  (listed in
+#     the old spam sitemaps). They never existed on the new site. Answer
+#     410 "Gone" (stronger than 404: Google drops them faster). Do NOT
+#     block these in robots.txt — Google must be able to fetch them to see
+#     the 410.
+# ---------------------------------------------------------------------
+RewriteRule ^(.+/)?es/item-[a-z0-9]+/?$ - [G,L]
+ErrorDocument 410 /404.html
+
+# ---------------------------------------------------------------------
 # 1. WORDPRESS SYSTEM PATHS — kill the crawl traps before anything else.
 # ---------------------------------------------------------------------
 # Internal search -> shop

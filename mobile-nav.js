@@ -150,7 +150,7 @@
     {label:'Journal',     href:'/blog/',         key:'journal'},
     /* Pulse is a DRAFT — flip PULSE_LIVE to true to put it back in the menu */
     {label:'Pulse',       href:'/newsletter/',   key:'pulse', draft:true},
-    {label:'Showrooms',   href:'/showrooms/',    key:'dealers'},
+    {label:'Our Dealers', href:'/our-dealers/',  key:'dealers'},
     {label:'Service',     href:'/service-center/', key:'service'},
     {label:'Contact',     href:'/contact-us/',   key:'contact'}
   ];
@@ -609,27 +609,4 @@
   }
   if(document.readyState!=='loading') load();
   else document.addEventListener('DOMContentLoaded',load);
-})();
-
-/* ============================================================================
-   SHOWROOMS — the dealers page is paused, so every link that pointed to
-   /our-dealers/ now goes to /showrooms/. To bring the dealers page back,
-   delete this block and restore our-dealers/index.html.
-   ========================================================================== */
-(function(){
-  function fix(){
-    var as=document.querySelectorAll('a[href*="our-dealers"]');
-    for(var i=0;i<as.length;i++){
-      var a=as[i], h=a.getAttribute('href')||'';
-      if(h.indexOf('our-dealers')<0 || /^https?:/i.test(h)) continue;
-      a.setAttribute('href',h.replace('our-dealers','showrooms'));
-      var t=(a.textContent||'').trim();
-      if(/^dealers$/i.test(t)) a.textContent='Showrooms';
-      else if(/^find an? (authorised |authorized )?dealer$/i.test(t)) a.textContent='Find a showroom';
-      else if(/^all dealers$/i.test(t)) a.textContent='All showrooms';
-    }
-  }
-  if(document.readyState!=='loading') fix();
-  else document.addEventListener('DOMContentLoaded',fix);
-  window.addEventListener('load',fix);
 })();
